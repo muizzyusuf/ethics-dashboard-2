@@ -69,6 +69,7 @@
                6. Care ethics /15
             2. “Summary box” with total out of 80 and percentage.
             3. Probably should include progress status, to let student know that grade is not finalised and inputs can be edited. Can inputs be edited or is first submission final submission?
+            4. Plagiarism Prevention - this feature will produce a detailed report that students will utilize for the their case analyses and various other papers. Any overlapping similarities will result in potential plagiarism. 
    2. Instructor Dashboard
       1. Classes
       2. Student's submission per class
@@ -77,6 +78,7 @@
       5. Ability to view grades
       6. Ability to generate report per student (with or/and without their comments)
       7. Ability to generate spreadsheet of class grades
+      8. Ability to generate spreadsheet of plagiarism precentages per submission for each student. 
 3. Reports
    1. Student Generated
    2. Instructor Generated
