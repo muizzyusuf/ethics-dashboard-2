@@ -83,7 +83,7 @@
    1. Student Generated
    2. Instructor Generated
 4. Database
-   1.Connecting to data
-   2.View student/class data
+   1. Connecting to data
+   2. Visualize student/class data
 
 
