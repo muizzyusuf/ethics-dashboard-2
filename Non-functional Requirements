@@ -1,0 +1,6 @@
+Scalability- The dashboard should be able to scale according to different devices used.
+Performance efficiency. How fast does it need to operate?
+Compatibility. Where the data is coming from, how to import/export it
+Security. TBD
+Maintainability. It should be maintainable in the future when the project is complete
+Hosting. TBD
