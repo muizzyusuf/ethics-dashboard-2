@@ -1,20 +1,20 @@
     Functional Requirements
 1. Creation of classes
-Enrolment - Instructor should be able to create classes and add students
+a) Enrolment - Instructor should be able to create classes and add students
 2. Login Feature
-Authentication - Should authenticate the different users using their email and password
+a) Authentication - Should authenticate the different users using their email and password
 
 3. The Dashboard 
-The user interface should offer text inputs, checkboxes and sliders
-Should calculate averages
-The progress page should display progress for the student while markers/professors should be able to post in-text feedback and marks
-Students should be able to download selected sections into report
-Markers/Professors should be able to download text reports for individual students and an Excel document with students’ marks for each class
+a) The user interface should offer text inputs, checkboxes and sliders
+b) Should calculate averages
+c) The progress page should display progress for the student while markers/professors should be able to post in-text feedback and marks
+d) Students should be able to download selected sections into report
+e) Markers/Professors should be able to download text reports for individual students and an Excel document with students’ marks for each class
 
 4. Database
-Storage - Should s tore student's data and their progress
-Reports - Should generate individual reports for the students.
-Usability - It should give support up to 120 students with private accounts that can allow them to work with up to five cases per term
-Administration - Should enable admin/instructor to create dashboards, markers to grade and students to view. 
+a) Storage - Should s tore student's data and their progress
+b) Reports - Should generate individual reports for the students.
+c) Usability - It should give support up to 120 students with private accounts that can allow them to work with up to five cases per term
+d) Administration - Should enable admin/instructor to create dashboards, markers to grade and students to view. 
 
 
