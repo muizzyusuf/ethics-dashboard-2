@@ -40,7 +40,7 @@
                   1. Hypothetical Imp. Screens: Lists selected motivations for that option + summary statement
                3. If "it's the right thing to do" is selected it will lead to categorial imperative screen (Should all other options be greyed out/unusable?)
                   1. categorical imperative screen: lists selected motivations for that option + summary statement
-                  2. testing categorical imperative screen:
+                  3. testing categorical imperative screen: (we will have a min. of 1, and max of 3 for the moral laws that can be entered to start with)
                      1. describe moral issues per ethical issue option/action/decision that falls under categorical imperative
                      2. describe moral laws per ethical issue option/action/decision that falls under categorical imperative. How many? max/min?
                         1. for each moral law, test its universalizability & consistency with yes/no checkbox and text input.
