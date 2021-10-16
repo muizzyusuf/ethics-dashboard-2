@@ -86,4 +86,22 @@
    1. Connecting to data
    2. Visualize student/class data
 
+Tech stack:
+   -Laravel (php)
+   -VueJs/Blade templates & Bootstrap
+   -MySQL
+   -Google docs/drive for collaboration
+   -Git, github for version control
+Rationale:
+   -Laravel makes implementing authentication straightforward because almost everything can be automatically set up and organized.
+   -Laravel has an easy to implement API for mail service that can be used to send notifications to users’ emails after various events or for password recovery.
+   -Laravel is a Model-View-Controller framework so all files are properly organized and separated for potential bug identification, route modification, UI design etc
+   -Laravel's eloquent ORM uses PDO, which prevents SQL injections. It’s syntax automatically escapes any html entities being passed via view parameters, which prevents cross       site scripting.
+   -Laravel's migration allows you to maintain the database structure of an application without re-creating it.
+   -Laravel does have an active community so searching for help, tutorials etc should not be difficult.
+   -There are php APIs for generating pdfs and spreadsheets
+   -Bootstrap for front-end formatting is easy to use.
+   -MySQL is the most popular database software
+
+
 
