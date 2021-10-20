@@ -40,7 +40,7 @@
                   1. Hypothetical Imp. Screens: Lists selected motivations for that option + summary statement
                3. If "it's the right thing to do" is selected it will lead to categorial imperative screen (Should all other options be greyed out/unusable?)
                   1. categorical imperative screen: lists selected motivations for that option + summary statement
-                  2. testing categorical imperative screen:
+                  3. testing categorical imperative screen: (we will have a min. of 1, and max of 3 for the moral laws that can be entered to start with)
                      1. describe moral issues per ethical issue option/action/decision that falls under categorical imperative
                      2. describe moral laws per ethical issue option/action/decision that falls under categorical imperative. How many? max/min?
                         1. for each moral law, test its universalizability & consistency with yes/no checkbox and text input.
@@ -85,5 +85,23 @@
 4. Database
    1. Connecting to data
    2. Visualize student/class data
+
+Tech stack:
+   -Laravel (php)
+   -VueJs/Blade templates & Bootstrap
+   -MySQL
+   -Google docs/drive for collaboration
+   -Git, github for version control
+Rationale:
+   -Laravel makes implementing authentication straightforward because almost everything can be automatically set up and organized.
+   -Laravel has an easy to implement API for mail service that can be used to send notifications to users’ emails after various events or for password recovery.
+   -Laravel is a Model-View-Controller framework so all files are properly organized and separated for potential bug identification, route modification, UI design etc
+   -Laravel's eloquent ORM uses PDO, which prevents SQL injections. It’s syntax automatically escapes any html entities being passed via view parameters, which prevents cross       site scripting.
+   -Laravel's migration allows you to maintain the database structure of an application without re-creating it.
+   -Laravel does have an active community so searching for help, tutorials etc should not be difficult.
+   -There are php APIs for generating pdfs and spreadsheets
+   -Bootstrap for front-end formatting is easy to use.
+   -MySQL is the most popular database software
+
 
 
