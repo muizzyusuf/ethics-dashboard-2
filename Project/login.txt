@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <style>
+    	h1 {text-align: center; text-decoration: underline;}
+        h2 {text-align: center; }
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 360px; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <!--- we can change this div to class="wrapper" if we want even shorter input boxes--->
+    	<h1>Ethics Dashboard</h1>
+        <h2>Log In</h2>
+     
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        	<!--- This action recalls the page to run verifying email/pass on form submit --->
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" value="<?php ?>">
+            </div>    
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" value="<?php ?>">
+            </div>
+             <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Submit">
+            </div>
+        </form>
+    </div>    
+</body>
+</html>
+
+<?php
+
+session_start();
+$email = $password = "";
+// Include config file (once we have it created properly, commented out for now in text editor)
+//require_once "config.php";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+	$sql = "SELECT id, email, password FROM users WHERE email = ?";
+        
+	if($stmt = mysqli_prepare($link, $sql)){
+	// Put variables into SELECT statement
+		mysqli_stmt_bind_param($stmt, "s", $param_email);        
+    // Set parameters
+		$param_email = $email;
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Store result
+                mysqli_stmt_store_result($stmt);
+                // Check if email exists, if yes then verify password
+                if(mysqli_stmt_num_rows($stmt) > 0){                    
+                    // Bind result variables
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+                    if(mysqli_stmt_fetch($stmt)){
+                        if($password == $hashed_password){
+                            // Password is correct, so start a new session
+                            session_start();
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["email"] = $email;                            
+                            
+                            // Redirect user to course selection
+                            header("location: courseSelect.php");
+                        } 
+                    }
+                } else{
+                    $login_err = "Invalid username or password.";
+                    //login error
+                }
+            } 
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    
+    
+    // Close connection
+    mysqli_close($link);
+}
+?>
