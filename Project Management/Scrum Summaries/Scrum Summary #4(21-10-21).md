@@ -18,6 +18,8 @@
 
 ​        -Go over Laravel tutorials
 
+​        -have the wireframes ready (basic design structure of what the pages would like) 
+
 ​        -PHP tutorials
 
 ​        -Hopefully submit some basic code to GitHub (HTML mostly)
