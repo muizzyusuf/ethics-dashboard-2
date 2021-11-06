@@ -5,17 +5,30 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
+                <div class="card-header"><h1>Course Selection</div>
+                
+   @if(count($names)>0 && count($codes)>0)
+   
+        <ul>
+            <script>
+                $x=0;
+            </script>
+        @foreach($codes as $code)
+    
+        
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                <form method="GET" action="{{ route('home') }}">
+                   <h3> {{$code}} </h3>
+                  
+                   <button type="submit" class="btn btn-primary">{{ __('Next') }} </button>
+            </form>
                 </div>
+              
+        @endforeach
+    </ul>
+    @endif
+
+                
             </div>
         </div>
     </div>
