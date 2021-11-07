@@ -24,3 +24,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/coursePost', [App\Http\Controllers\CourseController::class, 'store'])->name('coursePost');
+
+Route::get('/course', function(){
+    return view('/courseCreate');
+});
+

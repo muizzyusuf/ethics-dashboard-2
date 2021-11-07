@@ -21,7 +21,7 @@
                    <button type="submit" class="btn btn-primary">{{ __('Next') }} </button>
             </form>
                 </div>
-              
+            
         @endforeach
     </ul>
     @endif
