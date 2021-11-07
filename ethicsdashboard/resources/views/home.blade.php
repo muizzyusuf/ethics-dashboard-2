@@ -10,9 +10,7 @@
    @if(count($names)>0 && count($codes)>0)
    
         <ul>
-            <script>
-                $x=0;
-            </script>
+           
         @foreach($codes as $code)
     
         
