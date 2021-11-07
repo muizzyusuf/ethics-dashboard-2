@@ -23,8 +23,17 @@
                 </div>
             
         @endforeach
+        <div class="card-body">
+                <form method="GET" action="course">
+                   <h3> Create and Add a New Course </h3>
+                  
+                   <button type="submit" class="btn btn-primary">{{ __('Create') }} </button>
+            </form>
+                </div>
     </ul>
     @endif
+    
+            
 
                 
             </div>

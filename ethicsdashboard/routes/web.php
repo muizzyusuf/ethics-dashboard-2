@@ -31,3 +31,4 @@ Route::get('/course', function(){
     return view('/courseCreate');
 });
 
+
