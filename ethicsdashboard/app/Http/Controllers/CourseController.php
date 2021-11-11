@@ -9,16 +9,21 @@ use App\Models\Course;
 class CourseController extends Controller
 {
     public function store(Request $request){
-        Course::create([
-            //do i need to request for id each time? or can we have it autocreate class ID's
-            'id' => $request->id,
-            'title' => $request->title,
-            'code' => $request->code,
-            'number' => $request->number,
-            'section' => $request->section,
-            'year' => $request->year
-    
-        ]);
+        $c=new Course;
+        $c->title=$request->input('title');
+        $c-> code=$request->input('code');
+        $c->number=$request->input('number');
+        $c->section=$request->input('section');
+        $c->year=$request->input('year');
+        if($c->save()){
+            $request->session()->flash('success', 'New course saved');
+
+        }else{
+            $request->session()->flash('error', 'There was an error adding the course');
+        }
+
+        $c->save();
+      
         return redirect('/course');
     }
 }
