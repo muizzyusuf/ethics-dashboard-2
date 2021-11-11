@@ -6,37 +6,65 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><h1>Course Selection</div>
-                
-   @if(count($names)>0 && count($codes)>0)
+
    
         <ul>
-           
+        <table style="float:right">
+        <tr>
         @foreach($codes as $code)
     
-        
+            <th>
                 <div class="card-body">
-                <form method="GET" action="{{ route('home') }}">
-                   <h3> {{$code}} </h3>
-                  
-                   <button type="submit" class="btn btn-primary">{{ __('Next') }} </button>
+                
+                  <h3> <u> {{$code}} </u></h3>
             </form>
                 </div>
-            
+            </th>
         @endforeach
-        <div class="card-body">
-                <form method="GET" action="course">
-                   <h3> Create and Add a New Course </h3>
-                  
-                   <button type="submit" class="btn btn-primary">{{ __('Create') }} </button>
+</tr>
+        <tr>
+        @foreach($names as $name)
+        <td>
+                <div class="card-body">
+                
+                   <h5> {{$name}} </h5>
             </form>
                 </div>
-    </ul>
-    @endif
-    
-            
+            </td>
+        @endforeach
+
+
+            </tr>
+            <tr>
+            @foreach($ids as $id)
+            <td>
+            <div class="card-body">
+            <a class="btn btn-success" href="{{route('casestudy', ['course_id' => $id])}}">{{ __('Next') }} </a>
+</td>
+</div>
+            @endforeach  
+            </tr>
+</table>
+
 
                 
             </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header"><h1>Course Creation</h1></div>
+
+        <div class="card-body">
+            <form method="GET" action="course">
+            <button type="submit" class="btn btn-primary" style="width: 200px">{{ __('Create a New Course') }} </button>
+            </form>  
+            </div>
+    </ul>
+    </div>
         </div>
     </div>
 </div>

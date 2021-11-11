@@ -27,6 +27,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/coursePost', [App\Http\Controllers\CourseController::class, 'store'])->name('coursePost');
 
+Route::get('/casestudy/{course_id}', [
+    'as' => 'casestudy', 
+    'uses' => 'App\Http\Controllers\CaseStudyController@index'
+]);
+
 Route::get('/course', function(){
     return view('/courseCreate');
 });

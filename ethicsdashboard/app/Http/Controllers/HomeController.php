@@ -41,6 +41,7 @@ class HomeController extends Controller
                     }
                 }
         }
+        $courseIDs=$data;
         $courseNames=array();
         $courseCodes=array();
         $temp=array();
@@ -69,8 +70,9 @@ class HomeController extends Controller
         //create two arrays of course name and course code
         //add each to $array
         $array=array(
-            'names'=>$courseNames,
-            'codes'=>$courseCodes
+            'ids'=>$courseIDs,
+            'codes'=>$courseCodes,
+            'names'=>$courseNames
         );
         return view('home') -> with ($array);
     }
