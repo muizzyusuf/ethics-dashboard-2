@@ -9,5 +9,9 @@ class CourseUser extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = ['course_id', 'user_id'];
+    protected $table = 'course_users';
+
+    protected $primaryKey = ['course_id','user_id'];
+
+    public $incrementing = false;
 }

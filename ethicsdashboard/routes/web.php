@@ -21,19 +21,21 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// course post page is now redundant due to model
+// Route::post('/coursePost', [App\Http\Controllers\CourseController::class, 'store'])->name('coursePost');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::post('/coursePost', [App\Http\Controllers\CourseController::class, 'store'])->name('coursePost');
+// Route::get('/course', function(){   REDUNDANT
+//     return view('/courseCreate');
+// });
 
 Route::get('/casestudy/{course_id}', [
     'as' => 'casestudy', 
     'uses' => 'App\Http\Controllers\CaseStudyController@index'
 ]);
 
-Route::get('/course', function(){
-    return view('/courseCreate');
-});
+
+
+//This resource contains the following routes in course controller index, create, store, edit, update, destroy
+Route::resource('/courses','App\http\Controllers\CourseController');
 
 
