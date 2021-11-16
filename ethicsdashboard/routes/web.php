@@ -38,4 +38,3 @@ Route::get('/casestudy/{course_id}', [
 //This resource contains the following routes in course controller index, create, store, edit, update, destroy
 Route::resource('/courses','App\http\Controllers\CourseController');
 
-

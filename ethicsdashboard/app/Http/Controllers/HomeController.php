@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\User;
 
 
+
 class HomeController extends Controller
 {
     /**
@@ -22,13 +23,13 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
+
     {    
         //in home.blade, form GET will be a POST to the Dashboard? Ethical Issue?
         //this will be returning course id's that match
@@ -92,3 +93,4 @@ class HomeController extends Controller
     }
     
 }
+

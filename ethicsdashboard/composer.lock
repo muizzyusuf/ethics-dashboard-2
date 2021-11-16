@@ -1323,6 +1323,7 @@
         },
         {
             "name": "laravel/ui",
+
             "version": "v3.3.2",
             "source": {
                 "type": "git",
@@ -1375,6 +1376,7 @@
                 "ui"
             ],
             "support": {
+
                 "source": "https://github.com/laravel/ui/tree/v3.3.2"
             },
             "time": "2021-11-05T08:25:44+00:00"

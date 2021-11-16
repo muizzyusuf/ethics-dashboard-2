@@ -27,4 +27,10 @@ class CaseStudyController extends Controller
 
 
     }
+
+
+class CaseStudyController extends Controller
+{
+    //
+
 }
