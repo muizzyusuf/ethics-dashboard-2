@@ -154,6 +154,8 @@
                                     <h6 class="card-subtitle mb-2 text-muted">{{$courses[$i]->year}}</h6>
                                     <p class="card-text">{{$courses[$i]->title}}</p>
 
+                                    <a class="btn btn-success" href="{{route('casestudy', ['course_id'=>$courses[$i]->id])}}">Next</a>
+                                    
                                     <!-- Delete Button trigger modal -->
                                     <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteCourse{{$courses[$i]->id}}Modal">
                                         Delete

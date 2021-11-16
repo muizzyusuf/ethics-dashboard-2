@@ -5,39 +5,70 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h1>Course Selection</div>
-                
-   @if(count($names))
+                <div class="card-header"><h1>Case Studies for {{$courseCode}}</div>
+
    
         <ul>
-           
-        @foreach($codes as $code)
-    
+        <table>
+        <tr>
         
-                <div class="card-body">
-                <form method="GET" action="{{ route('/casestudy/{course_id}') }}">
-                   <h3> {{$code}} </h3>
-                  
-                   <button type="submit" class="btn btn-primary">{{ __('Next') }} </button>
-            </form>
-                </div>
-            
-        @endforeach
-        <div class="card-body">
-                <form method="GET" action="course">
-                   <h3> Create and Add a New Course </h3>
-                  
-                   <button type="submit" class="btn btn-primary">{{ __('Create') }} </button>
-            </form>
-                </div>
-    </ul>
-    @endif
+        @foreach($names as $name)
     
-            
+            <th>
+                <div class="card-body">
+                
+                  <h3> <u> {{$name}} </u></h3>
+           
+                </div>
+            </th>
+        @endforeach
+</tr>
+        <tr>
+        @foreach($points as $point)
+        <td>
+                <div class="card-body">
+                
+                   <h5> Possible Points: {{$point}} </h5>
+           
+                </div>
+            </td>
+        @endforeach
+
+
+            </tr>
+            <tr>
+            @foreach($ids as $id)
+            <td>
+            <div class="card-body">
+            <a class="btn btn-success" href="{{route('casestudyInstr', ['id' => $id])}}">{{ __('Next') }} </a>
+</td>                                                   
+</div>
+            @endforeach  
+            </tr>
+</table>
+
 
                 
             </div>
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header"><h1>Case Study Creation</h1></div>
+
+        <div class="card-body">
+            <form method="GET" action="{{route('csCreate', ['course_id' => $course_id])}}">
+            <button type="submit" class="btn btn-primary" style="width: 200px">{{ __('Create a New Case Study') }} </button>
+            </form>  
+            </div>
+    </ul>
+    </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+

@@ -9,6 +9,14 @@ class Dashboard extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id', 
+        'name', 
+        'ethical_issue_id', 
+        'utilitarianism_section_id',
+        'user_id',
+        'case_study_id'
+    ];
     public function ethicalIssue(){
         return $this->hasOne('App\Models\EthicalIssue');
     }
