@@ -161,10 +161,10 @@
                                     
                                     <!-- delete Modal -->
                                     <div class="modal fade" id="deleteCourse{{$courses[$i]->id}}Modal" tabindex="-1" role="dialog" aria-labelledby="deleteCourse{{$courses[$i]->id}}ModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-sm" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteCourse{{$courses[$i]->id}}ModalLabel">Modal title</h5>
+                                                <h5 class="modal-title" id="deleteCourse{{$courses[$i]->id}}ModalLabel">Delete {{$courses[$i]->code}}-{{$courses[$i]->number}}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
