@@ -48,6 +48,12 @@ class DashboardController extends Controller
         $dash->utilitarianism_section_id = $util->id;
         $dash->save();
         
+        if($dash->save()){
+            $request->session()->flash('success', 'New Dashboard Created');
+        }else{
+            $request->session()->flash('error', 'There was an error creating the dashboard');
+        }
+
 
         return redirect('/home');
     }
