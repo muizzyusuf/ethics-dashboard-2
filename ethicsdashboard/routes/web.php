@@ -38,3 +38,17 @@ Route::get('/casestudy/{course_id}', [
 //This resource contains the following routes in course controller index, create, store, edit, update, destroy
 Route::resource('/courses','App\http\Controllers\CourseController');
 
+
+//Routing for options
+
+// Route::get('/options/{optionPost}', [
+//     'as' => 'options', 
+//     'uses' => 'App\Http\Controllers\OptionController@index'
+// ]);
+
+Route::get('/options', function(){
+    return view('/options');
+});
+
+Route::post('/options', [App\Http\Controllers\OptionController::class, 'store'])->name('ethicalIssuePost');
+
