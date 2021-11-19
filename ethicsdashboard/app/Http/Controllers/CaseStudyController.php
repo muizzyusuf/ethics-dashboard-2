@@ -6,152 +6,152 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CaseStudy;
+use App\Models\Course;
+use App\Models\Dashboard;
 
 class CaseStudyController extends Controller
 {
-    public function index($course_id){
     
-    //turns passed course_id to string
-    //uses to query DB for all case studies' information that are in class
-    $sid=strval($course_id);
-    $result= DB::select('select id, name, instruction, points from case_studies where course_id='.$sid);
-    $resultArray = json_decode(json_encode($result), true);
-
-    //create individual arrays for all attributes to be passed, varaibel for course code
-    $caseIDs = array();
-    $caseNames = array();
-    $caseInstructions = array();
-    $casePoints = array();
-    $courseCodes;
-
-    //makes case study variable array traversable
-    $courseCodeResult=DB::select("select code from courses where id=".$sid);
-    $courses = json_decode(json_encode($courseCodeResult), true);
-    foreach($courses as $course){
-        foreach($course as $courseCode){
-            $courseCodes=$courseCode;
-        }
-    }
-    
-    //traverse case study variable array, assign variables to corresponding arrays
-    $x=0;
-    foreach($resultArray as $caseData){
-        foreach($caseData as $data){
-
-                switch ($x) {
-                    case 0:
-                        array_push($caseIDs, $data);
-                        $x++;
-                        break;
-                    case 1:
-                        array_push($caseNames, $data);
-                        $x++;
-                        break;
-                    case 2:
-                        array_push($caseInstructions, $data);
-                        $x++;
-                        break;
-                    case 3:
-                        array_push($casePoints, $data);
-                        $x=0;
-                        break;
-                }      
-            
-        }
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 
-    //add array for each variable, return casestudy view with array
-    $array=array(
-        'ids'=>$caseIDs,
-        'names'=>$caseNames,
-        'instructions'=>$caseInstructions,
-        'points'=>$casePoints,
-        'courseCode'=>$courseCodes,
-        'course_id'=>$sid
-    );
-
-    return view('casestudy') -> with ($array);
-        
-
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
     }
 
-    public function store($course_id, Request $request){
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
-        //Creates new CaseStudy object to be pushed to DB
-        //Assigns each parameter of the CaseStudy object to the inputs provided by the blade file
-        $c=new CaseStudy;
-        $c->name=$request->input('name');
-        $c->instruction=$request->input('instruction');
-        $c->points=$request->input('points');
-        $c->course_id=$course_id;
-         //returns error or success message if new entry is successful
-        if($c->save()){
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'name' => 'required',
+            'instruction' => 'required',
+            'points'=> 'required',
+            ]);
+
+        $casestudy = new CaseStudy;
+        $casestudy->name = $request->input('name');
+        $casestudy->instruction = $request->input('instruction');
+        $casestudy->points = $request->input('points');
+        $casestudy->course_id = $request->input('course_id');
+        $casestudy->save();
+
+        //get course and associate it with casestudy
+        $course = Course::where('id', $request->input('course_id'))->first();
+
+        if($casestudy->course()->associate($course)){
             $request->session()->flash('success', 'New case study saved');
-
+            
         }else{
             $request->session()->flash('error', 'There was an error adding the case study');
+           
         }
 
-        $c->save();
-      
-        return redirect(route('casestudy', ['course_id' => $course_id]));
+        return redirect(route('courses.show', $course->id));
+
     }
 
-    public function show($course_id){
-        //return specified view
-        $array=array(
-            'course_id'=>$course_id
-        );
-        return view('casestudyCreate')->with($array);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        $casestudy = CaseStudy::where('id', $id)->first();
+        $user_id = Auth::user()->id;
+
+        $dashboard = Dashboard::where('case_study_id',$id)->where('user_id',$user_id)->first();
+
+        return view('casestudy')->with('casestudy', $casestudy)->with('dashboard', $dashboard);
+       
     }
 
-    public function instructions($id){
-    
-            //turns passed course_id to string
-            //uses to query DB for all case studies' information that are in class
-            $sid=strval($id);
-            $result= DB::select('select name, instruction, points from case_studies where id='.$sid);
-            $resultArray = json_decode(json_encode($result), true);
-            $data = array();
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $this->validate($request, [
+            'name' => 'required',
+            'instruction' => 'required',
+            'points'=> 'required',
+            ]);
+
+        $casestudy = CaseStudy::where('id', $id)->first();
+        $casestudy->name = $request->input('name');
+        $casestudy->instruction = $request->input('instruction');
+        $casestudy->points = $request->input('points');
+
+        if($casestudy->save()){
+            $request->session()->flash('success', 'Case study updated');
             
-            $csID=$id;
-            $csName=array();
-            $csInstruction=array();
-            $csPoints=array();
-
-            $x=0;
-            foreach($resultArray as $caseData){
-                foreach($caseData as $data){
-
-                        switch ($x) {
-                            case 0:
-                                array_push($csName, $data);
-                                $x++;
-                                break;
-                            case 1:
-                                array_push($csInstruction, $data);
-                                $x++;
-                                break;
-                            case 2:
-                                array_push($csPoints, $data);
-                                $x=0;
-                                break;
-            
-                        }      
-                    
-                }
-            }
-
-            $array=array(
-                'name'=>$csName,
-                'instruction'=>$csInstruction,
-                'points'=>$csPoints,
-                'id'=>$csID
-            );
-            //returns home route with array parameter
-            return view('instructions') -> with ($array);
+        }else{
+            $request->session()->flash('error', 'There was an error updating the case study');
+           
         }
-    
-    
+
+        return redirect(route('courses.show', $casestudy->course_id));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        //
+        $casestudy = CaseStudy::where('id', $id)->first();
+        
+        if($casestudy->delete()){
+            $request->session()->flash('success','Case study has been deleted');
+        }else{
+            $request->session()->flash('error', 'There was an error deleting the case study');
+        }
+        
+        return redirect(route('courses.show', $request->input('course_id')));
+    }
 }

@@ -8,21 +8,44 @@ use App\Models\Dashboard;
 use App\Models\EthicalIssue;
 use App\Models\StakeholderSection;
 use App\Models\UtilitarianismSection;
+use App\Models\User;
+use App\Models\CaseStudy;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
-{   public function index($case_study_id){
-        $array=array(
-            'case_study_id'=>$case_study_id
-        );
-        return view('dashboard')->with($array);
-}
-    public function store(Request $request, $case_study_id)
+{   
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    public function index()
     {
         //
-        
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
         $id = Auth::user()->id;
         /*'id', 
         'name', 
@@ -42,19 +65,98 @@ class DashboardController extends Controller
         $dash = new Dashboard;
         $dash->name = $request->input('name'); //gotten from create dashboard form as input
         $dash->user_id = $id; //gotten from create dashboard form as hidden input
-        $dash->case_study_id = $case_study_id; //gotten from create dashboard form as hidden input
+        $dash->case_study_id = $request->input('case_study_id'); //gotten from create dashboard form as hidden input
         $dash->ethical_issue_id = $issue->id;
         $dash->stakeholder_section_id = $stakeholder->id;
         $dash->utilitarianism_section_id = $util->id;
         $dash->save();
-        
-        if($dash->save()){
+
+        //set eloquent relationships
+        $dash->user()->associate(User::where('id',$id)->first());
+        $dash->caseStudy()->associate(CaseStudy::where('id',$request->input('case_study_id')));
+        $issue->dashboard()->associate($dash);
+        $stakeholder->dashboard()->associate($dash);
+
+        if($util->dashboard()->associate($dash)){
             $request->session()->flash('success', 'New Dashboard Created');
         }else{
             $request->session()->flash('error', 'There was an error creating the dashboard');
         }
 
 
-        return redirect('/home');
+        return redirect(route('casestudy.show', $request->input('case_study_id')));
+
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        
+        $dashboard = Dashboard::where('id',$id)->first();
+
+        return view('dashboard')->with('dashboard', $dashboard);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $id = Auth::user()->id;
+    
+        $dash = Dashboard::where('id', $id)->first();
+        $dash->name = $request->input('name'); //gotten from create dashboard form as input
+        
+        if($dash->save()){
+            $request->session()->flash('success', 'New dashboard updated');
+        }else{
+            $request->session()->flash('error', 'There was an error updating the dashboard');
+        }
+
+
+        return redirect(route('casestudy.show', $request->input('case_study_id')));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        //
+        $dashboard = Dashboard::where('id', $id)->first();
+        
+        if($dashboard->delete()){
+            $request->session()->flash('success','Dashboard has been deleted');
+        }else{
+            $request->session()->flash('error', 'There was an error deleting the dashboard');
+        }
+        
+        return redirect(route('casestudy.show', $request->input('case_study_id')));
+    }
+
 }

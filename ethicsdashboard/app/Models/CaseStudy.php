@@ -17,8 +17,8 @@ class CaseStudy extends Model
         'course_id',
     ];
 
-    public function courses(){
-        return this->belongsTo('App\Models\Course');
+    public function course(){
+        return $this->belongsTo('App\Models\Course');
     }
 
     public function dashboard(){

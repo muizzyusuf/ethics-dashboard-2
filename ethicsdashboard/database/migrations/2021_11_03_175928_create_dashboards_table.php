@@ -21,6 +21,7 @@ class CreateDashboardsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('case_study_id');
             $table->unsignedBigInteger('stakeholder_section_id');
+            $table->integer('grade')->nullable();
             $table->timestamps();
 
             $table->foreign('ethical_issue_id')->references('id')->on('ethical_issues')->onDelete('cascade')->onUpdate('cascade');
