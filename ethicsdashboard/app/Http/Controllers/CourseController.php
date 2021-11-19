@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\CourseUser;
 use App\Models\User;
+use App\Models\CaseStudy;
 
 class CourseController extends Controller
 {
@@ -15,6 +16,12 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         //
@@ -80,6 +87,12 @@ class CourseController extends Controller
     public function show($id)
     {
         //
+        $course = Course::where('id', $id)->first();
+        $casestudies = CaseStudy::where('course_id', $id)->get();
+
+
+
+        return view('course')->with('course', $course)->with('casestudies',$casestudies);
     }
 
     /**

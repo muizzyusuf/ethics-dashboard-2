@@ -9,6 +9,14 @@ class Dashboard extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id', 
+        'name', 
+        'ethical_issue_id', 
+        'utilitarianism_section_id',
+        'user_id',
+        'case_study_id'
+    ];
     public function ethicalIssue(){
         return $this->hasOne('App\Models\EthicalIssue');
     }
@@ -25,7 +33,7 @@ class Dashboard extends Model
         return $this->belongsTo('App\Models\CaseStudy');
     }
 
-    public function user(){
+    public function user(){ 
         return $this->belongsTo('App\Models\User');
     }
 }

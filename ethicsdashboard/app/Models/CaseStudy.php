@@ -9,8 +9,16 @@ class CaseStudy extends Model
 {
     use HasFactory;
 
-    public function courses(){
-        return this->belongsTo('App\Models\Course');
+    protected $fillable = [
+        'id', 
+        'name', 
+        'instruction', 
+        'points',
+        'course_id',
+    ];
+
+    public function course(){
+        return $this->belongsTo('App\Models\Course');
     }
 
     public function dashboard(){

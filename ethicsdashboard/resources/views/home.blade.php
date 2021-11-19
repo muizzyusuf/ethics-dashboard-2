@@ -2,75 +2,6 @@
 
 @section('content')
 
-    {{-- <!-- <div class="row justify-content-center mb-5">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h1>Course Selection
-                </div>
-
-
-                    <table style="float:right">
-                        <tr>
-                            @foreach($codes as $code)
-
-                            <th>
-                                <div class="card-body">
-
-                                    <h3> <u> {{$code}} </u></h3>
-                                    </form>
-                                </div>
-                            </th>
-                            @endforeach
-                        </tr>
-                        <tr>
-                            @foreach($names as $name)
-                            <td>
-                                <div class="card-body">
-
-                                    <h5> {{$name}} </h5>
-                                    </form>
-                                </div>
-                            </td>
-                            @endforeach
-
-
-                        </tr>
-                        <tr>
-                            @foreach($ids as $id)
-                            <td>
-                                <div class="card-body">
-                                    <a class="btn btn-success" href="{{route('casestudy', ['course_id' => $id])}}">{{
-                                        __('Next') }} </a>
-                            </td>
-                            @endforeach
-                        </tr>
-                    </table>
-            
-            </div>
-
-        </div>
-    </div>
-
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h1>Course Creation</h1>
-                </div>
-
-                <div class="card-body">
-                    <form method="GET" action="course">
-                        <button type="submit" class="btn btn-primary" style="width: 200px">{{ __('Create a New Course')
-                            }} </button>
-                    </form>
-                </div>
-            
-            </div>
-        </div>
-    </div> --> --}}
-
     <div class="container">
         <div class="row">
             <div class="col-6 float-left">
@@ -139,7 +70,7 @@
            
             @if(count($courses)<1)
             
-                <p>NO COURSES REGISTERED/CREATED</p>
+            <p class="mx-auto mt-2 "><mark>NO COURSES REGISTERED/CREATED</mark></p>
 
             @else
                 
@@ -150,10 +81,10 @@
                         <div class="col-md-4 mt-5">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title font-weight-bold ">{{$courses[$i]->code}}-{{$courses[$i]->number}} 00{{$courses[$i]->section}}</h5>
+                                    <h5 class="card-title font-weight-bold"><a href="{{route('courses.show', $courses[$i]->id)}}">{{$courses[$i]->code}}-{{$courses[$i]->number}} 00{{$courses[$i]->section}}</a></h5>
                                     <h6 class="card-subtitle mb-2 text-muted">{{$courses[$i]->year}}</h6>
                                     <p class="card-text">{{$courses[$i]->title}}</p>
-
+                                    
                                     <!-- Delete Button trigger modal -->
                                     <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteCourse{{$courses[$i]->id}}Modal">
                                         Delete
@@ -205,7 +136,7 @@
                             <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                <h5 class="modal-title" id="editCourse{{$courses[$i]->id}}ModalLabel">Create a course</h5>
+                                <h5 class="modal-title" id="editCourse{{$courses[$i]->id}}ModalLabel">Edit course</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
