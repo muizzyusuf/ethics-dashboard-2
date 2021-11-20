@@ -15,10 +15,6 @@ class Option extends Model
         'option2', 
         'option3', 
         'option4',
-        'stakeholder1',
-        'stakeholder2',
-        'stakeholder3',
-        'stakeholder4'
     ];
 
     use HasFactory;

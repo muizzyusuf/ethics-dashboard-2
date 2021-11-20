@@ -21,10 +21,6 @@ class OptionController extends Controller
             'option2'=> 'required',
             'option3' => 'required',
             'option4' => 'required',
-            'stakeholder1' => 'required',
-            'stakeholder2'=> 'required',
-            'stakeholder3' => 'required',
-            'stakeholder4' => 'required',
 
             ]);
         $c=new Option;
@@ -33,10 +29,6 @@ class OptionController extends Controller
         $c->option2=$request->input('option2');
         $c->option3=$request->input('option3');
         $c->option4=$request->input('option4');
-        $c->option1=$request->input('stakeholder1');
-        $c->option2=$request->input('stakeholder2');
-        $c->option3=$request->input('stakeholder3');
-        $c->option4=$request->input('stakeholder4');
         $c->save();
 
 
