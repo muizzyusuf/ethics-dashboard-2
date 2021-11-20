@@ -30,3 +30,10 @@ Route::resource('/casestudy','App\http\Controllers\CaseStudyController');
 //This resource contains the following routes in dashboard controller index, create, store, edit, update, destroy
 Route::resource('/dashboard','App\http\Controllers\DashboardController');
 
+//Routing for options
+
+Route::get('/options', function(){
+    return view('/options');
+});
+
+Route::post('/options', [App\Http\Controllers\OptionController::class, 'store'])->name('ethicalIssuePost');
