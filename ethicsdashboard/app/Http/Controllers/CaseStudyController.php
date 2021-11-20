@@ -86,9 +86,25 @@ class CaseStudyController extends Controller
         $casestudy = CaseStudy::where('id', $id)->first();
         $user_id = Auth::user()->id;
 
+        $course = Course::where('id', $casestudy->course_id)->first();
+
         $dashboard = Dashboard::where('case_study_id',$id)->where('user_id',$user_id)->first();
 
-        return view('casestudy')->with('casestudy', $casestudy)->with('dashboard', $dashboard);
+        $dashboards = Dashboard::join('users','dashboards.user_id','=','users.id')
+                                ->select('dashboards.name','dashboards.id', 'users.name AS user_name', 'dashboards.user_id', 'dashboards.grade')
+                                ->where('case_study_id',$id)->get();
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.casestudy')->with('casestudy', $casestudy)
+                                            ->with('dashboard', $dashboard)
+                                            ->with('course',$course);
+        }else{
+            return view('casestudy')->with('casestudy', $casestudy)
+                                            ->with('dashboards', $dashboards)
+                                            ->with('course',$course);
+        }
+
+       
        
     }
 

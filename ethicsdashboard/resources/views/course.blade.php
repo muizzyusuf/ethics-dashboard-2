@@ -10,7 +10,7 @@
             <a class="nav-link font-weight-bold" href="{{route('courses.people', $course->id)}}">People</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="#">Grades</a>
+            <a class="nav-link font-weight-bold" href="{{route('courses.grade', $course->id)}}">Grades</a>
         </li>
     </ul>
 

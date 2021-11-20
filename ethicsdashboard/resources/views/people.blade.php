@@ -7,10 +7,10 @@
             <a class="nav-link font-weight-bold" href="{{route('courses.show', $course->id)}}">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold active" href="{{route('courses.show', $course->id)}}">People</a>
+            <a class="nav-link font-weight-bold active" href="{{route('courses.people', $course->id)}}">People</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="#">Grades</a>
+            <a class="nav-link font-weight-bold" href="{{route('courses.grade', $course->id)}}">Grades</a>
         </li>
     </ul>
 

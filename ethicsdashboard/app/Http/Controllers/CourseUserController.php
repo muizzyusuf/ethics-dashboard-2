@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\CourseUser;
+use App\Models\User;
+use App\Models\Dashboard;
 
 
 class CourseUserController extends Controller
@@ -118,11 +120,12 @@ class CourseUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $cid, $uid)
-    {
+    { 
         //
         $courseUser = CourseUser::where('user_id', $uid)->where('course_id', $cid);
 
-        
+        $dashboards = User::find($uid)->dashboards()->delete();
+  
         if($courseUser->delete()){
             $request->session()->flash('success','User has been removed from course');
         }else{

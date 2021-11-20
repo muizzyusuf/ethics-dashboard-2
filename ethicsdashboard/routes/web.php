@@ -26,6 +26,8 @@ Route::resource('/courses','App\http\Controllers\CourseController');
 
 Route::get('/courses/{course}/people','App\http\Controllers\CourseController@people')->name('courses.people');
 
+Route::get('/courses/{course}/grade','App\http\Controllers\CourseController@grade')->name('courses.grade');
+
 //This resource contains the following routes in case study controller index, create, store, edit, update, destroy
 Route::resource('/casestudy','App\http\Controllers\CaseStudyController');
 
