@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- course navigation -->
+    <ul class="nav nav-tabs mb-2 justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold active" href="{{route('courses.show', $course->id)}}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" href="{{route('courses.people', $course->id)}}">People</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" href="#">Grades</a>
+        </li>
+    </ul>
 
     <div class="container">
         <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
@@ -80,27 +92,27 @@
                             <!-- delete Modal -->
                             <div class="modal fade" id="deleteCasestudy{{$casestudy->id}}Modal" tabindex="-1" role="dialog" aria-labelledby="deleteCasestudy{{$casestudy->id}}ModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteCasestudy{{$casestudy->id}}ModalLabel">Delete case study</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-
-                                    <form action="{{route('casestudy.destroy', $casestudy->id)}}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{method_field('DELETE')}}
-                                        <input type="hidden" name="course_id" id="course_id" value="{{$casestudy->course_id}}">
-                                        <div class="modal-body">
-                                            Are you sure you want to delete this case study?
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteCasestudy{{$casestudy->id}}ModalLabel">Delete case study</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                            <button type="submit" class="btn btn-danger">Yes</button>
+
+                                        <form action="{{route('casestudy.destroy', $casestudy->id)}}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{method_field('DELETE')}}
+                                            <input type="hidden" name="course_id" id="course_id" value="{{$casestudy->course_id}}">
+                                            <div class="modal-body">
+                                                Are you sure you want to delete this case study?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    </form>
-                                </div>
                                 </div>
                             </div>
                             

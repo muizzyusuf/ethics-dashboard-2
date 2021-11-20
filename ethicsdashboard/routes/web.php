@@ -24,9 +24,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //This resource contains the following routes in course controller index, create, store, edit, update, destroy
 Route::resource('/courses','App\http\Controllers\CourseController');
 
+Route::get('/courses/{course}/people','App\http\Controllers\CourseController@people')->name('courses.people');
+
 //This resource contains the following routes in case study controller index, create, store, edit, update, destroy
 Route::resource('/casestudy','App\http\Controllers\CaseStudyController');
 
 //This resource contains the following routes in dashboard controller index, create, store, edit, update, destroy
 Route::resource('/dashboard','App\http\Controllers\DashboardController');
 
+//This resource contains the following routes in courseuser controller index, create, store, edit, update, destroy
+//Route::resource('/courseuser','App\http\Controllers\CourseUserController');
+
+Route::post('/courses/courseuser','App\http\Controllers\CourseUserController@store')->name('courseuser.store');
+
+Route::delete('/courses/courseuser/{course}/{user}','App\http\Controllers\CourseUserController@destroy')->name('courseuser.destroy');

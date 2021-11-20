@@ -15,8 +15,8 @@ class RoleSeeder extends Seeder
     public function run()
     {
         //
-        Role::create(['role'=>'instructor']);
-        Role::create(['role'=>'teaching assistant']);
-        Role::create(['role'=>'student']);
+        Role::create(['role'=>'Instructor']);
+        Role::create(['role'=>'Teaching assistant']);
+        Role::create(['role'=>'Student']);
     }
 }

@@ -47,9 +47,9 @@
 
                                 <select class="custom-select" id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
                                     <option disabled selected hidden>Choose...</option>
-                                    <option value="instructor">Instructor</option>
-                                    <option value="teaching assistant">Teaching Assistant</option>
-                                    <option value="student">Student</option>
+                                    <option value="Instructor">Instructor</option>
+                                    <option value="Teaching assistant">Teaching Assistant</option>
+                                    <option value="Student">Student</option>
                                 </select>
 
                                 @error('role')

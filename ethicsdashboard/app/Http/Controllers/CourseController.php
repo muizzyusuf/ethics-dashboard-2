@@ -161,4 +161,28 @@ class CourseController extends Controller
 
         return redirect('/home');
     }
+
+    public function people($id)
+    {
+        //
+        $course = Course::where('id', $id)->first();
+        $people = Course::join('course_users','courses.id',"=","course_users.course_id")
+                    ->join('users','course_users.user_id',"=","users.id")
+                    ->join('roles', 'users.role_id','=','roles.id')
+                    ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
+                    ->where('courses.id','=',$id)->get();
+
+        $students = User::join('roles', 'users.role_id','=','roles.id')
+                    ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
+                    ->where('roles.id','=','3')->get();
+
+        $teachingAssistants = User::join('roles', 'users.role_id','=','roles.id')
+                    ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
+                    ->where('roles.id','=','2')->get();
+
+        return view('people')->with('course', $course)
+                            ->with('people',$people)
+                            ->with('students',$students)
+                            ->with('teachingAssistants',$teachingAssistants);
+    }
 }
