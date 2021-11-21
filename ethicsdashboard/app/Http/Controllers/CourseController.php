@@ -8,6 +8,8 @@ use App\Models\Course;
 use App\Models\CourseUser;
 use App\Models\User;
 use App\Models\CaseStudy;
+use App\Models\Dashboard;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -90,7 +92,11 @@ class CourseController extends Controller
         $course = Course::where('id', $id)->first();
         $casestudies = CaseStudy::where('course_id', $id)->get();
 
-
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.course')->with('course', $course)->with('casestudies',$casestudies);
+        }else{
+            return view('course')->with('course', $course)->with('casestudies',$casestudies);
+        }
 
         return view('course')->with('course', $course)->with('casestudies',$casestudies);
     }
@@ -160,5 +166,79 @@ class CourseController extends Controller
         }
 
         return redirect('/home');
+    }
+
+    public function people($id)
+    {
+        //
+        $course = Course::where('id', $id)->first();
+        $people = Course::join('course_users','courses.id',"=","course_users.course_id")
+                    ->join('users','course_users.user_id',"=","users.id")
+                    ->join('roles', 'users.role_id','=','roles.id')
+                    ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
+                    ->where('courses.id','=',$id)->get();
+
+        $students = User::join('roles', 'users.role_id','=','roles.id')
+                    ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
+                    ->where('roles.id','=','3')->get();
+
+        $teachingAssistants = User::join('roles', 'users.role_id','=','roles.id')
+                    ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
+                    ->where('roles.id','=','2')->get();
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.people')->with('course', $course)
+                            ->with('people',$people)
+                            ->with('students',$students)
+                            ->with('teachingAssistants',$teachingAssistants);
+        }else{
+            return view('people')->with('course', $course)
+                            ->with('people',$people)
+                            ->with('students',$students)
+                            ->with('teachingAssistants',$teachingAssistants);
+        }
+
+        
+    }
+
+    public function grade($id)
+    {
+        //
+        $course = Course::where('id', $id)->first();
+        $students = Course::join('course_users','courses.id',"=","course_users.course_id")
+                    ->join('users','course_users.user_id',"=","users.id")
+                    ->join('roles', 'users.role_id','=','roles.id')
+                    ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
+                    ->where('users.role_id', '=', 3)
+                    ->where('courses.id','=',$id)->get();
+
+        $student = User::where('id',Auth::user()->id)->first();
+
+        $dashboards = Dashboard::join("case_studies", "dashboards.case_study_id","=","case_studies.id")
+                    ->select('dashboards.user_id','dashboards.id','dashboards.grade','case_studies.name', 'case_studies.points')
+                    ->where('case_studies.course_id',$id)->get();
+                
+        $dboards = Dashboard::join("case_studies", "dashboards.case_study_id","=","case_studies.id")
+                    ->select('dashboards.user_id','dashboards.id','dashboards.grade','case_studies.name', 'case_studies.points', 'case_studies.id AS case_study_id')
+                    ->where('dashboards.user_id',Auth::user()->id)
+                    ->where('case_studies.course_id',$id)->get();
+
+        $casestudies = CaseStudy::where('course_id', $id)->get();
+    
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.grade')->with('course', $course)
+                            ->with('dboards', $dboards)
+                            ->with('casestudies', $casestudies)
+                            ->with('student', $student);
+        }else{
+            return view('grade')->with('course', $course)
+                            ->with('dashboards', $dashboards)
+                            ->with('casestudies', $casestudies)
+                            ->with('students', $students);
+        }
+
+        
+                            
     }
 }
