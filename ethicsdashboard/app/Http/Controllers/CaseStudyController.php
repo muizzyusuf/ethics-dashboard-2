@@ -87,8 +87,8 @@ class CaseStudyController extends Controller
         $user_id = Auth::user()->id;
 
         $dashboard = Dashboard::where('case_study_id',$id)->where('user_id',$user_id)->first();
-
-        return view('casestudy')->with('casestudy', $casestudy)->with('dashboard', $dashboard);
+        
+       return view('casestudy')->with('casestudy', $casestudy)->with('dashboard', $dashboard);
        
     }
 

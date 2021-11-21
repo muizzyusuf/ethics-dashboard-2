@@ -30,3 +30,33 @@ Route::resource('/casestudy','App\http\Controllers\CaseStudyController');
 //This resource contains the following routes in dashboard controller index, create, store, edit, update, destroy
 Route::resource('/dashboard','App\http\Controllers\DashboardController');
 
+
+Route::get('/stakeholders/{id}', [
+    'as' => 'stakeholders', 
+    'uses' => 'App\Http\Controllers\StakeholderController@index'
+]);
+
+Route::post('/stakeholders/{id}', [
+    'as' => 'stakeholders', 
+    'uses' => 'App\Http\Controllers\StakeholderController@store'
+]);
+
+Route::get('/ethicalissues/{id}', [
+    'as' => 'ethicalissues', 
+    'uses' => 'App\Http\Controllers\EthicalIssueController@index'
+]);
+
+Route::post('/ethicalissues/{id}', [
+    'as' => 'ethicalissues', 
+    'uses' => 'App\Http\Controllers\EthicalIssueController@store'
+]);
+
+Route::get('/options/{id}', [
+    'as' => 'options', 
+    'uses' => 'App\Http\Controllers\OptionController@index'
+]);
+
+Route::post('/options/{id}', [
+    'as' => 'options', 
+    'uses' => 'App\Http\Controllers\OptionController@store'
+]);

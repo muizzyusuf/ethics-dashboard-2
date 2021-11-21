@@ -7,6 +7,8 @@ use App\Models\Dashboard;
 
 use App\Models\EthicalIssue;
 use App\Models\StakeholderSection;
+use App\Models\Stakeholder;
+use App\Models\Option;
 use App\Models\UtilitarianismSection;
 use App\Models\User;
 use App\Models\CaseStudy;
@@ -99,8 +101,14 @@ class DashboardController extends Controller
         //
         
         $dashboard = Dashboard::where('id',$id)->first();
-
-        return view('dashboard')->with('dashboard', $dashboard);
+        $ethicalIssue=EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        
+        $stakeholders=Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options=Option::where('ethical_issue_id', $ethicalIssue->id)-> get();
+        //can't use ethicalIssue id for some reason, says it is not there ( but is )
+        //->with('options', $options)
+        //return $ethicalIssue;
+        return view('dashboard')->with('dashboard', $dashboard)->with('ethicalissue', $ethicalIssue)->with('stakeholders', $stakeholders)->with('options', $options);
     }
 
     /**
