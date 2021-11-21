@@ -10,6 +10,8 @@ use App\Models\StakeholderSection;
 use App\Models\UtilitarianismSection;
 use App\Models\User;
 use App\Models\CaseStudy;
+use App\Models\Stakeholder;
+use App\Models\Option;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -99,8 +101,11 @@ class DashboardController extends Controller
         //
         
         $dashboard = Dashboard::where('id',$id)->first();
-
-        return view('dashboard')->with('dashboard', $dashboard);
+        $ethicalIssue=EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $stakeholders=Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options=Option::where('ethical_issue_id', $ethicalIssue->id)-> get();
+        return view('dashboard')->with('dashboard', $dashboard)->with('ethicalissue', $ethicalIssue)->with('stakeholders', $stakeholders)->with('options', $options);
+   
     }
 
     /**
