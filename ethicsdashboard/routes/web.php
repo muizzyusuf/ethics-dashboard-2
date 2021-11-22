@@ -41,33 +41,39 @@ Route::post('/courses/courseuser','App\http\Controllers\CourseUserController@sto
 
 Route::delete('/courses/courseuser/{course}/{user}','App\http\Controllers\CourseUserController@destroy')->name('courseuser.destroy');
 
+Route::resource('/ethicalissue','App\http\Controllers\EthicalIssueController');
+
+Route::resource('/stakeholder','App\http\Controllers\StakeholderController');
+
+Route::resource('/stakeholdersection','App\http\Controllers\StakeholderSectionController');
+
 //Routes Created for Dashboard Home Screen, most likely need to be reduced (by Mike)
-Route::get('/stakeholders/{id}', [
-    'as' => 'stakeholders', 
-    'uses' => 'App\Http\Controllers\StakeholderController@index'
-]);
+// Route::get('/stakeholders/{id}', [
+//     'as' => 'stakeholders', 
+//     'uses' => 'App\Http\Controllers\StakeholderController@index'
+// ]);
 
-Route::post('/stakeholders/{id}', [
-    'as' => 'stakeholders', 
-    'uses' => 'App\Http\Controllers\StakeholderController@store'
-]);
+// Route::post('/stakeholders/{id}', [
+//     'as' => 'stakeholders', 
+//     'uses' => 'App\Http\Controllers\StakeholderController@store'
+// ]);
 
-Route::get('/ethicalissues/{id}', [
-    'as' => 'ethicalissues', 
-    'uses' => 'App\Http\Controllers\EthicalIssueController@index'
-]);
+// Route::get('/ethicalissues/{id}', [
+//     'as' => 'ethicalissues', 
+//     'uses' => 'App\Http\Controllers\EthicalIssueController@index'
+// ]);
 
-Route::post('/ethicalissues/{id}', [
-    'as' => 'ethicalissues', 
-    'uses' => 'App\Http\Controllers\EthicalIssueController@store'
-]);
+// Route::post('/ethicalissues/{id}', [
+//     'as' => 'ethicalissues', 
+//     'uses' => 'App\Http\Controllers\EthicalIssueController@store'
+// ]);
 
-Route::get('/options/{id}', [
-    'as' => 'options', 
-    'uses' => 'App\Http\Controllers\OptionController@index'
-]);
+// Route::get('/options/{id}', [
+//     'as' => 'options', 
+//     'uses' => 'App\Http\Controllers\OptionController@index'
+// ]);
 
-Route::post('/options/{id}', [
-    'as' => 'options', 
-    'uses' => 'App\Http\Controllers\OptionController@store'
-]);
+// Route::post('/options/{id}', [
+//     'as' => 'options', 
+//     'uses' => 'App\Http\Controllers\OptionController@store'
+// ]);

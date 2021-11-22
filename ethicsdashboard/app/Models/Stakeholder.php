@@ -12,7 +12,7 @@ class Stakeholder extends Model
     public $fillable = ['stakeholder', 'interests', 'stakeholder_section_id'];
 
     public function stakeholderSection(){
-        return $this->belongsTo('App\Models\StakeholderSection');
+        return $this->belongsTo('App\Models\StakeholderSection', 'id');
     }
 
     public function impact(){

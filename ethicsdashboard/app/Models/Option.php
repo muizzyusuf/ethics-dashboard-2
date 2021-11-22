@@ -10,7 +10,7 @@ class Option extends Model
     use HasFactory;
 
     public function ethicalIssue(){
-        return $this->belongsTo('App\Models\EthicalIssue');
+        return $this->belongsTo('App\Models\EthicalIssue', 'id');
     }
 
     public function consequences(){

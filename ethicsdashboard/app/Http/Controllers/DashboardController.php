@@ -101,10 +101,15 @@ class DashboardController extends Controller
         //
         
         $dashboard = Dashboard::where('id',$id)->first();
-        $ethicalIssue=EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
-        $stakeholders=Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
-        $options=Option::where('ethical_issue_id', $ethicalIssue->id)-> get();
-        return view('dashboard')->with('dashboard', $dashboard)->with('ethicalissue', $ethicalIssue)->with('stakeholders', $stakeholders)->with('options', $options);
+        $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)-> get();
+        return view('dashboard')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options);
    
     }
 

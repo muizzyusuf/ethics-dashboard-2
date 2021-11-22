@@ -1,112 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
- <div class="container" >
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-
-    <h2 align="center">Create Stakeholders</h2> 
-
-   
+ 
+<div>
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+        ⏴Case Study
+    </a> 
 </div>
 
-    <form action="{{ route('stakeholders', $id) }}" method="POST">
+<div class="container mb-2">
+    <nav class="nav nav-pills nav-justified">
+        <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link active" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
+        <a class="nav-link" href="#">Utilitarianism</a>
+        <a class="nav-link" href="#">My Progress</a>
+    </nav>
+</div>
 
-        @csrf
+<div class="jumbotron">
+    <div class="card">
+        <h5 class="card-header">Stakeholder Analysis</h5>
+        <div class="card-body">
+          <p class="card-text">Stakeholders are persons or groups that will be impacted 
+            by the decision/action taken.  List the stakeholders and 
+            what they want in the simplest terms – wealth, social 
+            status, etc.  Note: It’s good to start with the decision-maker 
+            as the first stakeholder and then work out from there.</p>
 
-   
+            <form method="POST" action="{{route('stakeholder.store')}}">
+                {{ csrf_field() }}
+                {{method_field('POST')}}
+                <input type="hidden" id="id" name="id" value="{{$ethicalissue->id}}" >
+                <input type="hidden" name="stakeholder_section_id" value="{{$dashboard->stakeholder_section_id}}">
 
-        @if ($errors->any())
+                @for($i=0; $i<6; $i++)
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="stakeholder{{$i+1}}">Stakeholder {{$i+1}}</label>
+                            <input type="text" class="form-control" id="stakeholder{{$i+1}}" name="stakeholder{{$i+1}}" @if(count($stakeholders)>0) value="{{$stakeholders[$i]->stakeholder}}" @endif  required>
+                            <input type="hidden" id="stakeholder{{$i+1}}_id" name="stakeholder{{$i+1}}_id" @if(count($stakeholders)>0) value="{{$stakeholders[$i]->id}}" @endif>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="interest{{$i+1}}">Interests</label>
+                            <textarea class="form-control" id="interest{{$i+1}}" name="interest{{$i+1}}" rows="3" required>@if(count($stakeholders)>0) {{$stakeholders[$i]->interests}} @endif </textarea>
+                        </div>
+                    </div>
+                @endfor
 
-            <div class="alert alert-danger">
+                <input type="submit" class="float-right btn btn-primary" value="Save">
 
-                <ul>
-
-                    @foreach ($errors->all() as $error)
-
-                        <li>{{ $error }}</li>
-
-                    @endforeach
-
-                </ul>
-
-            </div>
-
-        @endif
-
-   
-
-        @if (Session::has('success'))
-
-            <div class="alert alert-success text-center">
-
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                <p>{{ Session::get('success') }}</p>
-
-            </div>
-
-        @endif
-
-   
-
-        <table class="table table-bordered" id="dynamicTable">  
-
-            <tr>
-
-                <th width="25%" >Stakeholder #</th>
-
-                <th>Stakeholder Name</th>
-
-                <th>Stakeholder Interests</th>
-
-
-               
-
-              
-
-            </tr>
-
-            <tr>  
-                <td><h5> Stakeholder 1 </h5></td>
-                <td><textarea cols="30" rows="10" type="text" name="stakeholders[0][stakeholder]" placeholder="Enter Name of Stakeholder" class="form-control"> </textarea></td>  
-
-                <td><textarea cols="30" rows="10" type="text" name="stakeholders[0][interests]" placeholder="Enter Stakeholder Interests" class="form-control"> </textarea></td>  
+            </form>
           
-
-            </tr>  
-            <tr>  
-                <td><h5> Stakeholder 2 </h5></td>
-                <td><textarea cols="30" rows="10" type="text" name="stakeholders[1][stakeholder]" placeholder="Enter Name of Stakeholder" class="form-control"> </textarea></td>  
-
-                <td><textarea cols="30" rows="10" type="text" name="stakeholders[1][interests]" placeholder="Enter Stakeholder Interests" class="form-control"> </textarea></td>  
-
-            </tr>  
-  <tr>  
-                <td><h5> Stakeholder 3 </h5></td>
-                <td><textarea cols="30" rows="10" type="text" name="stakeholders[2][stakeholder]" placeholder="Enter Name of Stakeholder" class="form-control"> </textarea></td>  
-
-                <td><textarea cols="30" rows="10" type="text" name="stakeholders[2][interests]" placeholder="Enter Stakeholder Interests" class="form-control"> </textarea></td>  
-
-
-          
-
-            </tr> 
-            
-            
-
-        </table> 
-
-    
-
-        <button style="float:right; height:60px; width:200px" type="submit" class="btn btn-success"><h3>Save</h3></button>
-
-    </form>
-
-</div>
-</div>
+        </div>
+      </div>
 </div>
 
 @endsection
