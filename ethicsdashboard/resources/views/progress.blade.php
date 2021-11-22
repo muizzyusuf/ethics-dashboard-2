@@ -14,7 +14,7 @@
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="#">Utilitarianism</a>
-        <a class="nav-link active" href="{{route('progress.show', $dashboard->id)}}">My Progress</a>
+        <a class="nav-link active" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
 
