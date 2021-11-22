@@ -116,12 +116,20 @@ class EthicalIssueController extends Controller
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)-> get();
 
-        
-        return view('ethicalissue')->with('dashboard', $dashboard)
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.ethicalissue')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options);
+        }else{
+            return view('ethicalissue')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options);
+        }
+        
 
         
     }

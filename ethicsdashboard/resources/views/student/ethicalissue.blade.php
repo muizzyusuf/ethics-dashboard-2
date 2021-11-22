@@ -37,25 +37,25 @@
                 <input type="hidden" id="id" name="id" value="{{$ethicalissue->id}}" >
                 <div class="form-group">
                     <label class="font-weight-bold col-form-label-lg" for="issue">Ethical Issue</label>
-                    <textarea class="form-control form-control-lg" id="issue" name="issue" rows="3" readonly required>{{$ethicalissue->issue}} </textarea>
+                    <textarea class="form-control form-control-lg" id="issue" name="issue" rows="3" required>{{$ethicalissue->issue}} </textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="option1">Option 1</label>
                     <input type="hidden" id="option1_id" name="option1_id" @if(isset($options[0])) value="{{$options[0]->id}}" @endif>
-                    <textarea class="form-control" id="option1" name="option1" rows="3" readonly required>@if(count($options)>0) {{$options[0]->option}} @endif </textarea>
+                    <textarea class="form-control" id="option1" name="option1" rows="3" required>@if(count($options)>0) {{$options[0]->option}} @endif </textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="option2">Option 2</label>
                     <input type="hidden" id="option2_id" name="option2_id" @if(isset($options[1])) value="{{$options[1]->id}}" @endif>
-                    <textarea class="form-control" id="option2" name="option2" rows="3" readonly required>@if(count($options)>0) {{$options[1]->option}} @endif </textarea>
+                    <textarea class="form-control" id="option2" name="option2" rows="3" required>@if(count($options)>0) {{$options[1]->option}} @endif </textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="option3">Option 3</label>
                     <input type="hidden" id="option3_id" name="option3_id" @if(isset($options[2])) value="{{$options[2]->id}}" @endif>
-                    <textarea class="form-control" id="option3" name="option3" rows="3" readonly required>@if(count($options)>0) {{$options[2]->option}} @endif </textarea>
+                    <textarea class="form-control" id="option3" name="option3" rows="3" required>@if(count($options)>0) {{$options[2]->option}} @endif </textarea>
                 </div>
 
               
@@ -67,29 +67,6 @@
         </div>
     </div>
 
-    <div class="mt-3 card">
-        <p class="card-header">Instructor Comments & Grade</p>
-        <div class="card-body">
-            <form method="POST" action="{{route('ethicalissue.comment',$ethicalissue->id)}}">
-                {{ csrf_field() }}
-                {{method_field('POST')}}
-        
-                <div class="form-group">
-                    <label class="font-weight-bold" for="comment">Comment</label>
-                    <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$ethicalissue->comment}} </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="font-weight-bold" for="grade">Grade</label>
-                    <input type="number" class="form-control col-1" id="grade" name="grade" value="{{$ethicalissue->grade}}" required >
-                </div>
-
-                <input type="submit" class="float-right btn btn-primary" value="Save">
-
-            </form>
-          
-        </div>
-    </div>
 </div>
 
 @endsection
