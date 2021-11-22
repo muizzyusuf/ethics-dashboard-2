@@ -15,7 +15,7 @@ class CreateEthicalIssuesTable extends Migration
     {
         Schema::create('ethical_issues', function (Blueprint $table) {
             $table->id();
-            $table->integer('grade')->nullable();
+            $table->integer('grade')->default(0);
             $table->text('comment')->nullable();
             $table->text('issue')->nullable();
             $table->timestamps();

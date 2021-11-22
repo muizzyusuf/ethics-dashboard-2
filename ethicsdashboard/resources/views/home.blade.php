@@ -35,23 +35,23 @@
                 
                     <div class="form-group">
                         <label for="title">Title:</label>
-                        <input type="text" id="title" name="title" class="form-control" required>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="e.g. Intro to Philosophy" required>
                     </div>
                     <div class="form-group">
                         <label for="code">Course Code:</label>
-                        <input type="text" id="code" name="code" class="form-control" required>
+                        <input type="text" id="code" name="code" class="form-control" placeholder="e.g. PHIL" required>
                     </div>
                     <div class="form-group">
                         <label for="section">Number:</label>
-                        <input type="number" id="number" name="number" class="form-control" required>
+                        <input type="number" id="number" name="number" class="form-control" placeholder="e.g. 101" required>
                     </div>
                     <div class="form-group">
                         <label for="section">Section:</label>
-                        <input type="number" id="section" name="section" class="form-control" required>
+                        <input type="number" id="section" name="section" class="form-control" placeholder="e.g. 001" required>
                     </div>
                     <div class="form-group">
                         <label for="year">Year:</label>
-                        <input type="text" id="year" name="year" class="form-control" required>
+                        <input type="text" id="year" name="year" class="form-control" placeholder="e.g. 2021" required>
                     </div>
 
                 </div>

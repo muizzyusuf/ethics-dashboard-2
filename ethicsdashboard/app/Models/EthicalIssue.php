@@ -10,7 +10,7 @@ class EthicalIssue extends Model
     use HasFactory;
 
     public function dashboard(){
-        return $this->belongsTo('App\Models\Dashboard');
+        return $this->belongsTo('App\Models\Dashboard', 'id');
     }
 
     public function options(){
