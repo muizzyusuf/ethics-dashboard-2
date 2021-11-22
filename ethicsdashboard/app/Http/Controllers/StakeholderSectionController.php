@@ -12,6 +12,7 @@ use App\Models\EthicalIssue;
 use App\Models\CaseStudy;
 use App\Models\Option;
 use App\Models\Stakeholder;
+use App\Models\StakeholderSection;
 
 
 class StakeholderSectionController extends Controller
@@ -66,13 +67,15 @@ class StakeholderSectionController extends Controller
         $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)-> get();
+        $stakeholderSection = StakeholderSection::where('id', $dashboard->stakeholder_section_id)->first();
 
         
         return view('stakeholder')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
-                                ->with('options', $options);
+                                ->with('options', $options)
+                                ->with('stakeholderSection', $stakeholderSection);
 
         
     }
@@ -110,5 +113,28 @@ class StakeholderSectionController extends Controller
     { 
         //
         
+    }
+
+    public function comment(Request $request, $id)
+    { 
+        //
+        $stakeholder = StakeholderSection::where('id', $id)->first();
+        $stakeholder->comment = $request->input('comment');
+        $stakeholder->grade = $request->input('grade');
+        $stakeholder->save();
+
+
+        $dashboard = Dashboard::where('id', $stakeholder->dashboard->id)->first();
+        $egrade = $dashboard->ethicalIssue->grade;
+        $sgrade = $dashboard->stakeholderSection->grade;
+        $dashboard->grade = $egrade + $sgrade;
+
+
+        if($dashboard->save()){
+            $request->session()->flash('success', 'Comment and grade saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the comment and grade');
+        }
+        return  redirect(route('stakeholdersection.show', $id));
     }
 }

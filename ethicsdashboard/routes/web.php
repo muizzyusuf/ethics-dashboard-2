@@ -43,37 +43,12 @@ Route::delete('/courses/courseuser/{course}/{user}','App\http\Controllers\Course
 
 Route::resource('/ethicalissue','App\http\Controllers\EthicalIssueController');
 
+Route::post('/ethicalissue/{ethicalissue}','App\http\Controllers\EthicalIssueController@comment')->name('ethicalissue.comment');
+
 Route::resource('/stakeholder','App\http\Controllers\StakeholderController');
 
 Route::resource('/stakeholdersection','App\http\Controllers\StakeholderSectionController');
 
-//Routes Created for Dashboard Home Screen, most likely need to be reduced (by Mike)
-// Route::get('/stakeholders/{id}', [
-//     'as' => 'stakeholders', 
-//     'uses' => 'App\Http\Controllers\StakeholderController@index'
-// ]);
+Route::post('/stakeholdersection/{stakeholdersection}','App\http\Controllers\StakeholderSectionController@comment')->name('stakeholdersection.comment');
 
-// Route::post('/stakeholders/{id}', [
-//     'as' => 'stakeholders', 
-//     'uses' => 'App\Http\Controllers\StakeholderController@store'
-// ]);
-
-// Route::get('/ethicalissues/{id}', [
-//     'as' => 'ethicalissues', 
-//     'uses' => 'App\Http\Controllers\EthicalIssueController@index'
-// ]);
-
-// Route::post('/ethicalissues/{id}', [
-//     'as' => 'ethicalissues', 
-//     'uses' => 'App\Http\Controllers\EthicalIssueController@store'
-// ]);
-
-// Route::get('/options/{id}', [
-//     'as' => 'options', 
-//     'uses' => 'App\Http\Controllers\OptionController@index'
-// ]);
-
-// Route::post('/options/{id}', [
-//     'as' => 'options', 
-//     'uses' => 'App\Http\Controllers\OptionController@store'
-// ]);
+Route::resource('/progress','App\http\Controllers\ProgressController');

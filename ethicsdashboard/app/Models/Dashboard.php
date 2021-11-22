@@ -18,15 +18,15 @@ class Dashboard extends Model
         'case_study_id'
     ];
     public function ethicalIssue(){
-        return $this->hasOne('App\Models\EthicalIssue');
+        return $this->hasOne('App\Models\EthicalIssue', 'id');
     }
 
     public function utilitarianismSection(){
-        return $this->hasOne('App\Models\UtilitarianismSection');
+        return $this->hasOne('App\Models\UtilitarianismSection', 'id');
     }
 
     public function stakeholderSection(){
-        return $this->hasOne('App\Models\StakeholderSection');
+        return $this->hasOne('App\Models\StakeholderSection', 'id');
     }
 
     public function caseStudy(){

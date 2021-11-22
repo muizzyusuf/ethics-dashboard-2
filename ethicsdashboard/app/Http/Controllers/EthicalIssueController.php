@@ -112,8 +112,6 @@ class EthicalIssueController extends Controller
         $ethicalissue = EthicalIssue::where('id', $id)->first();
         $dashboard = Dashboard::where('id',$ethicalissue->dashboard->id)->first();
         $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
-       
-
         
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)-> get();
@@ -161,5 +159,28 @@ class EthicalIssueController extends Controller
     { 
         //
         
+    }
+
+    public function comment(Request $request, $id)
+    { 
+        //
+        $ethicalissue = EthicalIssue::where('id', $id)->first();
+        $ethicalissue->comment = $request->input('comment');
+        $ethicalissue->grade = $request->input('grade');
+        $ethicalissue->save();
+
+        $dashboard = Dashboard::where('id', $ethicalissue->dashboard->id)->first();
+        $egrade = $dashboard->ethicalIssue->grade;
+        $sgrade = $dashboard->stakeholderSection->grade;
+        $dashboard->grade = $egrade + $sgrade;
+
+        
+
+        if($dashboard->save()){
+            $request->session()->flash('success', 'Comment and grade saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the comment and grade');
+        }
+        return  redirect(route('ethicalissue.show', $id));
     }
 }
