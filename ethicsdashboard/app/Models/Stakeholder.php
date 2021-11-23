@@ -16,7 +16,7 @@ class Stakeholder extends Model
     }
 
     public function impact(){
-        return $this->hasOne('App\Models\Impact');
+        return $this->hasOne('App\Models\Impact', 'stakeholder_id');
     }
 
     public function pleasures(){

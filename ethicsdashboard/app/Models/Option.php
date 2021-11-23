@@ -14,7 +14,7 @@ class Option extends Model
     }
 
     public function consequences(){
-        return $this->hasMany('App\Models\Consequence');
+        return $this->hasMany('App\Models\Consequence','option_id');
     }
 
     public function pleasures(){

@@ -12,21 +12,21 @@
     <nav class="nav nav-pills nav-justified">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
-        <a class="nav-link active" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
-        <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
+        <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
+        <a class="nav-link active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
 
 <div class="jumbotron">
     <div class="card">
-        <h5 class="card-header">Stakeholder Analysis</h5>
+        <h5 class="card-header"></h5>
         <div class="card-body">
-          <p class="card-text">Stakeholders are persons or groups that will be impacted 
-            by the decision/action taken.  List the stakeholders and 
-            what they want in the simplest terms – wealth, social 
-            status, etc.  Note: It’s good to start with the decision-maker 
-            as the first stakeholder and then work out from there.</p>
+          <p class="card-text">Utilitarianism is a consequentialist theory – meaning that the 
+            moral worth of an action is determined by the consequences 
+            of the action.  The first step is to consider the consequences, 
+            both short-term and long-term, for the options you’ve 
+            identified.</p>
 
             <form method="POST" action="{{route('stakeholder.store')}}">
                 {{ csrf_field() }}

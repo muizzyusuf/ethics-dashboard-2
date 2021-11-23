@@ -10,7 +10,7 @@ class Consequence extends Model
     use HasFactory;
 
     public function option(){
-        return $this->belongsTo('App\Models\Option');
+        return $this->belongsTo('App\Models\Option', 'id');
     }
 
     public function pleasures(){
