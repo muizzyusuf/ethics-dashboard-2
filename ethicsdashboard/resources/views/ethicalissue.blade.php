@@ -13,7 +13,7 @@
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
         <a class="nav-link active" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
-        <a class="nav-link" href="#">Utilitarianism</a>
+        <a class="nav-link" href="{{route('utiltarianism.show')}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>

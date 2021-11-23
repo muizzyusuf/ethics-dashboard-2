@@ -22,6 +22,7 @@ class EthicalIssueController extends Controller
     
     public function index($id)
     {
+        
 
     }
 

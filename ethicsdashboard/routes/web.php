@@ -45,6 +45,9 @@ Route::delete('/courses/courseuser/{course}/{user}','App\http\Controllers\Course
 //route for showing the ethical issues page of the dashboard and modifying issues and options
 Route::resource('/ethicalissue','App\http\Controllers\EthicalIssueController');
 
+//route for showing the Utilitarian page of the dashboard and moidifying both the consequences and impacts
+Route::resource('/utilitarianism','App\http\Controllers\UtilitarianismSectionController');
+
 //route for adding grades and comments to ethical issue section
 Route::post('/ethicalissue/{ethicalissue}','App\http\Controllers\EthicalIssueController@comment')->name('ethicalissue.comment');
 
@@ -59,3 +62,11 @@ Route::post('/stakeholdersection/{stakeholdersection}','App\http\Controllers\Sta
 
 //route for accessing the my progress section of the dashboard
 Route::resource('/progress','App\http\Controllers\ProgressController');
+
+//test route for utilitarian page
+// Route::get('/Utilitarianism', function(){
+//     return view('/Utilitarianism');
+// });
+
+// Route::post('/Utilitarianism', [App\Http\Controllers\UtilitarianismSectionController::class, 'store'])->name('Utilitarianism');
+
