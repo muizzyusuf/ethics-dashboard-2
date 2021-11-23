@@ -88,7 +88,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        // 
         $course = Course::where('id', $id)->first();
         $casestudies = CaseStudy::where('course_id', $id)->get();
 

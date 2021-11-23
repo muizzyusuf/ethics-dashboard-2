@@ -4,7 +4,12 @@
 
 
 <kbd>//TO-DO: Homepage design</kbd>
-    
-   
+
+<p>
+    Welcome Page 
+</p>
+
 
 @endsection
+
+
