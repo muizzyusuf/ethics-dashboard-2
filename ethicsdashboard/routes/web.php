@@ -40,3 +40,7 @@ Route::resource('/dashboard','App\http\Controllers\DashboardController');
 Route::post('/courses/courseuser','App\http\Controllers\CourseUserController@store')->name('courseuser.store');
 
 Route::delete('/courses/courseuser/{course}/{user}','App\http\Controllers\CourseUserController@destroy')->name('courseuser.destroy');
+
+//This resource contains the following routes in dashboard controller index, create, store, edit, update, destroy
+Route::get('/pleasures/{dash_id}','App\http\Controllers\PleasureController@show')->name('pleasures.show');
+Route::post('/pleasures/{dash_id}','App\http\Controllers\PleasureController@store')->name('pleasures.store');
