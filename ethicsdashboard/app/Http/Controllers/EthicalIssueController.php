@@ -180,7 +180,8 @@ class EthicalIssueController extends Controller
         $dashboard = Dashboard::where('id', $ethicalissue->dashboard->id)->first();
         $egrade = $dashboard->ethicalIssue->grade;
         $sgrade = $dashboard->stakeholderSection->grade;
-        $dashboard->grade = $egrade + $sgrade;
+        $ugrade = $dashboard->utilitarianismSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade;
 
         
 

@@ -119,6 +119,173 @@ class UtilitarianismSectionController extends Controller
         
     }
 
+    public function impact($id)
+    {
+        //
+
+        $utilitarianismSection = UtilitarianismSection::where('id', $id)->first();
+        $dashboard = Dashboard::where('id',$utilitarianismSection->dashboard->id)->first();        
+        $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
+        $impacts = Impact::join('stakeholders','impacts.stakeholder_id','=', 'stakeholders.id')
+                        ->select('impacts.id','impacts.stakeholder_id','impacts.rank', 'impacts.impact')
+                        ->where('Stakeholders.stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $consequences = Consequence::join('options','consequences.option_id','=','options.id')
+                                ->select('consequences.id', 'consequences.consequence', 'consequences.type', 'consequences.option_id')
+                                ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+        $pleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+                            ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+                            ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
+        //                         ->groupBy('pleasures.consequence_id')->get();
+
+    
+       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.impact')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('consequences', $consequences)
+                                ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
+                                ->with('utilitarianismSection', $utilitarianismSection);
+
+        }else{
+            return view('impact')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('consequences', $consequences)
+                                ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
+                                ->with('utilitarianismSection', $utilitarianismSection);
+        }
+        
+        
+
+        
+    }
+
+    public function aggregate($id)
+    {
+        //
+
+        $utilitarianismSection = UtilitarianismSection::where('id', $id)->first();
+        $dashboard = Dashboard::where('id',$utilitarianismSection->dashboard->id)->first();        
+        $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
+        $impacts = Impact::join('stakeholders','impacts.stakeholder_id','=', 'stakeholders.id')
+                        ->select('impacts.id','impacts.stakeholder_id','impacts.rank', 'impacts.impact')
+                        ->where('Stakeholders.stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $consequences = Consequence::join('options','consequences.option_id','=','options.id')
+                                ->select('consequences.id', 'consequences.consequence', 'consequences.type', 'consequences.option_id')
+                                ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+        $pleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+                            ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+                            ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
+        //                         ->groupBy('pleasures.consequence_id')->get();
+
+    
+       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.aggregate')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('consequences', $consequences)
+                                ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
+                                ->with('utilitarianismSection', $utilitarianismSection);
+
+        }else{
+            return view('aggregate')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('consequences', $consequences)
+                                ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
+                                ->with('utilitarianismSection', $utilitarianismSection);
+        }
+        
+        
+
+        
+    }
+
+    public function summary($id)
+    {
+        //
+
+        $utilitarianismSection = UtilitarianismSection::where('id', $id)->first();
+        $dashboard = Dashboard::where('id',$utilitarianismSection->dashboard->id)->first();        
+        $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
+        $impacts = Impact::join('stakeholders','impacts.stakeholder_id','=', 'stakeholders.id')
+                        ->select('impacts.id','impacts.stakeholder_id','impacts.rank', 'impacts.impact')
+                        ->where('Stakeholders.stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $consequences = Consequence::join('options','consequences.option_id','=','options.id')
+                                ->select('consequences.id', 'consequences.consequence', 'consequences.type', 'consequences.option_id')
+                                ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+        $pleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+                            ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+                            ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
+        //                         ->groupBy('pleasures.consequence_id')->get();
+
+    
+       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.summary')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('consequences', $consequences)
+                                ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
+                                ->with('utilitarianismSection', $utilitarianismSection);
+
+        }else{
+            return view('summary')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('consequences', $consequences)
+                                ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
+                                ->with('utilitarianismSection', $utilitarianismSection);
+        }
+        
+        
+
+        
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -157,16 +324,17 @@ class UtilitarianismSectionController extends Controller
     public function comment(Request $request, $id)
     { 
         //
-        $stakeholder = StakeholderSection::where('id', $id)->first();
-        $stakeholder->comment = $request->input('comment');
-        $stakeholder->grade = $request->input('grade');
-        $stakeholder->save();
+        $util = UtilitarianismSection::where('id', $id)->first();
+        $util->comment = $request->input('comment');
+        $util->grade = $request->input('grade');
+        $util->save();
 
 
-        $dashboard = Dashboard::where('id', $stakeholder->dashboard->id)->first();
+        $dashboard = Dashboard::where('id', $util->dashboard->id)->first();
         $egrade = $dashboard->ethicalIssue->grade;
         $sgrade = $dashboard->stakeholderSection->grade;
-        $dashboard->grade = $egrade + $sgrade;
+        $ugrade = $dashboard->utilitarianismSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade;
 
 
         if($dashboard->save()){
@@ -174,6 +342,6 @@ class UtilitarianismSectionController extends Controller
         }else{
             $request->session()->flash('error', 'There was an error saving the comment and grade');
         }
-        return  redirect(route('stakeholdersection.show', $id));
+        return  redirect()->back();
     }
 }

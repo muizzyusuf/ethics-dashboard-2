@@ -56,11 +56,11 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                Utilitrianism
+                                Utilitarianism
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title font-weight-bold">Comments:</h6>
-                                <p class="card-text text-muted"></p>
+                                <p class="card-text text-muted">{{$utilitarianismSection->comment}}</p>
                                     
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                     <div class="card-body">
                         <p class="card-text font-weight-bold">Issue & Options: <span class="float-right">{{$ethicalissue->grade}} pts</span></p>
                         <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} pts</span></p>
-                            
+                        <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} pts</span></p>
                     </div>
                 </div>
             </div>

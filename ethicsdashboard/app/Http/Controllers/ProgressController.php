@@ -62,11 +62,13 @@ class ProgressController extends Controller
         $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
         $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
         $stakeholderSection = StakeholderSection::where('id', $dashboard->stakeholder_section_id)->first();
+        $utilitarianismSection = UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
         return view('progress')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('stakeholderSection', $stakeholderSection)
                                 ->with('casestudy', $casestudy)
+                                ->with('utilitarianismSection', $utilitarianismSection)
                                 ->with('options', $options);
     }
 
