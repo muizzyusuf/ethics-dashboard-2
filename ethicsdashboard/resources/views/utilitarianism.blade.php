@@ -19,43 +19,101 @@
 </div>
 
 <div class="jumbotron">
-    <div class="card">
-        <h5 class="card-header"></h5>
-        <div class="card-body">
-          <p class="card-text">Utilitarianism is a consequentialist theory – meaning that the 
+
+    <div class="container mb-2">
+        <nav class="nav nav-pills nav-justified">
+            <a class="nav-link btn-dark active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Option Analysis</a>
+            <a class="nav-link" href="{{route('utilitarianismsection.impact', $dashboard->utilitarianism_section_id)}}">Stakeholder Analysis</a>
+            <a class="nav-link" href="{{route('utilitarianismsection.aggregate', $dashboard->utilitarianism_section_id)}}">Pleasure Analysis</a>
+            <a class="nav-link" href="{{route('utilitarianismsection.summary', $dashboard->utilitarianism_section_id)}}">Summary</a>
+        </nav>
+    </div>
+
+    <div class="card border-secondary">
+        <p class="card-header font-weight-bold">Utilitarianism is a consequentialist theory – meaning that the 
             moral worth of an action is determined by the consequences 
             of the action.  The first step is to consider the consequences, 
             both short-term and long-term, for the options you’ve 
             identified.</p>
 
-            <form method="POST" action="{{route('stakeholder.store')}}">
-                {{ csrf_field() }}
-                {{method_field('POST')}}
-                <input type="hidden" id="id" name="id" value="{{$ethicalissue->id}}" >
-                <input type="hidden" name="stakeholder_section_id" value="{{$dashboard->stakeholder_section_id}}">
+        @for($i=0; $i<count($options); $i++)
+            <div class="card-body">
+                <form method="POST" action="{{route('consequence.store')}}">
+                    {{ csrf_field() }}
+                    {{method_field('POST')}}
+                    <input type="hidden" id="id" name="id" value="{{$utilitarianismSection->id}}" >
 
-                @for($i=0; $i<6; $i++)
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="font-weight-bold" for="stakeholder{{$i+1}}">Stakeholder {{$i+1}}</label>
-                            <input type="text" class="form-control" id="stakeholder{{$i+1}}" name="stakeholder{{$i+1}}" @if(count($stakeholders)>0) value="{{$stakeholders[$i]->stakeholder}}" @endif  required>
-                            <input type="hidden" id="stakeholder{{$i+1}}_id" name="stakeholder{{$i+1}}_id" @if(count($stakeholders)>0) value="{{$stakeholders[$i]->id}}" @endif>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="font-weight-bold" for="interest{{$i+1}}">Interests</label>
-                            <textarea class="form-control" id="interest{{$i+1}}" name="interest{{$i+1}}" rows="3" required>@if(count($stakeholders)>0) {{$stakeholders[$i]->interests}} @endif </textarea>
-                        </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
+                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
+                        <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
                     </div>
-                @endfor
+                    
+                    @if(count($options[$i]->consequences)>0 )
+                        @foreach($consequences as $consequence)
+                            @if(($consequence->option_id == $options[$i]->id) && ($consequence->type == 'short'))
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="short">Short Term Consequence</label>
+                                    <input type="hidden" id="short_id" name="short_id" value="{{$consequence->id}}">
+                                    <textarea class="form-control" id="short" name="short" rows="3" readonly required>{{$consequence->consequence}}</textarea>
+                                </div>
 
-                <input type="submit" class="float-right btn btn-primary" value="Save">
+                            @elseif(($consequence->option_id == $options[$i]->id) && ($consequence->type == 'long'))
+                                <div class="form-group">
+                                    <label class="font-weight-bold" for="long">Long Term Consequence</label>
+                                    <input type="hidden" id="long_id" name="long_id" value="{{$consequence->id}}">
+                                    <textarea class="form-control" id="long" name="long" rows="3" readonly required>{{$consequence->consequence}}</textarea>
+                                </div>
+                            @endif
+                            
+                        @endforeach
+                        
+                    @else
+                    
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="short">Short Term Consequence</label>
+                            <textarea class="form-control" id="short" name="short" rows="3" readonly required></textarea>
+                        </div>
 
-            </form>
-          
-        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="long">Long Term Consequence</label>
+                            <textarea class="form-control" id="long" name="long" rows="3" readonly required> </textarea>
+                        </div>
+
+                        
+                
+                    @endif
+                    
+
+                </form>
+            </div>
+        @endfor
+        
     </div>
-
 
 </div>
 
+<div class="mt-3 card">
+    <p class="card-header">Instructor Comments & Grade</p>
+    <div class="card-body">
+        <form method="POST" action="{{route('utilitarianismsection.comment',$utilitarianismSection->id)}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+    
+            <div class="form-group">
+                <label class="font-weight-bold" for="comment">Comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$utilitarianismSection->comment}} </textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold" for="grade">Grade</label>
+                <input type="number" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
+            </div>
+
+            <input type="submit" class="float-right btn btn-primary" value="Save">
+
+        </form>
+      
+    </div>
+</div>
 @endsection

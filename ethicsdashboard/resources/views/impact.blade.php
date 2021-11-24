@@ -6,7 +6,7 @@
     <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
         ⏴Case Study
     </a> 
-</div>
+</div> 
 
 <div class="container mb-2">
     <nav class="nav nav-pills nav-justified">
@@ -56,12 +56,12 @@
                                 <div class="form-group col-md-11">
                                     <label class="font-weight-bold" for="impact">Impact</label>
                                     <input type="hidden" id="impact_id" name="impact_id" value="{{$impact->id}}">
-                                    <textarea class="form-control" id="impact" name="impact" rows="3" required>{{$impact->impact}}</textarea>
+                                    <textarea class="form-control" id="impact" name="impact" rows="3" readonly required>{{$impact->impact}}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-1">
                                     <label class="font-weight-bold" for="rank">Rank</label>
-                                    <input type="number" class="form-control" id="rank" name="rank" min="1" max="6" value="{{$impact->rank}}" required >
+                                    <input type="number" class="form-control" id="rank" name="rank" min="1" max="6" value="{{$impact->rank}}" readonly required >
                                 </div>
                             </div>
                                 
@@ -69,27 +69,20 @@
                             @endif
                             
                         @endforeach
-                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
+                        
                     @else
                         <div class="row">
                             <div class="form-group col-md-11">
                                 <label class="font-weight-bold" for="impact">Impact</label>
-                                <textarea class="form-control" id="impact" name="impact" rows="3" required></textarea>
+                                <textarea class="form-control" id="impact" name="impact" rows="3" readonly required></textarea>
                             </div>
 
                             <div class="form-group col-md-1">
                                 <label class="font-weight-bold" for="rank">Rank</label>
-                                <input type="number" class="form-control" id="rank" name="rank" min="1" max="6" required >
+                                <input type="number" class="form-control" id="rank" name="rank" min="1" max="6" readonly required >
                             </div>
                         </div>
                         
-
-                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
-                
                     @endif
                     
 
@@ -103,5 +96,27 @@
 
 </div>
 
+<div class="mt-3 card">
+    <p class="card-header">Instructor Comments & Grade</p>
+    <div class="card-body">
+        <form method="POST" action="{{route('utilitarianismsection.comment',$utilitarianismSection->id)}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+    
+            <div class="form-group">
+                <label class="font-weight-bold" for="comment">Comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$utilitarianismSection->comment}} </textarea>
+            </div>
 
+            <div class="form-group">
+                <label class="font-weight-bold" for="grade">Grade</label>
+                <input type="number" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
+            </div>
+
+            <input type="submit" class="float-right btn btn-primary" value="Save">
+
+        </form>
+      
+    </div>
+</div>
 @endsection

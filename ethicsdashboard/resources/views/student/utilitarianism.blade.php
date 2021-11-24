@@ -97,27 +97,4 @@
 
 </div>
 
-<div class="mt-3 card">
-    <p class="card-header">Instructor Comments & Grade</p>
-    <div class="card-body">
-        <form method="POST" action="{{route('utilitarianismsection.comment',$utilitarianismSection->id)}}">
-            {{ csrf_field() }}
-            {{method_field('POST')}}
-    
-            <div class="form-group">
-                <label class="font-weight-bold" for="comment">Comment</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$utilitarianismSection->comment}} </textarea>
-            </div>
-
-            <div class="form-group">
-                <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
-            </div>
-
-            <input type="submit" class="float-right btn btn-primary" value="Save">
-
-        </form>
-      
-    </div>
-</div>
 @endsection

@@ -5,7 +5,7 @@
 <div>
     <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
         ⏴Case Study
-    </a> 
+    </a>  
 </div>
 
 <div class="container mb-2">
@@ -124,14 +124,9 @@
             <form>
                 <div class="form-group">
                     <label class="font-weight-bold" for="decision">Decision</label>
-                    <textarea class="form-control" id="decision" name="decision" rows="3" placeholder="Sum up your analysis. Eg. Although Option 1 produces pleasures in the short-term, they are lower pleasures. Option 2 results in less overall pain and higher pleasures to the stakeholders most impacted by the issue. Option 2 will produce the greatest happiness and is therefore the right option.">
-                        
-                    </textarea>
+                    <textarea readonly class="form-control" id="decision" name="decision" rows="3" placeholder="Sum up your analysis. Eg. Although Option 1 produces pleasures in the short-term, they are lower pleasures. Option 2 results in less overall pain and higher pleasures to the stakeholders most impacted by the issue. Option 2 will produce the greatest happiness and is therefore the right option."></textarea>
                 </div>
 
-                <div class="form-group">
-                    <input type="submit" class="float-right btn btn-primary" value="Save">
-                </div>
             </form>
         </div>
        
@@ -140,5 +135,27 @@
 
 </div>
 
+<div class="mt-3 card">
+    <p class="card-header">Instructor Comments & Grade</p>
+    <div class="card-body">
+        <form method="POST" action="{{route('utilitarianismsection.comment',$utilitarianismSection->id)}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+    
+            <div class="form-group">
+                <label class="font-weight-bold" for="comment">Comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$utilitarianismSection->comment}} </textarea>
+            </div>
 
+            <div class="form-group">
+                <label class="font-weight-bold" for="grade">Grade</label>
+                <input type="number" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
+            </div>
+
+            <input type="submit" class="float-right btn btn-primary" value="Save">
+
+        </form>
+      
+    </div>
+</div>
 @endsection
