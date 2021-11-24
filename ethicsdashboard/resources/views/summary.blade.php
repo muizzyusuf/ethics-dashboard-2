@@ -88,12 +88,18 @@
                                                 
                                                 <div class="form-group col-md-2">
                                                     <label for="higher">Higher</label>
-                                                    <input type="text" class="form-control" id="higher" value="{{$pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['High']->count() }}" disabled>
+                                                    <input type="text" class="form-control" id="higher" 
+                                                    @if(isset($pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['High']))
+                                                    value="{{$pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['High']->count() }}"
+                                                    @else value="0" @endif disabled>
                                                 </div>
 
                                                 <div class="form-group col-md-2">
                                                     <label for="lower">Lower</label>
-                                                    <input type="text" class="form-control" id="lower" value="{{$pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['Low']->count() }}" disabled>
+                                                    <input type="text" class="form-control" id="lower" 
+                                                    @if(isset($pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['Low']))
+                                                    value="{{$pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['Low']->count() }}"
+                                                    @else value="0" @endif disabled>
                                                 </div>
                                                     
                                             </div>
