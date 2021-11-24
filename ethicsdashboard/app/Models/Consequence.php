@@ -14,6 +14,6 @@ class Consequence extends Model
     }
 
     public function pleasures(){
-        return $this->hasMany('App\Models\Pleasure');
+        return $this->hasMany('App\Models\Pleasure', 'consequence_id');
     }
 }

@@ -18,6 +18,6 @@ class Option extends Model
     }
 
     public function pleasures(){
-        return $this->hasMany('App\Models\Pleasure');
+        return $this->hasMany('App\Models\Pleasure', 'option_id');
     }
 }

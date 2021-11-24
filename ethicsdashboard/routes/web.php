@@ -71,3 +71,6 @@ Route::resource('/consequence','App\http\Controllers\ConsequenceController');
 
 //route helps with showing the stakeholder section on the dashboard
 Route::resource('/impact','App\http\Controllers\ImpactController');
+
+//route helps with showing the stakeholder section on the dashboard
+Route::resource('/pleasure','App\http\Controllers\PleasureController');

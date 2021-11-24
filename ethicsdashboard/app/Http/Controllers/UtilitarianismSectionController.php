@@ -16,6 +16,7 @@ use App\Models\StakeholderSection;
 use App\Models\UtilitarianismSection;
 use App\Models\Consequence;
 use App\Models\Impact;
+use App\Models\Pleasure;
 
 
 class UtilitarianismSectionController extends Controller
@@ -71,13 +72,24 @@ class UtilitarianismSectionController extends Controller
         $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
         $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
-        $options = Option::where('ethical_issue_id', $ethicalissue->id)-> get();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
         $impacts = Impact::join('stakeholders','impacts.stakeholder_id','=', 'stakeholders.id')
-        ->select('impacts.id','impacts.stakeholder_id','impacts.rank', 'impacts.impact')
-        ->where('Stakeholders.stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+                        ->select('impacts.id','impacts.stakeholder_id','impacts.rank', 'impacts.impact')
+                        ->where('Stakeholders.stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $consequences = Consequence::join('options','consequences.option_id','=','options.id')
                                 ->select('consequences.id', 'consequences.consequence', 'consequences.type', 'consequences.option_id')
-                                ->where('options.ethical_issue_id', $ethicalissue->id)-> get();
+                                ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+        $pleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+                            ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+                            ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
+        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
+        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
+        //                         ->groupBy('pleasures.consequence_id')->get();
+
+    
+       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.utilitarianism')->with('dashboard', $dashboard)
@@ -87,6 +99,7 @@ class UtilitarianismSectionController extends Controller
                                 ->with('options', $options)
                                 ->with('consequences', $consequences)
                                 ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
                                 ->with('utilitarianismSection', $utilitarianismSection);
 
         }else{
@@ -97,6 +110,7 @@ class UtilitarianismSectionController extends Controller
                                 ->with('options', $options)
                                 ->with('consequences', $consequences)
                                 ->with('impacts', $impacts)
+                                ->with('pleasures', $pleasures)
                                 ->with('utilitarianismSection', $utilitarianismSection);
         }
         
