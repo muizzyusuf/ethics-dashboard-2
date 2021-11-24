@@ -121,11 +121,13 @@
     
         <div class="card-body">
 
-            <form>
+            <form method="POST" action="{{route('utilitarianismsection.decision',$utilitarianismSection->id)}}">
+                {{ csrf_field() }}
+                {{method_field('POST')}}
                 <div class="form-group">
                     <label class="font-weight-bold" for="decision">Decision</label>
                     <textarea class="form-control" id="decision" name="decision" rows="3" placeholder="Sum up your analysis. Eg. Although Option 1 produces pleasures in the short-term, they are lower pleasures. Option 2 results in less overall pain and higher pleasures to the stakeholders most impacted by the issue. Option 2 will produce the greatest happiness and is therefore the right option.">
-                        
+                        {{$utilitarianismSection->decision}}
                     </textarea>
                 </div>
 

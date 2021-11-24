@@ -68,6 +68,20 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="utilHeaderId">
+                    <h5 class="mb-0">
+                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#utilContentId" aria-expanded="true" aria-controls="utilContentId">
+                           <b>Utilitarianism </b>
+                        </a>
+                    </h5>
+                </div>
+                <div id="utilContentId" class="collapse in" role="tabpanel" aria-labelledby="utilHeaderId">
+                    <div class="card-body">
+                        {{$util->decision}}
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

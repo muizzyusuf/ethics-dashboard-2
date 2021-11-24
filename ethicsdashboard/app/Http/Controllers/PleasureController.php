@@ -164,7 +164,7 @@ class PleasureController extends Controller
             }else{
                 $request->session()->flash('error', 'There was an error saving the stakeholder pleasures for the consequence');
             }
-            return  redirect(route('utilitarianismsection.show', $request->input('id')));
+            return  redirect()->back();
 
         }else{
             
@@ -216,7 +216,7 @@ class PleasureController extends Controller
             }else{
                 $request->session()->flash('error', 'There was an error updating the stakeholder pleasures for the consequence');
             }
-            return  redirect(route('utilitarianismsection.show', $request->input('id')));
+            return  redirect()->back();
         }    
     }
 

@@ -70,7 +70,7 @@ class ImpactController extends Controller
             }else{
                 $request->session()->flash('error', 'There was an error saving the impact and rank');
             }
-            return  redirect(route('utilitarianismsection.show', $request->input('id')));
+            return  redirect()->back();
 
         }else{
             $impact = Impact::where('id',$request->input('impact_id'))->first();
@@ -82,7 +82,7 @@ class ImpactController extends Controller
             }else{
                 $request->session()->flash('error', 'There was an error saving the impact and rank');
             }
-            return  redirect(route('utilitarianismsection.show', $request->input('id')));
+            return  redirect()->back();
         }    
     }
 

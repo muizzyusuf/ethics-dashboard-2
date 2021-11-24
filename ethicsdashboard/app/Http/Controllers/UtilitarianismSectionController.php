@@ -83,13 +83,7 @@ class UtilitarianismSectionController extends Controller
                             ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
                             ->where('options.ethical_issue_id', $ethicalissue->id)->get();
 
-        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
-        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
-        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
-        //                         ->groupBy('pleasures.consequence_id')->get();
-
-    
-       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
+     
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.utilitarianism')->with('dashboard', $dashboard)
@@ -139,13 +133,6 @@ class UtilitarianismSectionController extends Controller
                             ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
                             ->where('options.ethical_issue_id', $ethicalissue->id)->get();
 
-        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
-        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
-        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
-        //                         ->groupBy('pleasures.consequence_id')->get();
-
-    
-       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.impact')->with('dashboard', $dashboard)
@@ -195,13 +182,6 @@ class UtilitarianismSectionController extends Controller
                             ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
                             ->where('options.ethical_issue_id', $ethicalissue->id)->get();
 
-        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
-        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
-        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
-        //                         ->groupBy('pleasures.consequence_id')->get();
-
-    
-       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.aggregate')->with('dashboard', $dashboard)
@@ -251,13 +231,7 @@ class UtilitarianismSectionController extends Controller
                             ->select('pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
                             ->where('options.ethical_issue_id', $ethicalissue->id)->get();
 
-        // $avgPleasures = Pleasure::join('options','pleasures.option_id','=','options.id')
-        //                         ->select(DB::raw("ROUND(AVG('pleasures.pleasure'), 0) AS avgPleasure"),'pleasures.id','pleasures.pleasure','pleasures.level','pleasures.explanation','pleasures.stakeholder_id','pleasures.option_id','pleasures.consequence_id')
-        //                         ->where('options.ethical_issue_id', $ethicalissue->id)
-        //                         ->groupBy('pleasures.consequence_id')->get();
 
-    
-       // dd( $pleasures->groupBy('consequence_id')[1]->groupBy('level')['Low']->count() );
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.summary')->with('dashboard', $dashboard)
@@ -341,6 +315,20 @@ class UtilitarianismSectionController extends Controller
             $request->session()->flash('success', 'Comment and grade saved');
         }else{
             $request->session()->flash('error', 'There was an error saving the comment and grade');
+        }
+        return  redirect()->back();
+    }
+
+    public function decision(Request $request, $id)
+    { 
+        //
+        $util = UtilitarianismSection::where('id', $id)->first();
+        $util->decision = $request->input('decision');
+
+        if( $util->save()){
+            $request->session()->flash('success', 'Decision saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the decision');
         }
         return  redirect()->back();
     }

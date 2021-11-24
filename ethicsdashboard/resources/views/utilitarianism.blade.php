@@ -96,7 +96,7 @@
 <div class="mt-3 card">
     <p class="card-header">Instructor Comments & Grade</p>
     <div class="card-body">
-        <form method="POST" action="{{route('utilitarianismsection.comment',$utilitarianismSection->id)}}">
+        <form method="POST" action="{{route('utilitarianismsection.comment', $utilitarianismSection->id)}}">
             {{ csrf_field() }}
             {{method_field('POST')}}
     

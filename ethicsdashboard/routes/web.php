@@ -67,6 +67,9 @@ Route::resource('/utilitarianismsection','App\http\Controllers\UtilitarianismSec
 Route::post('/utilitarianismsection/{utilitarianismsection}','App\http\Controllers\UtilitarianismSectionController@comment')->name('utilitarianismsection.comment');
 
 //route for adding grades and comments to stakeholder section
+Route::post('/utilitarianismsection/{utilitarianismsection}/decision','App\http\Controllers\UtilitarianismSectionController@decision')->name('utilitarianismsection.decision');
+
+//route for adding grades and comments to stakeholder section
 Route::get('/utilitarianismsection/{utilitarianismsection}/impact','App\http\Controllers\UtilitarianismSectionController@impact')->name('utilitarianismsection.impact');
 
 //route for adding grades and comments to stakeholder section

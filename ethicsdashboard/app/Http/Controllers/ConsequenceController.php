@@ -71,7 +71,7 @@ class ConsequenceController extends Controller
             }else{
                 $request->session()->flash('error', 'There was an error saving the long and short term consequences');
             }
-            return  redirect(route('utilitarianismsection.show', $request->input('id')));
+            return  redirect()->back();
 
         }else{
             $long = Consequence::where('id',$request->input('long_id'))->first();
@@ -86,7 +86,7 @@ class ConsequenceController extends Controller
             }else{
                 $request->session()->flash('error', 'There was an error updating the long and short term consequences');
             }
-            return  redirect(route('utilitarianismsection.show', $request->input('id')));
+            return  redirect()->back();
         }    
     }
 
