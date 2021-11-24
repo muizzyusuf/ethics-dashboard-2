@@ -14,10 +14,10 @@ class Option extends Model
     }
 
     public function consequences(){
-        return $this->hasMany('App\Models\Consequence');
+        return $this->hasMany('App\Models\Consequence','option_id');
     }
 
     public function pleasures(){
-        return $this->hasMany('App\Models\Pleasure');
+        return $this->hasMany('App\Models\Pleasure', 'option_id');
     }
 }

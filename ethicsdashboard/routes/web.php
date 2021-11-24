@@ -59,3 +59,30 @@ Route::post('/stakeholdersection/{stakeholdersection}','App\http\Controllers\Sta
 
 //route for accessing the my progress section of the dashboard
 Route::resource('/progress','App\http\Controllers\ProgressController');
+
+//route helps with showing the stakeholder section on the dashboard
+Route::resource('/utilitarianismsection','App\http\Controllers\UtilitarianismSectionController');
+
+//route for adding grades and comments to stakeholder section
+Route::post('/utilitarianismsection/{utilitarianismsection}','App\http\Controllers\UtilitarianismSectionController@comment')->name('utilitarianismsection.comment');
+
+//route for adding grades and comments to stakeholder section
+Route::post('/utilitarianismsection/{utilitarianismsection}/decision','App\http\Controllers\UtilitarianismSectionController@decision')->name('utilitarianismsection.decision');
+
+//route for adding grades and comments to stakeholder section
+Route::get('/utilitarianismsection/{utilitarianismsection}/impact','App\http\Controllers\UtilitarianismSectionController@impact')->name('utilitarianismsection.impact');
+
+//route for adding grades and comments to stakeholder section
+Route::get('/utilitarianismsection/{utilitarianismsection}/aggregate','App\http\Controllers\UtilitarianismSectionController@aggregate')->name('utilitarianismsection.aggregate');
+
+//route for adding grades and comments to stakeholder section
+Route::get('/utilitarianismsection/{utilitarianismsection}/summary','App\http\Controllers\UtilitarianismSectionController@summary')->name('utilitarianismsection.summary');
+
+//route helps with showing the stakeholder section on the dashboard
+Route::resource('/consequence','App\http\Controllers\ConsequenceController');
+
+//route helps with showing the stakeholder section on the dashboard
+Route::resource('/impact','App\http\Controllers\ImpactController');
+
+//route helps with showing the stakeholder section on the dashboard
+Route::resource('/pleasure','App\http\Controllers\PleasureController');

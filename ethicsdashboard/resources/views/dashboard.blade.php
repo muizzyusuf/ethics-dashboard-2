@@ -13,7 +13,7 @@
         <a class="nav-link active" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
-        <a class="nav-link" href="#">Utilitarianism</a>
+        <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
@@ -65,6 +65,20 @@
                         @else
                             <p class="card-text">No inputs have been made</p>                      
                         @endif
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="utilHeaderId">
+                    <h5 class="mb-0">
+                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#utilContentId" aria-expanded="true" aria-controls="utilContentId">
+                           <b>Utilitarianism </b>
+                        </a>
+                    </h5>
+                </div>
+                <div id="utilContentId" class="collapse in" role="tabpanel" aria-labelledby="utilHeaderId">
+                    <div class="card-body">
+                        {{$util->decision}}
                     </div>
                 </div>
             </div>

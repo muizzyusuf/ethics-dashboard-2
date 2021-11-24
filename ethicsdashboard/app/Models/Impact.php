@@ -10,6 +10,6 @@ class Impact extends Model
     use HasFactory;
 
     public function stakeholder(){
-        return $this->belongsTo('App\Models\Stakeholder');
+        return $this->belongsTo('App\Models\Stakeholder', 'id');
     }
 }
