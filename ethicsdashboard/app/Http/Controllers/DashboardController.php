@@ -49,14 +49,7 @@ class DashboardController extends Controller
     {
         //
         $id = Auth::user()->id;
-        /*'id', 
-        'name', 
-        'ethical_issue_id', 
-        'utilitarianism_section_id',
-        'user_id',
-        'case_study_id'
-        */
-        
+       
         $issue = new EthicalIssue;
         $issue->save(); //generates the id and sets grade,comment,issue to null
         $stakeholder = new StakeholderSection;
