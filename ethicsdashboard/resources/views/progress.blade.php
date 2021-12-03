@@ -76,9 +76,9 @@
                         <h5 class="card-title font-weight-bold">TOTAL:&nbsp;{{$dashboard->grade}} / {{$casestudy->points}} pts</h6>
                     </div>
                     <div class="card-body">
-                        <p class="card-text font-weight-bold">Issue & Options: <span class="float-right">{{$ethicalissue->grade}} pts</span></p>
-                        <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} pts</span></p>
-                        <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} pts</span></p>
+                        <p class="card-text font-weight-bold">Issue & Options: <span class="float-right">{{$ethicalissue->grade}} / {{$casestudy->issue_points}}  pts</span></p>
+                        <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} / {{$casestudy->stakeholder_points}} pts</span></p>
+                        <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} / {{$casestudy->util_points}} pts</span></p>
                     </div>
                 </div>
             </div>
