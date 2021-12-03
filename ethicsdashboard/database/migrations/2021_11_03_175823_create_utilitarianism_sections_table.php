@@ -16,7 +16,6 @@ class CreateUtilitarianismSectionsTable extends Migration
         Schema::create('utilitarianism_sections', function (Blueprint $table) {
             $table->id();
             $table->integer('grade')->default(0);
-            $table->integer('total');
             $table->text('comment')->nullable();
             $table->text('decision')->nullable();
             $table->timestamps();

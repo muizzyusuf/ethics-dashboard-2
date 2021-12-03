@@ -49,7 +49,9 @@ class CaseStudyController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'instruction' => 'required',
-            'points'=> 'required',
+            'issue_points'=> 'required',
+            'util_points'=> 'required',
+            'stakeholder_points'=> 'required',
             ]);
 
         $casestudy = new CaseStudy;

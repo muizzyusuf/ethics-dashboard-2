@@ -16,7 +16,6 @@ class CreateStakeholderSectionsTable extends Migration
         Schema::create('stakeholder_sections', function (Blueprint $table) {
             $table->id();
             $table->integer('grade')->default(0);
-            $table->integer('total');
             $table->text('comment')->nullable();
             $table->timestamps();
         });
