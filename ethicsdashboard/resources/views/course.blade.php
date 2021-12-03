@@ -53,8 +53,16 @@
                             <textarea cols="30" rows="10" type="text" name="instruction" placeholder="Instructions.." class="form-control" required> </textarea>
                         </div>
                         <div class="form-group">
-                            <label for="code">Total Points:</label>
-                            <input type="number" id="points" name="points" class="form-control" required>
+                            <label for="code">Ethical Issue Section Points:</label>
+                            <input type="number" id="issue_points" name="issue_points" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="code"> Stakeholder Section Points:</label>
+                            <input type="number" id="stakeholder_points" name="stakeholder_points" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="code">Utilitarianism Section Points:</label>
+                            <input type="number" id="util_points" name="util_points" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -146,8 +154,16 @@
                                                 <textarea cols="30" rows="10" type="text" name="instruction" class="form-control" required>{{$casestudy->instruction}}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="code">Total Points:</label>
-                                                <input type="number" id="points" name="points" class="form-control" value="{{$casestudy->points}}" required>
+                                                <label for="code">Ethical Issue Section Points:</label>
+                                                <input type="number" id="issue_points" name="issue_points" class="form-control" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="code"> Stakeholder Section Points:</label>
+                                                <input type="number" id="stakeholder_points" name="stakeholder_points" class="form-control" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="code">Utilitarianism Section Points:</label>
+                                                <input type="number" id="util_points" name="util_points" class="form-control" value="" required>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
