@@ -81,7 +81,8 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="grade">Grade</label>
-                    <input type="number" class="form-control col-1" id="grade" name="grade" value="{{$ethicalissue->grade}}" required >
+                    <input type="number" min="0" max="{{$casestudy->issue_points}}" class="form-control col-1" id="grade" name="grade" value="{{$ethicalissue->grade}}" required >
+                    <small id="help" class="form-text text-muted">Out of {{$casestudy->issue_points}} </small>
                 </div>
 
                 <input type="submit" class="float-right btn btn-primary" value="Save">

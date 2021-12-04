@@ -17,6 +17,9 @@ class CreateCaseStudiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('instruction');
+            $table->integer('issue_points');
+            $table->integer('stakeholder_points');
+            $table->integer('util_points');
             $table->integer('points');
             $table->unsignedBigInteger('course_id');
             $table->timestamps();

@@ -132,7 +132,7 @@
                 {{method_field('POST')}}
                 <div class="form-group">
                     <label class="font-weight-bold" for="decision">Decision</label>
-                    <textarea readonly class="form-control" id="decision" name="decision" rows="3" placeholder="Sum up your analysis. Eg. Although Option 1 produces pleasures in the short-term, they are lower pleasures. Option 2 results in less overall pain and higher pleasures to the stakeholders most impacted by the issue. Option 2 will produce the greatest happiness and is therefore the right option.">
+                    <textarea readonly class="form-control" id="decision" name="decision" rows="3" >
                         {{$utilitarianismSection->decision}}
                     </textarea>
                 </div>
@@ -160,7 +160,8 @@
 
             <div class="form-group">
                 <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
+                <input type="number" min="0" max="{{$casestudy->util_points}}" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
+                <small id="help" class="form-text text-muted">Out of {{$casestudy->util_points}} </small>
             </div>
 
             <input type="submit" class="float-right btn btn-primary" value="Save">

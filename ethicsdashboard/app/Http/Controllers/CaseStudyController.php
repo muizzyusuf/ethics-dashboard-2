@@ -49,13 +49,18 @@ class CaseStudyController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'instruction' => 'required',
-            'points'=> 'required',
+            'issue_points'=> 'required',
+            'util_points'=> 'required',
+            'stakeholder_points'=> 'required',
             ]);
 
         $casestudy = new CaseStudy;
         $casestudy->name = $request->input('name');
         $casestudy->instruction = $request->input('instruction');
-        $casestudy->points = $request->input('points');
+        $casestudy->issue_points = $request->input('issue_points');
+        $casestudy->stakeholder_points = $request->input('stakeholder_points');
+        $casestudy->util_points = $request->input('util_points');
+        $casestudy->points = (int)$request->input('issue_points') + (int)$request->input('stakeholder_points') + (int)$request->input('util_points');
         $casestudy->course_id = $request->input('course_id');
         $casestudy->save();
 
@@ -132,13 +137,18 @@ class CaseStudyController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'instruction' => 'required',
-            'points'=> 'required',
+            'issue_points'=> 'required',
+            'util_points'=> 'required',
+            'stakeholder_points'=> 'required',
             ]);
 
         $casestudy = CaseStudy::where('id', $id)->first();
         $casestudy->name = $request->input('name');
         $casestudy->instruction = $request->input('instruction');
-        $casestudy->points = $request->input('points');
+        $casestudy->issue_points = $request->input('issue_points');
+        $casestudy->stakeholder_points = $request->input('stakeholder_points');
+        $casestudy->util_points = $request->input('util_points');
+        $casestudy->points = (int)$request->input('issue_points') + (int)$request->input('stakeholder_points') + (int)$request->input('util_points');
 
         if($casestudy->save()){
             $request->session()->flash('success', 'Case study updated');
