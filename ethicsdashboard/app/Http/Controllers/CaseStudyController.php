@@ -83,6 +83,7 @@ class CaseStudyController extends Controller
     public function show($id)
     {
         //
+
         $casestudy = CaseStudy::where('id', $id)->first();
         $user_id = Auth::user()->id;
 
@@ -93,7 +94,7 @@ class CaseStudyController extends Controller
         $dashboards = Dashboard::join('users','dashboards.user_id','=','users.id')
                                 ->select('dashboards.name','dashboards.id', 'users.name AS user_name', 'dashboards.user_id', 'dashboards.grade')
                                 ->where('case_study_id',$id)->get();
-
+        //Decide what path to take based on user role
         if(Auth::user()->role()->first()->id == 3){
             return view('student.casestudy')->with('casestudy', $casestudy)
                                             ->with('dashboard', $dashboard)
@@ -129,12 +130,13 @@ class CaseStudyController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //validate that all variables are present
         $this->validate($request, [
             'name' => 'required',
             'instruction' => 'required',
             'points'=> 'required',
             ]);
-
+        //get values from input, assign to object to be sent
         $casestudy = CaseStudy::where('id', $id)->first();
         $casestudy->name = $request->input('name');
         $casestudy->instruction = $request->input('instruction');

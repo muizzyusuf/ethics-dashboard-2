@@ -225,7 +225,7 @@ class CourseController extends Controller
 
         $casestudies = CaseStudy::where('course_id', $id)->get();
     
-
+        //choose route based on User Role
         if(Auth::user()->role()->first()->id == 3){
             return view('student.grade')->with('course', $course)
                             ->with('dboards', $dboards)
