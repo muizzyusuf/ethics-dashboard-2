@@ -17,9 +17,12 @@ class CreateOptionsTable extends Migration
             $table->id();
             $table->text('option');
             $table->unsignedBigInteger('ethical_issue_id');
+            $table->unsignedBigInteger('virtue_id')->nullable();
+            $table->string('imperative')->nullable();
             $table->timestamps();
 
             $table->foreign('ethical_issue_id')->references('id')->on('ethical_issues')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('virtue_id')->references('id')->on('virtues')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

@@ -20,6 +20,9 @@ class CreateCaseStudiesTable extends Migration
             $table->integer('issue_points');
             $table->integer('stakeholder_points');
             $table->integer('util_points');
+            $table->integer('deontology_points');
+            $table->integer('care_points');
+            $table->integer('virtue_points');
             $table->integer('points');
             $table->unsignedBigInteger('course_id');
             $table->timestamps();
