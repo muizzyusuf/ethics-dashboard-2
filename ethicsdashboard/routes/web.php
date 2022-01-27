@@ -60,7 +60,7 @@ Route::post('/stakeholdersection/{stakeholdersection}','App\http\Controllers\Sta
 //route for accessing the my progress section of the dashboard
 Route::resource('/progress','App\http\Controllers\ProgressController');
 
-//route helps with showing the stakeholder section on the dashboard
+//route helps with showing the stakeholder section on the dashboard **
 Route::resource('/utilitarianismsection','App\http\Controllers\UtilitarianismSectionController');
 
 //route for adding grades and comments to stakeholder section
@@ -86,3 +86,8 @@ Route::resource('/impact','App\http\Controllers\ImpactController');
 
 //route helps with showing the stakeholder section on the dashboard
 Route::resource('/pleasure','App\http\Controllers\PleasureController');
+
+//Mike's routes (temporary) for care ethics section
+
+//route helps with showing the stakeholder section on the dashboard
+Route::resource('/careethicssection','App\http\Controllers\CareEthicsSectionController');
