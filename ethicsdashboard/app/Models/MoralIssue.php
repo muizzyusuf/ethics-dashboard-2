@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MoralIssue extends Model
 {
     use HasFactory;
+
+    public function option(){
+        return $this->belongsTo('App\Models\Option', 'id');
+    }
+
 }

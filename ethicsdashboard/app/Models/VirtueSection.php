@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class VirtueSection extends Model
 {
     use HasFactory;
+
+    public function dashboard(){
+        return $this->belongsTo('App\Models\Dashboard', 'id');
+    }
 }

@@ -25,6 +25,18 @@ class Dashboard extends Model
         return $this->hasOne('App\Models\UtilitarianismSection', 'id');
     }
 
+    public function deontologySection(){
+        return $this->hasOne('App\Models\DeontologySection', 'id');
+    }
+
+    public function careSection(){
+        return $this->hasOne('App\Models\CareSection', 'id');
+    }
+
+    public function virtueSection(){
+        return $this->hasOne('App\Models\VirtueSection', 'id');
+    }
+
     public function stakeholderSection(){
         return $this->hasOne('App\Models\StakeholderSection', 'id');
     }
