@@ -15,7 +15,15 @@ class CreateMoralLawsTable extends Migration
     {
         Schema::create('moral_laws', function (Blueprint $table) {
             $table->id();
+            $table->string('moral_law');
+            $table->unsignedBigInteger('option_id');
+            $table->string('universalizability')->nullable();
+            $table->text('uni_explain')->nullable();
+            $table->string('consistency')->nullable();
+            $table->text('con_explain')->nullable();
             $table->timestamps();
+
+            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

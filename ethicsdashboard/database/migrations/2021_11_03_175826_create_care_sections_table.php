@@ -15,6 +15,9 @@ class CreateCareSectionsTable extends Migration
     {
         Schema::create('care_sections', function (Blueprint $table) {
             $table->id();
+            $table->integer('grade')->default(0);
+            $table->text('comment')->nullable();
+            $table->text('decision')->nullable();
             $table->timestamps();
         });
     }

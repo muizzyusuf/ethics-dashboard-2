@@ -15,7 +15,11 @@ class CreateMoralIssuesTable extends Migration
     {
         Schema::create('moral_issues', function (Blueprint $table) {
             $table->id();
+            $table->text('moral_issues');
+            $table->unsignedBigInteger('option_id');
             $table->timestamps();
+
+            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

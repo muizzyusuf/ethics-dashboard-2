@@ -15,6 +15,9 @@ class CreateVirtueSectionsTable extends Migration
     {
         Schema::create('virtue_sections', function (Blueprint $table) {
             $table->id();
+            $table->integer('grade')->default(0);
+            $table->text('comment')->nullable();
+            $table->text('decision')->nullable();
             $table->timestamps();
         });
     }

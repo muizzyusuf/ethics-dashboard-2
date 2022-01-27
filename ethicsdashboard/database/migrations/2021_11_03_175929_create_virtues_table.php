@@ -15,6 +15,11 @@ class CreateVirtuesTable extends Migration
     {
         Schema::create('virtues', function (Blueprint $table) {
             $table->id();
+            $table->string('excess');
+            $table->string('mean');
+            $table->string('deficiency');
+            $table->integer('value');
+            $table->string('virtue');
             $table->timestamps();
         });
     }

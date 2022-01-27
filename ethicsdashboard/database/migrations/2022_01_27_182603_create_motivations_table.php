@@ -15,7 +15,11 @@ class CreateMotivationsTable extends Migration
     {
         Schema::create('motivations', function (Blueprint $table) {
             $table->id();
+            $table->string('motivation');
+            $table->unsignedBigInteger('option_id');
             $table->timestamps();
+
+            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

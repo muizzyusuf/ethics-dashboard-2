@@ -15,7 +15,15 @@ class CreateCaresTable extends Migration
     {
         Schema::create('cares', function (Blueprint $table) {
             $table->id();
+            $table->integer('attentiveness');
+            $table->integer('competence');
+            $table->integer('responsiveness');
+            $table->unsignedBigInteger('option_id');
+            $table->unsignedBigInteger('stakeholder_id');
             $table->timestamps();
+
+            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('stakeholder_id')->references('id')->on('stakeholders')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
