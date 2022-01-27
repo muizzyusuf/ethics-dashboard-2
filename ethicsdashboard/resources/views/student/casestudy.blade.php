@@ -107,41 +107,6 @@
                                 </div>
                             </div>
                             
-
-
-                            <!-- edit case study Button trigger modal -->
-                            <button type="button" class="mr-1 btn btn-secondary float-right" data-toggle="modal" data-target="#editDashboardModal">
-                                Edit
-                            </button>
-
-                            <!-- edit case study Modal -->
-                            <div class="modal fade" id="editDashboardModal" tabindex="-1" role="dialog" aria-labelledby="editDashboardModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editDashboardModalLabel">Edit Dashboard</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form method="POST" action="{{route('dashboard.update', $dashboard->id)}}">
-                                        {{ csrf_field() }}
-                                        {{method_field('PUT')}}
-                                        <input type="hidden" name="case_study_id" id="case_study_id" value="{{$casestudy->id}}">
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="title">Title of Dashboard:</label>
-                                                <input type="text" id="name" name="name" class="form-control" value="{{$dashboard->name}}" required>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-primary" value="Update">
-                                        </div>
-                                    </form>
-                                </div>
-                                </div>
-                            </div>
                         </li>
             
             

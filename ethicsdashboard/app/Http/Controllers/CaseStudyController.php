@@ -52,6 +52,9 @@ class CaseStudyController extends Controller
             'issue_points'=> 'required',
             'util_points'=> 'required',
             'stakeholder_points'=> 'required',
+            'care_points'=> 'required',
+            'virtue_points'=> 'required',
+            'deontology_points'=> 'required',
             ]);
 
         $casestudy = new CaseStudy;
@@ -60,7 +63,10 @@ class CaseStudyController extends Controller
         $casestudy->issue_points = $request->input('issue_points');
         $casestudy->stakeholder_points = $request->input('stakeholder_points');
         $casestudy->util_points = $request->input('util_points');
-        $casestudy->points = (int)$request->input('issue_points') + (int)$request->input('stakeholder_points') + (int)$request->input('util_points');
+        $casestudy->deontology_points = $request->input('deontology_points');
+        $casestudy->virtue_points = $request->input('virtue_points');
+        $casestudy->care_points = $request->input('care_points');
+        $casestudy->points = (int)$request->input('issue_points') + (int)$request->input('stakeholder_points') + (int)$request->input('util_points')+ (int)$request->input('deontology_points')+ (int)$request->input('care_points')+ (int)$request->input('virtue_points');
         $casestudy->course_id = $request->input('course_id');
         $casestudy->save();
 
@@ -140,6 +146,9 @@ class CaseStudyController extends Controller
             'issue_points'=> 'required',
             'util_points'=> 'required',
             'stakeholder_points'=> 'required',
+            'care_points'=> 'required',
+            'virtue_points'=> 'required',
+            'deontology_points'=> 'required',
             ]);
 
         $casestudy = CaseStudy::where('id', $id)->first();
@@ -148,7 +157,10 @@ class CaseStudyController extends Controller
         $casestudy->issue_points = $request->input('issue_points');
         $casestudy->stakeholder_points = $request->input('stakeholder_points');
         $casestudy->util_points = $request->input('util_points');
-        $casestudy->points = (int)$request->input('issue_points') + (int)$request->input('stakeholder_points') + (int)$request->input('util_points');
+        $casestudy->deontology_points = $request->input('deontology_points');
+        $casestudy->virtue_points = $request->input('virtue_points');
+        $casestudy->care_points = $request->input('care_points');
+        $casestudy->points = (int)$request->input('issue_points') + (int)$request->input('stakeholder_points') + (int)$request->input('util_points')+ (int)$request->input('deontology_points')+ (int)$request->input('care_points')+ (int)$request->input('virtue_points');
 
         if($casestudy->save()){
             $request->session()->flash('success', 'Case study updated');

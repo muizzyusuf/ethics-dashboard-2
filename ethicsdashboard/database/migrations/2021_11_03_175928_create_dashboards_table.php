@@ -16,9 +16,9 @@ class CreateDashboardsTable extends Migration
         Schema::create('dashboards', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('summary');
-            $table->string('role');
-            $table->text('dilemma');
+            $table->text('summary')->nullable();
+            $table->string('role')->nullable();
+            $table->text('dilemma')->nullable();
             $table->unsignedBigInteger('ethical_issue_id');
             $table->unsignedBigInteger('utilitarianism_section_id');
             $table->unsignedBigInteger('user_id');

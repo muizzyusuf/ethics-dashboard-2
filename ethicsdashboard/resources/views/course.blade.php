@@ -64,6 +64,18 @@
                             <label for="code">Utilitarianism Section Points:</label>
                             <input type="number" id="util_points" name="util_points" class="form-control" required>
                         </div>
+                        <div class="form-group">
+                            <label for="code"> Deontology Section Points:</label>
+                            <input type="number" id="deontology_points" name="deontology_points" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="code"> Virtue Ethics Section Points:</label>
+                            <input type="number" id="virtue_points" name="virtue_points" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="code"> Care Ethics Section Points:</label>
+                            <input type="number" id="care_points" name="care_points" class="form-control" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -164,6 +176,18 @@
                                             <div class="form-group">
                                                 <label for="code">Utilitarianism Section Points:</label>
                                                 <input type="number" id="util_points" name="util_points" class="form-control" value="{{$casestudy->util_points}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="code"> Deontology Section Points:</label>
+                                                <input type="number" id="deontology_points" name="deontology_points" class="form-control" value="{{$casestudy->deontology_points}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="code"> Virtue Ethics Section Points:</label>
+                                                <input type="number" id="virtue_points" name="virtue_points" class="form-control" value="{{$casestudy->virtue_points}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="code"> Care Ethics Section Points:</label>
+                                                <input type="number" id="care_points" name="care_points" class="form-control" value="{{$casestudy->care_points}}" required>
                                             </div>
 
                                             <div class="form-group">
