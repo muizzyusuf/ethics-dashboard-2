@@ -7,6 +7,9 @@ use App\Models\Dashboard;
 
 use App\Models\EthicalIssue;
 use App\Models\StakeholderSection;
+use App\Models\VirtueSection;
+use App\Models\CareSection;
+use App\Models\DeontologySection;
 use App\Models\UtilitarianismSection;
 use App\Models\User;
 use App\Models\CaseStudy;
@@ -63,6 +66,12 @@ class DashboardController extends Controller
         $stakeholder->save(); //generates the id and sets grade,comment to null
         $util = new UtilitarianismSection;
         $util->save(); //generates the id and sets grade,comment to null
+        $deontology = new DeontologySection;
+        $deontology->save();
+        $care = new CareSection;
+        $care->save();
+        $virtue = new VirtueSection;
+        $virtue->save();
 
         $dash = new Dashboard;
         $dash->name = $request->input('name'); //gotten from create dashboard form as input
@@ -71,6 +80,9 @@ class DashboardController extends Controller
         $dash->ethical_issue_id = $issue->id;
         $dash->stakeholder_section_id = $stakeholder->id;
         $dash->utilitarianism_section_id = $util->id;
+        $dash->deontology_section_id = $deontology->id;
+        $dash->virtue_section_id = $virtue->id;
+        $dash->care_section_id = $care->id;
         $dash->save();
 
         //set eloquent relationships
@@ -78,6 +90,9 @@ class DashboardController extends Controller
         $dash->caseStudy()->associate(CaseStudy::where('id',$request->input('case_study_id')));
         $issue->dashboard()->associate($dash);
         $stakeholder->dashboard()->associate($dash);
+        $deontology->dashboard()->associate($dash);
+        $virtue->dashboard()->associate($dash);
+        $care->dashboard()->associate($dash);
 
         if($util->dashboard()->associate($dash)){
             $request->session()->flash('success', 'New Dashboard Created');
