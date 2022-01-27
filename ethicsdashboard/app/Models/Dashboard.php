@@ -12,8 +12,15 @@ class Dashboard extends Model
     protected $fillable = [
         'id', 
         'name', 
+        'summary',
+        'role',
+        'dilemma',
+        'grade',
         'ethical_issue_id', 
         'utilitarianism_section_id',
+        'deontology_section_id',
+        'virtue_section_id',
+        'care_section_id',
         'user_id',
         'case_study_id'
     ];
@@ -23,6 +30,18 @@ class Dashboard extends Model
 
     public function utilitarianismSection(){
         return $this->hasOne('App\Models\UtilitarianismSection', 'id');
+    }
+
+    public function deontologySection(){
+        return $this->hasOne('App\Models\DeontologySection', 'id');
+    }
+
+    public function careSection(){
+        return $this->hasOne('App\Models\CareSection', 'id');
+    }
+
+    public function virtueSection(){
+        return $this->hasOne('App\Models\VirtueSection', 'id');
     }
 
     public function stakeholderSection(){

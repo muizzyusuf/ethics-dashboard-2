@@ -18,9 +18,11 @@ class CreateStakeholdersTable extends Migration
             $table->string('stakeholder');
             $table->text('interests');
             $table->unsignedBigInteger('stakeholder_section_id');
+            $table->unsignedBigInteger('virtue_id')->nullable();
             $table->timestamps();
 
             $table->foreign('stakeholder_section_id')->references('id')->on('stakeholder_sections')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('virtue_id')->references('id')->on('virtues')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

@@ -15,11 +15,19 @@ class Stakeholder extends Model
         return $this->belongsTo('App\Models\StakeholderSection', 'id');
     }
 
+    public function virtue(){
+        return $this->belongsTo('App\Models\Virtue', 'id');
+    }
+
     public function impact(){
         return $this->hasOne('App\Models\Impact', 'stakeholder_id');
     }
 
     public function pleasures(){
         return $this->hasMany('App\Models\Pleasure', 'stakeholder_id');
+    }
+
+    public function cares(){
+        return $this->hasMany('App\Models\Care', 'stakeholder_id');
     }
 }
