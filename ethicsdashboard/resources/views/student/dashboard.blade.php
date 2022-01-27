@@ -32,7 +32,7 @@
                     <div class="form-group row mb-0">
                         <label class="col-3 col-form-label font-weight-bold" for="title">Title of Dashboard:</label>
                         <div class="col-9">
-                            <input type="text" id="name" name="name" class="form-control" readonly value="{{$dashboard->name}}" required>
+                            <input type="text" id="name" name="name" class="form-control" value="{{$dashboard->name}}" required>
                         </div>
                     </div>
                 </div>
@@ -40,23 +40,25 @@
                     <div class="form-group row">
                         <label class="col-3 col-form-label font-weight-bold" for="summary">Case Summary:</label>
                         <div class="col-9">
-                            <textarea class="form-control form-control" id="summary" name="summary" readonly rows="5" required>{{$dashboard->summary}} </textarea>
+                            <textarea class="form-control form-control" id="summary" name="summary" rows="5" placeholder="Briefly describe the key features of the case-the who, what, where, when and why." required>{{$dashboard->summary}} </textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-3 col-form-label font-weight-bold" for="dilemma">Identify the Dilemmas:</label>
                         <div class="col-9">
-                            <textarea class="form-control form-control" id="dilema" name="dilemma" readonly rows="5" required>{{$dashboard->dilemma}} </textarea>
+                            <textarea class="form-control form-control" id="dilema" name="dilemma" rows="5" placeholder="What are the ethical dilemmas you are facing? Desribe the dilemmas in ethical terms, e.g. Honest, deception, loyalty, betrayal, beneficence, malfeasence, autonomy, paternalism, confidentiality, transparency, integrity, etc." required>{{$dashboard->dilemma}} </textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-3 col-form-label font-weight-bold" for="role">Choose Your Role:</label>
                         <div class="col-9">
-                            <input type="text" id="role" name="role" class="form-control" readonly value="{{$dashboard->role}}" required>
+                            <input type="text" id="role" name="role" class="form-control" placeholder="Put yourself in the position of a key decision maker in the case" value="{{$dashboard->role}}" required>
                         </div>
                     </div>
                 </div>
-            
+                <div class="card-footer">
+                    <input type="submit" class="btn btn-primary float-right mb-2" value="Save">
+                </div>
                 
             </form>
 

@@ -121,13 +121,22 @@ class DashboardController extends Controller
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $util = UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)-> get();
-        return view('dashboard')->with('dashboard', $dashboard)
-                                ->with('ethicalissue', $ethicalissue)
-                                ->with('stakeholders', $stakeholders)
-                                ->with('casestudy', $casestudy)
-                                ->with('util', $util)
-                                ->with('options', $options);
-   
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.dashboard')->with('dashboard', $dashboard)
+                                    ->with('ethicalissue', $ethicalissue)
+                                    ->with('stakeholders', $stakeholders)
+                                    ->with('casestudy', $casestudy)
+                                    ->with('util', $util)
+                                    ->with('options', $options);
+        }else{
+            return view('dashboard')->with('dashboard', $dashboard)
+                                    ->with('ethicalissue', $ethicalissue)
+                                    ->with('stakeholders', $stakeholders)
+                                    ->with('casestudy', $casestudy)
+                                    ->with('util', $util)
+                                    ->with('options', $options);
+        }
     }
 
     /**
@@ -151,19 +160,22 @@ class DashboardController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $id = Auth::user()->id;
+        //$id = Auth::user()->id;
     
         $dash = Dashboard::where('id', $id)->first();
         $dash->name = $request->input('name'); //gotten from create dashboard form as input
+        $dash->summary = $request->input('summary');
+        $dash->dilemma = $request->input('dilemma');
+        $dash->role = $request->input('role');
         
         if($dash->save()){
-            $request->session()->flash('success', 'New dashboard updated');
+            $request->session()->flash('success', 'dashboard updated');
         }else{
             $request->session()->flash('error', 'There was an error updating the dashboard');
         }
 
 
-        return redirect(route('casestudy.show', $request->input('case_study_id')));
+        return redirect(route('dashboard.show', $id));
     }
 
     /**
