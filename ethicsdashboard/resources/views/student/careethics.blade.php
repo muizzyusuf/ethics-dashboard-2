@@ -14,27 +14,23 @@
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
+        <a class="nav-link" href="{{route('caresection.show', $dashboard->utilitarianism_section_id)}}">Care Ethics</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
 
 <div class="jumbotron">
 
-    <div class="container mb-2">
-        <nav class="nav nav-pills nav-justified">
-            <a class="nav-link btn-dark active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Option Analysis</a>
-            <a class="nav-link" href="{{route('utilitarianismsection.impact', $dashboard->utilitarianism_section_id)}}">Stakeholder Analysis</a>
-            <a class="nav-link" href="{{route('utilitarianismsection.aggregate', $dashboard->utilitarianism_section_id)}}">Pleasure Analysis</a>
-            <a class="nav-link" href="{{route('utilitarianismsection.summary', $dashboard->utilitarianism_section_id)}}">Summary</a>
-        </nav>
-    </div>
 
     <div class="card border-secondary">
-        <p class="card-header font-weight-bold">Care Ethics.</p>
+        <p class="card-header font-weight-bold">Care ethics we come to understand the right thing to do by considering how we can care for others.  There are three main features of care that we can use to quantify this:</p>
+            <p class="card-header font-weight-bold"> 1) Attentiveness: Being aware of needs in others.</p>  
+             <p class="card-header font-weight-bold">2) Competence: The ability to deliver what is needed.</p>
+             <p class="card-header font-weight-bold">3) Responsiveness: Empathy for the position of others in need of care.</p>
 
         @for($i=0; $i<count($options); $i++)
             <div class="card-body">
-                <form method="POST" action="{{route('consequence.store')}}">
+                <form method="POST" action="{{route('care.store')}}">
                     {{ csrf_field() }}
                     {{method_field('POST')}}
                     <input type="hidden" id="id" name="id" value="{{$utilitarianismSection->id}}" >
@@ -45,43 +41,33 @@
                         <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
                     </div>
                     
-                    @if(count($options[$i]->consequences)>0 )
-                        @foreach($consequences as $consequence)
-                            @if(($consequence->option_id == $options[$i]->id) && ($consequence->type == 'short'))
-                                <div class="form-group">
-                                    <label class="font-weight-bold" for="short">Short Term Consequence</label>
-                                    <input type="hidden" id="short_id" name="short_id" value="{{$consequence->id}}">
-                                    <textarea class="form-control" id="short" name="short" rows="3" required>{{$consequence->consequence}}</textarea>
-                                </div>
-
-                            @elseif(($consequence->option_id == $options[$i]->id) && ($consequence->type == 'long'))
-                                <div class="form-group">
-                                    <label class="font-weight-bold" for="long">Long Term Consequence</label>
-                                    <input type="hidden" id="long_id" name="long_id" value="{{$consequence->id}}">
-                                    <textarea class="form-control" id="long" name="long" rows="3" required>{{$consequence->consequence}}</textarea>
-                                </div>
-                            @endif
+                    @if(count($options[$i]->cares)>0 )
+                        @foreach($cares as $care)
+                          <!--Display Summary of Attentiveness, Competence, Responsiveness for each Stakeholder in each Option-->
                             
                         @endforeach
                         <div class="form-group">
                             <input type="submit" class="float-right btn btn-primary" value="Save">
                         </div>
                     @else
-                    
+                    @for($j=0; $j<count($stakeholders); $j++)
                         <div class="form-group">
-                            <label class="font-weight-bold" for="short">Short Term Consequence</label>
-                            <textarea class="form-control" id="short" name="short" rows="3" required></textarea>
+                            <label class="font-weight-bold" for="short">Stakeholder {{$j+1}}</label>
+                            <p>Attentiveness:</p>
+                            <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j+1}}" name="attentivenss{{$j+1}}" required>  
+                            <p>Competence:</p>
+                            <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j+1}}" name="competence{{$j+1}}" required>
+                            <p>Responsiveness:</p>
+                            <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>                        
                         </div>
 
-                        <div class="form-group">
-                            <label class="font-weight-bold" for="long">Long Term Consequence</label>
-                            <textarea class="form-control" id="long" name="long" rows="3" required> </textarea>
-                        </div>
+                  
 
                         <div class="form-group">
                             <input type="submit" class="float-right btn btn-primary" value="Save">
                         </div>
-                
+                        <label></label>
+                    @endfor
                     @endif
                     
 
