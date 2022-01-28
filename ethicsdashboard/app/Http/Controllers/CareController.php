@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Care;
+use App\Models\Option;
+use App\Models\Stakeholder;
 use Illuminate\Http\Request;
 
 class CareController extends Controller
@@ -35,7 +37,24 @@ class CareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
+        $option = Option::where('id', $request->input('option_id'))->first();
+        $stakeholder = Stakeholder::where('id', $request->input('stakeholder_id'))->first();
+      
+            $care = new Care;
+            $care->option_id = $option->id;
+            $care->stakeholder_id = $stakeholder->id;
+            $care->attentiveness = $request->input('attentiveness');
+            $care->competence = $request->input('competence');
+            $care->responsiveness = $request->input('responsiveness');
+            $care->save();
+     
+
+
+            /*Need confrimation message*/
+
+       
     }
 
     /**

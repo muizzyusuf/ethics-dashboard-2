@@ -33,7 +33,7 @@
                 <form method="POST" action="{{route('care.store')}}">
                     {{ csrf_field() }}
                     {{method_field('POST')}}
-                    <input type="hidden" id="id" name="id" value="{{$utilitarianismSection->id}}" >
+                    <input type="hidden" id="id" name="id" value="{{$careSection->id}}" >
 
                     <div class="form-group">
                         <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
@@ -51,23 +51,32 @@
                         </div>
                     @else
                     @for($j=0; $j<count($stakeholders); $j++)
+            
                         <div class="form-group">
-                            <label class="font-weight-bold" for="short">Stakeholder {{$j+1}}</label>
+                            <label class="font-weight-bold">Stakeholder {{$stakeholders[$j+1]->id}}</label>
+                            <input type="hidden" id="stakeholder_id" name="stakeholder_id"  value="{{$stakeholders[$j+1]->id}}" >
                             <p>Attentiveness:</p>
-                            <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j+1}}" name="attentivenss{{$j+1}}" required>  
+                            <div>
+                            <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j+1}}" name="attentivenss{{$j+1}}" value="{{$attentiveness[$j+1]->attentiveness}}" required>   
+                        </div>
                             <p>Competence:</p>
-                            <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j+1}}" name="competence{{$j+1}}" required>
+                            <div>
+                            <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j+1}}" name="competence{{$j+1}}" value="{{$competence[$j+1]->competence}}" required>
+                            </div>  
                             <p>Responsiveness:</p>
-                            <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>                        
+                            <div>
+                            <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" value="{{$responsiveness[$j+1]->responsiveness}}" required>                        
+                            </div>
                         </div>
 
                   
 
-                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
+                       
                         <label></label>
                     @endfor
+                    <div class="form-group">
+                            <input type="submit" class="float-right btn btn-primary" value="Save">
+                        </div>
                     @endif
                     
 
