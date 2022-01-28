@@ -53,30 +53,30 @@
                     @for($j=0; $j<count($stakeholders); $j++)
             
                         <div class="form-group">
-                            <label class="font-weight-bold">Stakeholder {{$stakeholders[$j+1]->id}}</label>
-                            <input type="hidden" id="stakeholder_id" name="stakeholder_id"  value="{{$stakeholders[$j+1]->id}}" >
+                            <label class="font-weight-bold">Stakeholder {{$stakeholders[$j]->id}}</label>
+                            <input type="hidden" id="stakeholder_id" name="stakeholder_id"  value="{{$stakeholders[$j]->id}}" >
                             <p>Attentiveness:</p>
                             <div>
-                            <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j+1}}" name="attentivenss{{$j+1}}" value="{{$attentiveness[$j+1]->attentiveness}}" required>   
+                            <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j}}" name="attentivenss{{$j}}" required>   
                         </div>
                             <p>Competence:</p>
                             <div>
-                            <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j+1}}" name="competence{{$j+1}}" value="{{$competence[$j+1]->competence}}" required>
+                            <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j}}" name="competence{{$j}}" required>
                             </div>  
                             <p>Responsiveness:</p>
                             <div>
-                            <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" value="{{$responsiveness[$j+1]->responsiveness}}" required>                        
+                            <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j}}" name="responsiveness{{$j}}" required>                        
                             </div>
                         </div>
 
                   
-
+                        <div class="form-group">
+                            <input type="submit" class="float-right btn btn-primary" value="Save">
+                        </div>
                        
                         <label></label>
                     @endfor
-                    <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
+                    
                     @endif
                     
 
