@@ -84,15 +84,18 @@
 
                                                     
                                             @endfor
+        </div>
 
-                                        </form>
-         
+                                        
+                                        <div class="form-group">
+                            <input type="submit" class="float-right btn btn-primary" value="Save">
+                        </div>
+</form>
+                        </div>
                           <!--Display Summary of Attentiveness, Competence, Responsiveness for each Stakeholder in each Option-->
                             
     
-                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
+                    
                     @else
                     <form method="POST" action="{{route('care.store')}}">
                                             {{ csrf_field() }}
@@ -129,6 +132,10 @@
                                                             </div>
 
                                         </div>
+                                    
+                                        <div class="form-group">
+                            <input type="submit" class="float-right btn btn-primary" value="Save">
+                        </div>     
                                         @endif
                                         @endfor
                                         @endfor
@@ -140,11 +147,11 @@
                                                 
                                                                 
 
-                                                    
+                                                                  
                  @endfor
                 </form>
             </div>
-    
+            
         
     </div>
 
