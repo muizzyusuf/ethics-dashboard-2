@@ -94,13 +94,57 @@
                             <input type="submit" class="float-right btn btn-primary" value="Save">
                         </div>
                     @else
-                    
-                    @endif
-                    
+                    <form method="POST" action="{{route('care.store')}}">
+                                            {{ csrf_field() }}
+                                            {{method_field('POST')}}
+                                            <input type="hidden" id="id" name="id" value="{{$careSection->id}}">
+                                            <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
+                                           
+                                            @for($j=0; $j<count($stakeholders); $j++)
+                                                        
+                                                <div class="form-group">
+                                                    <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}</label>
+                                                    <input type="hidden" id="stakeholde{{$j+1}}r_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
+                                                    <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
+                                                </div>
 
+                                                
+                                                @for($k=0; $k<count($cares); $k++)
+
+                                                
+                                                    @if(($cares[$k]->stakeholder_id == $stakeholders[$j]->id)  )
+                                                        <div class="row">
+                                                            
+                                                            <div class="form-group col-md-10">
+                                                                <div><label>Attentiveness:</label></div>
+                                                                <label class="float-left font-weight-bold text-muted" for="attentiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="attentiveness">High</label>
+                                                                <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$k+1}}" name="attentiveness{{$k+1}}" value="{{$cares[$k]->attentiveness}}" required >
+                                                                <div><label>Competence:</label></div>
+                                                                <label class="float-left font-weight-bold text-muted" for="competence">Low</label> <label class="float-right font-weight-bold text-muted" for="competence">High</label>
+                                                                <input type="range" min="0" max="10" class="form-control-range" id="competence{{$k+1}}" name="competence{{$k+1}}" value="{{$cares[$k]->competence}}" required >
+                                                                <div><label>Responsiveness:</label></div>
+                                                                <label class="float-left font-weight-bold text-muted" for="responsiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="responsiveness">High</label>
+                                                                <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$k+1}}" name="responsiveness{{$k+1}}" value="{{$cares[$k]->responsiveness}}" required >
+                                                                <input type="hidden" id="care{{$k+1}}_id" name="care{{$k+1}}_id"  value="{{$cares[$k]->id}}">
+                                                            </div>
+
+                                        </div>
+                                        @endif
+                                        @endfor
+                                        @endfor
+                                        @endif
+                    
+                    
+                  
+                                                
+                                                
+                                                                
+
+                                                    
+                 @endfor
                 </form>
             </div>
-        @endfor
+    
         
     </div>
 
