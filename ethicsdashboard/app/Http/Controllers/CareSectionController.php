@@ -68,6 +68,20 @@ class CareSectionController extends Controller
         $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
+        /*
+        $cares=array();
+        for($i=0; $i<count($stakeholders); $i++){
+            $careOld=Care::where('stakeholder_id',$stakeholders[$i]->id)->get();
+            if ($careOld!=null){
+            array_push($cares, $careOld);
+            }
+            else array_push($cares,new Care);
+        }
+        */
+
+        $cares = Care::join('options','cares.option_id','=','options.id')
+        ->select('cares.id','cares.attentiveness','cares.competence','cares.responsiveness','cares.stakeholder_id','cares.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.careethics')->with('dashboard', $dashboard)
@@ -75,7 +89,8 @@ class CareSectionController extends Controller
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
-                                ->with('careSection', $careSection);
+                                ->with('careSection', $careSection)
+                                ->with('cares', $cares);
 
         }else{
             return view('careethics')->with('dashboard', $dashboard)
@@ -88,7 +103,7 @@ class CareSectionController extends Controller
         
         
 
-        
+       
     }
 
     /**
