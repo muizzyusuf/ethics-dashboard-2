@@ -37,7 +37,6 @@ class CareController extends Controller
      */
     public function store(Request $request)
     {
-        
 
         $option = Option::where('id', $request->input('option_id'))->first();
 
@@ -54,58 +53,113 @@ class CareController extends Controller
             $care1->option()->associate($option);
             $care1->stakeholder()->associate($stakeholder1);
 
+            $stakeholder2 = Stakeholder::where('id', $request->input('stakeholder2_id'))->first();
+            $care2 = new Care;
+            $care2->option_id = $option->id;
+            $care2->stakeholder_id = $stakeholder2->id;
+            $care2->attentiveness = $request->input('attentiveness2');
+            $care2->competence = $request->input('competence2');
+            $care2->responsiveness = $request->input('responsiveness2');
+            $care2->save();
+            //set eloquent relationships
+            $care2->option()->associate($option);
+            $care2->stakeholder()->associate($stakeholder2);
 
+            $stakeholder3 = Stakeholder::where('id', $request->input('stakeholder3_id'))->first();
+            $care3 = new Care;
+            $care3->option_id = $option->id;
+            $care3->stakeholder_id = $stakeholder3->id;
+            $care3->attentiveness = $request->input('attentiveness3');
+            $care3->competence = $request->input('competence3');
+            $care3->responsiveness = $request->input('responsiveness3');
+            $care3->save();
+            //set eloquent relationships
+            $care3->option()->associate($option);
+            $care3->stakeholder()->associate($stakeholder3);
+
+            $stakeholder4 = Stakeholder::where('id', $request->input('stakeholder4_id'))->first();
+            $care4 = new Care;
+            $care4->option_id = $option->id;
+            $care4->stakeholder_id = $stakeholder4->id;
+            $care4->attentiveness = $request->input('attentiveness4');
+            $care4->competence = $request->input('competence4');
+            $care4->responsiveness = $request->input('responsiveness4');
+            $care4->save();
+            //set eloquent relationships
+            $care4->option()->associate($option);
+            $care4->stakeholder()->associate($stakeholder4);
+
+            $stakeholder5 = Stakeholder::where('id', $request->input('stakeholder5_id'))->first();
+            $care5 = new Care;
+            $care5->option_id = $option->id;
+            $care5->stakeholder_id = $stakeholder5->id;
+            $care5->attentiveness = $request->input('attentiveness5');
+            $care5->competence = $request->input('competence5');
+            $care5->responsiveness = $request->input('responsiveness5');
+            $care5->save();
+            //set eloquent relationships
+            $care5->option()->associate($option);
+            $care5->stakeholder()->associate($stakeholder5);
+
+            $stakeholder6 = Stakeholder::where('id', $request->input('stakeholder6_id'))->first();
+            $care6 = new Care;
+            $care6->option_id = $option->id;
+            $care6->stakeholder_id = $stakeholder6->id;
+            $care6->attentiveness = $request->input('attentiveness6');
+            $care6->competence = $request->input('competence6');
+            $care6->responsiveness = $request->input('responsiveness6');
+            $care6->save();
+            //set eloquent relationships
+            $care6->option()->associate($option);
+
+            if($care6->stakeholder()->associate($stakeholder6)){
+                $request->session()->flash('success', 'Stakeholder care values saved');
+            }else{
+                $request->session()->flash('error', 'There was an error saving the care values');
+            }
             return  redirect()->back();
 
         }else{
             
-            $pleasure1 = Pleasure::where('id', $request->input('pleasure1_id') )->first();
-            $pleasure1->pleasure = $request->input('pleasure1');
-            $pleasure1->level = $request->input('level1');
-            $pleasure1->explanation = $request->input('explanation1');
-            $pleasure1->save();
+            $care1 = Care::where('id', $request->input('care1_id') )->first();
+            $care1->attentiveness = $request->input('attentiveness1');
+            $care1->competence = $request->input('competence1');
+            $care1->responsiveness = $request->input('responsiveness1');
+            $care1->save();
 
-            
-            $pleasure2 = Pleasure::where('id', $request->input('pleasure2_id') )->first();
-            $pleasure2->pleasure = $request->input('pleasure2');
-            $pleasure2->level = $request->input('level2');
-            $pleasure2->explanation = $request->input('explanation2');
-            $pleasure2->save();
-            
+            $care2 = Care::where('id', $request->input('care2_id') )->first();
+            $care2->attentiveness = $request->input('attentiveness2');
+            $care2->competence = $request->input('competence2');
+            $care2->responsiveness = $request->input('responsiveness2');
+            $care2->save();
 
-            
-            $pleasure3 = Pleasure::where('id', $request->input('pleasure3_id') )->first();
-            $pleasure3->pleasure = $request->input('pleasure3');
-            $pleasure3->level = $request->input('level3');
-            $pleasure3->explanation = $request->input('explanation3');
-            $pleasure3->save();
-            
+            $care3 = Care::where('id', $request->input('care3_id') )->first();
+            $care3->attentiveness = $request->input('attentiveness3');
+            $care3->competence = $request->input('competence3');
+            $care3->responsiveness = $request->input('responsiveness3');
+            $care3->save();
 
-            $pleasure4 = Pleasure::where('id', $request->input('pleasure4_id') )->first();
-            $pleasure4->pleasure = $request->input('pleasure4');
-            $pleasure4->level = $request->input('level4');
-            $pleasure4->explanation = $request->input('explanation4');
-            $pleasure4->save();
-    
+            $care4 = Care::where('id', $request->input('care4_id') )->first();
+            $care4->attentiveness = $request->input('attentiveness4');
+            $care4->competence = $request->input('competence4');
+            $care4->responsiveness = $request->input('responsiveness4');
+            $care4->save();
 
-            $pleasure5 = Pleasure::where('id', $request->input('pleasure5_id') )->first();
-            $pleasure5->pleasure = $request->input('pleasure5');
-            $pleasure5->level = $request->input('level5');
-            $pleasure5->explanation = $request->input('explanation5');
-            $pleasure5->save();
-            
+            $care5 = Care::where('id', $request->input('care5_id') )->first();
+            $care5->attentiveness = $request->input('attentiveness5');
+            $care5->competence = $request->input('competence5');
+            $care5->responsiveness = $request->input('responsiveness5');
+            $care5->save();
 
-            $pleasure6 = Pleasure::where('id', $request->input('pleasure6_id') )->first();
-            $pleasure6->pleasure = $request->input('pleasure6');
-            $pleasure6->level = $request->input('level6');
-            $pleasure6->explanation = $request->input('explanation6');
-            
-                    
+            $care6 = Care::where('id', $request->input('care6_id') )->first();
+            $care6->attentiveness = $request->input('attentiveness6');
+            $care6->competence = $request->input('competence6');
+            $care6->responsiveness = $request->input('responsiveness6');
 
-            if($pleasure6->save()){
-                $request->session()->flash('success', 'Stakeholder pleasures for the consequence updateed');
+            if($care6->save()){
+                $request->session()->flash('success', 'Stakeholder care values updated');
             }else{
-                $request->session()->flash('error', 'There was an error updating the stakeholder pleasures for the consequence');
+                $request->session()->flash('error', 'There was an error updating the stakeholder care values');
             }
             return  redirect()->back();
         }    
