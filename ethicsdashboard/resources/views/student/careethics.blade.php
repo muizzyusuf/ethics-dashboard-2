@@ -83,15 +83,15 @@
                                                                 
 
                                                     
-                                            @endfor
-        </div>
+                                                @endfor
 
-                                        
-                                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
-</form>
-                        </div>
+                            
+                        <div class="form-group">
+            <input type="submit" class="float-right btn btn-primary" value="Save">
+        </div>
+        </form>
+                        
+                    </div>
                           <!--Display Summary of Attentiveness, Competence, Responsiveness for each Stakeholder in each Option-->
                             
     
@@ -115,7 +115,7 @@
                                                 @for($k=0; $k<count($cares); $k++)
 
                                                 
-                                                    @if(($cares[$k]->stakeholder_id == $stakeholders[$j]->id)  )
+                                                    @if(($cares[$k]->stakeholder_id == $stakeholders[$j]->id && $cares[$k]->option_id == $options[$i]->id)  )
                                                         <div class="row">
                                                             
                                                             <div class="form-group col-md-10">
@@ -132,27 +132,50 @@
                                                             </div>
 
                                         </div>
-                                    
+                                        
+                                                        @else
+
+                                                        <div class="form-group">
+                                                    <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}</label>
+                                                    <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
+                                                    <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-10">
+                                                        <div><label>Attentiveness:</label></div>
+                                                        <label class="float-left font-weight-bold text-muted" for="attentiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="attentiveness">High</label>
+                                                        <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" required>
+                                                        
+                                                    </div>
+                                                    <div class="form-group col-md-10">
+                                                    <div><label>Competence:</label></div>
+                                                        <label class="float-left font-weight-bold text-muted" for="competence">Low</label> <label class="float-right font-weight-bold text-muted" for="competence">High</label>
+                                                        <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j+1}}" name="competence{{$j+1}}" required>
+                                                        
+                                                    </div>
+                                                    <div class="form-group col-md-10">
+                                                    <div><label>Responsiveness:</label></div>
+                                                        <label class="float-left font-weight-bold text-muted" for="responsiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="responsiveness">High</label>
+                                                        <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                            
+                                        @endif
+                                        @endfor
                                         <div class="form-group">
                             <input type="submit" class="float-right btn btn-primary" value="Save">
                         </div>     
-                                        @endif
+                        </form>
                                         @endfor
-                                        @endfor
-                                        @endif
-                    
-                    
-                  
-                                                
-                                                
-                                                                
+                                        @endif                      
 
                                                                   
                  @endfor
-                </form>
-            </div>
+             
             
-        
+                 </div>
     </div>
 
 </div>
