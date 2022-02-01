@@ -55,6 +55,7 @@ class CaseStudyController extends Controller
             'care_points'=> 'required',
             'virtue_points'=> 'required',
             'deontology_points'=> 'required',
+           
             ]);
 
         $casestudy = new CaseStudy;
