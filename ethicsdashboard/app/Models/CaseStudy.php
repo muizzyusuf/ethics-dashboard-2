@@ -13,6 +13,12 @@ class CaseStudy extends Model
         'id', 
         'name', 
         'instruction', 
+        'issue_points',
+        'stakeholder_points',
+        'util_points',
+        'deontology_points',
+        'virtue_points',
+        'care_points',
         'points',
         'course_id',
     ];
