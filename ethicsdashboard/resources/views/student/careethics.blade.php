@@ -21,167 +21,144 @@
 
 <div class="jumbotron">
 
-
-    <div class="card border-secondary">
-
-        <div class="card-header font-weight-bold">Care ethics we come to understand the right thing to do by considering how we can care for others.  There are three main features of care that we can use to quantify this:
-            <ol>
-                <li>Attentiveness: Being aware of needs in others. </li>
-                <li>Competence: The ability to deliver what is needed.</li>
-                <li>Responsiveness: Empathy for the position of others in need of care.</li>
-            </ol>    
-        
-        </div>
-
-        @for($i=0; $i<count($options); $i++)
-            <div class="card-body">
-                <form method="POST" action="{{route('care.store')}}">
-                    {{ csrf_field() }}
-                    {{method_field('POST')}}
-                    <input type="hidden" id="id" name="id" value="{{$careSection->id}}" >
-
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
-                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
-                        <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
-                    </div>
-                    
-                    <div class="card-body">
-                                    @if(count($cares)<1)
-                                        <form method="POST" action="{{route('care.store')}}">
-                                            {{ csrf_field() }}
-                                            {{method_field('POST')}}
-                                            <input type="hidden" id="id" name="id" value="{{$careSection->id}}">
-                                            <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
-                                            
-                                            @for($j=0; $j<count($stakeholders); $j++)
-                                                        
-                                                <div class="form-group">
-                                                    <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}</label>
-                                                    <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
-                                                    <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-10">
-                                                        <div><label>Attentiveness:</label></div>
-                                                        <label class="float-left font-weight-bold text-muted" for="attentiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="attentiveness">High</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" required>
-                                                        
-                                                    </div>
-                                                    <div class="form-group col-md-10">
-                                                    <div><label>Competence:</label></div>
-                                                        <label class="float-left font-weight-bold text-muted" for="competence">Low</label> <label class="float-right font-weight-bold text-muted" for="competence">High</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j+1}}" name="competence{{$j+1}}" required>
-                                                        
-                                                    </div>
-                                                    <div class="form-group col-md-10">
-                                                    <div><label>Responsiveness:</label></div>
-                                                        <label class="float-left font-weight-bold text-muted" for="responsiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="responsiveness">High</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>
-                                                        
-                                                    </div>
-                                                    
-                                                </div>
-                                            
-                        
-                                                
-                                                                
-
-                                                    
-                                                @endfor
-
-                            
-                        <div class="form-group">
-            <input type="submit" class="float-right btn btn-primary" value="Save">
-        </div>
-        </form>
-                        
-                    </div>
-                          <!--Display Summary of Attentiveness, Competence, Responsiveness for each Stakeholder in each Option-->
-                            
+    <div class="container font-weight-bold">Care ethics we come to understand the right thing to do by considering how we can care for others.  There are three main features of care that we can use to quantify this:
+        <ol>
+            <li>Attentiveness: Being aware of needs in others. </li>
+            <li>Competence: The ability to deliver what is needed.</li>
+            <li>Responsiveness: Empathy for the position of others in need of care.</li>
+        </ol>    
     
-                    
-                    @else
-                    <form method="POST" action="{{route('care.store')}}">
-                                            {{ csrf_field() }}
-                                            {{method_field('POST')}}
-                                            <input type="hidden" id="id" name="id" value="{{$careSection->id}}">
-                                            <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
-                                           
-                                            @for($j=0; $j<count($stakeholders); $j++)
-                                                        
-                                                <div class="form-group">
-                                                    <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}</label>
-                                                    <input type="hidden" id="stakeholde{{$j+1}}r_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
-                                                    <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
-                                                </div>
+    </div>
 
-                                                
-                                                @for($k=0; $k<count($cares); $k++)
+        
+        <div class="container">
 
-                                                
-                                                    @if(($cares[$k]->stakeholder_id == $stakeholders[$j]->id && $cares[$k]->option_id == $options[$i]->id)  )
-                                                        <div class="row">
-                                                            
-                                                            <div class="form-group col-md-10">
-                                                                <div><label>Attentiveness:</label></div>
-                                                                <label class="float-left font-weight-bold text-muted" for="attentiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="attentiveness">High</label>
-                                                                <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$k+1}}" name="attentiveness{{$k+1}}" value="{{$cares[$k]->attentiveness}}" required >
-                                                                <div><label>Competence:</label></div>
-                                                                <label class="float-left font-weight-bold text-muted" for="competence">Low</label> <label class="float-right font-weight-bold text-muted" for="competence">High</label>
-                                                                <input type="range" min="0" max="10" class="form-control-range" id="competence{{$k+1}}" name="competence{{$k+1}}" value="{{$cares[$k]->competence}}" required >
-                                                                <div><label>Responsiveness:</label></div>
-                                                                <label class="float-left font-weight-bold text-muted" for="responsiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="responsiveness">High</label>
-                                                                <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$k+1}}" name="responsiveness{{$k+1}}" value="{{$cares[$k]->responsiveness}}" required >
-                                                                <input type="hidden" id="care{{$k+1}}_id" name="care{{$k+1}}_id"  value="{{$cares[$k]->id}}">
-                                                            </div>
+            @for($i=0; $i<count($options); $i++)
 
-                                        </div>
+                <div class="card mb-2">
+                    <div class="card-header font-weight-bold">
+                        Option {{$i+1}}: {{$options[$i]->option}}
+                    </div>
+
+                    @if(count($options[$i]->cares)<1)
+                        <form method="POST" action="{{route('care.store')}}">
+                            {{ csrf_field() }}
+                            {{method_field('POST')}}
+                            <input type="hidden" id="id" name="id" value="{{$careSection->id}}" >
+                            <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
+
+                            <div class="card-body">
+                                @for($j=0; $j<count($stakeholders); $j++)
                                         
-                                                        @else
-
-                                                        <div class="form-group">
-                                                    <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}</label>
-                                                    <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
-                                                    <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-10">
-                                                        <div><label>Attentiveness:</label></div>
-                                                        <label class="float-left font-weight-bold text-muted" for="attentiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="attentiveness">High</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" required>
-                                                        
-                                                    </div>
-                                                    <div class="form-group col-md-10">
-                                                    <div><label>Competence:</label></div>
-                                                        <label class="float-left font-weight-bold text-muted" for="competence">Low</label> <label class="float-right font-weight-bold text-muted" for="competence">High</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="competence{{$j+1}}" name="competence{{$j+1}}" required>
-                                                        
-                                                    </div>
-                                                    <div class="form-group col-md-10">
-                                                    <div><label>Responsiveness:</label></div>
-                                                        <label class="float-left font-weight-bold text-muted" for="responsiveness">Low</label> <label class="float-right font-weight-bold text-muted" for="responsiveness">High</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>
-                                                        
-                                                    </div>
-                                                    
-                                                </div>
+                                    <div class="container border my-1 py-1 rounded">
+                                        <div class="form-group row mt-1">
+                                            <label class="col-2 col-form-label" for="stakeholder">Stakeholder {{$j+1}}:</label>
+                                            <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
+                                            <div class="col-10">
+                                                <input type="text" class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" value="{{$stakeholders[$j]->stakeholder}}" readonly>
+                                            </div>
                                             
-                                        @endif
-                                        @endfor
-                                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>     
-                        </form>
-                                        @endfor
-                                        @endif                      
+                                        </div>
 
-                                                                  
-                 @endfor
+                                        <div class="row">
+                                            <div class="text-center form-group col-md-4">
+                                                <div>
+                                                    <label>Attentiveness:</label>
+                                                </div>
+                                                <small class="float-left text-muted" for="attentiveness">Low</small> <small class="float-right  text-muted" for="attentiveness">High</small>
+                                                <input type="range" min="0" max="10" class="form-control-range " id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" required>
+                                                
+                                            </div>
+                                            <div class="text-center form-group col-md-4">
+                                                <div>
+                                                    <label>Competence:</label>
+                                                </div>
+                                                <small class="float-left text-muted" for="competence">Low</small> <small class="float-right  text-muted" for="competence">High</small>
+                                                <input type="range" min="0" max="10" class="form-control-range " id="competence{{$j+1}}" name="competence{{$j+1}}" required>
+                                                
+                                            </div>
+                                            <div class="text-center form-group col-md-4">
+                                                <div>
+                                                    <label>Responsiveness:</label>
+                                                </div>
+                                                <small class="float-left  text-muted" for="responsiveness">Low</small> <small class="float-right  text-muted" for="responsiveness">High</small>
+                                                <input type="range" min="0" max="10" class="form-control-range " id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>
+                                                
+                                            </div>
+                                            
+                                        </div> 
+                                    </div> 
+                                    
+                                @endfor
+                            </div>
+                            <div class="container text-right form-group">                    
+                                <input type="submit" class=" btn btn-primary" value="Save">   
+                            </div>
+                        </form>
+                    @else
+                        <form method="POST" action="{{route('care.store')}}">
+                            {{ csrf_field() }}
+                            {{method_field('POST')}}
+                            <input type="hidden" id="id" name="id" value="{{$careSection->id}}" >
+                            <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
+
+                            <div class="card-body">
+                                @for($j=0; $j<count($stakeholders); $j++)
+                                        
+                                    <div class="container border my-1 py-1 rounded">
+                                        <div class="form-group row mt-1">
+                                            <label class="col-2 col-form-label" for="stakeholder">Stakeholder {{$j+1}}:</label>
+                                            <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
+                                            <input type="hidden" id="care{{$j+1}}_id" name="care{{$j+1}}_id"  value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->id}} @endif @endforeach >
+                                            <div class="col-10">
+                                                <input type="text" class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" value="{{$stakeholders[$j]->stakeholder}}" readonly>
+                                            </div>
+                                            
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="text-center form-group col-md-4">
+                                                <div>
+                                                    <label>Attentiveness:</label>
+                                                </div>
+                                                <small class="float-left text-muted" for="attentiveness">Low</small> <small class="float-right  text-muted" for="attentiveness">High</small>
+                                                <input type="range" min="0" max="10" class="form-control-range " id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->attentiveness}} @endif @endforeach required>
+                                                
+                                            </div>
+                                            <div class="text-center form-group col-md-4">
+                                                <div>
+                                                    <label>Competence:</label>
+                                                </div>
+                                                <small class="float-left text-muted" for="competence">Low</small> <small class="float-right  text-muted" for="competence">High</small>
+                                                <input type="range" min="0" max="10" class="form-control-range " id="competence{{$j+1}}" name="competence{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->competence}}   @endif @endforeach required>
+                                                
+                                            </div>
+                                            <div class="text-center form-group col-md-4">
+                                                <div>
+                                                    <label>Responsiveness:</label>
+                                                </div>
+                                                <small class="float-left  text-muted" for="responsiveness">Low</small> <small class="float-right  text-muted" for="responsiveness">High</small>
+                                                <input type="range" min="0" max="10" class="form-control-range " id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->responsiveness}}    @endif @endforeach required>
+                                                
+                                            </div>
+                                            
+                                        </div> 
+                                    </div> 
+                                    
+                                @endfor
+                            </div>
+                            <div class="container text-right form-group">                    
+                                <input type="submit" class=" btn btn-primary" value="Save">   
+                            </div>
+                        </form>
+                    @endif
+                </div> 
+                                                                
+            @endfor
              
             
-                 </div>
-    </div>
+        </div>
+  
 
 </div>
 
