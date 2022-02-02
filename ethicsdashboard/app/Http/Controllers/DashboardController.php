@@ -120,6 +120,7 @@ class DashboardController extends Controller
         $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $util = UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
+        $care = CareSection::where('id', $dashboard->care_section_id)->first();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)-> get();
 
         if(Auth::user()->role()->first()->id == 3){
@@ -128,14 +129,16 @@ class DashboardController extends Controller
                                     ->with('stakeholders', $stakeholders)
                                     ->with('casestudy', $casestudy)
                                     ->with('util', $util)
-                                    ->with('options', $options);
+                                    ->with('options', $options)
+                                    ->with('care', $care);
         }else{
             return view('dashboard')->with('dashboard', $dashboard)
                                     ->with('ethicalissue', $ethicalissue)
                                     ->with('stakeholders', $stakeholders)
                                     ->with('casestudy', $casestudy)
                                     ->with('util', $util)
-                                    ->with('options', $options);
+                                    ->with('options', $options)
+                                    ->with('care', $care);
         }
     }
 
