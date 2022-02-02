@@ -13,8 +13,8 @@
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
-        <a class="nav-link active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
-        <a class="nav-link" href="{{route('caresection.show', $dashboard->utilitarianism_section_id)}}">Care Ethics</a>
+        <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
+        <a class="nav-link active" href="{{route('caresection.show', $dashboard->care_section_id)}}">Care Ethics</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
@@ -23,10 +23,15 @@
 
 
     <div class="card border-secondary">
-        <p class="card-header font-weight-bold">Care ethics we come to understand the right thing to do by considering how we can care for others.  There are three main features of care that we can use to quantify this:</p>
-            <p class="card-header font-weight-bold"> 1) Attentiveness: Being aware of needs in others.</p>  
-             <p class="card-header font-weight-bold">2) Competence: The ability to deliver what is needed.</p>
-             <p class="card-header font-weight-bold">3) Responsiveness: Empathy for the position of others in need of care.</p>
+
+        <div class="card-header font-weight-bold">Care ethics we come to understand the right thing to do by considering how we can care for others.  There are three main features of care that we can use to quantify this:
+            <ol>
+                <li>Attentiveness: Being aware of needs in others. </li>
+                <li>Competence: The ability to deliver what is needed.</li>
+                <li>Responsiveness: Empathy for the position of others in need of care.</li>
+            </ol>    
+        
+        </div>
 
         @for($i=0; $i<count($options); $i++)
             <div class="card-body">
