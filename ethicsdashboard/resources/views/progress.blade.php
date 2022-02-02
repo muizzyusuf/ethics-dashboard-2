@@ -66,6 +66,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Care Ethics
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title font-weight-bold">Comments:</h6>
+                                <p class="card-text text-muted">{{$careSection->comment}}</p>
+                                    
+                            </div>
+                        </div>
+                    </div>
         
                         
                 </div> 
@@ -80,6 +93,7 @@
                         <p class="card-text font-weight-bold">Issue & Options: <span class="float-right">{{$ethicalissue->grade}} / {{$casestudy->issue_points}}  pts</span></p>
                         <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} / {{$casestudy->stakeholder_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} / {{$casestudy->util_points}} pts</span></p>
+                        <p class="card-text font-weight-bold">Care Ethics: <span class="float-right">{{$careSection->grade}} / {{$casestudy->care_points}} pts</span></p>
                     </div>
                 </div>
             </div>

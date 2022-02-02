@@ -128,6 +128,24 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="careHeaderId">
+                    <h5 class="mb-0">
+                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#careContentId" aria-expanded="true" aria-controls="careContentId">
+                           <b>Care Ethics </b>
+                        </a>
+                    </h5>
+                </div>
+                <div id="careContentId" class="collapse in" role="tabpanel" aria-labelledby="careHeaderId">
+                    <div class="card-body">
+                        @if($care->decision != null)
+                            {{$care->decision}}
+                        @else
+                            <p class="card-text">No inputs have been made</p>       
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
