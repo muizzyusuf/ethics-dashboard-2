@@ -73,7 +73,7 @@
                                                 <label>Attentiveness:</label>
                                             </div>
                                             <small class="float-left text-muted" for="attentiveness">Low</small> <small class="float-right  text-muted" for="attentiveness">High</small>
-                                            <input type="range" min="0" max="10" class="form-control-range " id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" required>
+                                            <input type="range" min="0" max="10" class="form-control-range " disabled id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" required>
                                             
                                         </div>
                                         <div class="text-center form-group col-md-4">
@@ -81,7 +81,7 @@
                                                 <label>Competence:</label>
                                             </div>
                                             <small class="float-left text-muted" for="competence">Low</small> <small class="float-right  text-muted" for="competence">High</small>
-                                            <input type="range" min="0" max="10" class="form-control-range " id="competence{{$j+1}}" name="competence{{$j+1}}" required>
+                                            <input type="range" min="0" max="10" class="form-control-range " disabled id="competence{{$j+1}}" name="competence{{$j+1}}" required>
                                             
                                         </div>
                                         <div class="text-center form-group col-md-4">
@@ -89,7 +89,7 @@
                                                 <label>Responsiveness:</label>
                                             </div>
                                             <small class="float-left  text-muted" for="responsiveness">Low</small> <small class="float-right  text-muted" for="responsiveness">High</small>
-                                            <input type="range" min="0" max="10" class="form-control-range " id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>
+                                            <input type="range" min="0" max="10" class="form-control-range " disabled id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" required>
                                             
                                         </div>
                                         
@@ -98,9 +98,7 @@
                                 
                             @endfor
                         </div>
-                        <div class="container text-right form-group">                    
-                            <input type="submit" class=" btn btn-primary" value="Save">   
-                        </div>
+
                     </form>
                 @else
                     <form method="POST" action="{{route('care.store')}}">
@@ -129,7 +127,7 @@
                                                 <label>Attentiveness:</label>
                                             </div>
                                             <small class="float-left text-muted" for="attentiveness">Low</small> <small class="float-right  text-muted" for="attentiveness">High</small>
-                                            <input type="range" min="0" max="10" class="form-control-range " id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->attentiveness}} @endif @endforeach required>
+                                            <input type="range" min="0" max="10" class="form-control-range " disabled id="attentiveness{{$j+1}}" name="attentiveness{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->attentiveness}} @endif @endforeach required>
                                             
                                         </div>
                                         <div class="text-center form-group col-md-4">
@@ -137,7 +135,7 @@
                                                 <label>Competence:</label>
                                             </div>
                                             <small class="float-left text-muted" for="competence">Low</small> <small class="float-right  text-muted" for="competence">High</small>
-                                            <input type="range" min="0" max="10" class="form-control-range " id="competence{{$j+1}}" name="competence{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->competence}}   @endif @endforeach required>
+                                            <input type="range" min="0" max="10" class="form-control-range " disabled id="competence{{$j+1}}" name="competence{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->competence}}   @endif @endforeach required>
                                             
                                         </div>
                                         <div class="text-center form-group col-md-4">
@@ -145,7 +143,7 @@
                                                 <label>Responsiveness:</label>
                                             </div>
                                             <small class="float-left  text-muted" for="responsiveness">Low</small> <small class="float-right  text-muted" for="responsiveness">High</small>
-                                            <input type="range" min="0" max="10" class="form-control-range " id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->responsiveness}}    @endif @endforeach required>
+                                            <input type="range" min="0" max="10" class="form-control-range " disabled id="responsiveness{{$j+1}}" name="responsiveness{{$j+1}}" value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->responsiveness}}    @endif @endforeach required>
                                             
                                         </div>
                                         
@@ -154,9 +152,7 @@
                                 
                             @endfor
                         </div>
-                        <div class="container text-right form-group">                    
-                            <input type="submit" class=" btn btn-primary" value="Save">   
-                        </div>
+                        
                     </form>
                 @endif
             </div> 
@@ -165,8 +161,31 @@
             
         
     </div>
-
   
 </div>
 
+<div class="mt-3 card">
+    <p class="card-header">Instructor Comments & Grade</p>
+    <div class="card-body">
+        <form method="POST" action="{{route('caresection.comment',$careSection->id)}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+    
+            <div class="form-group">
+                <label class="font-weight-bold" for="comment">Comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$careSection->comment}} </textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold" for="grade">Grade</label>
+                <input type="number" min="0" max="{{$casestudy->care_points}}" class="form-control col-1" id="grade" name="grade" value="{{$careSection->grade}}" required>
+                <small id="help" class="form-text text-muted">Out of {{$casestudy->care_points}} </small>
+            </div>
+
+            <input type="submit" class="float-right btn btn-primary" value="Save">
+
+        </form>
+      
+    </div>
+</div>
 @endsection

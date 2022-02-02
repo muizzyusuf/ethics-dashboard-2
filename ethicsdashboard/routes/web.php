@@ -111,5 +111,11 @@ Route::resource('/virtue','App\http\Controllers\VirtueController');
 //This resource contains the following routes in care controller index, create, store, edit, update, destroy
 Route::resource('/care','App\http\Controllers\CareController');
 
+//route for viewing summary of inputs in care ethics section
+Route::get('/caresection/{caresection}/summary','App\http\Controllers\CareSectionController@summary')->name('caresection.summary');
 
+//route for inputing final care ethics decision
+Route::post('/caresection/{caresection}/decision','App\http\Controllers\CareSectionController@decision')->name('caresection.decision');
 
+//route for adding grades and comments to care section
+Route::post('/caresection/{caresection}','App\http\Controllers\CareSectionController@comment')->name('caresection.comment');

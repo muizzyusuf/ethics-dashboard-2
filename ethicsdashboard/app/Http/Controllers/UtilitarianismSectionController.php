@@ -234,7 +234,7 @@ class UtilitarianismSectionController extends Controller
 
 
         if(Auth::user()->role()->first()->id == 3){
-            return view('student.summary')->with('dashboard', $dashboard)
+            return view('student.util_summary')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
@@ -245,7 +245,7 @@ class UtilitarianismSectionController extends Controller
                                 ->with('utilitarianismSection', $utilitarianismSection);
 
         }else{
-            return view('summary')->with('dashboard', $dashboard)
+            return view('util_summary')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
@@ -308,7 +308,8 @@ class UtilitarianismSectionController extends Controller
         $egrade = $dashboard->ethicalIssue->grade;
         $sgrade = $dashboard->stakeholderSection->grade;
         $ugrade = $dashboard->utilitarianismSection->grade;
-        $dashboard->grade = $egrade + $sgrade +$ugrade;
+        $cgrade = $dashboard->careSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade;
 
 
         if($dashboard->save()){

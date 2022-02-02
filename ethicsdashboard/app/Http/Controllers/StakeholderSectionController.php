@@ -140,7 +140,8 @@ class StakeholderSectionController extends Controller
         $egrade = $dashboard->ethicalIssue->grade;
         $sgrade = $dashboard->stakeholderSection->grade;
         $ugrade = $dashboard->utilitarianismSection->grade;
-        $dashboard->grade = $egrade + $sgrade +$ugrade;
+        $cgrade = $dashboard->careSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade;
 
 
         if($dashboard->save()){

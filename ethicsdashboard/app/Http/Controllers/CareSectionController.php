@@ -106,6 +106,45 @@ class CareSectionController extends Controller
        
     }
 
+
+    public function summary($id)
+    {
+     
+        $careSection = CareSection::where('id', $id)->first();
+        $dashboard = Dashboard::where('id',$careSection->dashboard->id)->first();        
+        $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
+
+        $cares = Care::join('options','cares.option_id','=','options.id')
+        ->select('cares.id','cares.attentiveness','cares.competence','cares.responsiveness','cares.stakeholder_id','cares.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.care_summary')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('careSection', $careSection)
+                                ->with('cares', $cares);
+
+        }else{
+            return view('care_summary')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('careSection', $careSection);
+        }
+        
+        
+
+       
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -138,5 +177,44 @@ class CareSectionController extends Controller
     public function destroy(CareSection $careSection)
     {
         //
+    }
+
+    public function comment(Request $request, $id)
+    { 
+        //
+        $care = CareSection::where('id', $id)->first();
+        $care->comment = $request->input('comment');
+        $care->grade = $request->input('grade');
+        $care->save();
+
+
+        $dashboard = Dashboard::where('id', $care->dashboard->id)->first();
+        $egrade = $dashboard->ethicalIssue->grade;
+        $sgrade = $dashboard->stakeholderSection->grade;
+        $ugrade = $dashboard->utilitarianismSection->grade;
+        $cgrade = $dashboard->careSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade;
+
+
+        if($dashboard->save()){
+            $request->session()->flash('success', 'Comment and grade saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the comment and grade');
+        }
+        return  redirect()->back();
+    }
+
+    public function decision(Request $request, $id)
+    { 
+        //
+        $care = CareSection::where('id', $id)->first();
+        $care->decision = $request->input('decision');
+
+        if( $care->save()){
+            $request->session()->flash('success', 'Decision saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the decision');
+        }
+        return  redirect()->back();
     }
 }
