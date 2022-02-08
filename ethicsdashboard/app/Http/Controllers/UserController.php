@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -46,7 +48,10 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        return view('user');
+        $user = User::where('id', $id)->first();
+
+        
+        return view('user')->with('user',$user);
     }
 
     /**
