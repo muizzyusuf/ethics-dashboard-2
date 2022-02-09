@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -75,6 +76,27 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        
+        $user = User::where('id', $id)->first();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+
+        if( $user->save()){
+            $request->session()->flash('success', 'User updated!');
+            
+        }else{
+            $request->session()->flash('error', 'There was an error updating the user');
+           
+        }
+
+        return redirect(route('user.show',$id));
+        
     }
 
     /**
