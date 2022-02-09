@@ -124,4 +124,4 @@ Route::post('/caresection/{caresection}','App\http\Controllers\CareSectionContro
 Route::resource('/user','App\http\Controllers\UserController');
 
 //route for changing user password
-Route::put('/user/{user}','App\http\Controllers\UserController@password')->name('user.password');
+Route::put('/user/{user}/password','App\http\Controllers\UserController@password')->name('user.password');
