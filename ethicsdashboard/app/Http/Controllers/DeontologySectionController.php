@@ -62,7 +62,7 @@ class DeontologySectionController extends Controller
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
        
-    
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -141,7 +141,7 @@ class DeontologySectionController extends Controller
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
                                 ->with('deontologySection', $deontologySection);
-                                       
+
         }else{
             return view('deontology_summary')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)

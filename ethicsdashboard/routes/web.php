@@ -114,6 +114,8 @@ Route::resource('/care','App\http\Controllers\CareController');
 //route for viewing summary of inputs in deontology section
 Route::get('/deontologysection/{deontologysection}/summary','App\http\Controllers\DeontologySectionController@summary')->name('deontologysection.summary');
 
-//route for adding grades and comments to care section
+//route for adding grades and comments to deontology section
 Route::post('/deontologysection/{deontologysection}','App\http\Controllers\DeontologySectionController@comment')->name('deontologysection.comment');
 
+//route for inputing final eontology section decision
+//Route::post('/deontologysection/{deontologysection}/decision','App\http\Controllers\DeontologySectionController@decision')->name('deontologysection.decision');
