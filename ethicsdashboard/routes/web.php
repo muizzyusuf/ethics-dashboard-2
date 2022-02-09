@@ -119,3 +119,9 @@ Route::post('/caresection/{caresection}/decision','App\http\Controllers\CareSect
 
 //route for adding grades and comments to care section
 Route::post('/caresection/{caresection}','App\http\Controllers\CareSectionController@comment')->name('caresection.comment');
+
+//This resource contains the following routes in the user controller index, create, store, edit, update, destroy
+Route::resource('/user','App\http\Controllers\UserController');
+
+//route for changing user password
+Route::put('/user/{user}/password','App\http\Controllers\UserController@password')->name('user.password');
