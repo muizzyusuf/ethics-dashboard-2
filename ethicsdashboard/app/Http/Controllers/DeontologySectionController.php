@@ -63,31 +63,7 @@ class DeontologySectionController extends Controller
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
        
-        $cares = Care::join('options','cares.option_id','=','options.id')
-        ->select('cares.id','cares.attentiveness','cares.competence','cares.responsiveness','cares.stakeholder_id','cares.option_id')
-        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
-
-        if(Auth::user()->role()->first()->id == 3){
-            return view('student.careethics')->with('dashboard', $dashboard)
-                                ->with('ethicalissue', $ethicalissue)
-                                ->with('stakeholders', $stakeholders)
-                                ->with('casestudy', $casestudy)
-                                ->with('options', $options)
-                                ->with('careSection', $careSection)
-                                ->with('cares', $cares);
-
-        }else{
-            return view('careethics')->with('dashboard', $dashboard)
-                                ->with('ethicalissue', $ethicalissue)
-                                ->with('stakeholders', $stakeholders)
-                                ->with('casestudy', $casestudy)
-                                ->with('options', $options)
-                                ->with('careSection', $careSection);
-        }
-        
-        
-
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
