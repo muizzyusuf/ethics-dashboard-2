@@ -9,7 +9,6 @@ use App\Models\EthicalIssue;
 use App\Models\CaseStudy;
 use App\Models\Stakeholder;
 use App\Models\StakeholderSection;
-use App\Models\Care;
 use App\Models\Option;
 
 use Illuminate\Support\Facades\DB;
