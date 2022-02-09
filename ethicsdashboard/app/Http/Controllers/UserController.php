@@ -79,13 +79,11 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
         
         $user = User::where('id', $id)->first();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
 
         if( $user->save()){
             $request->session()->flash('success', 'User updated!');
@@ -94,6 +92,31 @@ class UserController extends Controller
             $request->session()->flash('error', 'There was an error updating the user');
            
         }
+
+        return redirect(route('user.show',$id));
+        
+    }
+
+    public function password(Request $request, $id)
+    {
+        //
+        $this->validate($request, [
+            'old_password' => ['required'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed', 'different:old_password'],
+            ]);
+        
+        $user = User::where('id', $id)->first();
+
+        if (Hash::check($request->input('old_password'), $user->password)) { 
+            
+            $user->fill(['password' => Hash::make($request->input('new_password'))])->save();
+            
+            $request->session()->flash('success', 'Password changed!');
+
+        }else{
+            $request->session()->flash('error', 'Old password is incorrect');
+        }
+
 
         return redirect(route('user.show',$id));
         
