@@ -12,6 +12,8 @@ use App\Models\User;
 use App\Models\CaseStudy;
 use App\Models\Stakeholder;
 use App\Models\Option;
+use App\Models\DeontologySection;
+
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;

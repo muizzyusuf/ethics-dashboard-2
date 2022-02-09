@@ -111,5 +111,9 @@ Route::resource('/virtue','App\http\Controllers\VirtueController');
 //This resource contains the following routes in care controller index, create, store, edit, update, destroy
 Route::resource('/care','App\http\Controllers\CareController');
 
+//route for viewing summary of inputs in deontology section
+Route::get('/deontologysection/{deontologysection}/summary','App\http\Controllers\DeontologySectionController@summary')->name('deontologysection.summary');
 
+//route for adding grades and comments to care section
+Route::post('/deontologysection/{deontologysection}','App\http\Controllers\DeontologySectionController@comment')->name('deontologysection.comment');
 

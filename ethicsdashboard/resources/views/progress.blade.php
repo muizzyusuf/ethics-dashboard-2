@@ -14,6 +14,7 @@
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
+        <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Deontology</a>
         <a class="nav-link active" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
@@ -65,7 +66,19 @@
                             </div>
                         </div>
                     </div>
-        
+                    <br>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Deontology
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title font-weight-bold">Comments:</h6>
+                                    
+                            </div>
+                        </div>
+                    </div>
+            
                         
                 </div> 
                 
@@ -79,6 +92,7 @@
                         <p class="card-text font-weight-bold">Issue & Options: <span class="float-right">{{$ethicalissue->grade}} / {{$casestudy->issue_points}}  pts</span></p>
                         <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} / {{$casestudy->stakeholder_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} / {{$casestudy->util_points}} pts</span></p>
+                        <p class="card-text font-weight-bold">Deontology: <span class="float-right">{{$utilitarianismSection->grade}} / {{$casestudy->deontology_points}} pts</span></p>
                     </div>
                 </div>
             </div>
