@@ -94,10 +94,12 @@
                         <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} / {{$casestudy->stakeholder_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} / {{$casestudy->util_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Care Ethics: <span class="float-right">{{$careSection->grade}} / {{$casestudy->care_points}} pts</span></p>
-                        <form method="GET" action="{{route('tasks')}}">
-                            <div class="container text-right form-group">                    
-                                <input type="submit" class=" btn btn-primary" value="Save">   
-                            </div>
+                        <form method="POST" action="{{route('tasks')}}">
+                        {{ csrf_field() }}
+                        {{method_field('POST')}}
+                        <input type="hidden" id="id" name="id" value="{{$dashboard->id}}" >                   
+                                <input type="submit" class=" btn btn-primary" value="Export">   
+                            
                         </form>
                     </div>
                 </div>

@@ -126,6 +126,6 @@ Route::resource('/user','App\http\Controllers\UserController');
 //route for changing user password
 Route::put('/user/{user}/password','App\http\Controllers\UserController@password')->name('user.password');
 
-//Route::get('/tasks', 'App\http\Controllers\TaskController@exportCsv')->name('tasks');
+//Route::post('/tasks', 'App\http\Controllers\TaskController@exportCsv')->name('tasks');
 
-Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'exportCsv'])->name('tasks');
+Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'exportCsv'])->name('tasks');
