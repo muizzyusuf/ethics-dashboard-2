@@ -5,6 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\MoralIssue;
 use Illuminate\Http\Request;
 
+use App\Models\MoralLaw;
+use App\Models\Dashboard;
+use App\Models\EthicalIssue;
+use App\Models\CaseStudy;
+use App\Models\Option;
+use App\Models\DeontologySection;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 class MoralIssueController extends Controller
 {
     /**

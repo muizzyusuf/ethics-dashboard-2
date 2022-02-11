@@ -4,15 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\MoralLaw;
 use Illuminate\Http\Request;
+use App\Models\Dashboard;
+use App\Models\EthicalIssue;
+use App\Models\CaseStudy;
+use App\Models\Option;
+use App\Models\MoralIssue;
+use App\Models\DeontologySection;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MoralLawController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function  index($id)
     {
         //
     }
