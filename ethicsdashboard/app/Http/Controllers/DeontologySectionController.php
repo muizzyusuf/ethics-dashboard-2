@@ -89,7 +89,7 @@ class DeontologySectionController extends Controller
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
-                                >with('deontologySection', $deontologySection)
+                                ->with('deontologySection', $deontologySection)
                                 ->with('moral_issues', $moral_issues)
                                 ->with('moral_laws', $moral_laws);
         }

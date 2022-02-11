@@ -55,7 +55,7 @@
 
             <div class="form-group">
                 <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" min="0" max="{{$casestudy->deontology_points}}" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
+                <input type="number" min="0" max="{{$casestudy->deontology_points}}" class="form-control col-1" id="grade" name="grade" value="{{$deontologySection->grade}}" required>
                 <small id="help" class="form-text text-muted">Out of {{$casestudy->deontology_points}} </small>
             </div>
 
