@@ -46,7 +46,7 @@ class VirtueSectionController extends Controller
      */
     public function show(VirtueSection $virtueSection)
     {
-        //
+        
     }
 
     /**
@@ -55,6 +55,7 @@ class VirtueSectionController extends Controller
      * @param  \App\Models\VirtueSection  $virtueSection
      * @return \Illuminate\Http\Response
      */
+
     public function edit(VirtueSection $virtueSection)
     {
         //
