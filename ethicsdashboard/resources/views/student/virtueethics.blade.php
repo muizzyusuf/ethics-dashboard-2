@@ -41,73 +41,73 @@
 
     <!-- User input of Vices and Virtues for all options-->
         @for($i=0; $i<count($options); $i++)
-             <div class="card-body">
-                 <form method="POST" action="{{route('virtue.store')}}">
-                    {{csrf_field() }}
-                    {{method_field('POST')}}
-                    <input type="hidden" id="id" name ="id" value="{{$virtueSection->$id}}">
-
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
-                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
-                        <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
+                <div class="container border my-1 py-1 rounded">
+                    <div class="form-group row mt-1">
+                        <label class="col-2 col-form-label" for="option">Option {{$i+1}}:</label>
+                        <input type="hidden" id="option{{$i+1}}_id" name="option{{$j+1}}_id"  value="{{$option[$j]->id}}">
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="option{{$i+1}}" name="option{{$j+1}}" value="{{$options[$j]->option}}" readonly>
+                        </div>
                     </div>
+                </div>
 
-                     @if(count($options[$i]->virtues)>0)
-                        @foreach($virtues as $virtue)
-                            @if(($virtue->option_id == $options[$i]->id) && ($virtue->type == "excess"))
+                @if(count($options[$i]->virtues)<1)
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="excess">Vice (Excess)</label>
+                         <input type="hidden" id="excess_id" name="excess_id" value="{{$virtue->id}}">
+                        <textarea class="form-control" disabled id="excess{{$i+1}}" name="excess{{$i+1}}" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="mean">Virtue (Mean)</label>
+                        <input type="hidden" id="mean_id" name="mean_id" value="{{$virtue->id}}">
+                        <textarea class="form-control" disabled id="mean{{$i+1}}" name="mean" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="deficiency">Vice (Deficiency)</label>
+                        <input type="hidden" id="deficiency_id" name="deficiency_id" value="{{$virtue->id}}">
+                        <textarea class="form-control" disabled id="deficiency{{$i+1}}" name="deficiency" rows="3" required></textarea>
+                    </div>
+                    @else
+                        @for($j=0; $j<count($stakeholders); $j++)        
+                            <div class="container border my-1 py-1 rounded">
+
+                                <div class="form-group row mt-1">
+                                    <label class="col-2 col-form-label" for="option">Option {{$j+1}}:</label>
+                                    <input type="hidden" id="option{{$i+1}}_id" name="option{{$i+1}}_id"  value="{{$option[$j]->id}}">
+                                    <input type="hidden" id="virtue{{$i+1}}_id" name="virtue{{$i+1}}_id"  value=@foreach($option[$j]->virtue as $v) @if($v->option_id == $options[$i]->id)  {{$v->id}} @endif @endforeach >
+                                <div class="col-10">
+                                    <input type="text" class="form-control" id="option{{$j+1}}" name="option{{$j+1}}" value="{{$options[$j]->option}}" readonly>
+                                </div>  
+                            </div>
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="excess">Vice (Excess)</label>
                                     <input type="hidden" id="excess_id" name="excess_id" value="{{$virtue->id}}">
-                                    <textarea class="form-control" id="excess" name="excess" rows="3" required>{{$virtue->virtue}}</textarea>
+                                    <textarea class="form-control" disabled id="excess{{$i+1}}" name="excess{{$i+1}}" rows="3" value=@foreach($options[$i]->virtue as $v) @if($v->option_id == $options[$i]->id)  {{$v->excess}} @endif @endforeach required></textarea>
                                 </div>
-
-                            @if(($virtue->option_id == $options[$i]->id) && ($virtue->type == "mean"))
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="excess">Vice (Excess)</label>
-                                    <input type="hidden" id="excess_id" name="excess_id" value="{{$virtue->id}}">
-                                    <textarea class="form-control" id="excess" name="excess" rows="3" required>{{$virtue->virtue}}</textarea>
+                                    <label class="font-weight-bold" for="mean">Virtue (Mean)</label>
+                                    <input type="hidden" id="mean_id" name="mean_id" value="{{$virtue->id}}">
+                                    <textarea class="form-control" disabled id="mean{{$i+1}}" name="mean{{$i+1}}" rows="3" value=@foreach($options[$i]->virtue as $v) @if($v->option_id == $options[$i]->id)  {{$v->mean}} @endif @endforeach required></textarea>
                                 </div>
-                            @elseif(($virtue->option_id == $options[$i]->id) && ($virtue->type == "deficiency"))
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="excess">Vice (Excess)</label>
-                                    <input type="hidden" id="excess_id" name="excess_id" value="{{$virtue->id}}">
-                                    <textarea class="form-control" id="excess" name="excess" rows="3" required>{{$virtue->virtue}}</textarea>
+                                    <label class="font-weight-bold" for="deficiency">Vice (Deficiency)</label>
+                                    <input type="hidden" id="deficiency_id" name="deficiency_id" value="{{$virtue->id}}">
+                                    <textarea class="form-control" disabled id="deficiency{{$i+1}}" name="deficiency{{$i+1}}" rows="3" value=@foreach($options[$i]->virtue as $v) @if($v->option_id == $options[$i]->id)  {{$v->deficiency}} @endif @endforeach required></textarea>
                                 </div>
-                            @endif
-                        @endforeach
-                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
-                     @else
-                        
-                        <div class="form-group">
-                            <label class="font-weight-bold" for="excess">Vice (excess)</label>
-                            <textarea class="form-control" id="excess" name="excess" rows="3" required></textarea>
-                        </div>
+                            </div>
+                            
+                        @endif
+                    
+                    
+                            
+                       
+                                
 
-                        <div class="form-group">
-                            <label class="font-weight-bold" for="mean">Virtue (mean)</label>
-                            <textarea class="form-control" id="mean" name="mean" rows="3" required></textarea>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="font-weight-bold" for="deficiency">Vice (deficiency)</label>
-                            <textarea class="form-control" id="deficiency" name="deficiency" rows="3" required></textarea>
-                        </div>
 
-                        <div class="form-group">
-                            <input type="submit" class="float-right btn btn-primary" value="Save">
-                        </div>
 
-                    @endif
 
-                </form>
-            </div>
-        @endfor
 
-        <!-- User input of Vices and Virtues for all stakeholder options-->
-    </div>
-</div>
+                            
 
-@endsection
+                       
