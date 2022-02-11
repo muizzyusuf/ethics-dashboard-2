@@ -56,6 +56,8 @@ class TaskController extends Controller
     
         $dashboard = Dashboard::where('id', $request->input('id'))->first();
         $utilitarianism= UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
+        $ethicalIssue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $stakeholder = StakeholderSection::where('id', $dashboard->stakeholder_section_id)->first();
         $deontology= DeontologySection::where('id', $dashboard->deontology_section_id)->first();
         $care= CareSection::where('id', $dashboard->care_section_id)->first();
         $virtue= VirtueSection::where('id', $dashboard->virtue_section_id)->first();
@@ -73,7 +75,7 @@ class TaskController extends Controller
 
         $columns = array('Student', 'Course', 'Case Study', 'Dashboard', 'Dashboard ID', 'Section','Grade','Comment');
     
-        $callback = function() use($dashboard, $user, $case, $utilitarianism, $care, $deontology, $virtue, $course, $columns) {
+        $callback = function() use($dashboard, $user, $case, $ethicalIssue, $stakeholder, $utilitarianism, $care, $deontology, $virtue, $course, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
@@ -82,6 +84,28 @@ class TaskController extends Controller
             $row['Case Study']  = $case->name;
             $row['Dashboard'] = $dashboard->name;
             $row['Dashboard ID'] = $dashboard->id;
+            $row['Section'] = "Ethical Issue";
+            $row['Grade'] = $ethicalIssue->grade;
+            $row['Comment'] = $ethicalIssue->comment;
+
+                fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
+
+             $row['Student']  = null;
+            $row['Course'] = null;
+            $row['Case Study']  = null;
+            $row['Dashboard'] = null;
+            $row['Dashboard ID'] = null;
+            $row['Section'] = "Stakeholder";
+            $row['Grade'] = $stakeholder->grade;
+            $row['Comment'] = $stakeholder->comment;
+
+                fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
+
+            $row['Student']  = null;
+            $row['Course'] = null;
+            $row['Case Study']  = null;
+            $row['Dashboard'] = null;
+            $row['Dashboard ID'] = null;
             $row['Section'] = "Utilitarianism";
             $row['Grade'] = $utilitarianism->grade;
             $row['Comment'] = $utilitarianism->comment;
