@@ -86,7 +86,7 @@ class TaskController extends Controller
             $row['Grade'] = $utilitarianism->grade;
             $row['Comment'] = $utilitarianism->comment;
 
-                fputcsv($file, array($row['Student'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
+                fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
 
             $row['Student']  = null;
             $row['Course'] = null;
@@ -97,7 +97,7 @@ class TaskController extends Controller
             $row['Grade'] = $care->grade;
             $row['Comment'] = $care->comment;
         
-                fputcsv($file, array($row['Student'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
+                fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));   
             
             $row['Student']  = null;
             $row['Course'] = null;
@@ -108,7 +108,7 @@ class TaskController extends Controller
             $row['Grade'] = $virtue->grade;
             $row['Comment'] = $virtue->comment;
             
-                fputcsv($file, array($row['Student'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
+                fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
             
             $row['Student']  = null;
             $row['Course'] = null;
@@ -119,7 +119,7 @@ class TaskController extends Controller
             $row['Grade'] = $deontology->grade;
             $row['Comment'] = $deontology->comment;
                 
-                    fputcsv($file, array($row['Student'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
+                fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
                          
                 
             
