@@ -20,36 +20,21 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Student Name</th>
-                        @foreach($casestudies as $cs)
-                            <th class="text-center" style="text-overflow: ellipsis;" scope="col">
-                                <p>
-                                    <a href="{{route('casestudy.show', $cs->id)}}">
-                                        {{$cs->name}}
-                                    </a> 
-                                    <br>
-                                    <small>Out of {{$cs->points}}</small>
-                                </p>
-                            </th>
-                        @endforeach
+                        <th scope="col">Case Study</th>
+                        <th class="text-center" scope="col">Grade</th>
+                        <th class="text-center" scope="col">Out of</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    @foreach($students as $student)
-    
+
+                    @foreach($dboards as $dash)
                         <tr>
-                            <th scope="row">{{$student->name}}</th>
-                            
-                            @foreach($dashboards as $dash)
-                        
-                                @if($dash->user_id == $student->id)
+                            <th scope="row"><a href="{{route('casestudy.show', $dash->case_study_id)}}">{{$dash->name}}</a></th>
+                            @if($dash->user_id == $student->id)
                                     <td class="text-center">{{$dash->grade}}</td>
-
-                                @endif
-
-                            @endforeach
-                            
+                                    
+                                    <td class="text-center">{{$dash->points}}</td>
+                            @endif
                         </tr>
                     @endforeach
                 

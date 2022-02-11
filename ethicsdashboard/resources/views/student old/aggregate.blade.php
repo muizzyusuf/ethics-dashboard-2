@@ -5,7 +5,7 @@
 <div>
     <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
         ⏴Case Study
-    </a>  
+    </a> 
 </div>
 
 <div class="container mb-2">
@@ -14,7 +14,6 @@
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
-        <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Deontology</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
@@ -73,16 +72,16 @@
                                                 <div class="row">
                                                     <div class="form-group col-md-10">
                                                         <label class="float-left font-weight-bold text-muted" for="pleasure">Pleasure</label> <label class="float-right font-weight-bold text-muted" for="pleasure">Pain</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$j+1}}" name="pleasure{{$j+1}}" disabled required>
+                                                        <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$j+1}}" name="pleasure{{$j+1}}" required>
                                                         
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <div class="form-check text-justify">
-                                                            <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="High" readonly required>
+                                                            <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="High" required>
                                                             <label class="form-check-label" for="level">High</label>
                                                         </div>
                                                         <div class="form-check text-justify">
-                                                            <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="Low" readonly>
+                                                            <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="Low">
                                                             <label class="form-check-label" for="">Low</label>
                                                         </div>
                                                     </div>
@@ -92,7 +91,7 @@
 
                                                 <div class="form-group">
                                                     <label class="font-weight-bold" for="explanation">Explanation</label>
-                                                    <textarea class="form-control" id="explanation{{$j+1}}" name="explanation{{$j+1}}" rows="3" readonly></textarea>
+                                                    <textarea class="form-control" id="explanation{{$j+1}}" name="explanation{{$j+1}}" rows="3"></textarea>
                                                 </div>
                                                 
                                                 
@@ -101,6 +100,10 @@
                                                     
                                             @endfor
 
+
+                                            <div class="form-group">
+                                                <input type="submit" class="float-right btn btn-primary" value="Save">
+                                            </div>
                                         </form>
                                     @else 
 
@@ -128,29 +131,29 @@
                                                             
                                                             <div class="form-group col-md-10">
                                                                 <label class="float-left font-weight-bold text-muted" for="pleasure">Pleasure</label> <label class="float-right font-weight-bold text-muted" for="pleasure">Pain</label>
-                                                                <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$k+1}}" name="pleasure{{$k+1}}" value="{{$pleasures[$k]->pleasure}}" disabled required >
+                                                                <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$k+1}}" name="pleasure{{$k+1}}" value="{{$pleasures[$k]->pleasure}}" required >
                                                                 <input type="hidden" id="pleasure{{$k+1}}_id" name="pleasure{{$k+1}}_id"  value="{{$pleasures[$k]->id}}">
                                                             </div>
 
                                                             @if($pleasures[$k]->level == 'High')
                                                                 <div class="form-group col-md-2">
                                                                     <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" checked readonly required>
+                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" checked required>
                                                                         <label class="form-check-label" for="level">High</label>
                                                                     </div>
                                                                     <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low" readonly>
+                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low">
                                                                         <label class="form-check-label" for="">Low</label>
                                                                     </div>
                                                                 </div>
                                                             @else
                                                                 <div class="form-group col-md-2">
                                                                     <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" readonly required>
+                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" required>
                                                                         <label class="form-check-label" for="level">High</label>
                                                                     </div>
                                                                     <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low" readonly checked>
+                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low" checked>
                                                                         <label class="form-check-label" for="">Low</label>
                                                                     </div>
                                                                 </div>
@@ -161,7 +164,7 @@
 
                                                         <div class="form-group">
                                                             <label class="font-weight-bold" for="explanation">Explanation</label>
-                                                            <textarea class="form-control" id="explanation{{$k+1}}" name="explanation{{$k+1}}" rows="3" required readonly>{{$pleasures[$k]->explanation}}</textarea>
+                                                            <textarea class="form-control" id="explanation{{$k+1}}" name="explanation{{$k+1}}" rows="3" required>{{$pleasures[$k]->explanation}}</textarea>
                                                         </div>
                                                     @endif
                                                 @endfor
@@ -172,6 +175,10 @@
                                                     
                                             @endfor
 
+
+                                            <div class="form-group">
+                                                <input type="submit" class="float-right btn btn-primary" value="Save">
+                                            </div>
                                         </form>
                                     
                                     @endif
@@ -191,28 +198,5 @@
 
 </div>
 
-<div class="mt-3 card">
-    <p class="card-header">Instructor Comments & Grade</p>
-    <div class="card-body">
-        <form method="POST" action="{{route('utilitarianismsection.comment',$utilitarianismSection->id)}}">
-            {{ csrf_field() }}
-            {{method_field('POST')}}
-    
-            <div class="form-group">
-                <label class="font-weight-bold" for="comment">Comment</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$utilitarianismSection->comment}} </textarea>
-            </div>
 
-            <div class="form-group">
-                <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" min="0" max="{{$casestudy->util_points}}" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
-                <small id="help" class="form-text text-muted">Out of {{$casestudy->util_points}} </small>
-            </div>
-
-            <input type="submit" class="float-right btn btn-primary" value="Save">
-
-        </form>
-      
-    </div>
-</div>
 @endsection

@@ -14,7 +14,6 @@
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
-        <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Deontology</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
 </div>
@@ -56,32 +55,36 @@
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="short">Short Term Consequence</label>
                                     <input type="hidden" id="short_id" name="short_id" value="{{$consequence->id}}">
-                                    <textarea class="form-control" id="short" name="short" rows="3" readonly required>{{$consequence->consequence}}</textarea>
+                                    <textarea class="form-control" id="short" name="short" rows="3" required>{{$consequence->consequence}}</textarea>
                                 </div>
 
                             @elseif(($consequence->option_id == $options[$i]->id) && ($consequence->type == 'long'))
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="long">Long Term Consequence</label>
                                     <input type="hidden" id="long_id" name="long_id" value="{{$consequence->id}}">
-                                    <textarea class="form-control" id="long" name="long" rows="3" readonly required>{{$consequence->consequence}}</textarea>
+                                    <textarea class="form-control" id="long" name="long" rows="3" required>{{$consequence->consequence}}</textarea>
                                 </div>
                             @endif
                             
                         @endforeach
-                        
+                        <div class="form-group">
+                            <input type="submit" class="float-right btn btn-primary" value="Save">
+                        </div>
                     @else
                     
                         <div class="form-group">
                             <label class="font-weight-bold" for="short">Short Term Consequence</label>
-                            <textarea class="form-control" id="short" name="short" rows="3" readonly required></textarea>
+                            <textarea class="form-control" id="short" name="short" rows="3" required></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="font-weight-bold" for="long">Long Term Consequence</label>
-                            <textarea class="form-control" id="long" name="long" rows="3" readonly required> </textarea>
+                            <textarea class="form-control" id="long" name="long" rows="3" required> </textarea>
                         </div>
 
-                        
+                        <div class="form-group">
+                            <input type="submit" class="float-right btn btn-primary" value="Save">
+                        </div>
                 
                     @endif
                     
@@ -94,28 +97,4 @@
 
 </div>
 
-<div class="mt-3 card">
-    <p class="card-header">Instructor Comments & Grade</p>
-    <div class="card-body">
-        <form method="POST" action="{{route('utilitarianismsection.comment', $utilitarianismSection->id)}}">
-            {{ csrf_field() }}
-            {{method_field('POST')}}
-    
-            <div class="form-group">
-                <label class="font-weight-bold" for="comment">Comment</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$utilitarianismSection->comment}} </textarea>
-            </div>
-
-            <div class="form-group">
-                <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" min="0" max="{{$casestudy->util_points}}" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
-                <small id="help" class="form-text text-muted">Out of {{$casestudy->util_points}} </small>
-            </div>
-
-            <input type="submit" class="float-right btn btn-primary" value="Save">
-
-        </form>
-      
-    </div>
-</div>
 @endsection
