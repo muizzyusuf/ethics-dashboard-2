@@ -12,4 +12,7 @@ class DeontologySection extends Model
     public function dashboard(){
         return $this->belongsTo('App\Models\Dashboard', 'id');
     }
+    public function options(){
+        return $this->hasMany('App\Models\Option');
+    }
 }
