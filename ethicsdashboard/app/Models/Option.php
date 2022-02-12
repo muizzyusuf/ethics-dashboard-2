@@ -26,7 +26,7 @@ class Option extends Model
     }
 
     public function virtue(){
-        return $this->belongsTo('App\Models\Virtue', 'id');
+        return $this->belongsTo('App\Models\Virtue', 'virtue_id');
     }
 
     public function cares(){
