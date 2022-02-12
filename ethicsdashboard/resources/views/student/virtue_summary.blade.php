@@ -123,6 +123,30 @@
         
     </div>
 
+    <div class="mt-3 card border-secondary">
+        <p class="card-header font-weight-bold">ETHICAL DECISION/
+            COURSE OF ACTION </p>
+    
+    
+        <div class="card-body">
+
+            <form method="POST" action="{{route('virtuesection.decision',$virtueSection->id)}}">
+                {{ csrf_field() }}
+                {{method_field('POST')}}
+                <div class="form-group">
+                    <label class="font-weight-bold" for="decision">Decision</label>
+                    <textarea class="form-control" id="decision" name="decision" rows="3" placeholder="Sum up your analysis. Eg. Wealth and prestige were desired by the most stakeholders, but they were not the most virtuous goals. Balancing the options and interests of stakeholders shows that the right thing will be a combination of courage, integrity and self-confidence.">{{$virtueSection->decision}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="float-right btn btn-primary" value="Save">
+                </div>
+            </form>
+        </div>
+       
+        
+    </div>
+
     
     
 </div>

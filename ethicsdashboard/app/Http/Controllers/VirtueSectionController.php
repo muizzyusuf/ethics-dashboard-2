@@ -197,6 +197,19 @@ class VirtueSectionController extends Controller
         //
     }
    
+    public function decision(Request $request, $id)
+    { 
+        //
+        $virtue = VirtueSection::where('id', $id)->first();
+        $virtue->decision = $request->input('decision');
+
+        if( $virtue->save()){
+            $request->session()->flash('success', 'Decision saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the decision');
+        }
+        return  redirect()->back();
+    }
     
 }
 
