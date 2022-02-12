@@ -23,10 +23,24 @@ class VirtueSectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index($id)
     {
         //
     }
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function index()
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -68,14 +82,12 @@ class VirtueSectionController extends Controller
 
         // for each option assign a virtue_id (so assigbn general id of the virtue to the options)
         //make arrays of virtues outside then 
-        $virtues = []; 
-        foreach($options as $option){
-            $virtue = new Virtue;
-            array_push($virtues, $virtue);
-            $option -> virtue_id = $virtue -> id;
-        }
+        
 
-      
+      $virtues = Virtue::join('options','virtues.id','=','options.virtue_id')
+        ->select('virtues.id','virtues.excess','virtues.mean','virtues.deficiency')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+        //dd($virtues);
         if(Auth::user()->role()->first()->id == 3){
             return view('student.virtueethics')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
@@ -129,5 +141,9 @@ class VirtueSectionController extends Controller
     {
         //
     }
+    public function aggregate($id){
+
+    }
+    
 }
 
