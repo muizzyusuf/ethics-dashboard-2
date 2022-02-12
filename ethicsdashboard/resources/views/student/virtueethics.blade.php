@@ -128,7 +128,9 @@
             </div>
     </div>
     <div class="card border-secondary">
-        <p class="card-header font-weight-bold">Consider the context....</p>
+        <p class="card-header font-weight-bold">Consider the context. The virtues are practiced (and understood)
+            in the context of a community. Identify the relevant virtues and vices relevant to the stakeholder interests you've tried
+        </p>
             <div class="card-body">  
                 <!-- User input of Vices and Virtues for all options-->
                 @if(count($virtues)<1)
