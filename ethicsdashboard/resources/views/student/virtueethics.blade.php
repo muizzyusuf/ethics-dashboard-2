@@ -88,6 +88,9 @@
                         
                         <input type="hidden" id="virtue_section_id" name="virtue_section_id"  value="{{$dashboard->virtue_section_id}}">
                         @for($i=0; $i<count($options); $i++)
+
+                            <input type="hidden" id="virtue{{$i+1}}_id" name="virtue{{$i+1}}_id"  value="{{$options[$i]->virtue->id}}">
+
                             <div class="container border my-1 py-1 rounded">
                                 <div class="form-group row mt-1">
                                     <label class="col-2 col-form-label font-weight-bold" for="option">Option {{$i+1}}:</label>
@@ -102,22 +105,22 @@
                                     <div class="col-2">
                                     
                                         
-                                        <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" required>
+                                        <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" value="{{$options[$i]->virtue->excess}}" required>
                                     </div>
                                     <div class="col-2 offset-3">
                                     
             
-                                        <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" required>
+                                        <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" value="{{$options[$i]->virtue->mean}}" required>
                                     </div>
                                     <div class="col-2 offset-3">
                             
                                     
-                                        <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" required>
+                                        <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" value="{{$options[$i]->virtue->deficiency}}" required>
                                     </div>
                                 </div>
             
                                 <div class="form-group">
-                                    <input type="range" min="-9" max="9" class="form-control-range" name="value{{$i+1}}" required >
+                                    <input type="range" min="-9" max="9" class="form-control-range" name="value{{$i+1}}" value="{{$options[$i]->virtue->value}}" required >
                                 </div>
                             </div>
                         @endfor

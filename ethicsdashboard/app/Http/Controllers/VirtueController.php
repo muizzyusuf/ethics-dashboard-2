@@ -51,7 +51,7 @@ class VirtueController extends Controller
 
             if($request->input('virtue1_id') !== null){
 
-                $virtue1 = Virtue::where('id', $request->input('virtue1_id'));
+                $virtue1 = Virtue::where('id', $request->input('virtue1_id'))->first();
                 $virtue1->excess = $request->input('excess1');
                 $virtue1->mean = $request->input('mean1');
                 $virtue1->deficiency = $request->input('deficiency1');
@@ -65,7 +65,7 @@ class VirtueController extends Controller
                 }
                 $virtue1->save();
 
-                $virtue2 = Virtue::where('id', $request->input('virtue2_id'));
+                $virtue2 = Virtue::where('id', $request->input('virtue2_id'))->first();
                 $virtue2->excess = $request->input('excess2');
                 $virtue2->mean = $request->input('mean2');
                 $virtue2->deficiency = $request->input('deficiency2');
@@ -79,7 +79,7 @@ class VirtueController extends Controller
                 }
                 $virtue2->save();
 
-                $virtue3 = Virtue::where('id', $request->input('virtue3_id'));
+                $virtue3 = Virtue::where('id', $request->input('virtue3_id'))->first();
                 $virtue3->excess = $request->input('excess3');
                 $virtue3->mean = $request->input('mean3');
                 $virtue3->deficiency = $request->input('deficiency3');
@@ -93,7 +93,7 @@ class VirtueController extends Controller
                 }
                 $virtue3->save();
 
-                $virtue4 = Virtue::where('id', $request->input('virtue4_id'));
+                $virtue4 = Virtue::where('id', $request->input('virtue4_id'))->first();
                 $virtue4->excess = $request->input('excess4');
                 $virtue4->mean = $request->input('mean4');
                 $virtue4->deficiency = $request->input('deficiency4');
@@ -107,7 +107,7 @@ class VirtueController extends Controller
                 }
                 $virtue4->save();
 
-                $virtue5 = Virtue::where('id', $request->input('virtue5_id'));
+                $virtue5 = Virtue::where('id', $request->input('virtue5_id'))->first();
                 $virtue5->excess = $request->input('excess5');
                 $virtue5->mean = $request->input('mean5');
                 $virtue5->deficiency = $request->input('deficiency5');
@@ -121,7 +121,7 @@ class VirtueController extends Controller
                 }
                 $virtue5->save();
 
-                $virtue6 = Virtue::where('id', $request->input('virtue6_id'));
+                $virtue6 = Virtue::where('id', $request->input('virtue6_id'))->first();
                 $virtue6->excess = $request->input('excess6');
                 $virtue6->mean = $request->input('mean6');
                 $virtue6->deficiency = $request->input('deficiency6');
@@ -271,7 +271,124 @@ class VirtueController extends Controller
 
         }else{
         
-        
+            if($request->input('virtue1_id') !== null){
+
+                $virtue1 = Virtue::where('id', $request->input('virtue1_id'))->first();
+                $virtue1->excess = $request->input('excess1');
+                $virtue1->mean = $request->input('mean1');
+                $virtue1->deficiency = $request->input('deficiency1');
+                $virtue1->value = $request->input('value1');
+                if($request->input('value1')>= -9 && $request->input('value1') <= -5){
+                    $virtue1->virtue = $request->input('excess1');
+                }else if($request->input('value1')>= -4 && $request->input('value1') <= 4){
+                    $virtue1->virtue = $request->input('mean1');
+                }else{
+                    $virtue1->virtue = $request->input('deficiency1');
+                }
+                $virtue1->save();
+
+                $virtue2 = Virtue::where('id', $request->input('virtue2_id'))->first();
+                $virtue2->excess = $request->input('excess2');
+                $virtue2->mean = $request->input('mean2');
+                $virtue2->deficiency = $request->input('deficiency2');
+                $virtue2->value = $request->input('value2');
+                if($request->input('value2')>= -9 && $request->input('value2') <= -5){
+                    $virtue2->virtue = $request->input('excess2');
+                }else if($request->input('value2')>= -4 && $request->input('value2') <= 4){
+                    $virtue2->virtue = $request->input('mean2');
+                }else{
+                    $virtue2->virtue = $request->input('deficiency2');
+                }
+                $virtue2->save();
+
+                $virtue3 = Virtue::where('id', $request->input('virtue3_id'))->first();
+                $virtue3->excess = $request->input('excess3');
+                $virtue3->mean = $request->input('mean3');
+                $virtue3->deficiency = $request->input('deficiency3');
+                $virtue3->value = $request->input('value3');
+                if($request->input('value3')>= -9 && $request->input('value3') <= -5){
+                    $virtue3->virtue = $request->input('excess3');
+                }else if($request->input('value3')>= -4 && $request->input('value3') <= 4){
+                    $virtue3->virtue = $request->input('mean3');
+                }else{
+                    $virtue3->virtue = $request->input('deficiency3');
+                }
+    
+                if($virtue3->save()){
+                    $request->session()->flash('success', 'Option virtues and vices updated');
+                }else{
+                    $request->session()->flash('error', 'There was an error updating the option virtues and vices');
+                }
+                return  redirect(route('virtuesection.show', $request->input('virtue_section_id')));
+
+                
+    
+            }else{
+
+                $virtue1 = new Virtue;
+                $virtue1->excess = $request->input('excess1');
+                $virtue1->mean = $request->input('mean1');
+                $virtue1->deficiency = $request->input('deficiency1');
+                $virtue1->value = $request->input('value1');
+                if($request->input('value1')>= -9 && $request->input('value1') <= -5){
+                    $virtue1->virtue = $request->input('excess1');
+                }else if($request->input('value1')>= -4 && $request->input('value1') <= 4){
+                    $virtue1->virtue = $request->input('mean1');
+                }else{
+                    $virtue1->virtue = $request->input('deficiency1');
+                }
+                $virtue1->save();
+                $option1 = Option::where('id', $request->input('option1_id'))->first();
+                $option1->virtue_id = $virtue1->id;
+                $option1->save();
+                //set eloquent relationships
+                $option1->virtue()->associate($virtue1);
+
+                $virtue2 = new Virtue;
+                $virtue2->excess = $request->input('excess2');
+                $virtue2->mean = $request->input('mean2');
+                $virtue2->deficiency = $request->input('deficiency2');
+                $virtue2->value = $request->input('value2');
+                if($request->input('value2')>= -9 && $request->input('value2') <= -5){
+                    $virtue2->virtue = $request->input('excess2');
+                }else if($request->input('value2')>= -4 && $request->input('value2') <= 4){
+                    $virtue2->virtue = $request->input('mean2');
+                }else{
+                    $virtue2->virtue = $request->input('deficiency2');
+                }
+                $virtue2->save();
+                $option2 = Option::where('id', $request->input('option2_id'))->first();
+                $option2->virtue_id = $virtue2->id;
+                $option2->save();
+                //set eloquent relationships
+                $option2->virtue()->associate($virtue2);
+
+                $virtue3 = new Virtue;
+                $virtue3->excess = $request->input('excess3');
+                $virtue3->mean = $request->input('mean3');
+                $virtue3->deficiency = $request->input('deficiency3');
+                $virtue3->value = $request->input('value3');
+                if($request->input('value3')>= -9 && $request->input('value3') <= -5){
+                    $virtue3->virtue = $request->input('excess3');
+                }else if($request->input('value3')>= -4 && $request->input('value3') <= 4){
+                    $virtue3->virtue = $request->input('mean3');
+                }else{
+                    $virtue3->virtue = $request->input('deficiency3');
+                }
+                $virtue3->save();
+                $option3 = Option::where('id', $request->input('option3_id'))->first();
+                $option3->virtue_id = $virtue3->id;
+                $option3->save();
+                //set eloquent relationships
+                
+    
+                if($option3->virtue()->associate($virtue3)){
+                    $request->session()->flash('success', 'Option virtues and vices saved');
+                }else{
+                    $request->session()->flash('error', 'There was an error saving the option virtues and vices');
+                }
+                return  redirect(route('virtuesection.show', $request->input('virtue_section_id')));
+            }  
         
         }
     }
