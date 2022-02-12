@@ -129,4 +129,3 @@ Route::post('/virtuesection/{virtuesection}/decision','App\http\Controllers\Virt
 
 //route for adding grades and comments to virtue section
 Route::post('/virtuesection/{virtuesection}','App\http\Controllers\VirtueSectionController@comment')->name('virtuesection.comment');
-Route::get('/virtuesection/{virtuesection}/aggregate','App\http\Controllers\VirtueSectionController@aggregate')->name('virtuesection.aggregate');

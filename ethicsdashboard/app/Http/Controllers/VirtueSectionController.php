@@ -84,9 +84,15 @@ class VirtueSectionController extends Controller
         //make arrays of virtues outside then 
         
 
-      $virtues = Virtue::join('options','virtues.id','=','options.virtue_id')
-        ->select('virtues.id','virtues.excess','virtues.mean','virtues.deficiency')
+        $optionVirtues = Virtue::join('options','virtues.id','=','options.virtue_id')
+        ->select('virtues.id','virtues.excess','virtues.mean','virtues.deficiency', 'virtues.value', 'virtues.virtue')
         ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+        $stakeholderVirtues = Virtue::join('stakeholders','virtues.id','=','stakeholders.virtue_id')
+        ->select('virtues.id','virtues.excess','virtues.mean','virtues.deficiency', 'virtues.value', 'virtues.virtue')
+        ->where('stakeholders.stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+
+
         //dd($virtues);
         if(Auth::user()->role()->first()->id == 3){
             return view('student.virtueethics')->with('dashboard', $dashboard)
@@ -95,7 +101,8 @@ class VirtueSectionController extends Controller
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
                                 ->with('virtueSection', $virtueSection)
-                                ->with('virtues', $virtues);
+                                ->with('stakeholderVirtues', $stakeholderVirtues)
+                                ->with('optionVirtues', $optionVirtues);
 
         }else{
             return view('virtueethics')->with('dashboard', $dashboard)
@@ -103,7 +110,9 @@ class VirtueSectionController extends Controller
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
-                                ->with('virtueSection', $virtueSection);
+                                ->with('virtueSection', $virtueSection)
+                                ->with('stakeholderVirtues', $stakeholderVirtues)
+                                ->with('optionVirtues', $optionVirtues);
     }
 }
 
@@ -141,9 +150,7 @@ class VirtueSectionController extends Controller
     {
         //
     }
-    public function aggregate($id){
-
-    }
+   
     
 }
 
