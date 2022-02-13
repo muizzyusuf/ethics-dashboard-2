@@ -149,6 +149,42 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="virtueHeaderId">
+                    <h5 class="mb-0">
+                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#virtueContentId" aria-expanded="true" aria-controls="virtueContentId">
+                           <b>Virtue Ethics </b>
+                        </a>
+                    </h5>
+                </div>
+                <div id="virtueContentId" class="collapse in" role="tabpanel" aria-labelledby="virtueHeaderId">
+                    <div class="card-body">
+                        @if($virtue->decision != null)
+                            {{$virtue->decision}}
+                        @else
+                            <p class="card-text">No inputs have been made</p>       
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="deonHeaderId">
+                    <h5 class="mb-0">
+                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#deonContentId" aria-expanded="true" aria-controls="deonContentId">
+                           <b>Deontology </b>
+                        </a>
+                    </h5>
+                </div>
+                <div id="deonContentId" class="collapse in" role="tabpanel" aria-labelledby="deonHeaderId">
+                    <div class="card-body">
+                        @if($deon->decision != null)
+                            {{$deon->decision}}
+                        @else
+                            <p class="card-text">No inputs have been made</p>       
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
