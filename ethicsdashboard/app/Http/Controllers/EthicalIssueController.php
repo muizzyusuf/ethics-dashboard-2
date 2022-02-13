@@ -182,7 +182,8 @@ class EthicalIssueController extends Controller
         $sgrade = $dashboard->stakeholderSection->grade;
         $ugrade = $dashboard->utilitarianismSection->grade;
         $cgrade = $dashboard->careSection->grade;
-        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade;
+        $vgrade = $dashboard->virtueSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $vgrade;
 
         
 

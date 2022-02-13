@@ -33,7 +33,7 @@
         <div class="card-body">
             The Virtuous action is the one that balances the interests of the stakeholders in light of the relevant virtues. Note: This is just a rough approximation of how Virtue Ethics can be applied to a particular case. Practicing the virtues is a life-long endeavor - meaning that you would evaluate success/failure in consideration of the consequences, re-evaluate your decisions and refine your understanding of the virtues until virtuous actions flow from your character.
         </div>
-    </div>
+      </div>
 
     <div>
         <div class="row">
@@ -135,17 +135,41 @@
                 {{method_field('POST')}}
                 <div class="form-group">
                     <label class="font-weight-bold" for="decision">Decision</label>
-                    <textarea class="form-control" id="decision" name="decision" rows="3" placeholder="Sum up your analysis. Eg. Wealth and prestige were desired by the most stakeholders, but they were not the most virtuous goals. Balancing the options and interests of stakeholders shows that the right thing will be a combination of courage, integrity and self-confidence.">{{$virtueSection->decision}}</textarea>
+                    <textarea disabled class="form-control" id="decision" name="decision" rows="3" placeholder="Sum up your analysis. Eg. Wealth and prestige were desired by the most stakeholders, but they were not the most virtuous goals. Balancing the options and interests of stakeholders shows that the right thing will be a combination of courage, integrity and self-confidence.">{{$virtueSection->decision}}</textarea>
                 </div>
 
-                <div class="form-group">
-                    <input type="submit" class="float-right btn btn-primary" value="Save">
-                </div>
+               
             </form>
-        </div>  
+        </div>
+       
         
     </div>
     
+</div>
+
+<div class="mt-3 card">
+    <p class="card-header">Instructor Comments & Grade</p>
+    <div class="card-body">
+        <form method="POST" action="{{route('virtuesection.comment',$virtueSection->id)}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+    
+            <div class="form-group">
+                <label class="font-weight-bold" for="comment">Comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$virtueSection->comment}} </textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold" for="grade">Grade</label>
+                <input type="number" min="0" max="{{$casestudy->virtue_points}}" class="form-control col-1" id="grade" name="grade" value="{{$virtueSection->grade}}" required>
+                <small id="help" class="form-text text-muted">Out of {{$casestudy->virtue_points}} </small>
+            </div>
+
+            <input type="submit" class="float-right btn btn-primary" value="Save">
+
+        </form>
+      
+    </div>
 </div>
 
 @endsection

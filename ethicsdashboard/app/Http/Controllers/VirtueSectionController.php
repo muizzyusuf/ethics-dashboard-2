@@ -196,6 +196,32 @@ class VirtueSectionController extends Controller
     {
         //
     }
+
+    public function comment(Request $request, $id)
+    { 
+        //
+        $virtue = VirtueSection::where('id', $id)->first();
+        $virtue->comment = $request->input('comment');
+        $virtue->grade = $request->input('grade');
+        $virtue->save();
+
+
+        $dashboard = Dashboard::where('id', $virtue->dashboard->id)->first();
+        $egrade = $dashboard->ethicalIssue->grade;
+        $sgrade = $dashboard->stakeholderSection->grade;
+        $ugrade = $dashboard->utilitarianismSection->grade;
+        $cgrade = $dashboard->careSection->grade;
+        $vgrade = $dashboard->virtueSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $vgrade;
+
+
+        if($dashboard->save()){
+            $request->session()->flash('success', 'Comment and grade saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the comment and grade');
+        }
+        return  redirect()->back();
+    }
    
     public function decision(Request $request, $id)
     { 
