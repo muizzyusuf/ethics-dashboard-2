@@ -22,7 +22,7 @@
 
 <div class="jumbotron">
     <div class="card">
-        <h5 class="card-header">Decision/Action Under Consideration</h5>
+        <p class="card-header font-weight-bold">Decision/Action Under Consideration</p>
         <div class="card-body">
           <p class="card-text">Describe the ethical issue 
             or dilemma you would like 
@@ -38,8 +38,8 @@
                 {{method_field('POST')}}
                 <input type="hidden" id="id" name="id" value="{{$ethicalissue->id}}" >
                 <div class="form-group">
-                    <label class="font-weight-bold col-form-label-lg" for="issue">Ethical Issue</label>
-                    <textarea class="form-control form-control-lg" id="issue" name="issue" rows="3" required>{{$ethicalissue->issue}} </textarea>
+                    <label class="font-weight-bold col-form-label" for="issue">Ethical Issue</label>
+                    <textarea class="form-control form-control" id="issue" name="issue" rows="3" required>{{$ethicalissue->issue}} </textarea>
                 </div>
 
                 <div class="form-group">

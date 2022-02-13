@@ -22,7 +22,7 @@
 
 <div class="jumbotron">
     <div class="card">
-        <h5 class="card-header">Stakeholder Analysis</h5>
+        <p class="card-header font-weight-bold">Stakeholder Analysis</p>
         <div class="card-body">
           <p class="card-text">Stakeholders are persons or groups that will be impacted 
             by the decision/action taken.  List the stakeholders and 
