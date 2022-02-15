@@ -14,6 +14,7 @@
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link active" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
+        <a class="nav-link" href="{{route('virtuesection.show', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
         <a class="nav-link" href="{{route('caresection.show', $dashboard->care_section_id)}}">Care Ethics</a>
         <a class="nav-link" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
     </nav>
@@ -21,7 +22,7 @@
 
 <div class="jumbotron">
     <div class="card">
-        <h5 class="card-header">Stakeholder Analysis</h5>
+        <p class="card-header font-weight-bold">Stakeholder Analysis</p>
         <div class="card-body">
           <p class="card-text">Stakeholders are persons or groups that will be impacted 
             by the decision/action taken.  List the stakeholders and 

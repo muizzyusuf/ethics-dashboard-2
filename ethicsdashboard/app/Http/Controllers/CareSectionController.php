@@ -79,6 +79,7 @@ class CareSectionController extends Controller
         }
         */
 
+
         $cares = Care::join('options','cares.option_id','=','options.id')
         ->select('cares.id','cares.attentiveness','cares.competence','cares.responsiveness','cares.stakeholder_id','cares.option_id')
         ->where('options.ethical_issue_id', $ethicalissue->id)->get();
@@ -193,7 +194,8 @@ class CareSectionController extends Controller
         $sgrade = $dashboard->stakeholderSection->grade;
         $ugrade = $dashboard->utilitarianismSection->grade;
         $cgrade = $dashboard->careSection->grade;
-        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade;
+        $vgrade = $dashboard->virtueSection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $vgrade;
 
 
         if($dashboard->save()){

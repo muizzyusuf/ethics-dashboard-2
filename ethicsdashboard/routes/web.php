@@ -120,6 +120,15 @@ Route::post('/caresection/{caresection}/decision','App\http\Controllers\CareSect
 //route for adding grades and comments to care section
 Route::post('/caresection/{caresection}','App\http\Controllers\CareSectionController@comment')->name('caresection.comment');
 
+//route for viewing summary of inputs in virtue ethics section
+Route::get('/virtuesection/{virtuesection}/summary','App\http\Controllers\VirtueSectionController@summary')->name('virtuesection.summary');
+
+//route for inputing final virtue ethics decision
+Route::post('/virtuesection/{virtuesection}/decision','App\http\Controllers\VirtueSectionController@decision')->name('virtuesection.decision');
+
+//route for adding grades and comments to virtue section
+Route::post('/virtuesection/{virtuesection}','App\http\Controllers\VirtueSectionController@comment')->name('virtuesection.comment');
+
 //This resource contains the following routes in the user controller index, create, store, edit, update, destroy
 Route::resource('/user','App\http\Controllers\UserController');
 
@@ -129,3 +138,4 @@ Route::put('/user/{user}/password','App\http\Controllers\UserController@password
 //Route::post('/tasks', 'App\http\Controllers\TaskController@exportCsv')->name('tasks');
 
 Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'exportCsv'])->name('tasks');
+
