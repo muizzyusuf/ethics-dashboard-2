@@ -47703,6 +47703,11 @@ function processPre (el) {
   }
 }
 
+function exportTasks(_this) {
+  let _url = $(_this).data('href');
+  window.location.href = _url;
+}
+
 function processRawAttrs (el) {
   var list = el.attrsList;
   var len = list.length;

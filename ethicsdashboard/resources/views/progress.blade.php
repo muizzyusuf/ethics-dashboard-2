@@ -126,6 +126,15 @@
                         <p class="card-text font-weight-bold">Virtue Ethics: <span class="float-right">{{$virtueSection->grade}} / {{$casestudy->virtue_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Care Ethics: <span class="float-right">{{$careSection->grade}} / {{$casestudy->care_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Deontology: <span class="float-right">{{$deontologySection->grade}} / {{$casestudy->deontology_points}} pts</span></p>
+
+                        <form method="POST" action="{{route('tasks')}}">
+                        {{ csrf_field() }}
+                        {{method_field('POST')}}
+                        <input type="hidden" id="id" name="id" value="{{$dashboard->id}}" >                   
+                                <input type="submit" class=" btn btn-primary" value="Export">   
+                            
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -133,6 +142,7 @@
 
     </div>
 </div>
+
 
 
 
