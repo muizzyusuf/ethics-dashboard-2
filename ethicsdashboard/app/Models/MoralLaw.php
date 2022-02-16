@@ -12,4 +12,5 @@ class MoralLaw extends Model
     public function option(){
         return $this->belongsTo('App\Models\Option', 'id');
     }
+    
 }

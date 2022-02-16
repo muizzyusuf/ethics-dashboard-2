@@ -12,6 +12,7 @@ use App\Models\StakeholderSection;
 use App\Models\Option;
 use App\Models\MoralIssue;
 use App\Models\MoralLaw;
+use App\Models\Motivation;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -61,7 +62,6 @@ class DeontologySectionController extends Controller
         $dashboard = Dashboard::where('id',$deontologySection->dashboard->id)->first();        
         $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
         $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
-        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
 
         // for each option set up moral issues
@@ -71,8 +71,14 @@ class DeontologySectionController extends Controller
         ->where('options.ethical_issue_id', $ethicalissue->id)->get();
        
         $moral_laws = MoralLaw::join('options','moral_laws.option_id','=','options.id')
-        ->select('moral_laws.moral_law','moral_laws.universalizability','moral_laws.uni_explain','moral_laws.consistency','moral_laws.con_explain')
+        ->select('moral_laws.id','moral_laws.moral_law','moral_laws.universalizability',
+        'moral_laws.uni_explain','moral_laws.consistency','moral_laws.con_explain','moral_laws.option_id')
         ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+        $motivations = Motivation::join('options','motivations.option_id','=','options.id')
+        ->select('motivations.id','motivations.motivation','motivations.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.deontologysection')->with('dashboard', $dashboard)
@@ -81,17 +87,18 @@ class DeontologySectionController extends Controller
                                 ->with('options', $options)
                                 ->with('deontologySection', $deontologySection)
                                 ->with('moral_issues', $moral_issues)
-                                ->with('moral_laws', $moral_laws);
+                                ->with('moral_laws', $moral_laws)
+                                ->with('motivations', $motivations);
 
         }else{
             return view('deontologysection')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
-                                ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
                                 ->with('deontologySection', $deontologySection)
                                 ->with('moral_issues', $moral_issues)
-                                ->with('moral_laws', $moral_laws);
+                                ->with('moral_laws', $moral_laws)
+                                ->with('motivations', $motivations);
         }
         
 
@@ -161,26 +168,31 @@ class DeontologySectionController extends Controller
         $dashboard = Dashboard::where('id',$deontologySection->dashboard->id)->first();        
         $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
         $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
-        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
 
+        // for each option set up moral issues
+        // for each option set up moral issues
+        $moral_issues = MoralIssue::join('options','moral_issues.option_id','=','options.id')
+        ->select('moral_issues.id','moral_issues.moral_issues','moral_issues.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
        
+        $moral_laws = MoralLaw::join('options','moral_laws.option_id','=','options.id')
+        ->select('moral_laws.moral_law','moral_laws.universalizability','moral_laws.uni_explain','moral_laws.consistency','moral_laws.con_explain')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
 
         if(Auth::user()->role()->first()->id == 3){
-            return view('student.deontology_summary')->with('dashboard', $dashboard)
+            return view('student.moral_law')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
-                                ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
                                 ->with('deontologySection', $deontologySection);
 
         }else{
-            return view('deontology_summary')->with('dashboard', $dashboard)
+            return view('moral_law')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
-                                ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)
-                                ->with('options', $options)
-                                ->with('deontologySection', $DeontologySection);
+                                ->with('options', $options);
         }
         
         
