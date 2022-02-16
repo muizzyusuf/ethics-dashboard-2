@@ -8,12 +8,13 @@ use App\Models\Option;
 
 class MoralIssueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    public function index($id)
     {
         //
     }
@@ -38,19 +39,35 @@ class MoralIssueController extends Controller
     {
         //
         $option = Option::where('id', $request->input('option_id'))->first();
-        if($request->input('moral_issues')==null){
-            $moralIssue = new MoralIssue;
-            $moralIssue->option_id = $option->id;
-            $moralIssue->moral_issues = $request->input('moral_issues');
+        dd($request->input('option_id'));
+        if($request->input('moral_issues_id')==null){
+            $moral_issues = new MoralIssue;
+            //$option->id =$moral_issues->option_id;
+            $moral_issues->option_id = $option->id;
+            $moral_issues->moral_issues = $request->input('moral_issues');
 
-            $moralIssue->save();
+            $moral_issues->save();
             //set eloquent relationships
-            $moralIssue->option()->associate($option);
+            $moral_issues->option()->associate($option);
+
+            if($moral_issues->option()->associate($option)){
+                $request->session()->flash('success', 'Moral Issues saved');
+            }else{
+                $request->session()->flash('error', 'There was an error saving the moral issues');
+            }
+            return  redirect()->back();
 
         }else{
-            $moralIssue = moralIssue::where('id', $request->input('moral_issues') )->first();
-            $moralIssue->moral_issues = $request->input('moral_issues');
-            $moralIssue->save();
+            $moral_issues = moralissue::where('id', $request->input('moral_issues') )->first();
+            $moral_issues->moral_issues = $request->input('moral_issues');
+            $moral_issues->save();
+
+            if($moral_issues->save()){
+                $request->session()->flash('success', 'Moral Issues saved');
+            }else{
+                $request->session()->flash('error', 'There was an error saving the moral issues');
+            }
+            return  redirect()->back();
         }
         
     }

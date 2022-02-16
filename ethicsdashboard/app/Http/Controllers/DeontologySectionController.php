@@ -78,7 +78,7 @@ class DeontologySectionController extends Controller
         $motivations = Motivation::join('options','motivations.option_id','=','options.id')
         ->select('motivations.id','motivations.motivation','motivations.option_id')
         ->where('options.ethical_issue_id', $ethicalissue->id)->get();
-
+        
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.deontologysection')->with('dashboard', $dashboard)
@@ -186,17 +186,38 @@ class DeontologySectionController extends Controller
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
-                                ->with('deontologySection', $deontologySection);
+                                ->with('deontologySection', $deontologySection)
+                                ->with('moral_issues', $moral_issues)
+                                ->with('moral_laws', $moral_laws);
 
         }else{
             return view('moral_law')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('casestudy', $casestudy)
-                                ->with('options', $options);
+                                ->with('options', $options)
+                                ->with('moral_issues', $moral_issues)
+                                ->with('moral_laws', $moral_laws);
         }
         
         
 
        
     }
+    public function decision(Request $request, $id)
+    { 
+        //
+        $decision = DeontologySection::where('id', $id)->first();
+        $decision->decision = $request->input('decision');
+        //$imperative = DeontologySection::where('id', $id)->first();
+
+        if( $decision->save()){
+            $request->session()->flash('success', 'Decision saved');
+        }else{
+            $request->session()->flash('error', 'There was an error saving the decision');
+        }
+        return  redirect()->back();
+    }
+
+
+
 }

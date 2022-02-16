@@ -42,7 +42,7 @@ class MoralLawController extends Controller
             $moralLaw1 = new MoralLaw;
             $moralLaw1->option_id = $option->id;
             $moralLaw1->moral_law = $request->input('moral_law1');
-            $moralLaw1->universalizability = $request->input('universability1');
+            $moralLaw1->universalizability = $request->input('universalizability1');
             $moralLaw1->uni_explain = $request->input('uni_explain1');
             $moralLaw1->consistency = $request->input('consistency1');
             $moralLaw1->con_explain = $request->input('con_explain1');
@@ -53,7 +53,7 @@ class MoralLawController extends Controller
             $moralLaw2 = new MoralLaw;
             $moralLaw2->option_id = $option->id;
             $moralLaw2->moral_law = $request->input('moral_law2');
-            $moralLaw2->universalizability = $request->input('universability2');
+            $moralLaw2->universalizability = $request->input('universalizability2');
             $moralLaw2->uni_explain = $request->input('uni_explain2');
             $moralLaw2->consistency = $request->input('consistency2');
             $moralLaw2->con_explain = $request->input('con_explain2');
@@ -64,18 +64,26 @@ class MoralLawController extends Controller
             $moralLaw3 = new MoralLaw;
             $moralLaw3->option_id = $option->id;
             $moralLaw3->moral_law = $request->input('moral_law3');
-            $moralLaw3->universalizability = $request->input('universability3');
+            $moralLaw3->universalizability = $request->input('universalizability3');
             $moralLaw3->uni_explain = $request->input('uni_explain3');
             $moralLaw3->consistency = $request->input('consistency3');
             $moralLaw3->con_explain = $request->input('con_explain3');
             $moralLaw3->save();
             //set eloquent relationships
             $moralLaw3->option()->associate($option);
+
+
+            if( $moralLaw3>save()){
+                $request->session()->flash('success', 'Moral Laws saved');
+            }else{
+                $request->session()->flash('error', 'There was an error saving the Moral Laws');
+            }
             return  redirect()->back();
+
         }else{
             $moralLaw1 = MoralLaw::where('id', $request->input('moral_law1_id') )->first();
             $moralLaw1->moral_law = $request->input('moral_law1');
-            $moralLaw1->universalizability = $request->input('universability1');
+            $moralLaw1->universalizability = $request->input('universalizability1');
             $moralLaw1->uni_explain = $request->input('uni_explain1');
             $moralLaw1->consistency = $request->input('consistency1');
             $moralLaw1->con_explain = $request->input('con_explain1');
@@ -83,7 +91,7 @@ class MoralLawController extends Controller
 
             $moralLaw2 = MoralLaw::where('id', $request->input('moral_law2_id') )->first();
             $moralLaw2->moral_law = $request->input('moral_law2');
-            $moralLaw2->universalizability = $request->input('universability2');
+            $moralLaw2->universalizability = $request->input('universalizability2');
             $moralLaw2->uni_explain = $request->input('uni_explain2');
             $moralLaw2->consistency = $request->input('consistency2');
             $moralLaw2->con_explain = $request->input('con_explain2');
@@ -91,11 +99,18 @@ class MoralLawController extends Controller
 
             $moralLaw3 = MoralLaw::where('id', $request->input('moral_law3_id') )->first();
             $moralLaw3->moral_law = $request->input('moral_law3');
-            $moralLaw3->universalizability = $request->input('universability3');
+            $moralLaw3->universalizability = $request->input('universalizability3');
             $moralLaw3->uni_explain = $request->input('uni_explain3');
             $moralLaw3->consistency = $request->input('consistency3');
             $moralLaw3->con_explain = $request->input('con_explain3');
             $moralLaw3->save();
+
+            if( $moralLaw3->save()){
+                $request->session()->flash('success', 'Moral Laws saved');
+            }else{
+                $request->session()->flash('error', 'There was an error saving the Moral Laws');
+            }
+            
             return  redirect()->back();
         }
         }

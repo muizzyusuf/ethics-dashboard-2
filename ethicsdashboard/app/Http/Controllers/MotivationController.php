@@ -38,86 +38,86 @@ class MotivationController extends Controller
     {
         //
         $option = Option::where('id', $request->input('option_id'))->first();
-        if($request->input('motivation1_id')==null){
-            $motivation1 = new Motivation;
-            $motivation1->option_id = $option->id;
-            $motivation1->motivation = $request->input('motivation1');
-            $motivation1->save();
+        if($request->input('motivation11_id')==null){
+            $motivation11 = new Motivation;
+            $motivation11->option_id = $option->id;
+            $motivation11->motivation = $request->input('motivation11');
+            $motivation11->save();
             //set eloquent relationships
-            $motivation1->option()->associate($option);
+            $motivation11->option()->associate($option);
 
-            $motivation2 = new Motivation;
-            $motivation2->option_id = $option->id;
-            $motivation2->motivation = $request->input('motivation2');
-            $motivation2->save();
+            $motivation21 = new Motivation;
+            $motivation21->option_id = $option->id;
+            $motivation21->motivation = $request->input('motivation21');
+            $motivation21->save();
             //set eloquent relationships
-            $motivation2->option()->associate($option);
+            $motivation21->option()->associate($option);
             
-            $motivation3 = new Motivation;
-            $motivation3->option_id = $option->id;
-            $motivation3->motivation = $request->input('motivation3');
-            $motivation3->save();
+            $motivation31 = new Motivation;
+            $motivation31->option_id = $option->id;
+            $motivation31->motivation = $request->input('motivation31');
+            $motivation31->save();
             //set eloquent relationships
-            $motivation3->option()->associate($option);
+            $motivation31->option()->associate($option);
             
-            $motivation4 = new Motivation;
-            $motivation4->option_id = $option->id;
-            $motivation4->motivation = $request->input('motivation4');
-            $motivation4->save();
+            $motivation41 = new Motivation;
+            $motivation41->option_id = $option->id;
+            $motivation41->motivation = $request->input('motivation41');
+            $motivation41->save();
             //set eloquent relationships
-            $motivation4->option()->associate($option);
+            $motivation41->option()->associate($option);
 
-            $motivation5 = new Motivation;
-            $motivation5->option_id = $option->id;
-            $motivation5->motivation = $request->input('motivation5');
-            $motivation5->save();
+            $motivation51 = new Motivation;
+            $motivation51->option_id = $option->id;
+            $motivation51->motivation = $request->input('motivation51');
+            $motivation51->save();
             //set eloquent relationships
-            $motivation5->option()->associate($option);
+            $motivation51->option()->associate($option);
 
-            $motivation6 = new Motivation;
-            $motivation6->option_id = $option->id;
-            $motivation6->motivation = $request->input('motivation6');
-            $motivation6->save();
+            $motivation61 = new Motivation;
+            $motivation61->option_id = $option->id;
+            $motivation61->motivation = $request->input('motivation61');
+            $motivation61->save();
             //set eloquent relationships
-            $motivation6->option()->associate($option);
+            $motivation61->option()->associate($option);
 
-            $motivation7 = new Motivation;
-            $motivation7->option_id = $option->id;
-            $motivation7->motivation = $request->input('motivation7');
-            $motivation7->save();
+            $motivation71 = new Motivation;
+            $motivation71->option_id = $option->id;
+            $motivation71->motivation = $request->input('motivation71');
+            $motivation71->save();
             //set eloquent relationships
-            $motivation7->option()->associate($option);
+            $motivation71->option()->associate($option);
             
             return  redirect()->back();
             
         }else{
-            $motivation1 = Motivation::where('id', $request->input('motivation1_id') )->first();
-            $motivation1->motivation = $request->input('motivation1');
-            $motivation1->save();
+            $motivation11= Motivation::where('id', $request->input('motivation1_id') )->first();
+            $motivation11->motivation = $request->input('motivation1');
+            $motivation11->save();
 
-            $motivation2 = Motivation::where('id', $request->input('motivation2_id') )->first();
-            $motivation2->motivation = $request->input('motivation2');
-            $motivation2->save();
+            $motivation21 = Motivation::where('id', $request->input('motivation21_id') )->first();
+            $motivation21->motivation = $request->input('motivation21');
+            $motivation21->save();
 
-            $motivation3 = Motivation::where('id', $request->input('motivation3_id') )->first();
-            $motivation3->motivation = $request->input('motivation3');
-            $motivation3->save();
+            $motivation31 = Motivation::where('id', $request->input('motivation31_id') )->first();
+            $motivation31->motivation = $request->input('motivation31');
+            $motivation31->save();
 
-            $motivation4 = Motivation::where('id', $request->input('motivation4_id') )->first();
-            $motivation4->motivation = $request->input('motivation4');
-            $motivation4->save();
+            $motivation41 = Motivation::where('id', $request->input('motivation41_id') )->first();
+            $motivation41->motivation = $request->input('motivation41');
+            $motivation41->save();
 
-            $motivation5 = Motivation::where('id', $request->input('motivation5_id') )->first();
-            $motivation5->motivation = $request->input('motivation5');
-            $motivation5->save();
+            $motivation51 = Motivation::where('id', $request->input('motivation51_id') )->first();
+            $motivation51->motivation = $request->input('motivation51');
+            $motivation51->save();
 
-            $motivation6 = Motivation::where('id', $request->input('motivation6_id') )->first();
-            $motivation6->motivation = $request->input('motivation6');
-            $motivation6->save();
+            $motivation61 = Motivation::where('id', $request->input('motivation61_id') )->first();
+            $motivation61->motivation = $request->input('motivation61');
+            $motivation61->save();
 
-            $motivation7 = Motivation::where('id', $request->input('motivation7_id') )->first();
-            $motivation7->motivation = $request->input('motivation7');
-            $motivation7->save();
+            $motivation71 = Motivation::where('id', $request->input('motivation71_id') )->first();
+            $motivation71->motivation = $request->input('motivation71');
+            $motivation71->save();
         }
         return  redirect()->back();
     }

@@ -54,8 +54,8 @@
                     <div class="form-group">
                         <label class="font-weight-bold" for="moralissue">TEST IT’S UNIVERSALIZABILITY</label><br/> 
                         <p>Can you restate the law as a universal law of moral action?
-                            <input type ="checkbox" id="universability" name="universability" > Yes 
-                            <input type ="checkbox" id="universability" name="universability" > No </p>
+                            <input type ="checkbox" id="universalizability" name="universalizability" > Yes 
+                            <input type ="checkbox" id="universalizability" name="universalizability" > No </p>
                         <textarea class="form-control" id="uni_explain" name="uni_explain" rows="2" ></textarea>
                     </div>
                     <p>*If the moral law cannot be expressed as a universal law of 
@@ -65,7 +65,7 @@
                         <p> Could you live in a world where everyone followed this law? 
                              <input type ="checkbox" id="consistency" name="consistency" > Yes 
                             <input type ="checkbox" id="consistency" name="consistency" > No </p>
-                        <textarea class="form-control" id="con_explain" name=con_explain" rows="2" ></textarea>
+                        <textarea class="form-control" id="con_explain" name="con_explain" rows="2" ></textarea>
                     </div>
                     <p>*If you could not live in a world where everyone (including you) followed this law, it fails the consistency test.</p>
                     <div class="form-group">
