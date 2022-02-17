@@ -95,6 +95,7 @@
                         <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} / {{$casestudy->stakeholder_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} / {{$casestudy->util_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Care Ethics: <span class="float-right">{{$careSection->grade}} / {{$casestudy->care_points}} pts</span></p>
+                        <p class="card-text font-weight-bold">Deontology: <span class="float-right">{{$careSection->grade}} / {{$casestudy->deontology_points}} pts</span></p>
                         <form method="POST" action="{{route('tasks')}}">
                         {{ csrf_field() }}
                         {{method_field('POST')}}
