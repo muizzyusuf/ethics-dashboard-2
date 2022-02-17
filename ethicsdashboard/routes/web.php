@@ -136,5 +136,10 @@ Route::get('/deontologysection/{deontologysection}/summary','App\http\Controller
 //route for adding grades and comments to deontology section
 Route::post('/deontologysection/{deontologysection}','App\http\Controllers\DeontologySectionController@comment')->name('deontologysection.comment');
 
-//route for inputing final eontology section decision
-//Route::post('/deontologysection/{deontologysection}/decision','App\http\Controllers\DeontologySectionController@decision')->name('deontologysection.decision');
+//route for inputing deontology section decision
+Route::post('/deontologysection/{deontologysection}/decision','App\http\Controllers\DeontologySectionController@decision')->name('deontologysection.decision');
+
+//route to store moralissues
+Route::post('/courses/deontologysection','App\http\Controllers\MoralIssueController@store')->name('moral_issues.store');
+
+
