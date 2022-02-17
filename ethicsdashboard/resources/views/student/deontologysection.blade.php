@@ -29,13 +29,129 @@
         </nav>
     </div>
 
+    <div class="card mb-2">
+        <div class="card-body">
+            <p class="card-subtitle">A deontological approach to ethical decision making 
+                begins with reasoning our way to understanding the 
+                moral law that should govern the decision.  Kant called 
+                these moral laws categorical (universal, timeless) 
+                imperatives (must do’s that are not optional).  To begin, 
+                consider the reasons supporting each option. </p>
+        </div>
+    </div>
+
+    
+    @for($i=0; $i<count($options); $i++)
+        <form method="POST" action="{{route('motivation.store')}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+            <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
+            <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
+            <div class="card border-secondary mt-2">
+                <div class="card-header font-weight-bold">
+
+                    <div class="form-row">
+                        <label for="option" class="col-form-label">Option {{$i+1}}:</label>
+                        <div class="col">
+                          <input type="text" name="option" class="form-control" id="option" value="{{$options[$i]->option}}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <h5 class="card-subtitle mb-2 text-muted">What is your motivation?</h5>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Serves your interests" name="motivations[]" >
+                        <label class="form-check-label" >
+                          Serves your interests
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Serves the interests of someone else you want to impress" name="motivations[]" >
+                        <label class="form-check-label" >
+                          Serves the interests of someone else you want to impress
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="It will look good" name="motivations[]" >
+                        <label class="form-check-label" >
+                          It will look good
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="It will pay off in the long run" name="motivations[]" >
+                        <label class="form-check-label" >
+                          It will pay off in the long run
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Everybody wins" name="motivations[]" >
+                        <label class="form-check-label">
+                          Everybody wins
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="It costs very little" name="motivations[]" >
+                        <label class="form-check-label">
+                          It costs very little
+                        </label>
+                      </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Revenge" name="motivations[]" >
+                        <label class="form-check-label">
+                            Revenge
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="col-form-label" for="other">Other:</label>
+                        <input type="text" class="form-control col-3" name="other" >
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="It's the right thing to do" name="motivations[]">
+                        <label class="form-check-label">
+                          It's the right thing to do
+                        </label>
+                    </div>
+                    <small id="motivationHelpBlock" class="form-text text-muted">
+                        A motivation is either the right thing to do or a combination of the other motivations but should <b>never</b> be both.
+                    </small>
+                    
+                    <div class="form-group">
+                        <input type="submit" class="float-right btn btn-primary" value="Save">
+                    </div>
+                </div>
+
+                @if($options[$i]->imperative != null)
+
+                    <div class="mx-5 text-center alert alert-dark" role="alert">
+
+                        @if($options[$i]->imperative == "categorical")
+                            This reasoning is consistent with <b><i>categorical</i></b> reasoning and therefore <b><i>may</i></b> support a moral action
+                        @else
+                            This reasoning is consistent with <b><i>hypothetical</i></b> reasoning and therefore <b><i>cannot</i></b> support a moral action
+                        @endif
+
+                    </div>
+
+                @endif
+            </div>   
+        </form>
+
+        
+            
+    @endfor
+
     <div class="card border-secondary">
-        <p class="card-header font-weight-bold">A deontological approach to ethical decision making 
-            begins with reasoning our way to understanding the 
-            moral law that should govern the decision.  Kant called 
-            these moral laws categorical (universal, timeless) 
-            imperatives (must do’s that are not optional).  To begin, 
-            consider the reasons supporting each option. 
+        <p class="card-header font-weight-bold">
+            
         </p>
 
         @for($i=0; $i<count($options); $i++)
