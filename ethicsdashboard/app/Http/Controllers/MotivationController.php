@@ -38,6 +38,8 @@ class MotivationController extends Controller
     {
         //
         $option = Option::where('id', $request->input('option_id'))->first();
+        //dd($request->input('option_id'));
+
         if($request->input('motivation11_id')==null){
             $motivation11 = new Motivation;
             $motivation11->option_id = $option->id;
@@ -88,6 +90,11 @@ class MotivationController extends Controller
             //set eloquent relationships
             $motivation71->option()->associate($option);
             
+            if( $motivation71->option()->associate($option)){
+                $request->session()->flash('success', 'Motivations saved');
+            }else{
+                $request->session()->flash('error', 'There was an error saving the Motivations');
+            }
             return  redirect()->back();
             
         }else{
@@ -118,6 +125,12 @@ class MotivationController extends Controller
             $motivation71 = Motivation::where('id', $request->input('motivation71_id') )->first();
             $motivation71->motivation = $request->input('motivation71');
             $motivation71->save();
+
+            if( $motivation71->save()){
+                $request->session()->flash('success', 'Motivations saved');
+            }else{
+                $request->session()->flash('error', 'There was an error saving the Motivations');
+            }
         }
         return  redirect()->back();
     }

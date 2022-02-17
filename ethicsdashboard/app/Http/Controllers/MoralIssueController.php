@@ -39,7 +39,7 @@ class MoralIssueController extends Controller
     {
         //
         $option = Option::where('id', $request->input('option_id'))->first();
-        dd($request->input('option_id'));
+        //dd($request->input('option_id'));
         if($request->input('moral_issues_id')==null){
             $moral_issues = new MoralIssue;
             //$option->id =$moral_issues->option_id;

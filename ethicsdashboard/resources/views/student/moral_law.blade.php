@@ -38,7 +38,10 @@
             Unlike hypothetical imperatives, categorical imperatives 
             are not relative to a desire or goal </p>
 
-            @for($i=0; $i<count($options); $i++)
+
+        
+            @for($i=0; $i<count($moral_laws); $i++)
+            
             <div class="card-body">
                 <form method="POST" action="{{route('morallaw.store')}}">
                     {{ csrf_field() }}
@@ -48,7 +51,8 @@
                     <div class="form-group">
                         <label class="font-weight-bold" for="option">Moral Law {{$i+1}}</label>
                         <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
-                        <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
+                        <input type="hidden" id="moral_laws_id" name="moral_laws_id" @if(isset($moral_laws[$i])) value="{{$moral_laws[$i]->id}}" @endif>
+                        <textarea class="form-control" id="moral_laws" name="moral_laws" rows="1" readonly>@if(count($moral_laws)>0) {{$moral_laws[$i]->moral_law}} @endif </textarea>
                     </div>
                     
                     <div class="form-group">

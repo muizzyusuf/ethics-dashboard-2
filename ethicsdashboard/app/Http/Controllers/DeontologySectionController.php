@@ -180,6 +180,10 @@ class DeontologySectionController extends Controller
         ->select('moral_laws.moral_law','moral_laws.universalizability','moral_laws.uni_explain','moral_laws.consistency','moral_laws.con_explain')
         ->where('options.ethical_issue_id', $ethicalissue->id)->get();
 
+        $motivations = Motivation::join('options','motivations.option_id','=','options.id')
+        ->select('motivations.id','motivations.motivation','motivations.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+        
 
         if(Auth::user()->role()->first()->id == 3){
             return view('student.moral_law')->with('dashboard', $dashboard)
@@ -188,7 +192,8 @@ class DeontologySectionController extends Controller
                                 ->with('options', $options)
                                 ->with('deontologySection', $deontologySection)
                                 ->with('moral_issues', $moral_issues)
-                                ->with('moral_laws', $moral_laws);
+                                ->with('moral_laws', $moral_laws)
+                                ->with('motivations', $motivations);
 
         }else{
             return view('moral_law')->with('dashboard', $dashboard)
@@ -196,13 +201,40 @@ class DeontologySectionController extends Controller
                                 ->with('casestudy', $casestudy)
                                 ->with('options', $options)
                                 ->with('moral_issues', $moral_issues)
-                                ->with('moral_laws', $moral_laws);
+                                ->with('moral_laws', $moral_laws)
+                                ->with('motivations', $motivations);
         }
         
         
 
        
     }
+    // public function comment(Request $request, $id)
+    // { 
+    //     //
+    //     $deontology = UtilitarianismSection::where('id', $id)->first();
+    //     $deontology->comment = $request->input('comment');
+    //     $deontology->grade = $request->input('grade');
+    //     $deontology->save();
+
+
+    //     $dashboard = Dashboard::where('id', $deontology->dashboard->id)->first();
+    //     $egrade = $dashboard->ethicalIssue->grade;
+    //     $sgrade = $dashboard->stakeholderSection->grade;
+    //     $ugrade = $dashboard->utilitarianismSection->grade;
+    //     $cgrade = $dashboard->careSection->grade;
+    //     $dgrade = $dashboard->deontologySection->grade;
+    //     $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + dgrade;
+
+
+    //     if($dashboard->save()){
+    //         $request->session()->flash('success', 'Comment and grade saved');
+    //     }else{
+    //         $request->session()->flash('error', 'There was an error saving the comment and grade');
+    //     }
+    //     return  redirect()->back();
+    // }
+
     public function decision(Request $request, $id)
     { 
         //
@@ -217,6 +249,8 @@ class DeontologySectionController extends Controller
         }
         return  redirect()->back();
     }
+
+    
 
 
 

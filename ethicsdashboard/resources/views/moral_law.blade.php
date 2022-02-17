@@ -38,39 +38,41 @@
             Unlike hypothetical imperatives, categorical imperatives 
             are not relative to a desire or goal </p>
 
-            @for($i=0; $i<count($options); $i++)
+
+        
+            @for($i=0; $i<count($moral_laws); $i++)
+            
             <div class="card-body">
-                <form method="POST" action="{{route('consequence.store')}}">
+                <form method="POST" action="{{route('morallaw.store')}}">
                     {{ csrf_field() }}
                     {{method_field('POST')}}
-                    <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
+                    <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
 
                     <div class="form-group">
                         <label class="font-weight-bold" for="option">Moral Law {{$i+1}}</label>
                         <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
-                        <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
+                        <input type="hidden" id="moral_laws_id" name="moral_laws_id" @if(isset($moral_laws[$i])) value="{{$moral_laws[$i]->id}}" @endif>
+                        <textarea class="form-control" id="moral_laws" name="moral_laws" rows="1" readonly>@if(count($moral_laws)>0) {{$moral_laws[$i]->moral_law}} @endif </textarea>
                     </div>
                     
                     <div class="form-group">
                         <label class="font-weight-bold" for="moralissue">TEST IT’S UNIVERSALIZABILITY</label><br/> 
                         <p>Can you restate the law as a universal law of moral action?
-                            <input type ="checkbox" id="universability" name="universability" > Yes 
-                            <input type ="checkbox" id="universability" name="universability" > No </p>
-                        <textarea class="form-control" id="uni_explain" name="uni_explain" rows="2" ></textarea>
+                            <input type ="checkbox" id="universalizability" name="universalizability" disabled > Yes 
+                            <input type ="checkbox" id="universalizability" name="universalizability" disabled> No </p>
+                        <textarea class="form-control" id="uni_explain" name="uni_explain" readonly rows="2" ></textarea>
                     </div>
                     <p>*If the moral law cannot be expressed as a universal law of 
                         moral action is fails the universalizability test.</p>
                     <div class="form-group">
                         <label class="font-weight-bold" for="moralissue">TEST IT’S CONSISTENCY</label><br/>
                         <p> Could you live in a world where everyone followed this law? 
-                             <input type ="checkbox" id="consistency" name="consistency" > Yes 
-                            <input type ="checkbox" id="consistency" name="consistency" > No </p>
-                        <textarea class="form-control" id="con_explain" name="con_explain" rows="2" ></textarea>
+                             <input type ="checkbox" id="consistency" name="consistency" disabled > Yes 
+                            <input type ="checkbox" id="consistency" name="consistency" disabled > No </p>
+                        <textarea class="form-control" id="con_explain" name="con_explain" readonly rows="2" ></textarea>
                     </div>
                     <p>*If you could not live in a world where everyone (including you) followed this law, it fails the consistency test.</p>
-                    <div class="form-group">
-                        <input type="submit" class="float-right btn btn-primary" value="Save">
-                    </div>
+                    
                 
                 </form>
             </div>

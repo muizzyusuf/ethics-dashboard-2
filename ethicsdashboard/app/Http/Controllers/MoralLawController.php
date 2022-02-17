@@ -38,6 +38,8 @@ class MoralLawController extends Controller
     {
         //
         $option = Option::where('id', $request->input('option_id'))->first();
+             // dd($request->input('option_id'));
+
         if($request->input('moral_law1_id')==null){
             $moralLaw1 = new MoralLaw;
             $moralLaw1->option_id = $option->id;
@@ -73,7 +75,7 @@ class MoralLawController extends Controller
             $moralLaw3->option()->associate($option);
 
 
-            if( $moralLaw3>save()){
+            if( $moralLaw3->option()->associate($option)){
                 $request->session()->flash('success', 'Moral Laws saved');
             }else{
                 $request->session()->flash('error', 'There was an error saving the Moral Laws');

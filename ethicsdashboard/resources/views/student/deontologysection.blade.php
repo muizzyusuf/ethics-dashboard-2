@@ -40,42 +40,40 @@
 
         @for($i=0; $i<count($options); $i++)
             <div class="card-body">
-                
-                
-                <div class="form-group">
-                    <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
-                    <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
-                    <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
-
-                </div>
-               
                 <form method="POST" action="{{route('motivation.store')}}">
-                        {{ csrf_field() }}
-                        {{method_field('POST')}}
-                        <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
-                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
+                    {{ csrf_field() }}
+                    {{method_field('POST')}}
+                    <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
 
                     <div class="form-group">
+                        <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
+                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
+                        <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
+    
+                    </div> 
+                    <div class="form-group">
                         <label class="font-weight-bold" for="motivation">&nbsp;What is your motivation?</label><br/>
-                        <input type="checkbox" name="motivations"id="motivation1{{$i+1}}" name="motivation1{{$i+1}}">&nbsp;Serves your interests <br/>
-                        <input type="checkbox" name="motivations"id="motivation2{{$i+1}}" name="motivation2{{$i+1}}">&nbsp;Serves the interests of someone else you want to impress <br/>
-                        <input type="checkbox" name="motivations"id="motivation3{{$i+1}}" name="motivation3{{$i+1}}">&nbsp;It will look good <br/>
-                        <input type="checkbox" name="motivations"id="motivation4{{$i+1}}" name="motivation4{{$i+1}}">&nbsp;It will pay off in the long run<br/>
-                        <input type="checkbox" name="motivations"id="motivation5{{$i+1}}" name="motivation5{{$i+1}}">&nbsp;It costs very little <br/>
-                        <input type="checkbox" name="motivations"id="motivation6{{$i+1}}" name="motivation6{{$i+1}}">&nbsp;It’s the right thing to do<br/>
-                        <input type="checkbox" name="motivations"id="motivation7{{$i+1}}" name="motivation7{{$i+1}}">&nbsp;Other: <input type ="text" id="motivations" name="motivations" > 
+                        <input type="checkbox" id="motivation11" name="motivation11">&nbsp;Serves your interests <br/>
+                        <input type="checkbox" id="motivation21" name="motivation21">&nbsp;Serves the interests of someone else you want to impress <br/>
+                        <input type="checkbox" id="motivation31" name="motivation31">&nbsp;It will look good <br/>
+                        <input type="checkbox" id="motivation41" name="motivation41">&nbsp;It will pay off in the long run<br/>
+                        <input type="checkbox" id="motivation51" name="motivation51">&nbsp;It costs very little <br/>
+                        <input type="checkbox" id="motivation61" name="motivation61">&nbsp;It’s the right thing to do<br/>
+                        &nbsp;Other: <input type ="text" id="motivation71" name="motivation71"> 
                     </div>
                     <div class="form-group">
                         <input type="submit" class="float-right btn btn-primary" value="Save">
                     </div>
+                
                 </form>
+                 
                 <form method="POST" action="{{route('deontologysection.decision',$deontologySection->id)}}">
                     {{ csrf_field() }}
                     {{method_field('POST')}}
                     <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
 
                     <div class="form-group">
-                        <label class="font-weight-bold" for="Decision">Decision</label>
+                        <label class="font-weight-bold" for="Decision">Imperative</label>
                         <p> This reasoning is consistent with 
                         <select name="imperative" id="imperative">
                             <option value="imperative">Hypothetical</option>
@@ -90,11 +88,22 @@
                         <input type="submit" class="float-right btn btn-primary" value="Save">
                     </div>
                 </form>
-                <form method="POST" action="{{route('moral_issues.store',$deontologySection->id)}}">
+            </div>
+        @endfor
+
+        @for($i=0; $i<count($options); $i++)
+            <div class="card-body">
+                <form method="POST" action="{{route('moral_issues.store')}}">
                     {{ csrf_field() }}
                     {{method_field('POST')}}
                     <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
 
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
+                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
+                        <textarea class="form-control" id="option" name="option" rows="1" readonly>@if(count($options)>0) {{$options[$i]->option}} @endif </textarea>
+    
+                    </div> 
                     <div class="form-group">
                         <label class="font-weight-bold" for="moral_issues">Describe the moral issues governing the decision described in Option {{$i+1}}</label><br/>
                         <textarea class="form-control" id="moral_issues" name="moral_issues" rows="2" ></textarea>
@@ -103,8 +112,16 @@
                         <input type="submit" class="float-right btn btn-primary" value="Save">
                     </div>
                 </form>
-                 
+            </div>
+            <div class="card-body">
                 <form method="POST" action="{{route('morallaw.store')}}">
+                    {{ csrf_field() }}
+                    {{method_field('POST')}}
+                    <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
+
+                    <div class="form-group">
+                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>    
+                    </div>       
                     <div class="form-group">
                         <label class="font-weight-bold" for="moral_law">Define the moral law(s) that govern the actions you will 
                             take if you choose Option {{$i+1}}</label><br/>
@@ -118,9 +135,10 @@
                         <input type="submit" class="float-right btn btn-primary" value="Save">
                     </div>
                 </form>
-                
             </div>
         @endfor
+
+    
     </div>
 
 </div>
