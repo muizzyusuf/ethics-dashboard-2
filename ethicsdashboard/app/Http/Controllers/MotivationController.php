@@ -48,10 +48,30 @@ class MotivationController extends Controller
 
         $motivations = $request->input('motivations');
 
-        foreach($motivations as $m){
+        if($request->input('motivations') != null){
+            foreach($motivations as $m){
+                $motivation = new Motivation;
+                $motivation->motivation = $m;
+                $motivation->option_id = $option->id;
+                $motivation->other = 'No';
+                $motivation->save();
+    
+                 //set eloquent relationships
+                if( $motivation->option()->associate($option)){
+                    $request->session()->flash('success', 'Motivations saved');
+                }else{
+                    $request->session()->flash('error', 'There was an error saving the motivations');
+                }
+            }
+        }
+
+        
+
+        if($request->input('other') != null){
             $motivation = new Motivation;
-            $motivation->motivation = $m;
+            $motivation->motivation = $request->input('other');
             $motivation->option_id = $option->id;
+            $motivation->other = 'Yes';
             $motivation->save();
 
              //set eloquent relationships
@@ -63,7 +83,7 @@ class MotivationController extends Controller
         }
         
         return  redirect()->back();
-        
+
         // if($request->input('motivation11_id')==null){
         //     $motivation11 = new Motivation;
         //     $motivation11->option_id = $option->id;

@@ -112,7 +112,7 @@
 
                     <div class="form-row">
                         <label class="col-form-label" for="other">Other:</label>
-                        <input type="text" class="form-control col-3" name="other" >
+                        <input type="text" class="form-control col-3" name="other" @if($options[$i]->motivations->contains('other','Yes')) value="{{$options[$i]->motivations->firstWhere('other','Yes')->motivation}}" @endif  >
                     </div>
 
                     <div class="form-check">
