@@ -42,6 +42,7 @@
 
     
     @for($i=0; $i<count($options); $i++)
+
         <form method="POST" action="{{route('motivation.store')}}">
             {{ csrf_field() }}
             {{method_field('POST')}}
@@ -62,48 +63,48 @@
                     <h5 class="card-subtitle mb-2 text-muted">What is your motivation?</h5>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Serves your interests" name="motivations[]" >
+                        <input class="form-check-input" type="checkbox" value="Serves your interests" @if($options[$i]->motivations->contains('motivation','Serves your interests'))checked @endif name="motivations[]" >
                         <label class="form-check-label" >
                           Serves your interests
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Serves the interests of someone else you want to impress" name="motivations[]" >
+                        <input class="form-check-input" type="checkbox" value="Serves the interests of someone else you want to impress" @if($options[$i]->motivations->contains('motivation','Serves the interests of someone else you want to impress'))checked @endif name="motivations[]" >
                         <label class="form-check-label" >
                           Serves the interests of someone else you want to impress
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="It will look good" name="motivations[]" >
+                        <input class="form-check-input" type="checkbox" value="It will look good" @if($options[$i]->motivations->contains('motivation','It will look good'))checked @endif name="motivations[]" >
                         <label class="form-check-label" >
                           It will look good
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="It will pay off in the long run" name="motivations[]" >
+                        <input class="form-check-input" type="checkbox" value="It will pay off in the long run" @if($options[$i]->motivations->contains('motivation','It will pay off in the long run'))checked @endif name="motivations[]" >
                         <label class="form-check-label" >
                           It will pay off in the long run
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Everybody wins" name="motivations[]" >
+                        <input class="form-check-input" type="checkbox" value="Everybody wins" @if($options[$i]->motivations->contains('motivation','Everybody wins'))checked @endif name="motivations[]" >
                         <label class="form-check-label">
                           Everybody wins
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="It costs very little" name="motivations[]" >
+                        <input class="form-check-input" type="checkbox" value="It costs very little" @if($options[$i]->motivations->contains('motivation','It costs very little'))checked @endif name="motivations[]" >
                         <label class="form-check-label">
                           It costs very little
                         </label>
                       </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Revenge" name="motivations[]" >
+                        <input class="form-check-input" type="checkbox" value="Revenge" @if($options[$i]->motivations->contains('motivation','Revenge'))checked @endif name="motivations[]" >
                         <label class="form-check-label">
                             Revenge
                         </label>
@@ -115,7 +116,7 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="It's the right thing to do" name="motivations[]">
+                        <input class="form-check-input" type="checkbox" value="It's the right thing to do" @if($options[$i]->motivations->contains('motivation',"It's the right thing to do"))checked @endif name="motivations[]">
                         <label class="form-check-label">
                           It's the right thing to do
                         </label>
