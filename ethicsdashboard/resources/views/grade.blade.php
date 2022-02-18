@@ -52,7 +52,18 @@
                             
                         </tr>
                     @endforeach
-                
+                    <tr>
+                            <th scope="row"></th>
+                            <td>
+                    <form method="POST" action="{{route('tasks.exportClassCsv')}}">
+                        {{ csrf_field() }}
+                        {{method_field('POST')}}
+                        <input type="hidden" id="id" name="id" value="{{$course->id}}" >                   
+                       <input type="submit" class=" btn btn-primary float-right" value="Export to CSV"> 
+                            
+                    </tr>
+                        </form>
+                        <td>
                 </tbody>
             </table>
         </div>

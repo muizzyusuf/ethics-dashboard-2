@@ -137,5 +137,6 @@ Route::put('/user/{user}/password','App\http\Controllers\UserController@password
 
 //Route::post('/tasks', 'App\http\Controllers\TaskController@exportCsv')->name('tasks');
 
-Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'exportCsv'])->name('tasks');
+Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'exportCsv'])->name('tasks.exportCsv');
 
+Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'exportClassCsv'])->name('tasks.exportClassCsv');
