@@ -55,7 +55,7 @@
                     <tr>
                             <th scope="row"></th>
                             <td>
-                    <form method="POST" action="{{route('tasks.exportClassCsv')}}">
+                    <form method="POST" action="{{route('tasksClass.exportClassCsv')}}">
                         {{ csrf_field() }}
                         {{method_field('POST')}}
                         <input type="hidden" id="id" name="id" value="{{$course->id}}" >                   

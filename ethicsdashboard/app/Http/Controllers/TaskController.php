@@ -15,6 +15,7 @@ use App\Models\CaseStudy;
 use App\Models\Stakeholder;
 use App\Models\Option;
 use App\Models\Course;
+use App\Models\CourseUser;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -157,11 +158,23 @@ class TaskController extends Controller
 public function exportClassCsv(Request $request)
 {   
     
-    return("p");
+    
     $fileName = 'ClassReport.csv';
     
 
-    $dashboard = Dashboard::where('id', $request->input('id'))->first();
+    $course = Course::where('id', $request->input('id'))->first();
+    $courseUsers= CourseUser::where('course_id', $course->id);
+   
+    foreach($courseUsers as $courseUser){
+        $caseStudies=CaseStudy::where('course_id', $courseUser->course_id);
+        return $courseUser->user_id;
+
+        foreach($caseStudies as $caseStudy){
+            $dashboard=Dashboard::where('user_id', $courseUser->user_id,'case_study_id',$caseStudy->id)->first();
+            return $dashboard->name;
+        }
+    }
+    /*
     $utilitarianism= UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
     $ethicalIssue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
     $stakeholder = StakeholderSection::where('id', $dashboard->stakeholder_section_id)->first();
@@ -171,6 +184,7 @@ public function exportClassCsv(Request $request)
     $user= User::where('id', $dashboard->user_id)->first();
     $case= CaseStudy::where('id', $dashboard->case_study_id)->first();
     $course= Course::where('id', $case->course_id)->first();
+    */
 
     $headers = array(
         "Content-type"        => "text/csv",
@@ -186,6 +200,7 @@ public function exportClassCsv(Request $request)
         $file = fopen('php://output', 'w');
         fputcsv($file, $columns);
 
+    foreach($courseUsers as $courseUser){
         $row['Student']  = $user->name;
         $row['Course'] = $course->title;
         $row['Case Study']  = $case->name;
@@ -197,61 +212,7 @@ public function exportClassCsv(Request $request)
 
             fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
 
-         $row['Student']  = null;
-        $row['Course'] = null;
-        $row['Case Study']  = null;
-        $row['Dashboard'] = null;
-        $row['Dashboard ID'] = null;
-        $row['Section'] = "Stakeholder";
-        $row['Grade'] = $stakeholder->grade;
-        $row['Comment'] = $stakeholder->comment;
-
-            fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
-
-        $row['Student']  = null;
-        $row['Course'] = null;
-        $row['Case Study']  = null;
-        $row['Dashboard'] = null;
-        $row['Dashboard ID'] = null;
-        $row['Section'] = "Utilitarianism";
-        $row['Grade'] = $utilitarianism->grade;
-        $row['Comment'] = $utilitarianism->comment;
-
-            fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
-
-        $row['Student']  = null;
-        $row['Course'] = null;
-        $row['Case Study']  = null;
-        $row['Dashboard'] = null;
-        $row['Dashboard ID'] = null;
-        $row['Section'] = "Care Ethics";
-        $row['Grade'] = $care->grade;
-        $row['Comment'] = $care->comment;
-    
-            fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));   
-        
-        $row['Student']  = null;
-        $row['Course'] = null;
-        $row['Case Study']  = null;
-        $row['Dashboard'] = null;
-        $row['Dashboard ID'] = null;
-        $row['Section'] = "Virtue Ethics";
-        $row['Grade'] = $virtue->grade;
-        $row['Comment'] = $virtue->comment;
-        
-            fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
-        
-        $row['Student']  = null;
-        $row['Course'] = null;
-        $row['Case Study']  = null;
-        $row['Dashboard'] = null;
-        $row['Dashboard ID'] = null;
-        $row['Section'] = "Deontology";
-        $row['Grade'] = $deontology->grade;
-        $row['Comment'] = $deontology->comment;
-            
-            fputcsv($file, array($row['Student'], $row['Course'], $row['Case Study'], $row['Dashboard'], $row['Dashboard ID'], $row['Section'], $row['Grade'], $row['Comment']));
-                     
+    }
             
         
 
