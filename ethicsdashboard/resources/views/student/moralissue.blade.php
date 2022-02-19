@@ -42,7 +42,7 @@
         
     @for($i=0; $i<count($options); $i++)
 
-        <form method="POST" action="{{route('motivation.store')}}">
+        <form method="POST" action="{{route('moralissue.store')}}">
             {{ csrf_field() }}
             {{method_field('POST')}}
             <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
@@ -61,35 +61,39 @@
                 <div class="card-body">
 
                     <div class="form-group">
+                        <input type="hidden" id="moral_issue_id" name="moral_issue_id" @if($options[$i]->moralIssue != null ) value="{{$options[$i]->moralIssue->id}}" @endif>
                         <label for="moralissue">Describe the moral issues governing the decision described in this option.</label>
-                        <textarea class="form-control" name="moralissue" rows="3"></textarea>
+                        <textarea class="form-control" name="moral_issue" rows="3" required>@if($options[$i]->moralIssue != null ){{$options[$i]->moralIssue->moral_issues}} @endif </textarea>
                     </div>
 
                     <label for="moralissue">Describe the moral law(s) that govern the actions you will take if you choose this option</label>
 
                     <div class="form-group">
+                        <input type="hidden" name="morallaw1_id" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->id}}" @endif >
                         <div class="form-row">
                             <label for="morallaw1" class="col-form-label">Moral Law 1:</label>
                             <div class="col">
-                                <input type="text" name="morallaw1" class="form-control"  >
+                                <input type="text" name="morallaw1" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->moral_law}}" @endif  required >
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
+                        <input type="hidden" name="morallaw2_id" class="form-control" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->id}}" @endif >
                         <div class="form-row">
                             <label for="morallaw2" class="col-form-label">Moral Law 2:</label>
                             <div class="col">
-                                <input type="text" name="morallaw2" class="form-control"  >
+                                <input type="text" name="morallaw2" class="form-control" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->moral_law}}" @endif  required >
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
+                        <input type="hidden" name="morallaw3_id" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->id}}" @endif >
                         <div class="form-row">
                             <label for="morallaw3" class="col-form-label">Moral Law 3:</label>
                             <div class="col">
-                                <input type="text" name="morallaw3" class="form-control"  >
+                                <input type="text" name="morallaw3" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->moral_law}}" @endif  required >
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Motivation;
 use App\Models\Option;
+use App\Models\MoralIssue;
+use App\Models\MoralLaw;
 use Illuminate\Http\Request;
 
 class MotivationController extends Controller
@@ -69,6 +71,8 @@ class MotivationController extends Controller
                 $option->save();
             }else{
                 $option->imperative = 'hypothetical';
+                MoralIssue::where('option_id', $option->id)->delete();
+                MoralLaw::where('option_id', $option->id)->delete();
                 $option->save();
             }
         }
@@ -82,6 +86,8 @@ class MotivationController extends Controller
 
             if($request->input('motivations') == null ){
                 $option->imperative = 'hypothetical';
+                MoralIssue::where('option_id', $option->id)->delete();
+                MoralLaw::where('option_id', $option->id)->delete();
                 $option->save();
             }
 
