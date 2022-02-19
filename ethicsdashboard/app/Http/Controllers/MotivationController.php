@@ -63,9 +63,15 @@ class MotivationController extends Controller
                     $request->session()->flash('error', 'There was an error saving the motivations');
                 }
             }
-        }
 
-        
+            if(in_array("It's the right thing to do", $motivations)){
+                $option->imperative = 'categorical';
+                $option->save();
+            }else{
+                $option->imperative = 'hypothetical';
+                $option->save();
+            }
+        }
 
         if($request->input('other') != null){
             $motivation = new Motivation;
@@ -73,6 +79,11 @@ class MotivationController extends Controller
             $motivation->option_id = $option->id;
             $motivation->other = 'Yes';
             $motivation->save();
+
+            if($request->input('motivations') == null ){
+                $option->imperative = 'hypothetical';
+                $option->save();
+            }
 
              //set eloquent relationships
             if( $motivation->option()->associate($option)){

@@ -60,7 +60,7 @@
                 </div>
                 <div class="card-body">
 
-                    <h5 class="card-subtitle mb-2 text-muted">What is your motivation?</h5>
+                    <h5 class="card-subtitle mb-2 text-muted">What is your motivation ?</h5>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="Serves your interests" @if($options[$i]->motivations->contains('motivation','Serves your interests'))checked @endif name="motivations[]" >
