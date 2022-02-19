@@ -139,7 +139,7 @@ Route::post('/deontologysection/{deontologysection}','App\http\Controllers\Deont
 //route for inputing deontology section decision
 Route::post('/deontologysection/{deontologysection}/decision','App\http\Controllers\DeontologySectionController@decision')->name('deontologysection.decision');
 
-//route to store moralissues
-Route::post('/courses/deontologysection','App\http\Controllers\MoralIssueController@store')->name('moral_issues.store');
+//route for viewing moral issue section of inputs in deontology section
+Route::get('/deontologysection/{deontologysection}/moralissue','App\http\Controllers\DeontologySectionController@moralissue')->name('deontologysection.moralissue');
 
 
