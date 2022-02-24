@@ -63,11 +63,11 @@
                             <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
     
                             <div class="form-group mt-2">
-                                <input type="hidden" name="morallaw1_id" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->id}}" @endif >
+                                <input type="hidden" name="morallaw_id" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->id}}" @endif >
                                 <div class="form-row">
-                                    <label for="morallaw1" class="col-form-label">Moral Law:</label>
+                                    <label for="morallaw" class="col-form-label">Moral Law:</label>
                                     <div class="col">
-                                        <input type="text" name="morallaw1" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->moral_law}}" @endif  readonly>
+                                        <input type="text" name="morallaw" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->moral_law}}" @endif  readonly>
                                     </div>
                                 </div>
                             </div>
@@ -115,11 +115,11 @@
                             <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
     
                             <div class="form-group mt-2">
-                                <input type="hidden" name="morallaw1_id" class="form-control"  @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->id}}" @endif >
+                                <input type="hidden" name="morallaw_id" class="form-control"  @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->id}}" @endif >
                                 <div class="form-row">
-                                    <label for="morallaw1" class="col-form-label">Moral Law:</label>
+                                    <label for="morallaw" class="col-form-label">Moral Law:</label>
                                     <div class="col">
-                                        <input type="text" name="morallaw1" class="form-control" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->moral_law}}" @endif  readonly>
+                                        <input type="text" name="morallaw" class="form-control" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->moral_law}}" @endif  readonly>
                                     </div>
                                 </div>
                             </div>
@@ -167,11 +167,11 @@
                             <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
     
                             <div class="form-group mt-2">
-                                <input type="hidden" name="morallaw3_id" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->id}}" @endif >
+                                <input type="hidden" name="morallaw_id" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->id}}" @endif >
                                 <div class="form-row">
-                                    <label for="morallaw3" class="col-form-label">Moral Law:</label>
+                                    <label for="morallaw" class="col-form-label">Moral Law:</label>
                                     <div class="col">
-                                        <input type="text" name="morallaw3" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->moral_law}}" @endif  readonly >
+                                        <input type="text" name="morallaw" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->moral_law}}" @endif  readonly >
                                     </div>
                                 </div>
                             </div>
