@@ -142,4 +142,6 @@ Route::post('/deontologysection/{deontologysection}/decision','App\http\Controll
 //route for viewing moral issue section of inputs in deontology section
 Route::get('/deontologysection/{deontologysection}/moralissue','App\http\Controllers\DeontologySectionController@moralissue')->name('deontologysection.moralissue');
 
+//route for viewing universalizability section of inputs in deontology section
+Route::get('/deontologysection/{deontologysection}/universalizability','App\http\Controllers\DeontologySectionController@universalizability')->name('deontologysection.universalizability');
 

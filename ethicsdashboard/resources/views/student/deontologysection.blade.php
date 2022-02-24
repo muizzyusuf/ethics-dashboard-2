@@ -31,7 +31,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Testing Categorical Imperatives</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="{{route('deontologysection.moralissue', $dashboard->deontology_section_id)}}">Moral Issue and Moral Laws</a>
-                  <a class="dropdown-item" href="#">Test the Universalizability and Consistency</a>
+                  <a class="dropdown-item" href="{{route('deontologysection.universalizability', $dashboard->deontology_section_id)}}" >Test the Universalizability and Consistency</a>
                 </div>
             </li>
             <li class="nav-item">

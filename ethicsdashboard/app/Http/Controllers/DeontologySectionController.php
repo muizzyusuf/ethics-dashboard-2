@@ -152,6 +152,56 @@ class DeontologySectionController extends Controller
         
 
     }
+
+
+    public function universalizability($id)
+    {
+        //
+        $deontologySection = DeontologySection::where('id', $id)->first();
+        $dashboard = Dashboard::where('id',$deontologySection->dashboard->id)->first();        
+        $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)->where('imperative', 'categorical')->get();
+
+        // for each option set up moral issues
+        // for each option set up moral issues
+        $moral_issues = MoralIssue::join('options','moral_issues.option_id','=','options.id')
+        ->select('moral_issues.id','moral_issues.moral_issues','moral_issues.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+       
+        $moral_laws = MoralLaw::join('options','moral_laws.option_id','=','options.id')
+        ->select('moral_laws.id','moral_laws.moral_law','moral_laws.universalizability',
+        'moral_laws.uni_explain','moral_laws.consistency','moral_laws.con_explain','moral_laws.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+
+        $motivations = Motivation::join('options','motivations.option_id','=','options.id')
+        ->select('motivations.id','motivations.motivation','motivations.option_id')
+        ->where('options.ethical_issue_id', $ethicalissue->id)->get();
+        
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.universalizability')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('deontologySection', $deontologySection)
+                                ->with('moral_issues', $moral_issues)
+                                ->with('moral_laws', $moral_laws)
+                                ->with('motivations', $motivations);
+
+        }else{
+            return view('universalizability')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('deontologySection', $deontologySection)
+                                ->with('moral_issues', $moral_issues)
+                                ->with('moral_laws', $moral_laws)
+                                ->with('motivations', $motivations);
+        }
+        
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
