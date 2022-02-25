@@ -23,62 +23,116 @@
 <div class="jumbotron">
 
     <div class="container mb-2">
-        <nav class="nav nav-pills nav-justified">
-            <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Option Analysis</a>
-            <a class="nav-link btn-dark active" href="{{route('deontologysection.summary', $dashboard->deontology_section_id)}}">Categorical Imperatives</a>
-        </nav>
+        <ul class="nav nav-pills nav-justified">
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Option Analysis</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link active btn-dark dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Testing Categorical Imperatives</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item active btn-secondary" href="{{route('deontologysection.moralissue', $dashboard->deontology_section_id)}}">Moral Issue and Moral Laws</a>
+                  <a class="dropdown-item" href="{{route('deontologysection.universalizability', $dashboard->deontology_section_id)}}" >Test the Universalizability and Consistency</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('deontologysection.summary', $dashboard->deontology_section_id)}}">Summary</a>
+            </li>
+        </ul>
     </div>
+        
+    @for($i=0; $i<count($options); $i++)
 
-    <div class="card border-secondary">
-        <h5 class="card-header font-weight-bold"> Testing Catergorical Imperatives</h5>
-        <p class="card-header font-weight-bold">The fundamental principle of our moral duties is a 
-            categorical imperative.<br/>
-            • It is an imperative because it is a command addressed to agents who could follow it but might not<br/>
-            • It is categorical in virtue of applying to us unconditionally – in all times and all places<br/>
-            Unlike hypothetical imperatives, categorical imperatives 
-            are not relative to a desire or goal </p>
+        <form method="POST" action="{{route('moralissue.store')}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+            <input type="hidden" id="id" name="id" value="{{$deontologySection->id}}" >
+            <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
+            <div class="card border-secondary mt-2">
+                <div class="card-header font-weight-bold">
+ 
+                    <div class="form-row">
+                        <label for="option" class="col-form-label">Option :</label>
+                        <div class="col">
+                            <input type="text" name="option" class="form-control" id="option" value="{{$options[$i]->option}}" readonly>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body">
 
+                    <div class="form-group">
+                        <input type="hidden" id="moral_issue_id" name="moral_issue_id" @if($options[$i]->moralIssue != null ) value="{{$options[$i]->moralIssue->id}}" @endif>
+                        <label for="moralissue">Describe the moral issues governing the decision described in this option.</label>
+                        <textarea class="form-control" name="moral_issue" rows="3" disabled >@if($options[$i]->moralIssue != null ){{$options[$i]->moralIssue->moral_issues}} @endif </textarea>
+                    </div>
+
+                    <label for="moralissue">Describe the moral law(s) that govern the actions you will take if you choose this option</label>
+
+                    <div class="form-group">
+                        <input type="hidden" name="morallaw1_id" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->id}}" @endif >
+                        <div class="form-row">
+                            <label for="morallaw1" class="col-form-label">Moral Law 1:</label>
+                            <div class="col">
+                                <input type="text" name="morallaw1" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->moral_law}}" @endif  readonly >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" name="morallaw2_id" class="form-control" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->id}}" @endif >
+                        <div class="form-row">
+                            <label for="morallaw2" class="col-form-label">Moral Law 2:</label>
+                            <div class="col">
+                                <input type="text" name="morallaw2" class="form-control" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->moral_law}}" @endif  readonly >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" name="morallaw3_id" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->id}}" @endif >
+                        <div class="form-row">
+                            <label for="morallaw3" class="col-form-label">Moral Law 3:</label>
+                            <div class="col">
+                                <input type="text" name="morallaw3" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->moral_law}}" @endif  readonly >
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>   
+        </form>
 
         
-            @for($i=0; $i<count($moral_laws); $i++)
             
-            <div class="card-body">
-                <form method="POST" action="{{route('morallaw.store')}}">
-                    {{ csrf_field() }}
-                    {{method_field('POST')}}
-                    <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
+    @endfor
+    
 
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="option">Moral Law {{$i+1}}</label>
-                        <input type="hidden" id="option_id" name="option_id" @if(isset($options[$i])) value="{{$options[$i]->id}}" @endif>
-                        <input type="hidden" id="moral_laws_id" name="moral_laws_id" @if(isset($moral_laws[$i])) value="{{$moral_laws[$i]->id}}" @endif>
-                        <textarea class="form-control" id="moral_laws" name="moral_laws" rows="1" readonly>@if(count($moral_laws)>0) {{$moral_laws[$i]->moral_law}} @endif </textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="moralissue">TEST IT’S UNIVERSALIZABILITY</label><br/> 
-                        <p>Can you restate the law as a universal law of moral action?
-                            <input type ="checkbox" id="universalizability" name="universalizability" disabled > Yes 
-                            <input type ="checkbox" id="universalizability" name="universalizability" disabled> No </p>
-                        <textarea class="form-control" id="uni_explain" name="uni_explain" readonly rows="2" ></textarea>
-                    </div>
-                    <p>*If the moral law cannot be expressed as a universal law of 
-                        moral action is fails the universalizability test.</p>
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="moralissue">TEST IT’S CONSISTENCY</label><br/>
-                        <p> Could you live in a world where everyone followed this law? 
-                             <input type ="checkbox" id="consistency" name="consistency" disabled > Yes 
-                            <input type ="checkbox" id="consistency" name="consistency" disabled > No </p>
-                        <textarea class="form-control" id="con_explain" name="con_explain" readonly rows="2" ></textarea>
-                    </div>
-                    <p>*If you could not live in a world where everyone (including you) followed this law, it fails the consistency test.</p>
-                    
-                
-                </form>
+</div>
+
+<div class="mt-3 card">
+    <p class="card-header">Instructor Comments & Grade</p>
+    <div class="card-body">
+        <form method="POST" action="{{route('deontologysection.comment',$deontologySection->id)}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+    
+            <div class="form-group">
+                <label class="font-weight-bold" for="comment">Comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$deontologySection->comment}} </textarea>
             </div>
-        @endfor
-    </div>
 
+            <div class="form-group">
+                <label class="font-weight-bold" for="grade">Grade</label>
+                <input type="number" min="0" max="{{$casestudy->deontology_points}}" class="form-control col-1" id="grade" name="grade" value="{{$deontologySection->grade}}" required>
+                <small id="help" class="form-text text-muted">Out of {{$casestudy->deontology_points}} </small>
+            </div>
+
+            <input type="submit" class="float-right btn btn-primary" value="Save">
+
+        </form>
+      
+    </div>
 </div>
 
 @endsection

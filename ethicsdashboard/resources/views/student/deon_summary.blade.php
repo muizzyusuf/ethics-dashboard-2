@@ -44,8 +44,8 @@
 
         <h5 class="font-weight-bold">HYPOTHETICAL IMPERATIVES</h5>
         <hr>
-        <ul>
-            <li class="list-unstyled">A hypothetical imperative is a command in a conditional form </p>
+        <ul class="list-unstyled">
+            <li>A hypothetical imperative is a command in a conditional form </li>
             <ul>
                 <li> E.g. If you want to do well on the midterm you must study!</li>
             </ul>
