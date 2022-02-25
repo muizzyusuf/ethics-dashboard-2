@@ -309,7 +309,9 @@ class UtilitarianismSectionController extends Controller
         $sgrade = $dashboard->stakeholderSection->grade;
         $ugrade = $dashboard->utilitarianismSection->grade;
         $cgrade = $dashboard->careSection->grade;
-        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade;
+        $vgrade = $dashboard->virtueSection->grade;
+        $dgrade = $dashboard->deontologySection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $dgrade +$vgrade;
 
 
         if($dashboard->save()){
