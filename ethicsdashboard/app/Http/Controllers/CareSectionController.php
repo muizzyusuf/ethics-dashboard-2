@@ -195,7 +195,9 @@ class CareSectionController extends Controller
         $ugrade = $dashboard->utilitarianismSection->grade;
         $cgrade = $dashboard->careSection->grade;
         $vgrade = $dashboard->virtueSection->grade;
-        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $vgrade;
+        $dgrade = $dashboard->deontologySection->grade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $dgrade +$vgrade;
+
 
 
         if($dashboard->save()){

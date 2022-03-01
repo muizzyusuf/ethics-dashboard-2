@@ -139,3 +139,19 @@ Route::put('/user/{user}/password','App\http\Controllers\UserController@password
 
 Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'exportCsv'])->name('tasks');
 
+//route for viewing summary of inputs in deontology section
+Route::get('/deontologysection/{deontologysection}/summary','App\http\Controllers\DeontologySectionController@summary')->name('deontologysection.summary');
+
+//route for adding grades and comments to deontology section
+Route::post('/deontologysection/{deontologysection}','App\http\Controllers\DeontologySectionController@comment')->name('deontologysection.comment');
+
+//route for inputing deontology section decision
+Route::post('/deontologysection/{deontologysection}/decision','App\http\Controllers\DeontologySectionController@decision')->name('deontologysection.decision');
+
+//route for viewing moral issue section of inputs in deontology section
+Route::get('/deontologysection/{deontologysection}/moralissue','App\http\Controllers\DeontologySectionController@moralissue')->name('deontologysection.moralissue');
+
+//route for viewing universalizability section of inputs in deontology section
+Route::get('/deontologysection/{deontologysection}/universalizability','App\http\Controllers\DeontologySectionController@universalizability')->name('deontologysection.universalizability');
+
+
