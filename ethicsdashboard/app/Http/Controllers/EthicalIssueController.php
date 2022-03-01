@@ -186,6 +186,7 @@ class EthicalIssueController extends Controller
         $dgrade = $dashboard->deontologySection->grade;
         $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $dgrade +$vgrade;
 
+
         
 
         if($dashboard->save()){

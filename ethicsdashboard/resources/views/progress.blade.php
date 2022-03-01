@@ -14,6 +14,7 @@
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
+        <a class="nav-link" href="{{route('virtuesection.show', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
         <a class="nav-link" href="{{route('caresection.show', $dashboard->care_section_id)}}">Care Ethics</a>
         <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Deontology</a>
         <a class="nav-link active" href="{{route('progress.show', $dashboard->id)}}">Progress</a>
@@ -28,8 +29,8 @@
                 <div class="row justify-content-around">
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">
-                                Ethical Issue and Options
+                            <div class="card-header font-weight-bold">
+                                ETHICAL ISSUE & OPTIONS
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title font-weight-bold">Comments:</h6>
@@ -41,8 +42,8 @@
         
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">
-                                Stakeholders and Interests
+                            <div class="card-header font-weight-bold">
+                                STAKEHOLDERS & INTERESTS
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title font-weight-bold">Comments:</h6>
@@ -54,11 +55,11 @@
                         
                 </div> 
                 <br>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">
-                                Utilitarianism
+                            <div class="card-header font-weight-bold">
+                                UTILITARIANISM
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title font-weight-bold">Comments:</h6>
@@ -70,12 +71,41 @@
 
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">
-                                Care Ethics
+                            <div class="card-header font-weight-bold">
+                                CARE ETHICS
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title font-weight-bold">Comments:</h6>
                                 <p class="card-text text-muted">{{$careSection->comment}}</p>
+                                    
+                            </div>
+                        </div>
+                    </div>
+        
+                        
+                </div> 
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header font-weight-bold">
+                                VIRTUE ETHICS
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title font-weight-bold">Comments:</h6>
+                                <p class="card-text text-muted">{{$virtueSection->comment}}</p>
+                                    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header font-weight-bold">
+                                DEONTOLOGY
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title font-weight-bold">Comments:</h6>
+                                <p class="card-text text-muted">{{$deontologySection->comment}}</p>
                                     
                             </div>
                         </div>
@@ -94,8 +124,10 @@
                         <p class="card-text font-weight-bold">Issue & Options: <span class="float-right">{{$ethicalissue->grade}} / {{$casestudy->issue_points}}  pts</span></p>
                         <p class="card-text font-weight-bold">Stakeholders: <span class="float-right">{{$stakeholderSection->grade}} / {{$casestudy->stakeholder_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Utilitarianism: <span class="float-right">{{$utilitarianismSection->grade}} / {{$casestudy->util_points}} pts</span></p>
+                        <p class="card-text font-weight-bold">Virtue Ethics: <span class="float-right">{{$virtueSection->grade}} / {{$casestudy->virtue_points}} pts</span></p>
                         <p class="card-text font-weight-bold">Care Ethics: <span class="float-right">{{$careSection->grade}} / {{$casestudy->care_points}} pts</span></p>
-                        <p class="card-text font-weight-bold">Deontology: <span class="float-right">{{$careSection->grade}} / {{$casestudy->deontology_points}} pts</span></p>
+                        <p class="card-text font-weight-bold">Deontology: <span class="float-right">{{$deontologySection->grade}} / {{$casestudy->deontology_points}} pts</span></p>
+
                         <form method="POST" action="{{route('tasks')}}">
                         {{ csrf_field() }}
                         {{method_field('POST')}}
@@ -103,6 +135,7 @@
                                 <input type="submit" class=" btn btn-primary" value="Export">   
                             
                         </form>
+
                     </div>
                 </div>
             </div>

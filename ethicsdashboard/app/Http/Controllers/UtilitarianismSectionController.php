@@ -312,7 +312,7 @@ class UtilitarianismSectionController extends Controller
         $vgrade = $dashboard->virtueSection->grade;
         $dgrade = $dashboard->deontologySection->grade;
         $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $dgrade +$vgrade;
-
+      
 
         if($dashboard->save()){
             $request->session()->flash('success', 'Comment and grade saved');

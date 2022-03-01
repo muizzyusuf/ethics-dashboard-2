@@ -7,8 +7,10 @@ use App\Models\Dashboard;
 
 use App\Models\EthicalIssue;
 use App\Models\StakeholderSection;
+use App\Models\DeontologySection;
 use App\Models\UtilitarianismSection;
 use App\Models\CareSection;
+use App\Models\VirtueSection;
 use App\Models\User;
 use App\Models\CaseStudy;
 use App\Models\Stakeholder;
@@ -65,6 +67,8 @@ class ProgressController extends Controller
         $stakeholderSection = StakeholderSection::where('id', $dashboard->stakeholder_section_id)->first();
         $utilitarianismSection = UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
         $careSection = CareSection::where('id', $dashboard->care_section_id)->first();
+        $virtueSection = VirtueSection::where('id', $dashboard->virtue_section_id)->first();
+        $deontologySection = DeontologySection::where('id', $dashboard->deontology_section_id)->first();
         $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
         return view('progress')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
@@ -72,6 +76,8 @@ class ProgressController extends Controller
                                 ->with('casestudy', $casestudy)
                                 ->with('utilitarianismSection', $utilitarianismSection)
                                 ->with('options', $options)
+                                ->with('virtueSection', $virtueSection)
+                                ->with('deontologySection', $deontologySection)
                                 ->with('careSection', $careSection);
     }
 
