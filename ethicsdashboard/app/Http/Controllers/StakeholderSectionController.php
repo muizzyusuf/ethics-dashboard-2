@@ -135,14 +135,14 @@ class StakeholderSectionController extends Controller
         $stakeholder->grade = $request->input('grade');
         $stakeholder->save();
 
+
         $dashboard = Dashboard::where('id', $stakeholder->dashboard->id)->first();
         $egrade = $dashboard->ethicalIssue->grade;
         $sgrade = $dashboard->stakeholderSection->grade;
         $ugrade = $dashboard->utilitarianismSection->grade;
         $cgrade = $dashboard->careSection->grade;
         $vgrade = $dashboard->virtueSection->grade;
-        $dgrade = $dashboard->deontologySection->grade;
-        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $dgrade +$vgrade;
+        $dashboard->grade = $egrade + $sgrade +$ugrade + $cgrade + $vgrade;
 
 
         if($dashboard->save()){
