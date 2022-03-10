@@ -261,7 +261,7 @@ class VirtueSectionController extends Controller
 
 
         if(Auth::user()->role()->first()->id == 3){
-            return view('student.chracter')->with('dashboard', $dashboard)
+            return view('student.character')->with('dashboard', $dashboard)
                                 ->with('ethicalissue', $ethicalissue)
                                 ->with('stakeholders', $stakeholders)
                                 ->with('casestudy', $casestudy)

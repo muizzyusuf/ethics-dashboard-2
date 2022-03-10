@@ -25,9 +25,9 @@
 
     <div class="ml-5 mr-5 pl-5 pr-5 mb-2">
         <nav class="nav nav-pills nav-justified">
-            <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Character</a>
+            <a class="nav-link btn-dark active" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Character</a>
             <a class="nav-link" href="{{route('virtuesection.show', $dashboard->virtue_section_id)}}">Vices and Virtues</a>
-            <a class="nav-link btn-dark active" href="{{route('virtuesection.summary', $dashboard->virtue_section_id)}}">Summary</a>
+            <a class="nav-link" href="{{route('virtuesection.summary', $dashboard->virtue_section_id)}}">Summary</a>
         </nav>
     </div>
 
