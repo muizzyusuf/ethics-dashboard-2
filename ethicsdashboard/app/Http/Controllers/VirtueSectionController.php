@@ -236,6 +236,51 @@ class VirtueSectionController extends Controller
         }
         return  redirect()->back();
     }
+
+    public function character($id)
+    {
+     
+        $virtueSection = VirtueSection::where('id', $id)->first();
+        $dashboard = Dashboard::where('id',$virtueSection->dashboard->id)->first();        
+        $ethicalissue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $casestudy = CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $options = Option::where('ethical_issue_id', $ethicalissue->id)->get();
+
+        $optionVirtues = Virtue::join('options','virtues.id','=','options.virtue_id')
+        ->select('virtues.id', 'virtues.value', 'virtues.virtue')
+        ->where('options.ethical_issue_id', $ethicalissue->id)
+        ->orderBy(DB::raw('ABS(value)'), 'asc')
+        ->get();
+
+        $stakeholderVirtues = Virtue::join('stakeholders','virtues.id','=','stakeholders.virtue_id')
+        ->select('virtues.id', 'virtues.value', 'virtues.virtue')
+        ->where('stakeholders.stakeholder_section_id', $dashboard->stakeholder_section_id)
+        ->orderBy(DB::raw('ABS(value)'), 'asc')
+        ->get();
+
+
+        if(Auth::user()->role()->first()->id == 3){
+            return view('student.character')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('virtueSection', $virtueSection)
+                                ->with('stakeholderVirtues', $stakeholderVirtues)
+                                ->with('optionVirtues', $optionVirtues);
+
+        }else{
+            return view('character')->with('dashboard', $dashboard)
+                                ->with('ethicalissue', $ethicalissue)
+                                ->with('stakeholders', $stakeholders)
+                                ->with('casestudy', $casestudy)
+                                ->with('options', $options)
+                                ->with('virtueSection', $virtueSection)
+                                ->with('stakeholderVirtues', $stakeholderVirtues)
+                                ->with('optionVirtues', $optionVirtues);
+        }
+    }
     
 }
 

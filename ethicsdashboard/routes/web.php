@@ -123,6 +123,9 @@ Route::post('/caresection/{caresection}','App\http\Controllers\CareSectionContro
 //route for viewing summary of inputs in virtue ethics section
 Route::get('/virtuesection/{virtuesection}/summary','App\http\Controllers\VirtueSectionController@summary')->name('virtuesection.summary');
 
+//route for viewing character section of inputs in virtue ethics section
+Route::get('/virtuesection/{virtuesection}/character','App\http\Controllers\VirtueSectionController@character')->name('virtuesection.character');
+
 //route for inputing final virtue ethics decision
 Route::post('/virtuesection/{virtuesection}/decision','App\http\Controllers\VirtueSectionController@decision')->name('virtuesection.decision');
 
