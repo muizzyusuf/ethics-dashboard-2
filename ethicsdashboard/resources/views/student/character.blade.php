@@ -56,7 +56,7 @@
                 <section>
 
                     <div>
-                        <canvas id="canvas" width="975" height="600">
+                        <canvas style="width: 100%; height: auto;" id="canvas"  width="600" height="400">
                             This text is displayed if your browser does not support HTML5 Canvas.
                         </canvas>
                     </div>
@@ -78,17 +78,17 @@
             
                             var circles = [];
             
-                            myGamePiece = new component(100, 80, 75, "#f67280", "traditions");
+                            myGamePiece = new component(100, 80, 50, "#f67280", "traditions");
                             circles.push(myGamePiece);
-                            myGamePiece1 = new component(300, 300, 75, "#81d8d0", "desire");
+                            myGamePiece1 = new component(300, 100, 50, "#81d8d0", "desire");
                             circles.push(myGamePiece1);
-                            myGamePiece2 = new component(100, 500, 75, "#c3fdb8", "expectations");
+                            myGamePiece2 = new component(100, 300, 50, "#c3fdb8", "expectations");
                             circles.push(myGamePiece2);
-                            myGamePiece3 = new component(500, 450, 75, "#ffffcf", "impulses");
+                            myGamePiece3 = new component(500, 250, 50, "#ffffcf", "impulses");
                             circles.push(myGamePiece3);
-                            myGamePiece4 = new component(500, 150, 75, "#ccccff", "conventions");
+                            myGamePiece4 = new component(500, 150, 50, "#ccccff", "conventions");
                             circles.push(myGamePiece4);
-                            myGamePiece5 = new component(300, 100, 75, "silver", "attachment");
+                            myGamePiece5 = new component(300, 100, 50, "silver", "attachment");
                             circles.push(myGamePiece5);
             
                             var canvas;
@@ -98,8 +98,8 @@
                             var offsetY;
                             var x = 75;
                             var y = 50;
-                            var WIDTH = 975;
-                            var HEIGHT = 600;
+                            var WIDTH = 600;
+                            var HEIGHT = 400;
                             
             
                             //var gravity = 0.25;
@@ -296,6 +296,9 @@
             
                     </script>
             
+                    <div class="text-center">
+                        <button class="btn btn-success"> BALANCE </button>
+                    </div>
                 </section>
             </div>
             
