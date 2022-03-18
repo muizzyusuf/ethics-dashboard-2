@@ -54,27 +54,27 @@
                         </div>
                         <div class="form-group">
                             <label for="code">Ethical Issue Section Points:</label>
-                            <input type="number" id="issue_points" name="issue_points" class="form-control" required>
+                            <input type="number" id="issue_points" min="0" name="issue_points" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="code"> Stakeholder Section Points:</label>
-                            <input type="number" id="stakeholder_points" name="stakeholder_points" class="form-control" required>
+                            <input type="number" id="stakeholder_points" min="0" name="stakeholder_points" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="code">Utilitarianism Section Points:</label>
-                            <input type="number" id="util_points" name="util_points" class="form-control" required>
+                            <input type="number" id="util_points" min="0" name="util_points" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="code"> Deontology Section Points:</label>
-                            <input type="number" id="deontology_points" name="deontology_points" class="form-control" required>
+                            <input type="number" id="deontology_points" min="0" name="deontology_points" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="code"> Virtue Ethics Section Points:</label>
-                            <input type="number" id="virtue_points" name="virtue_points" class="form-control" required>
+                            <input type="number" id="virtue_points" min="0" name="virtue_points" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="code"> Care Ethics Section Points:</label>
-                            <input type="number" id="care_points" name="care_points" class="form-control" required>
+                            <input type="number" id="care_points" min="0" name="care_points" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
