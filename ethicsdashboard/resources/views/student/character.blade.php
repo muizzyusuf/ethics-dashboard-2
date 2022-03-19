@@ -61,7 +61,7 @@
                         </canvas>
                     </div>
             
-                    <script>
+                    <script type="text/javascript">
             
                         $(document).ready(function(){
                            var myGamePiece;
@@ -146,7 +146,7 @@
                                     ctx.textBaseline = "middle";
                                     ctx.textAlign = "center"; 
                                     ctx.fillText(this.text, this.x, this.y);
-                                    this.bounce();
+                                    //this.bounce();
                                 }
             
                                 this.bounce = function(){
@@ -191,6 +191,7 @@
                                     var temp = circles[i];
                                 
                                     temp.update();
+                                    temp.bounce();
                                     
                                     
                                 }
@@ -201,21 +202,21 @@
             
                             
             
-                            function myDown(e) {
+                            $(function myDown(e) {
             
                                 // tell the browser we're handling this mouse event
                                 e.preventDefault();
                                 e.stopPropagation();
             
                                 // get the current mouse position
-                                var mx = e.offsetX||e.pageX;
-                                var my = e.offsetY||e.pageY;
+                                var mx = e.clientX;
+                                var my = e.clientY;
             
                                 // test each rect to see if mouse is inside
                                 dragok = false;
                                 for (var i = 0; i < circles.length; i++) {
                                     var c = circles[i];
-                                    if (Math.sqrt((mx-c.x)**2 + (my-c.y)**2) <= c.r) {
+                                    if (Math.sqrt((mx-c.x)**2 + (my-c.y)**2) < c.r) {
                                         // if yes, set that rects isDragging=true
                                         dragok = true;
 
@@ -225,11 +226,11 @@
                                 // save the current mouse position
                                 startX = mx;
                                 startY = my;
-                            }
+                            });
             
             
                             // handle mouseup events
-                            function myUp(e) {
+                            $(function myUp(e) {
                                 // tell the browser we're handling this mouse event
                                 e.preventDefault();
                                 e.stopPropagation();
@@ -239,11 +240,11 @@
                                 for (var i = 0; i < circles.length; i++) {
                                     circles[i].isDragging = false;
                                 }
-                            }
+                            });
             
             
                             // handle mouse moves
-                            function myMove(e) {
+                            $(function myMove(e) {
                                 // if we're dragging anything...
                                 if (dragok) {
             
@@ -252,8 +253,8 @@
                                     e.stopPropagation();
             
                                     // get the current mouse position
-                                    var mx = parseInt(e.offsetX);
-                                    var my = parseInt(e.offsetY);
+                                    var mx = parseInt(e.clientX - offsetX);
+                                    var my = parseInt(e.clientY - offsetY);
             
                                     // calculate the distance the mouse has moved
                                     // since the last mousemove
@@ -279,7 +280,39 @@
                                     startY = my;
             
                                 }
-                            }
+                            });
+
+                            $(function solve(){
+
+                                myGamePiece.x = 300;
+                                myGamePiece.y = 66;
+                                
+                                myGamePiece1.x = 300;
+                                myGamePiece1.y = 333;
+
+                                myGamePiece2.x = 100;
+                                myGamePiece2.y =133;
+
+                                myGamePiece3.x = 500;
+                                myGamePiece3.y = 133;
+
+                                myGamePiece4.x = 100;
+                                myGamePiece4.y = 266;
+
+                                myGamePiece5.x = 500;
+                                myGamePiece5.y = 266;
+
+                                for(var i = 0; i<circles.length; i++){
+                                    var temp = circles[i];
+                                    temp.moveX = 0;
+                                    temp.moveY = 0;
+                                }
+
+                                alert("CONGRATULATIONS! Your soul is now in a stable equilibrium which is essential to understanding virtue. However, this achievement is fleeting. Life will constantly challenge your ability to balance the many influences that will make it difficult to see the virtuous path.");
+
+                               
+
+                            });
             
                             init();
                             // canvas.onmousedown = myDown;
@@ -297,7 +330,7 @@
                     </script>
             
                     <div class="text-center">
-                        <button class="btn btn-success"> BALANCE </button>
+                        <button onclick="solve()" class="btn btn-success"> BALANCE </button>
                     </div>
                 </section>
             </div>
