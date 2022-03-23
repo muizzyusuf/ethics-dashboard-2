@@ -88,7 +88,7 @@
                             circles.push(myGamePiece3);
                             myGamePiece4 = new component(500, 150, 50, "#ccccff", "conventions");
                             circles.push(myGamePiece4);
-                            myGamePiece5 = new component(300, 100, 50, "silver", "attachment");
+                            myGamePiece5 = new component(300, 200, 50, "silver", "attachment");
                             circles.push(myGamePiece5);
             
                             var canvas;
@@ -202,35 +202,46 @@
             
                             
             
-                            $(function myDown(e) {
+                            function myDown(e) {
             
                                 // tell the browser we're handling this mouse event
                                 e.preventDefault();
                                 e.stopPropagation();
+                                var rect = this.getBoundingClientRect();
+                                var scaleX = canvas.width / rect.width;    // relationship bitmap vs. element for X
+                                var scaleY = canvas.height / rect.height;
             
                                 // get the current mouse position
-                                var mx = e.clientX;
-                                var my = e.clientY;
+                                var mx = (e.clientX - rect.left)*scaleX;
+                                var my = (e.clientY -rect.top)*scaleY;
+                                
+                                
             
                                 // test each rect to see if mouse is inside
                                 dragok = false;
                                 for (var i = 0; i < circles.length; i++) {
                                     var c = circles[i];
-                                    if (Math.sqrt((mx-c.x)**2 + (my-c.y)**2) < c.r) {
+                                    var dx = mx-c.x;
+                                    var dy = my-c.y;
+
+                                   
+                                    if (Math.sqrt((dx*dx) + (dy*dy)) < (c.r)) {
                                         // if yes, set that rects isDragging=true
                                         dragok = true;
 
                                         c.isDragging = true;
+
+                                        // console.log('circle = '+ (Math.sqrt((mx-c.x)**2 + (my-c.y)**2) < c.r);
                                     }
                                 }
                                 // save the current mouse position
                                 startX = mx;
                                 startY = my;
-                            });
+                            }
             
             
                             // handle mouseup events
-                            $(function myUp(e) {
+                            function myUp(e) {
                                 // tell the browser we're handling this mouse event
                                 e.preventDefault();
                                 e.stopPropagation();
@@ -240,21 +251,29 @@
                                 for (var i = 0; i < circles.length; i++) {
                                     circles[i].isDragging = false;
                                 }
-                            });
+                            }
             
             
                             // handle mouse moves
-                            $(function myMove(e) {
+                            function myMove(e) {
                                 // if we're dragging anything...
                                 if (dragok) {
             
                                     // tell the browser we're handling this mouse event
                                     e.preventDefault();
                                     e.stopPropagation();
+
+                                    var rect = this.getBoundingClientRect();
+                                    var scaleX = canvas.width / rect.width;    // relationship bitmap vs. element for X
+                                    var scaleY = canvas.height / rect.height;
+                
+                                    // get the current mouse position
+                                    var mx = (e.clientX - rect.left)*scaleX;
+                                    var my = (e.clientY -rect.top)*scaleY;
             
                                     // get the current mouse position
-                                    var mx = parseInt(e.clientX - offsetX);
-                                    var my = parseInt(e.clientY - offsetY);
+                                    // var mx = parseInt(e.clientX - offsetX);
+                                    // var my = parseInt(e.clientY - offsetY);
             
                                     // calculate the distance the mouse has moved
                                     // since the last mousemove
@@ -280,9 +299,9 @@
                                     startY = my;
             
                                 }
-                            });
+                            }
 
-                            $(function solve(){
+                            $('#solve').click(function(){
 
                                 myGamePiece.x = 300;
                                 myGamePiece.y = 66;
@@ -313,10 +332,23 @@
                                
 
                             });
+
+                            $('#reset').click(function(){
+
+                               
+
+                                for(var i = 0; i<circles.length; i++){
+                                    var temp = circles[i];
+                                    temp.startingAngle = Math.floor(Math.random() * (360 - 0 + 1) + 0);
+                                    temp.moveX = Math.cos(Math.PI / 180 * temp.startingAngle) * temp.velocity;
+                                    temp.moveY = Math.sin(Math.PI / 180 * temp.startingAngle) * temp.velocity;
+                                }
+                               
+
+                            });
             
                             init();
-                            // canvas.onmousedown = myDown;
-                            // canvas.onmouseup = myUp;
+                            
                             canvas.onmousedown = myDown;
                             canvas.onmouseup = myUp;
                             canvas.onmousemove = myMove;
@@ -330,8 +362,10 @@
                     </script>
             
                     <div class="text-center">
-                        <button onclick="solve()" class="btn btn-success"> BALANCE </button>
+                        <button id='solve' class="btn btn-success"> BALANCE </button>
+                        <button id='reset' class="btn btn-secondary"> RESET </button>
                     </div>
+                   
                 </section>
             </div>
             
