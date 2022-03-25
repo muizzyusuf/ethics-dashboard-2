@@ -16,6 +16,7 @@ use App\Models\Stakeholder;
 use App\Models\Option;
 use App\Models\Course;
 
+use PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,7 +49,11 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
+    public function downloadPDF(Request $request){
+        $dashboard = Dashboard::where('id', $request->input('id'))->first();
+        $pdf = PDF::loadView('pdf', compact('dashboard'));
+        return $pdf->download('testing.pdf');
+    }
     public function exportCsv(Request $request)
     {   
         
