@@ -15,6 +15,8 @@ use App\Models\CaseStudy;
 use App\Models\Stakeholder;
 use App\Models\Option;
 use App\Models\Course;
+use App\Models\Consequence;
+use App\Models\Impact;
 
 use PDF;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +53,34 @@ class TaskController extends Controller
      */
     public function downloadPDF(Request $request){
         $dashboard = Dashboard::where('id', $request->input('id'))->first();
-        $pdf = PDF::loadView('pdf', compact('dashboard'));
+        $utilitarianism= UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
+        $ethicalIssue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $options = Option::where('ethical_issue_id', $dashboard->ethical_issue_id)->get();
+        $consequences=[];
+        foreach ($options as $option){
+            $consequenceList=Consequence::where('option_id',$option->id)->get();
+            foreach($consequenceList as $consequence){
+                array_push($consequences,$consequence);
+            }
+        }
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
+        $impacts=[];
+        foreach ($stakeholders as $stakeholder){
+            $impactList=Impact::where('stakeholder_id',$stakeholder->id)->get();
+            foreach($impactList as $impact){
+                array_push($impacts,$impact);
+            }
+        }
+        
+        $deontology= DeontologySection::where('id', $dashboard->deontology_section_id)->first();
+        $care= CareSection::where('id', $dashboard->care_section_id)->first();
+        $virtue= VirtueSection::where('id', $dashboard->virtue_section_id)->first();
+        $user= User::where('id', $dashboard->user_id)->first();
+        $case= CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $course= Course::where('id', $case->course_id)->first();
+
+        $pdf = PDF::loadView('pdf', compact('dashboard','consequences','impacts','utilitarianism', 'ethicalIssue','options','stakeholders','deontology','care','virtue','user','case','course'),);
+
         return $pdf->download('testing.pdf');
     }
     public function exportCsv(Request $request)
