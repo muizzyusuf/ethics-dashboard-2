@@ -40,7 +40,7 @@ class HomeController extends Controller
         ->where('users.id','=',$id)
         ->get();
 
-        if(Auth::user()->role()->first()->id == 3){
+        if(Auth::user()->role()->first()->id == 3 || Auth::user()->role()->first()->id == 2){
             return view('student.home')->with('id', $id)->with('courses', $courses);
         }else{
             return view('home')->with('id', $id)->with('courses', $courses);

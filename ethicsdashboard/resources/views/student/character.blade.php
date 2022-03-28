@@ -56,12 +56,12 @@
                 <section>
 
                     <div>
-                        <canvas id="canvas" width="975" height="600">
+                        <canvas style="width: 100%; height: auto;" id="canvas"  width="600" height="400">
                             This text is displayed if your browser does not support HTML5 Canvas.
                         </canvas>
                     </div>
             
-                    <script>
+                    <script type="text/javascript">
             
                         $(document).ready(function(){
                            var myGamePiece;
@@ -78,17 +78,17 @@
             
                             var circles = [];
             
-                            myGamePiece = new component(100, 80, 75, "#f67280", "traditions");
+                            myGamePiece = new component(100, 80, 50, "#f67280", "traditions");
                             circles.push(myGamePiece);
-                            myGamePiece1 = new component(300, 300, 75, "#81d8d0", "desire");
+                            myGamePiece1 = new component(300, 100, 50, "#81d8d0", "desire");
                             circles.push(myGamePiece1);
-                            myGamePiece2 = new component(100, 500, 75, "#c3fdb8", "expectations");
+                            myGamePiece2 = new component(100, 300, 50, "#c3fdb8", "expectations");
                             circles.push(myGamePiece2);
-                            myGamePiece3 = new component(500, 450, 75, "#ffffcf", "impulses");
+                            myGamePiece3 = new component(500, 250, 50, "#ffffcf", "impulses");
                             circles.push(myGamePiece3);
-                            myGamePiece4 = new component(500, 150, 75, "#ccccff", "conventions");
+                            myGamePiece4 = new component(500, 150, 50, "#ccccff", "conventions");
                             circles.push(myGamePiece4);
-                            myGamePiece5 = new component(300, 100, 75, "silver", "attachment");
+                            myGamePiece5 = new component(300, 200, 50, "silver", "attachment");
                             circles.push(myGamePiece5);
             
                             var canvas;
@@ -98,8 +98,8 @@
                             var offsetY;
                             var x = 75;
                             var y = 50;
-                            var WIDTH = 975;
-                            var HEIGHT = 600;
+                            var WIDTH = 600;
+                            var HEIGHT = 400;
                             
             
                             //var gravity = 0.25;
@@ -146,7 +146,7 @@
                                     ctx.textBaseline = "middle";
                                     ctx.textAlign = "center"; 
                                     ctx.fillText(this.text, this.x, this.y);
-                                    this.bounce();
+                                    //this.bounce();
                                 }
             
                                 this.bounce = function(){
@@ -191,6 +191,7 @@
                                     var temp = circles[i];
                                 
                                     temp.update();
+                                    temp.bounce();
                                     
                                     
                                 }
@@ -206,20 +207,31 @@
                                 // tell the browser we're handling this mouse event
                                 e.preventDefault();
                                 e.stopPropagation();
+                                var rect = this.getBoundingClientRect();
+                                var scaleX = canvas.width / rect.width;    // relationship bitmap vs. element for X
+                                var scaleY = canvas.height / rect.height;
             
                                 // get the current mouse position
-                                var mx = e.offsetX||e.pageX;
-                                var my = e.offsetY||e.pageY;
+                                var mx = (e.clientX - rect.left)*scaleX;
+                                var my = (e.clientY -rect.top)*scaleY;
+                                
+                                
             
                                 // test each rect to see if mouse is inside
                                 dragok = false;
                                 for (var i = 0; i < circles.length; i++) {
                                     var c = circles[i];
-                                    if (Math.sqrt((mx-c.x)**2 + (my-c.y)**2) <= c.r) {
+                                    var dx = mx-c.x;
+                                    var dy = my-c.y;
+
+                                   
+                                    if (Math.sqrt((dx*dx) + (dy*dy)) < (c.r)) {
                                         // if yes, set that rects isDragging=true
                                         dragok = true;
 
                                         c.isDragging = true;
+
+                                        // console.log('circle = '+ (Math.sqrt((mx-c.x)**2 + (my-c.y)**2) < c.r);
                                     }
                                 }
                                 // save the current mouse position
@@ -250,10 +262,18 @@
                                     // tell the browser we're handling this mouse event
                                     e.preventDefault();
                                     e.stopPropagation();
+
+                                    var rect = this.getBoundingClientRect();
+                                    var scaleX = canvas.width / rect.width;    // relationship bitmap vs. element for X
+                                    var scaleY = canvas.height / rect.height;
+                
+                                    // get the current mouse position
+                                    var mx = (e.clientX - rect.left)*scaleX;
+                                    var my = (e.clientY -rect.top)*scaleY;
             
                                     // get the current mouse position
-                                    var mx = parseInt(e.offsetX);
-                                    var my = parseInt(e.offsetY);
+                                    // var mx = parseInt(e.clientX - offsetX);
+                                    // var my = parseInt(e.clientY - offsetY);
             
                                     // calculate the distance the mouse has moved
                                     // since the last mousemove
@@ -280,10 +300,55 @@
             
                                 }
                             }
+
+                            $('#solve').click(function(){
+
+                                myGamePiece.x = 300;
+                                myGamePiece.y = 66;
+                                
+                                myGamePiece1.x = 300;
+                                myGamePiece1.y = 333;
+
+                                myGamePiece2.x = 100;
+                                myGamePiece2.y =133;
+
+                                myGamePiece3.x = 500;
+                                myGamePiece3.y = 133;
+
+                                myGamePiece4.x = 100;
+                                myGamePiece4.y = 266;
+
+                                myGamePiece5.x = 500;
+                                myGamePiece5.y = 266;
+
+                                for(var i = 0; i<circles.length; i++){
+                                    var temp = circles[i];
+                                    temp.moveX = 0;
+                                    temp.moveY = 0;
+                                }
+
+                                alert("CONGRATULATIONS! Your soul is now in a stable equilibrium which is essential to understanding virtue. However, this achievement is fleeting. Life will constantly challenge your ability to balance the many influences that will make it difficult to see the virtuous path.");
+
+                               
+
+                            });
+
+                            $('#reset').click(function(){
+
+                               
+
+                                for(var i = 0; i<circles.length; i++){
+                                    var temp = circles[i];
+                                    temp.startingAngle = Math.floor(Math.random() * (360 - 0 + 1) + 0);
+                                    temp.moveX = Math.cos(Math.PI / 180 * temp.startingAngle) * temp.velocity;
+                                    temp.moveY = Math.sin(Math.PI / 180 * temp.startingAngle) * temp.velocity;
+                                }
+                               
+
+                            });
             
                             init();
-                            // canvas.onmousedown = myDown;
-                            // canvas.onmouseup = myUp;
+                            
                             canvas.onmousedown = myDown;
                             canvas.onmouseup = myUp;
                             canvas.onmousemove = myMove;
@@ -296,6 +361,11 @@
             
                     </script>
             
+                    <div class="text-center">
+                        <button id='solve' class="btn btn-success"> BALANCE </button>
+                        <button id='reset' class="btn btn-secondary"> RESET </button>
+                    </div>
+                   
                 </section>
             </div>
             

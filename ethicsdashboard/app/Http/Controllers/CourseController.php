@@ -92,7 +92,7 @@ class CourseController extends Controller
         $course = Course::where('id', $id)->first();
         $casestudies = CaseStudy::where('course_id', $id)->get();
 
-        if(Auth::user()->role()->first()->id == 3){
+        if(Auth::user()->role()->first()->id == 3 || Auth::user()->role()->first()->id == 2){
             return view('student.course')->with('course', $course)->with('casestudies',$casestudies);
         }else{
             return view('course')->with('course', $course)->with('casestudies',$casestudies);
