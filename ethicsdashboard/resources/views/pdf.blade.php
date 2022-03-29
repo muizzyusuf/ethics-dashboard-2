@@ -78,8 +78,36 @@
       </tr>
       <tr>
         <td>
-        <h3>Utilitarianism Decision: </h3>
-        <div>{{$utilitarianism->decision}}</div>
+        <h3>Utilitarianism Summary: </h3>
+        <div>Decision: {{$utilitarianism->decision}}</div>
+        <div>*Aggregate Summary of Pleasure Analysis can be found Under the <em>Summary</em> tab on the Dashboard Page</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <h3>Virtue Ethics Summary</h3>
+        @for($i=0; $i<count($oVirtues[0]); $i++)
+
+          <div> {{$oVirtues[0][$i]->option}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue: {{$oVirtues[1][$i]->virtue}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Excess): {{$oVirtues[1][$i]->excess}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue (Mean): {{$oVirtues[1][$i]->mean}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Deficiency): {{$oVirtues[1][$i]->deficiency}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Value: {{$oVirtues[1][$i]->value}}</div>
+            
+          
+        @endfor 
+        @for($i=0; $i<count($sVirtues[0]); $i++)
+
+          <div> {{$sVirtues[0][$i]->stakeholder}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue: {{$sVirtues[1][$i]->virtue}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Excess): {{$sVirtues[1][$i]->excess}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue (Mean): {{$sVirtues[1][$i]->mean}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Deficiency): {{$sVirtues[1][$i]->deficiency}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Value: {{$sVirtues[1][$i]->value}}</div>
+            
+
+        @endfor 
         </td>
       </tr>
     </table>
