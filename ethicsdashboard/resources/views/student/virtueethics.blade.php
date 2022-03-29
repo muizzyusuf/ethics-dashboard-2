@@ -34,8 +34,9 @@
     <div class="card border-secondary">
         <p class="card-header font-weight-bold">The Virtuous action is the one that balances the interests of
             the stakeholders in the light of the relavant virtues. 
+
             Note: This is just a rough approximation of how  Virtue Ethics can be applied to a 
-            particular case. Practicing the virtues is a lie-long endeavor - meaning that you
+            particular case. Practicing the virtues is a life-long endeavor - meaning that you
             would evaluate success/failure in consideration of the consequences, re-evaluate
             your decisions and refine your understanding of the virtues until virtuous actions 
             flow from your character.</p>
@@ -58,19 +59,44 @@
                         
                                 <div class="row">
                                     <div class="col-2">
-                                    
-                                        
-                                        <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" required>
+                                
+                                        <input list="excess"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" required>
+                                        <datalist id="excess">
+                                            <option value="Rashness">
+                                            <option value="Extravagant">
+                                            <option value="Self-sacrificing">
+                                            <option value="Over-ambitious">
+                                            <option value="Obsequious">
+                                            <option value="Conceited">
+                                        </datalist>        
+                                                                            
                                     </div>
                                     <div class="col-2 offset-3">
                                     
-            
-                                        <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" required>
+                                        <input list="mean" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" required>
+                                        <datalist id="mean">
+                                            <option value="Courage">
+                                            <option value="Generous">
+                                            <option value="Benevolent">
+                                            <option value="Industrious">
+                                            <option value="Friendly">
+                                            <option value="Truthful">
+                                        </datalist>
+                                        
                                     </div>
                                     <div class="col-2 offset-3">
                             
                                     
-                                        <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" required>
+                                        <input list="deficiency" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" required>
+                                        <datalist id="deficiency">
+                                            <option value="Cowardice">
+                                            <option value="Stingy">
+                                            <option value="Mean">
+                                            <option value="Lazy">
+                                            <option value="Cantankerous">
+                                            <option value="Self-deprecating">
+                                        </datalist>
+                                            
                                     </div>
                                 </div>
             
@@ -107,17 +133,45 @@
                                     <div class="col-2">
                                     
                                         
-                                        <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" value="{{$options[$i]->virtue->excess}}" required>
+                                        <input list="excess"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" value="{{$options[$i]->virtue->excess}}" required>
+                                        <datalist id="excess">
+                                            <option value="Rashness">
+                                            <option value="Extravagant">
+                                            <option value="Self-sacrificing">
+                                            <option value="Over-ambitious">
+                                            <option value="Obsequious">
+                                            <option value="Conceited">
+                                        </datalist>
+                                            
                                     </div>
+
                                     <div class="col-2 offset-3">
                                     
             
-                                        <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" value="{{$options[$i]->virtue->mean}}" required>
+                                        <input list="mean" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" value="{{$options[$i]->virtue->mean}}" required>
+                                        <datalist id="mean">
+                                            <option value="Courage">
+                                            <option value="Generous">
+                                            <option value="Benevolent">
+                                            <option value="Industrious">
+                                            <option value="Friendly">
+                                            <option value="Truthful">
+                                        </datalist>
+
                                     </div>
                                     <div class="col-2 offset-3">
                             
                                     
-                                        <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" value="{{$options[$i]->virtue->deficiency}}" required>
+                                        <input list="deficiency" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" value="{{$options[$i]->virtue->deficiency}}" required>
+                                        <datalist id="deficiency">
+                                            <option value="Cowardice">
+                                            <option value="Stingy">
+                                            <option value="Mean">
+                                            <option value="Lazy">
+                                            <option value="Cantankerous">
+                                            <option value="Self-deprecating">
+                                        </datalist>
+
                                     </div>
                                 </div>
             
@@ -159,17 +213,42 @@
                                     <div class="col-2">
                                     
                                         
-                                        <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" required>
+                                        <input list="excess"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" required>
+                                        <datalist id="excess">
+                                            <option value="Rashness">
+                                            <option value="Extravagant">
+                                            <option value="Self-sacrificing">
+                                            <option value="Over-ambitious">
+                                            <option value="Obsequious">
+                                            <option value="Conceited">
+                                        </datalist>
+                                        
                                     </div>
                                     <div class="col-2 offset-3">
                                     
             
-                                        <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" required>
+                                        <input list="mean" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" required>
+                                        <datalist id="mean">
+                                            <option value="Courage">
+                                            <option vaue="Generous">
+                                            <option value="Benevolent">
+                                            <option value="Industrious">
+                                            <option value="Friendly">
+                                            <option value="Truthful">
+                                        </datalist>
                                     </div>
                                     <div class="col-2 offset-3">
                             
-                                    
-                                        <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" required>
+                                        <input list="deficiency" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" required>
+                                        <datalist id="deficiency">
+                                            <option value="Cowardice">
+                                            <option value="Stingy">
+                                            <option value="Mean">
+                                            <option value="Lazy">
+                                            <option value="Cantankerous">
+                                            <option value="Self-deprecating">
+                                        </datalist>
+                                        
                                     </div>
                                 </div>
             
@@ -206,17 +285,43 @@
                                     <div class="col-2">
                                     
                                         
-                                        <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" value="{{$stakeholders[$i]->virtue->excess}}" required>
+                                        <input list="excess"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" value="{{$stakeholders[$i]->virtue->excess}}" required>
+                                        <datalist id="excess">
+                                            <option value="Rashness">
+                                            <option value="Extravagant">
+                                            <option value="Self-sacraficing">
+                                            <option value="Over-ambitious">
+                                            <option value="Obsequious">
+                                            <option value="Conceited">
+                                        </datalist>
+
                                     </div>
                                     <div class="col-2 offset-3">
                                     
             
-                                        <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" value="{{$stakeholders[$i]->virtue->mean}}" required>
+                                        <input list="mean" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" value="{{$stakeholders[$i]->virtue->mean}}" required>
+                                        <datalist id="mean">
+                                            <option value="Courage">
+                                            <option value="Generous">
+                                            <option value="Benevolent">
+                                            <option value="Industrious">
+                                            <option value="Friendly">
+                                            <option value="Truthful">
+                                        </datalist>
+                                
                                     </div>
                                     <div class="col-2 offset-3">
                             
                                     
-                                        <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" value="{{$stakeholders[$i]->virtue->deficiency}}" required>
+                                        <input list="deficiency" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" value="{{$stakeholders[$i]->virtue->deficiency}}" required>
+                                        <datalist id="deficiency">
+                                            <option value="Cowardice">
+                                            <option value="Stingy">
+                                            <option value="Mean">
+                                            <option value="Lazy">
+                                            <option value="Cantankerous">
+                                            <option value="Self-deprecating">
+                                        </datalist>
                                     </div>
                                 </div>
             
@@ -233,34 +338,6 @@
             </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-  
-      $("form").submit(function () {
-        // prevent duplicate form submissions
-        $(this).find(":submit").attr('disabled', 'disabled');
-        $(this).find(":submit").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-  
-      });
-    });
-  </script>
+
 @endsection
             
-
-        
-            
-
-                    
-                    
-                            
-                       
-                                
-
-
-
-
-
-
-                            
-
-                       
