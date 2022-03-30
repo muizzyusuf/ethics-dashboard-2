@@ -40,25 +40,25 @@
                 <input type="hidden" id="id" name="id" value="{{$ethicalissue->id}}" >
                 <div class="form-group">
                     <label class="font-weight-bold col-form-label" for="issue">Ethical Issue</label>
-                    <textarea class="form-control form-control" id="issue" name="issue" rows="3" placeholder="Example: I am an engineer who is asked to create the VW defeat device. It will make it possible for vehicles to pass emissions tests designed to protect the environment. I'm not sure I should do it because it seems wrong to cheat" required>{{$ethicalissue->issue}} </textarea>
+                    <textarea class="form-control form-control" id="issue" name="issue" rows="3" placeholder="E.g. I am an engineer who is asked to create the VW defeat device. It will make it possible for vehicles to pass emissions tests designed to protect the environment. I'm not sure I should do it because it seems wrong to cheat" required>{{$ethicalissue->issue}} </textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="option1">Option 1</label>
                     <input type="hidden" id="option1_id" name="option1_id" @if(isset($options[0])) value="{{$options[0]->id}}" @endif>
-                    <textarea class="form-control" id="option1" name="option1" rows="3" placeholder="Example: I can put loyalty to the company above my personal concerns and do my job - create the device." required>@if(count($options)>0) {{$options[0]->option}} @endif </textarea>
+                    <textarea class="form-control" id="option1" name="option1" rows="3" placeholder="E.g. I can put loyalty to the company above my personal concerns and do my job - create the device." required>@if(count($options)>0) {{$options[0]->option}} @endif </textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="option2">Option 2</label>
                     <input type="hidden" id="option2_id" name="option2_id" @if(isset($options[1])) value="{{$options[1]->id}}" @endif>
-                    <textarea class="form-control" id="option2" name="option2" rows="3" placeholder="Example: I can betray the company, go to the press and blow the whistle." required>@if(count($options)>0) {{$options[1]->option}} @endif </textarea>
+                    <textarea class="form-control" id="option2" name="option2" rows="3" placeholder="E.g. I can betray the company, go to the press and blow the whistle." required>@if(count($options)>0) {{$options[1]->option}} @endif </textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="option3">Option 3</label>
                     <input type="hidden" id="option3_id" name="option3_id" @if(isset($options[2])) value="{{$options[2]->id}}" @endif>
-                    <textarea class="form-control" id="option3" name="option3" rows="3" placeholder="Example: I can stand up to my superiors, say no and organize colleagues to prevent the cheat device." required>@if(count($options)>0) {{$options[2]->option}} @endif </textarea>
+                    <textarea class="form-control" id="option3" name="option3" rows="3" placeholder="E.g. I can stand up to my superiors, say no and organize colleagues to prevent the cheat device." required>@if(count($options)>0) {{$options[2]->option}} @endif </textarea>
                 </div>
 
               

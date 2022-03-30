@@ -41,12 +41,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="font-weight-bold" for="stakeholder{{$i+1}}">Stakeholder {{$i+1}}</label>
-                            <input type="text" class="form-control" id="stakeholder{{$i+1}}" name="stakeholder{{$i+1}}" placeholder=" Example: (1)The engineer asked to design the VW defeat device (2) The decision makers at VW who asked the engineer to create the device (3) Consumers - Vehicle buyers " @if(count($stakeholders)>0) value="{{$stakeholders[$i]->stakeholder}}" @endif  required>
+                            <input type="text" class="form-control" id="stakeholder{{$i+1}}" name="stakeholder{{$i+1}}" placeholder="E.g.(1)The engineer asked to design the VW defeat device E.g.(2) The decision makers at VW who asked the engineer to create the device E.g.(3) Consumers - Vehicle buyers " @if(count($stakeholders)>0) value="{{$stakeholders[$i]->stakeholder}}" @endif  required>
                             <input type="hidden" id="stakeholder{{$i+1}}_id" name="stakeholder{{$i+1}}_id" @if(count($stakeholders)>0) value="{{$stakeholders[$i]->id}}" @endif>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="font-weight-bold" for="interest{{$i+1}}">Interests</label>
-                            <textarea class="form-control" id="interest{{$i+1}}" name="interest{{$i+1}}" rows="3" placeholder="Example (1) Professional success, job security, clear conscience (2) Increase Profit, Satisfy Consumer needs (3) A green vehicle, a clear consience, social status"  required>@if(count($stakeholders)>0) {{$stakeholders[$i]->interests}} @endif </textarea>
+                            <textarea class="form-control" id="interest{{$i+1}}" name="interest{{$i+1}}" rows="3" placeholder="E.g.(1) Professional success, job security, clear conscience E.g.(2) Increase Profit, Satisfy Consumer needs E.g.(3) A green vehicle, a clear consience, social status"  required>@if(count($stakeholders)>0) {{$stakeholders[$i]->interests}} @endif </textarea>
                         </div>
                     </div>
                 @endfor
