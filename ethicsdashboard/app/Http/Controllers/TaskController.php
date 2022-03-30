@@ -18,6 +18,7 @@ use App\Models\Course;
 use App\Models\Consequence;
 use App\Models\Impact;
 use App\Models\Virtue;
+use App\Models\Care;
 
 use PDF;
 use Illuminate\Support\Facades\DB;
@@ -63,6 +64,7 @@ class TaskController extends Controller
         //Option Virtues
         $OVs=[];
         $oVirtues=[$Opts,$OVs];
+        $cares=[];
         foreach ($options as $option){
             $consequenceList=Consequence::where('option_id',$option->id)->get();
             foreach($consequenceList as $consequence){
@@ -70,6 +72,13 @@ class TaskController extends Controller
             }
             array_push($oVirtues[1],Virtue::where('id',$option->virtue_id)->first());
             array_push($oVirtues[0],$option);
+
+            $careList=Care::where('option_id', $option->id)->get();
+            foreach($careList as $care1){
+                $tempCare=[$care1, Option::where('id',$care1->option_id)->first(), Stakeholder::where('id',$care1->stakeholder_id)->first()];
+                array_push($cares,$tempCare);
+            }
+            
         }
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
         $impacts=[];
@@ -93,7 +102,7 @@ class TaskController extends Controller
         $case= CaseStudy::where('id', $dashboard->case_study_id)->first();
         $course= Course::where('id', $case->course_id)->first();
 
-        $pdf = PDF::loadView('pdf', compact('sVirtues','oVirtues','dashboard','consequences','impacts','utilitarianism', 'ethicalIssue','options','stakeholders','deontology','care','virtue','user','case','course'),);
+        $pdf = PDF::loadView('pdf', compact('cares','sVirtues','oVirtues','dashboard','consequences','impacts','utilitarianism', 'ethicalIssue','options','stakeholders','deontology','care','virtue','user','case','course'),);
 
         return $pdf->download('testing.pdf');
     }

@@ -95,7 +95,11 @@
           <div style="margin-left:2em; padding-bottom: 0;">Vice (Deficiency): {{$oVirtues[1][$i]->deficiency}}</div>
           <div style="margin-left:2em; padding-bottom: 0;">Value: {{$oVirtues[1][$i]->value}}</div>
             
-          
+         
+          </td>
+      </tr>
+      <tr>
+        <td>
         @endfor 
         @for($i=0; $i<count($sVirtues[0]); $i++)
 
@@ -110,6 +114,20 @@
         @endfor 
         </td>
       </tr>
+      
+        <h3>Care Ethics Summary</h3>
+        @for($i=0; $i<count($cares); $i++)
+        <tr>
+          <td>
+        <div>Care Analysis for {{$cares[$i][2]->stakeholder}}'s Choice in "{{$cares[$i][1]->option}}:"</div>
+        
+          <div style="margin-left:2em; padding-bottom: 0;">Attentiveness: {{$cares[$i][0]->attentiveness}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Competence: {{$cares[$i][0]->competence}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Responsiveness: {{$cares[$i][0]->responsiveness}}</div>
+          </td>
+      </tr>
+        @endfor
+      
     </table>
   </body>
 </html>
