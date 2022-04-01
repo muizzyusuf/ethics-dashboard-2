@@ -8716,92 +8716,233 @@
           @endfor 
         </td>
       </tr>
-      
-        
+
       <tr>
         <td>
           <h3>Care Ethics Summary</h3>
-          @for($i=0; $i<count($cares); $i++)
-          <p>Care Analysis for <b>Stakeholder: </b>{{$cares[$i][2]->stakeholder}}'s Choice in <b>Option:</b> "{{$cares[$i][1]->option}}:"</p>
-          <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
-            <li style="margin-left:2em; padding-bottom: 0;"><b>Attentiveness:</b> {{$cares[$i][0]->attentiveness}}</li>
-            <li style="margin-left:2em; padding-bottom: 0;"><b>Competence:</b> {{$cares[$i][0]->competence}}</li>
-            <li style="margin-left:2em; padding-bottom: 0;"><b>Responsiveness:</b> {{$cares[$i][0]->responsiveness}}</li>
-          </ol>
+        </td>
+      </tr>
+    
+      @for($i=0; $i<count($cares); $i++)
+        <tr>
+          <td>
+            <p>Care Analysis for:<br>
+              <b>Option:</b> "{{$cares[$i][1]->option}}"<br>
+              <b>Stakeholder:</b> {{$cares[$i][2]->stakeholder}}</p>
+            <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+              <li style="margin-left:2em; padding-bottom: 0;"><b>Attentiveness:</b> {{$cares[$i][0]->attentiveness}}</li>
+              <li style="margin-left:2em; padding-bottom: 0;"><b>Competence:</b> {{$cares[$i][0]->competence}}</li>
+              <li style="margin-left:2em; padding-bottom: 0;"><b>Responsiveness:</b> {{$cares[$i][0]->responsiveness}}</li>
+            </ol>
+          </td>
+      
+        </tr>
+      @endfor
+
+      
+        <tr>
+
+          <td>
+            <h3>Deontology Summary</h3>
+          </td>
+        
+        </tr>
+
+        <tr>
+
+          <th>
+            <p>Option Analysis</p>
+          </th>
+        
+        </tr>
+
+        @if(count($motivations[0])>0)
+          @for($i=0; $i<count($motivations); $i+=2)
+            <tr>
+              <td>
+                <p><b>Option:</b> {{$motivations[$i+1]->option}}</p>
+                <p><b>Imperative:</b> {{$motivations[$i+1]->imperative}}</p>
+                <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                  @for($j=0; $j<count($motivations[$i]); $j++)
+                  
+                    <li style="margin-left:2em; padding-bottom: 0;"><b>Motivation:</b> {{$motivations[$i][$j]->motivation}}</li>
+                  
+                  @endfor 
+                </ol>
+              </td>
+            </tr>
           @endfor
-        </td>
-       
-      </tr>
-       
-
-      
-      
-      <h3>Deontology Summary</h3>
-      <h4>Option Analysis</h4>
-      
-      @if(count($motivations[0])>0)
-        @for($i=0; $i<count($motivations); $i+=2)
+        @else
           <tr>
             <td>
-              <div>Option: {{$motivations[$i+1]->option}}</div>
-              @for($j=0; $j<count($motivations[$i]); $j++)
-                <div style="margin-left:2em; padding-bottom: 0;">Motivation: {{$motivations[$i][$j]->motivation}}</div>
-              @endfor 
+              <p>Analysis not done</p>
             </td>
           </tr>
-        @endfor
-      @else
-        <tr>
-          <td>
-            <br>
-          </td>
-        </tr>
-      @endif
+        @endif
 
-      
-      <h4>Moral Issues and Moral Laws</h4>
-      @if(count($moralIssuesLaws[0])>0)
-        @for($i=0; $i<count($moralIssuesLaws); $i+=3)
+        <tr>
+          <th>
+            <p>Moral Issues and Moral Laws</p>
+          </th>
+        </tr>
+        @if(count($moralIssuesLaws[3])>0)
+
+          @for($i=0; $i<count($moralIssuesLaws); $i+=3)
+            <tr>
+              <td>
+                <p>Moral Laws for <b>Option:</b> <em>"{{$moralIssuesLaws[$i+2]->option}}"</em>:<p>
+                  @for($j=0; $j<count($moralIssuesLaws[$i+1]); $j++)
+                    <p style="margin-left:2em; padding-bottom: 0;"><b>Law:</b> {{$moralIssuesLaws[$i+1][$j]->moral_law}}</p>
+                    <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                      
+                      <li style="margin-left:3em; padding-bottom: 0;"><b>Can this law be a universal law of moral action?</b> {{$moralIssuesLaws[$i+1][$j]->universalizability}}.</li>
+                      <li style="margin-left:3em; padding-bottom: 0;"><b>Explanation:</b> {{$moralIssuesLaws[$i+1][$j]->uni_explain}}</li>
+                      <li style="margin-left:3em; padding-bottom: 0;"><b>Could you live in a world where everyone followed this law?</b> {{$moralIssuesLaws[$i+1][$j]->consistency}}.</li>
+                      <li style="margin-left:3em; padding-bottom: 0;"><b>Explanation:</b> {{$moralIssuesLaws[$i+1][$j]->con_explain}}</li>
+                    </ol>
+                  @endfor 
+              </td>
+            </tr>
+          @endfor
+        @else
           <tr>
             <td>
-              <div>Moral Laws for <b>Option:</b> "{{$moralIssuesLaws[$i+2]->option}}":</div>
-                @for($j=0; $j<count($moralIssuesLaws[$i+1]); $j++)
-                  <div style="margin-left:2em; padding-bottom: 0;">{{$j+1}}. {{$moralIssuesLaws[$i+1][$j]->moral_law}}</div>
-                  <div style="margin-left:3em; padding-bottom: 0;">Can this law be a universal law of moral action? {{$moralIssuesLaws[$i+1][$j]->universalizability}}.</div>
-                  <div style="margin-left:3em; padding-bottom: 0;">Explanation: {{$moralIssuesLaws[$i+1][$j]->uni_explain}}</div>
-                  <div style="margin-left:3em; padding-bottom: 0;">Could you live in a world where everyone followed this law? {{$moralIssuesLaws[$i+1][$j]->consistency}}.</div>
-                  <div style="margin-left:3em; padding-bottom: 0;">Explanation: {{$moralIssuesLaws[$i+1][$j]->con_explain}}</div>
-                @endfor 
+              <p>Analysis not done</p>
             </td>
           </tr>
-        @endfor
-      @else
-        <tr>
-          <td>
-            <br>
-          </td>
-        </tr>
-      @endif
+        @endif
+
+  
+     
+
       
-      <h3>Grades Summary</h3>
+
       <tr>
+
         <td>
-          <div>Utilitarianism Section Grade: {{$utilitarianism->grade}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$utilitarianism->comment}}</div>
-          <div>Virtue Ethics Section Grade: {{$virtue->grade}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$virtue->comment}}</div>
-          <div>Care Ethics Section Grade: {{$care->grade}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$care->comment}}</div>
-          <div>Deontology Section Grade: {{$deontology->grade}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$deontology->comment}}</div>
-          <div>Ethical Issue and Options Grade: {{$ethicalIssue->grade}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$ethicalIssue->comment}}</div>
+
+          <table style="padding: 2px" class="table table-bordered">
+            <tr>
+              <td colspan="3">
+                <h3>Grades Summary</h3>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Section
+              </th>
       
+              <th>
+                Grade
+              </th>
       
+              <th>
+                Comment
+              </th>
+            </tr>
+      
+            <tr>
+              <td>
+                Ethical Issue & Options
+              </td>
+      
+              <td>
+                {{$ethicalIssue->grade}}
+              </td>
+      
+              <td>
+                {{$ethicalIssue->comment}}
+              </td>
+            </tr>
+      
+            <tr>
+              <td>
+                Stakeholders & Interests
+              </td>
+      
+              <td>
+                {{$dashboard->stakeholderSection->grade}}
+              </td>
+      
+              <td>
+                {{$dashboard->stakeholderSection->comment}}
+              </td>
+            </tr>
+      
+            <tr>
+              <td>
+                Utilitarianism
+              </td>
+      
+              <td>
+                {{$utilitarianism->grade}}
+              </td>
+      
+              <td>
+                {{$utilitarianism->comment}}
+              </td>
+            </tr>
+      
+            <tr>
+              <td>
+                Virtue Ethics
+              </td>
+      
+              <td>
+                {{$virtue->grade}}
+              </td>
+      
+              <td>
+                {{$virtue->comment}}
+              </td>
+            </tr>
+      
+            <tr>
+              <td>
+                Care Ethics
+              </td>
+      
+              <td>
+                {{$care->grade}}
+              </td>
+      
+              <td>
+                {{$care->comment}}
+              </td>
+            </tr>
+      
+            <tr>
+              <td>
+                Deontology
+              </td>
+      
+              <td>
+                {{$deontology->grade}}
+              </td>
+      
+              <td>
+                {{$deontology->comment}}
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                Total
+              </th>
+
+              <td colspan="2">
+                {{$dashboard->grade}}
+              </td>
+
+            </tr>
+          </table>
+
         </td>
+
       </tr>
-      
-      
+
+     
+       
     </table>
   </body>
 </html>
