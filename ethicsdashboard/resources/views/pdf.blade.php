@@ -86,14 +86,14 @@
       <tr>
         <td>
         <h3>Virtue Ethics Summary</h3>
-        @for($i=0; $i<count($oVirtues[0]); $i++)
+        @for($i=0; $i<count($oVirtues); $i+=2)
 
-          <div> {{$oVirtues[0][$i]->option}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Virtue: {{$oVirtues[1][$i]->virtue}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Vice (Excess): {{$oVirtues[1][$i]->excess}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Virtue (Mean): {{$oVirtues[1][$i]->mean}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Vice (Deficiency): {{$oVirtues[1][$i]->deficiency}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Value: {{$oVirtues[1][$i]->value}}</div>
+          <div> {{$oVirtues[$i+1]->option}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue: {{$oVirtues[$i]->virtue}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Excess): {{$oVirtues[$i]->excess}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue (Mean): {{$oVirtues[$i]->mean}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Deficiency): {{$oVirtues[$i]->deficiency}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Value: {{$oVirtues[$i]->value}}</div>
             
          
           </td>
@@ -101,14 +101,14 @@
       <tr>
         <td>
         @endfor 
-        @for($i=0; $i<count($sVirtues[0]); $i++)
+        @for($i=0; $i<count($sVirtues); $i+=2)
 
-          <div> {{$sVirtues[0][$i]->stakeholder}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Virtue: {{$sVirtues[1][$i]->virtue}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Vice (Excess): {{$sVirtues[1][$i]->excess}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Virtue (Mean): {{$sVirtues[1][$i]->mean}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Vice (Deficiency): {{$sVirtues[1][$i]->deficiency}}</div>
-          <div style="margin-left:2em; padding-bottom: 0;">Value: {{$sVirtues[1][$i]->value}}</div>
+          <div> {{$sVirtues[$i+1]->stakeholder}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue: {{$sVirtues[$i]->virtue}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Excess): {{$sVirtues[$i]->excess}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Virtue (Mean): {{$sVirtues[$i]->mean}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Vice (Deficiency): {{$sVirtues[$i]->deficiency}}</div>
+          <div style="margin-left:2em; padding-bottom: 0;">Value: {{$sVirtues[$i]->value}}</div>
             
 
         @endfor 
@@ -158,6 +158,26 @@
       </td>
     </tr>
       @endfor
+
+      </tr>
+      
+      <h3>Grades Summary</h3>
+     <tr>
+        <td>
+      <div>Utilitarianism Section Grade: {{$utilitarianism->grade}}</div>
+        <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$utilitarianism->comment}}</div>
+      <div>Virtue Ethics Section Grade: {{$virtue->grade}}</div>
+        <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$virtue->comment}}</div>
+      <div>Care Ethics Section Grade: {{$care->grade}}</div>
+        <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$care->comment}}</div>
+      <div>Deontology Section Grade: {{$deontology->grade}}</div>
+        <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$deontology->comment}}</div>
+      <div>Ethical Issue and Options Grade: {{$ethicalIssue->grade}}</div>
+        <div style="margin-left:2em; padding-bottom: 0;">Comment: {{$ethicalIssue->comment}}</div>
+      
+      
+        </td>
+    </tr>
       
       
     </table>
