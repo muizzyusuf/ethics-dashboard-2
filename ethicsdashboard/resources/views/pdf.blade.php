@@ -127,6 +127,38 @@
           </td>
       </tr>
         @endfor
+
+      
+      
+      <h3>Deontology Summary</h3>
+      <h4>Option Analysis</h4>
+      @for($i=0; $i<count($motivations); $i+=2)
+      <tr>
+        <td>
+      <div>Option: {{$motivations[$i+1]->option}}</div>
+        @for($j=0; $j<count($motivations[$i]); $j++)
+        <div style="margin-left:2em; padding-bottom: 0;">Motivation: {{$motivations[$i][$j]->motivation}}</div>
+       @endfor 
+      </td>
+    </tr>
+      @endfor
+
+      <h4>Moral Issues and Moral Laws</h4>
+      @for($i=0; $i<count($moralIssuesLaws); $i+=3)
+      <tr>
+        <td>
+      <div>Moral Laws for Option "{{$moralIssuesLaws[$i+2]->option}}":</div>
+        @for($j=0; $j<count($moralIssuesLaws[$i+1]); $j++)
+        <div style="margin-left:2em; padding-bottom: 0;">{{$j+1}}. {{$moralIssuesLaws[$i+1][$j]->moral_law}}</div>
+        <div style="margin-left:3em; padding-bottom: 0;">Can this law be a universal law of moral action? {{$moralIssuesLaws[$i+1][$j]->universalizability}}.</div>
+        <div style="margin-left:3em; padding-bottom: 0;">Explanation: {{$moralIssuesLaws[$i+1][$j]->uni_explain}}</div>
+        <div style="margin-left:3em; padding-bottom: 0;">Could you live in a world where everyone followed this law? {{$moralIssuesLaws[$i+1][$j]->consistency}}.</div>
+        <div style="margin-left:3em; padding-bottom: 0;">Explanation: {{$moralIssuesLaws[$i+1][$j]->con_explain}}</div>
+        @endfor 
+      </td>
+    </tr>
+      @endfor
+      
       
     </table>
   </body>

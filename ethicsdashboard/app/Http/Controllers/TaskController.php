@@ -19,6 +19,9 @@ use App\Models\Consequence;
 use App\Models\Impact;
 use App\Models\Virtue;
 use App\Models\Care;
+use App\Models\Motivation;
+use App\Models\MoralIssue;
+use App\Models\MoralLaw;
 
 use PDF;
 use Illuminate\Support\Facades\DB;
@@ -65,6 +68,8 @@ class TaskController extends Controller
         $OVs=[];
         $oVirtues=[$Opts,$OVs];
         $cares=[];
+        $motivations=[];
+        $moralIssuesLaws=[];
         foreach ($options as $option){
             $consequenceList=Consequence::where('option_id',$option->id)->get();
             foreach($consequenceList as $consequence){
@@ -78,6 +83,15 @@ class TaskController extends Controller
                 $tempCare=[$care1, Option::where('id',$care1->option_id)->first(), Stakeholder::where('id',$care1->stakeholder_id)->first()];
                 array_push($cares,$tempCare);
             }
+            
+            array_push($motivations,Motivation::where('option_id',$option->id)->get());
+            array_push($motivations,$option);
+
+            $moralIssues=MoralIssue::where('option_id',$option->id)->get();
+        
+            array_push($moralIssuesLaws,$moralIssues);
+            array_push($moralIssuesLaws,MoralLaw::where('option_id',$option->id)->get());
+            array_push($moralIssuesLaws,$option);
             
         }
         $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
@@ -102,9 +116,9 @@ class TaskController extends Controller
         $case= CaseStudy::where('id', $dashboard->case_study_id)->first();
         $course= Course::where('id', $case->course_id)->first();
 
-        $pdf = PDF::loadView('pdf', compact('cares','sVirtues','oVirtues','dashboard','consequences','impacts','utilitarianism', 'ethicalIssue','options','stakeholders','deontology','care','virtue','user','case','course'),);
+        $pdf = PDF::loadView('pdf', compact('moralIssuesLaws','motivations','cares','sVirtues','oVirtues','dashboard','consequences','impacts','utilitarianism', 'ethicalIssue','options','stakeholders','deontology','care','virtue','user','case','course'),);
 
-        return $pdf->download('testing.pdf');
+        return $pdf->download('DashboardSummary.pdf');
     }
     public function exportCsv(Request $request)
     {   
