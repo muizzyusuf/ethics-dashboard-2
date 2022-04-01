@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="font-weight-bold" for="interest{{$i+1}}">Interests</label>
-                            <textarea class="form-control" id="interest{{$i+1}}" name="interest{{$i+1}}" rows="3" placeholder="E.g.(1) Professional success, job security, clear conscience E.g.(2) Increase Profit, Satisfy Consumer needs E.g.(3) A green vehicle, a clear consience, social status"  required>@if(count($stakeholders)>0) {{$stakeholders[$i]->interests}} @endif </textarea>
+                            <textarea class="form-control" id="interest{{$i+1}}" name="interest{{$i+1}}" rows="3" placeholder="E.g.(1) Professional success, job security, clear conscience E.g.(2) Increase Profit, Satisfy Consumer needs E.g.(3) A green vehicle, a clear conscience, social status"  required>@if(count($stakeholders)>0) {{$stakeholders[$i]->interests}} @endif </textarea>
                         </div>
                     </div>
                 @endfor
