@@ -34,31 +34,31 @@
                 <div class="modal-body">
                 
                     <div class="form-group row">
-                        <label class="col-2" for="title">Title:</label>
+                        <label class="col-2 col-form-label" for="title">Title:</label>
                         <div class="col-10">
                             <input type="text" id="title" name="title" class="form-control" placeholder="e.g. Intro to Philosophy" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2" for="code">Course Code:</label>
+                        <label class="col-2 col-form-label" for="code">Course Code:</label>
                         <div class="col-10">
                             <input type="text" id="code" name="code" class="form-control" placeholder="e.g. PHIL" maxlength="5" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2" for="section">Number:</label>
+                        <label class="col-2 col-form-label" for="section">Number:</label>
                         <div class="col-10">
                             <input type="number" id="number" name="number" class="form-control" placeholder="e.g. 101" min="100" max="700" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2" for="section">Section:</label>
+                        <label class="col-2 col-form-label" for="section">Section:</label>
                         <div class="col-10">
                             <input type="text" id="section" name="section" class="form-control" placeholder="e.g. 001" maxlength="3" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-2" for="year">Year:</label>
+                        <label class="col-2 col-form-label" for="year">Year:</label>
                         <div class="col-10">
                             <input type="date" id="year" name="year" class="form-control" required>
                         </div>
@@ -164,31 +164,31 @@
                                     <div class="modal-body">
 
                                         <div class="form-group row">
-                                            <label class="col-2" for="title">Title:</label>
+                                            <label class="col-2 col-form-label" for="title">Title:</label>
                                             <div class="col-10">
                                                 <input type="text" id="title" name="title" class="form-control" value="{{$courses[$i]->title}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-2" for="code">Course Code:</label>
+                                            <label class="col-2 col-form-label" for="code">Course Code:</label>
                                             <div class="col-10">
                                                 <input type="text" id="code" name="code" class="form-control" value="{{$courses[$i]->code}}" maxlength="5" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-2" for="section">Number:</label>
+                                            <label class="col-2 col-form-label" for="section">Number:</label>
                                             <div class="col-10">
                                                 <input type="number" id="number" name="number" class="form-control" value="{{$courses[$i]->number}}" min="100" max="700" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-2" for="section">Section:</label>
+                                            <label class="col-2 col-form-label" for="section">Section:</label>
                                             <div class="col-10">
                                                 <input type="text" id="section" name="section" class="form-control" maxlength="3" value="{{$courses[$i]->section}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-2" for="year">Year:</label>
+                                            <label class="col-2 col-form-label" for="year">Year:</label>
                                             <div class="col-10">
                                                 <input type="date" id="year" name="year" value="{{$courses[$i]->year}}" class="form-control" required>
                                             </div>

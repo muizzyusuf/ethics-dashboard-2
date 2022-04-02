@@ -45,13 +45,13 @@
                     <input type="hidden" name="course_id" id="course_id" value="{{$course->id}}">
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label class="col-2" for="title">Name:</label>
+                            <label class="col-2 col-form-label" for="title">Name:</label>
                             <div class="col-10">
                                 <input type="text" id="name" name="name" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-2" for="code">Instruction:</label>
+                            <label class="col-2 col-form-label" for="code">Instruction:</label>
                             <div class="col-10">
                                 <textarea cols="30" rows="10" type="text" name="instruction" placeholder="Instructions.." class="form-control" required> </textarea>
                             </div>
@@ -59,34 +59,34 @@
                         <fieldset class="mt-1">
                             <h5>Dashboard Sections Maximum Points:</h5>
                             <div class="form-group row">
-                                <label class="col-2" for="code">Ethical Issue:</label>
+                                <label class="col-2 col-form-label" for="code">Ethical Issue:</label>
                                 <div class="col-4">
                                     <input type="number" id="issue_points" min="0" max="100" name="issue_points" class="form-control" required>
                                 </div>
                         
-                                <label class="col-2" for="code">Stakeholder:</label>
+                                <label class="col-2 col-form-label" for="code">Stakeholder:</label>
                                 <div class="col-4">
                                     <input type="number" id="stakeholder_points" min="0" max="100" name="stakeholder_points" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-2" for="code">Utilitarianism:</label>
+                                <label class="col-2 col-form-label" for="code">Utilitarianism:</label>
                                 <div class="col-4">
                                     <input type="number" id="util_points" min="0" max="100" name="util_points" class="form-control" required>
                                 </div>
 
-                                <label class="col-2" for="code">Deontology:</label>
+                                <label class="col-2 col-form-label" for="code">Deontology:</label>
                                 <div class="col-4">
                                     <input type="number" id="deontology_points" min="0" max="100" name="deontology_points" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-2" for="code">Virtue Ethics:</label>
+                                <label class="col-2 col-form-label" for="code">Virtue Ethics:</label>
                                 <div class="col-4">
                                     <input type="number" id="virtue_points" min="0" max="100" name="virtue_points" class="form-control" required>
                                 </div>
 
-                                <label class="col-2" for="code">Care Ethics:</label>
+                                <label class="col-2 col-form-label" for="code">Care Ethics:</label>
                                 <div class="col-4">
                                     <input type="number" id="care_points" min="0" max="100" name="care_points" class="form-control" required>
                                 </div>
@@ -184,13 +184,13 @@
                                         <div class="modal-body">
 
                                             <div class="form-group row">
-                                                <label class="col-2" for="title">Name:</label>
+                                                <label class="col-2 col-form-label" for="title">Name:</label>
                                                 <div class="col-10">
                                                     <input type="text" id="name" name="name" class="form-control" value="{{$casestudy->name}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-2" for="code">Instruction:</label>
+                                                <label class="col-2 col-form-label" for="code">Instruction:</label>
                                                 <div class="col-10">
                                                     <textarea cols="30" rows="10" type="text" name="instruction" class="form-control" required>{{$casestudy->instruction}}</textarea>
                                                 </div>
@@ -199,34 +199,34 @@
                                             <fieldset class="mt-1">
                                                 <h5>Dashboard Sections Maximum Points:</h5>
                                                 <div class="form-group row">
-                                                    <label class="col-2" for="code">Ethical Issue:</label>
+                                                    <label class="col-2 col-form-label" for="code">Ethical Issue:</label>
                                                     <div class="col-4">
                                                         <input type="number" id="issue_points" min="0" max="100" name="issue_points" class="form-control" value="{{$casestudy->issue_points}}" required>
                                                     </div>
                                             
-                                                    <label class="col-2" for="code">Stakeholder:</label>
+                                                    <label class="col-2 col-form-label" for="code">Stakeholder:</label>
                                                     <div class="col-4">
                                                         <input type="number" id="stakeholder_points" min="0" max="100" name="stakeholder_points" class="form-control" value="{{$casestudy->stakeholder_points}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-2" for="code">Utilitarianism:</label>
+                                                    <label class="col-2 col-form-label" for="code">Utilitarianism:</label>
                                                     <div class="col-4">
                                                         <input type="number" id="util_points" min="0" max="100" name="util_points" class="form-control" value="{{$casestudy->util_points}}" required>
                                                     </div>
                     
-                                                    <label class="col-2" for="code">Deontology:</label>
+                                                    <label class="col-2 col-form-label" for="code">Deontology:</label>
                                                     <div class="col-4">
                                                         <input type="number" id="deontology_points" min="0" max="100" name="deontology_points" class="form-control" value="{{$casestudy->deontology_points}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-2" for="code">Virtue Ethics:</label>
+                                                    <label class="col-2 col-form-label" for="code">Virtue Ethics:</label>
                                                     <div class="col-4">
                                                         <input type="number" id="virtue_points" min="0" max="100" name="virtue_points" class="form-control" value="{{$casestudy->virtue_points}}" required>
                                                     </div>
                     
-                                                    <label class="col-2" for="code">Care Ethics:</label>
+                                                    <label class="col-2 col-form-label" for="code">Care Ethics:</label>
                                                     <div class="col-4">
                                                         <input type="number" id="care_points" min="0" max="100" name="care_points" class="form-control" value="{{$casestudy->care_points}}" required>
                                                     </div>
@@ -234,7 +234,7 @@
                                             </fieldset>
 
                                             <div class="form-group row">
-                                                <label class="col-2" for="total">Total Points:</label>
+                                                <label class="col-2 col-form-label" for="total">Total Points:</label>
                                                 <div class="col-10">
                                                     <input readonly type="number" id="points" name="points" class="form-control" value="{{$casestudy->points}}" required>
                                                 </div>

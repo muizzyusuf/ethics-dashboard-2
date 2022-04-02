@@ -32,23 +32,38 @@
         
         <div class="card">
             <div class="card-header">Student Dashboards</div>
-            @foreach($dashboards as $dashboard)
-                <ul class="list-group list-group-flush">
-        
-                    <li class="list-group-item">
-                        <div class="float-left">
-                            <p class="lead font-weight-bold"><a href="{{route('dashboard.show', $dashboard->id)}}">{{$dashboard->name}}</a></p>
-                            <p><small class="font-weight-bold">Student: {{$dashboard->user_name}}<br>
-                            {{$dashboard->grade}}/ {{$casestudy->points}}pts</small></p>
-                        </div>
-                        
-                    </li>
-        
-                </ul>
-            @endforeach
+            @if(count($dashboards)<1)
+                <div class="mt-4 container">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>No worries!</strong> You cannot see any student dashboards because students have not created any yet!
+                    </div>
+                </div>
+                
+            @else
+
+                @foreach($dashboards as $dashboard)
+                    <ul class="list-group list-group-flush">
+            
+                        <li class="list-group-item">
+                            <div class="float-left">
+                                <p class="lead font-weight-bold"><a href="{{route('dashboard.show', $dashboard->id)}}">{{$dashboard->name}}</a></p>
+                                <p><small class="font-weight-bold">Student: {{$dashboard->user_name}}<br>
+                                {{$dashboard->grade}}/ {{$casestudy->points}}pts</small></p>
+                            </div>
+                            
+                        </li>
+            
+                    </ul>
+                @endforeach
+            
+            @endif
         </div>
            
-        
+         
 
     </div>
 </div>
