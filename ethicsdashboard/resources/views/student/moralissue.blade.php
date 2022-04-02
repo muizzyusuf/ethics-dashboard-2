@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <input type="hidden" id="moral_issue_id" name="moral_issue_id" @if($options[$i]->moralIssue != null ) value="{{$options[$i]->moralIssue->id}}" @endif>
                         <label for="moralissue">Describe the moral issues governing the decision described in this option.</label>
-                        <textarea class="form-control" name="moral_issue" rows="3" required>@if($options[$i]->moralIssue != null ){{$options[$i]->moralIssue->moral_issues}} @endif </textarea>
+                        <textarea class="form-control" name="moral_issue" rows="3" placeholder="E.g Cheating is wrong and should be exposed. Blowing the whistle is the right thing to do as I will be revealing the truth" required>@if($options[$i]->moralIssue != null ){{$options[$i]->moralIssue->moral_issues}} @endif </textarea>
                     </div>
 
                     <label for="moralissue">Describe the moral law(s) that govern the actions you will take if you choose this option</label>
@@ -74,7 +74,7 @@
                         <div class="form-row">
                             <label for="morallaw1" class="col-form-label">Moral Law 1:</label>
                             <div class="col">
-                                <input type="text" name="morallaw1" class="form-control" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->moral_law}}" @endif  required >
+                                <input type="text" name="morallaw1" class="form-control" placeholder="E.g Cheating is wrong" @if(isset($options[$i]->moralLaws[0])) value="{{$options[$i]->moralLaws[0]->moral_law}}" @endif  required >
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         <div class="form-row">
                             <label for="morallaw2" class="col-form-label">Moral Law 2:</label>
                             <div class="col">
-                                <input type="text" name="morallaw2" class="form-control" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->moral_law}}" @endif  required >
+                                <input type="text" name="morallaw2" class="form-control" placeholder="E.g Revealing the truth is right" @if(isset($options[$i]->moralLaws[1])) value="{{$options[$i]->moralLaws[1]->moral_law}}" @endif  required >
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                         <div class="form-row">
                             <label for="morallaw3" class="col-form-label">Moral Law 3:</label>
                             <div class="col">
-                                <input type="text" name="morallaw3" class="form-control" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->moral_law}}" @endif  required >
+                                <input type="text" name="morallaw3" class="form-control" placeholder="E.g Honesty is right" @if(isset($options[$i]->moralLaws[2])) value="{{$options[$i]->moralLaws[2]->moral_law}}" @endif  required >
                             </div>
                         </div>
                     </div>

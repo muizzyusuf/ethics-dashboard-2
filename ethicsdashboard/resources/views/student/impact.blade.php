@@ -35,7 +35,9 @@
 
     <div class="mt-3 card border-secondary">
         <p class="card-header font-weight-bold">Provide reasons why you have included each stakeholder. 
-            Make sure to rank them according to the degree of impact. </p>
+            Make sure to rank them according to the degree of impact (Note: Stakeholder 1 experiences the highest impact)
+            Remember! the aim is to defend the inclusion of Stakeholder x and subsequently rank them by degree of impact.
+        </p>
     
         @for($i=0; $i<count($stakeholders); $i++)
             <div class="card-body">
@@ -59,7 +61,7 @@
                                 <div class="form-group col-md-11">
                                     <label class="font-weight-bold" for="impact">Impact</label>
                                     <input type="hidden" id="impact_id" name="impact_id" value="{{$impact->id}}">
-                                    <textarea class="form-control" id="impact" name="impact" rows="3" required>{{$impact->impact}}</textarea>
+                                    <textarea class="form-control" id="impact" name="impact" rows="3" placeholder="E.g The engineer is directly and significantly impacted by the issue. They could lose their job at VW, freinds in industry and suffer career setbacks" required>{{$impact->impact}}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-1">

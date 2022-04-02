@@ -58,14 +58,14 @@
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="short">Short Term Consequence</label>
                                     <input type="hidden" id="short_id" name="short_id" value="{{$consequence->id}}">
-                                    <textarea class="form-control" id="short" name="short" rows="3" required>{{$consequence->consequence}}</textarea>
+                                    <textarea class="form-control" id="short" name="short" rows="3" placeholder="E.g. Personal guilt but I keep my job - the consumers are betrayed - the environment is damaged" required>{{$consequence->consequence}}</textarea>
                                 </div>
 
                             @elseif(($consequence->option_id == $options[$i]->id) && ($consequence->type == 'long'))
                                 <div class="form-group">
                                     <label class="font-weight-bold" for="long">Long Term Consequence</label>
                                     <input type="hidden" id="long_id" name="long_id" value="{{$consequence->id}}">
-                                    <textarea class="form-control" id="long" name="long" rows="3" required>{{$consequence->consequence}}</textarea>
+                                    <textarea class="form-control" id="long" name="long" rows="3" placeholder="E.g. If the device is discovered, it could potentially lead to job loss and/or end of career - VW's reputation will be tarnished" required>{{$consequence->consequence}}</textarea>
                                 </div>
                             @endif
                             
