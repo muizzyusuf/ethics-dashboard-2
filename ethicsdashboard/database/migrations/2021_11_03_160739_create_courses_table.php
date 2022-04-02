@@ -18,8 +18,8 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->string('code');
             $table->integer('number');
-            $table->integer('section');
-            $table->integer('year');
+            $table->string('section');
+            $table->date('year');
             // $table->unsignedBigInteger('role_id');
             $table->timestamps();
         });
