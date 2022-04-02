@@ -15,7 +15,15 @@ use App\Models\CaseStudy;
 use App\Models\Stakeholder;
 use App\Models\Option;
 use App\Models\Course;
+use App\Models\Consequence;
+use App\Models\Impact;
+use App\Models\Virtue;
+use App\Models\Care;
+use App\Models\Motivation;
+use App\Models\MoralIssue;
+use App\Models\MoralLaw;
 
+use PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,7 +56,67 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function downloadPDF(Request $request){
+        $dashboard = Dashboard::where('id', $request->input('id'))->first();
+        $utilitarianism= UtilitarianismSection::where('id', $dashboard->utilitarianism_section_id)->first();
+        $ethicalIssue = EthicalIssue::where('id', $dashboard->ethical_issue_id)->first();
+        $options = Option::where('ethical_issue_id', $dashboard->ethical_issue_id)->get();
+        $deontology= DeontologySection::where('id', $dashboard->deontology_section_id)->first();
+        $care= CareSection::where('id', $dashboard->care_section_id)->first();
+        $virtue= VirtueSection::where('id', $dashboard->virtue_section_id)->first();
+        $user= User::where('id', $dashboard->user_id)->first();
+        $case= CaseStudy::where('id', $dashboard->case_study_id)->first();
+        $course= Course::where('id', $case->course_id)->first();
+        $stakeholders = Stakeholder::where('stakeholder_section_id', $dashboard->stakeholder_section_id)->get();
 
+        $consequences=[];
+        $oVirtues=[];
+        $cares=[];
+        $motivations=[];
+        $moralIssuesLaws=[];
+
+        foreach ($options as $option){
+            $consequenceList=Consequence::where('option_id',$option->id)->get();
+            foreach($consequenceList as $consequence){
+                array_push($consequences,$consequence);
+            }
+            array_push($oVirtues,Virtue::where('id',$option->virtue_id)->first());
+            array_push($oVirtues,$option);
+
+            $careList=Care::where('option_id', $option->id)->get();
+            foreach($careList as $care1){
+                $tempCare=[$care1, Option::where('id',$care1->option_id)->first(), Stakeholder::where('id',$care1->stakeholder_id)->first()];
+                array_push($cares,$tempCare);
+            }
+            
+            array_push($motivations,Motivation::where('option_id',$option->id)->get());
+            array_push($motivations,$option);
+
+            $moralIssues=MoralIssue::where('option_id',$option->id)->get();
+        
+            array_push($moralIssuesLaws,$moralIssues);
+            array_push($moralIssuesLaws,MoralLaw::where('option_id',$option->id)->get());
+            array_push($moralIssuesLaws,$option);
+            
+        }
+
+        $impacts=[];
+        $sVirtues=[];
+        
+        foreach ($stakeholders as $stakeholder){
+            $impactList=Impact::where('stakeholder_id',$stakeholder->id)->get();
+            foreach($impactList as $impact){
+                array_push($impacts,$impact);
+            }
+            array_push($sVirtues,Virtue::where('id',$stakeholder->virtue_id)->first());
+            array_push($sVirtues,$stakeholder);
+        }
+        
+
+        $pdf = PDF::loadView('pdf', compact('oVirtues','sVirtues','ethicalIssue','care','virtue','deontology','utilitarianism','moralIssuesLaws','motivations','cares','dashboard','consequences','impacts','utilitarianism', 'ethicalIssue','options','stakeholders','deontology','care','virtue','user','case','course'),);
+
+        return $pdf->download('DashboardSummary.pdf');
+    }
     public function exportCsv(Request $request)
     {   
         

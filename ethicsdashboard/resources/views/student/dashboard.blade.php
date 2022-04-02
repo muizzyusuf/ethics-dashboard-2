@@ -187,8 +187,21 @@
                 </div>
             </div>
         </div>
-
+    
     </div>
+    
+                        <div class="card-header" role="tab" id="deonHeaderId">
+                    <h5 class="mb-0">
+                    <form method="POST" action="{{route('downloadPDF')}}">
+                        {{ csrf_field() }}
+                        {{method_field('POST')}}
+                        <input type="hidden" id="id" name="id" value="{{$dashboard->id}}" >                   
+                                <input type="submit" class=" btn btn-primary" value="Download Summary as PDF">   
+                            
+                        </form>
+                        </a>
+                    </h5>
+                </div>
 </div>
 
 <script type="text/javascript">

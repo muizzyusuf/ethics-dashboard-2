@@ -142,6 +142,9 @@ Route::put('/user/{user}/password','App\http\Controllers\UserController@password
 
 Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'exportCsv'])->name('tasks');
 
+//route for pdf export
+Route::post('/downloadPDF',[App\Http\Controllers\TaskController::class, 'downloadPDF'])->name('downloadPDF');
+
 //route for viewing summary of inputs in deontology section
 Route::get('/deontologysection/{deontologysection}/summary','App\http\Controllers\DeontologySectionController@summary')->name('deontologysection.summary');
 
