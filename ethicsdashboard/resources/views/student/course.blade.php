@@ -15,10 +15,10 @@
     </ul>
 
     <div class="container">
-        <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-            <div class="col px-0">
-                <h1 class="display-4">{{$course->code}}-{{$course->number}} 00{{$course->section}}</h1>
-                <p class="lead my-3">{{$course->title}}</p>
+        <div class="p-4 mb-4 text-white rounded bg-dark">
+            <div class="">
+                <h1 class="display-4">{{$course->code}}-{{$course->number}} {{$course->section}}</h1>
+                <p class="lead">{{$course->title}}</p>
                 <p>{{$course->year}}</p>
                 
             </div>
@@ -32,7 +32,16 @@
         <div class="card">
             <div class="card-header">Case Studies</div>
             @if(count($casestudies)<1)
-                <p class="mx-auto mt-2 "><mark>NO CASE STUDIES CREATED YET</mark></p>
+                <div class="mt-4 container">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>No worries!</strong> You cannot see any case studies because none have been created yet!
+                    </div>
+                </div>
+                
             @else
                 <ul class="list-group list-group-flush">
 
