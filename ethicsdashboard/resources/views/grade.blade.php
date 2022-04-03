@@ -12,7 +12,7 @@
         <li class="nav-item">
             <a class="nav-link font-weight-bold active" href="{{route('courses.grade', $course->id)}}">Grades</a>
         </li>
-    </ul>
+    </ul> 
 
     
     <div class="container">
@@ -35,23 +35,34 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     
+
                     @foreach($students as $student)
     
-                        <tr>
-                            <th scope="row">{{$student->name}}</th>
-                            
-                            @foreach($dashboards as $dash)
+                    <tr>
                         
-                                @if($dash->user_id == $student->id)
-                                    <td class="text-center">{{$dash->grade}}</td>
+                        <th scope="row">{{$student->name}}</th>
 
-                                @endif
+                        @foreach($casestudies as $case)
 
-                            @endforeach
+                            @if($case->dashboard->where('user_id',$student->id)->first() != null)
                             
-                        </tr>
-                    @endforeach
+                                <td class="text-center">{{$case->dashboard->where('user_id',$student->id)->first()->grade}}</td>
+                            
+                            @else
+
+                                <td class="text-center">0</td>
+
+                            @endif
+                            
+                            
+                        @endforeach
+                        
+                    </tr>
+                @endforeach
+
+                    
                 
                 </tbody>
             </table>
