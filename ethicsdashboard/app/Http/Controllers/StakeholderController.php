@@ -60,7 +60,8 @@ class StakeholderController extends Controller
             
             ]);
 
-        $ethicalissue = EthicalIssue::where('id', $request->input('id'))->first();
+
+        //$ethicalissue = EthicalIssue::where('id', $request->input('id'))->first();
         $stakeholder_section = StakeholderSection::where('id', $request->input('stakeholder_section_id'))->first();
 
         if($request->input('stakeholder1_id')==null){
@@ -120,7 +121,10 @@ class StakeholderController extends Controller
             return  redirect(route('stakeholdersection.show', $request->input('stakeholder_section_id')));
 
         }else{
+            
+
             $stakeholder1 = Stakeholder::where('id', $request->input('stakeholder1_id'))->first();
+            
             $stakeholder1->stakeholder = $request->input('stakeholder1');
             $stakeholder1->interests = $request->input('interest1');
             $stakeholder1->save();
@@ -145,7 +149,7 @@ class StakeholderController extends Controller
             $stakeholder5->interests = $request->input('interest5');
             $stakeholder5->save();
 
-            $stakeholder6 = Stakeholder::where('id', $request->input('stakeholder1_id'))->first();
+            $stakeholder6 = Stakeholder::where('id', $request->input('stakeholder6_id'))->first();
             $stakeholder6->stakeholder = $request->input('stakeholder6');
             $stakeholder6->interests = $request->input('interest6');
 

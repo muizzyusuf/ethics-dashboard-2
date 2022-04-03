@@ -3,7 +3,7 @@
 @section('content')
 
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
 </div>
@@ -96,8 +96,8 @@
                 <div class="form-group row">
                     <label class="font-weight-bold col-form-label col-3" for="grade">Grade:</label>
                     <div class="col-9">
-                        <input type="number" min="0" max="{{$casestudy->issue_points}}" class="form-control" id="grade" name="grade" value="{{$ethicalissue->grade}}" required >
-                        <small id="help" class="form-text text-muted">Out of {{$casestudy->issue_points}} </small>
+                        <input type="number" min="0" max="{{$dashboard->caseStudy->issue_points}}" class="form-control" id="grade" name="grade" value="{{$ethicalissue->grade}}" required >
+                        <small id="help" class="form-text text-muted">Out of {{$dashboard->caseStudy->issue_points}} </small>
                     </div>
                     
                 </div>
