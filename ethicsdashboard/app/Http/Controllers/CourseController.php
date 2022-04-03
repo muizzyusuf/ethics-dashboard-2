@@ -186,7 +186,7 @@ class CourseController extends Controller
                     ->select('users.name', 'users.email', 'users.id', 'roles.role', 'users.role_id')
                     ->where('roles.id','=','2')->get();
 
-        if(Auth::user()->role()->first()->id == 3){
+        if(Auth::user()->role()->first()->id == 3 || Auth::user()->role()->first()->id == 2){
             return view('student.people')->with('course', $course)
                             ->with('people',$people)
                             ->with('students',$students)

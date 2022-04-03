@@ -39,13 +39,41 @@
                     <div class="row">
                         <div class="col">
                             <div class="text-right">
-                                <!-- add student Button trigger modal -->
+                                <!-- add TA Button trigger modal -->
                                 <button type="button" class="btn btn-primary mt-1" style="width:180px" data-toggle="modal" data-target="#addTAModal">
                                     Add Teaching Assistant
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    @if(count($people->where('role_id','2'))<1)
+                        <div class="mt-4 container">
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                No <strong>Teaching Assistant</strong> has been added to this course!
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(count($people->where('role_id','3'))<1)
+                        <div class="mt-4 container">
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                No <strong>Student</strong> has been added to this course!
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -67,33 +95,37 @@
                             {{method_field('POST')}}
                             <input type="hidden" name="course_id" id="course_id" value="{{$course->id}}">
                             <div class="modal-body">
-                                <p>Check the box of any user you would like to add to the course</p>
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($students as $student)
-                                                @if($people->contains("id", $student->id)==false)
-                                                    
-                                                    <tr>
-                                                        <td>{{$student->name}}</td>
-                                                        <td>{{$student->email}}</td>
-                                                        <td>
-                                                            <input type="checkbox" value="{{$student->id}}" id="{{$student->id}}" name="user[]">
-                                                        </td>
-                                                        
-                                                    </tr>
 
-                                                @endif
-                                        
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                <p>Check the box of any user you would like to add to the course</p>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($students as $student)
+                                                    @if($people->contains("id", $student->id)==false)
+                                                        
+                                                        <tr>
+                                                            <td>{{$student->name}}</td>
+                                                            <td>{{$student->email}}</td>
+                                                            <td>
+                                                                <input type="checkbox" value="{{$student->id}}" id="{{$student->id}}" name="user[]">
+                                                            </td>
+                                                            
+                                                        </tr>
+    
+                                                    @endif
+                                            
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -106,7 +138,7 @@
 
             
 
-            <!-- add student Modal -->
+            <!-- add TA Modal -->
             <div class="modal fade" id="addTAModal" tabindex="-1" aria-labelledby="addTAModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-lg">
                     <div class="modal-content">
@@ -223,6 +255,8 @@
                 </div>
 
             @endif
+
+            
         </div>
         
        

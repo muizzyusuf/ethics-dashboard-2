@@ -42,22 +42,23 @@
                         <strong>No worries!</strong> You cannot see any student dashboards because students have not created any yet!
                     </div>
                 </div>
-                
+                 
             @else
 
                 @foreach($dashboards as $dashboard)
                     <ul class="list-group list-group-flush">
             
                         <li class="list-group-item">
-                            <div class="float-left">
-                                <p class="lead font-weight-bold"><a href="{{route('dashboard.show', $dashboard->id)}}">{{$dashboard->name}}</a></p>
-                                <p><small class="font-weight-bold">Student: {{$dashboard->user_name}}<br>
-                                {{$dashboard->grade}}/ {{$casestudy->points}}pts</small></p>
+                            <div class="">
+                                <p class="lead font-weight-bold"><a href="{{route('dashboard.show', $dashboard->id)}}">{{$dashboard->name}}</a><br>
+                                <small class="text-muted"><b>Student:</b> {{$dashboard->user_name}} | <b>Points:</b> {{$dashboard->grade}}/ {{$casestudy->points}}pts</small></p>
                             </div>
                             
                         </li>
             
                     </ul>
+
+                    
                 @endforeach
             
             @endif
