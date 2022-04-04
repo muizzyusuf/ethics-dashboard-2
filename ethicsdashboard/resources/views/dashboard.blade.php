@@ -9,7 +9,7 @@
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link active" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
         <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
@@ -65,13 +65,23 @@
 
         </div>
         
+        <div class="my-3 container">
+            <p class="lead font-weight-bold">Summary of Inputs: <br>
+                <small class="form-text text-muted">
+                    Click the tabs below to see a summary of inputs/final ethical decisions for each dashboard section. 
+                </small>
+            </p>
+            
+        </div>
+        
         <div id="accordianId" role="tablist" aria-multiselectable="true">
             <div class="card">
                 <div class="card-header" role="tab" id="ethicalIssueHeaderId">
                     <h5 class="mb-0">
-                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#ethicalIssueContentId" aria-expanded="true" aria-controls="ethicalIssueContentId">
-                            <b>Ethical Issue and Options</b>
+                        <a style="height:30px;" class="btn btn-light btn-block" data-toggle="collapse" data-parent="#accordianId" href="#ethicalIssueContentId" aria-expanded="true" aria-controls="ethicalIssueContentId">
+                            <span class="float-left"><b>Ethical Issue and Options</b></span> <span class="float-right badge @if(count($options)>0) badge-success @else badge-danger @endif badge-pill">&nbsp;</span>
                         </a>
+                        
                     </h5>
                 </div>
                 <div id="ethicalIssueContentId" class="collapse in" role="tabpanel" aria-labelledby="ethicalIssueHeaderId">
@@ -84,7 +94,15 @@
 
                             @endfor
                         @else
-                            <p class="card-text">No inputs have been made</p>                      
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>No inputs have been made</strong> 
+                                </div>
+                            </div>                         
                         @endif
                     </div>
                 </div>
@@ -92,8 +110,8 @@
             <div class="card">
                 <div class="card-header" role="tab" id="stakeholdersHeaderId">
                     <h5 class="mb-0">
-                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#stakeholdersContentId" aria-expanded="true" aria-controls="stakeholdersContentId">
-                           <b>Stakeholders and Interests </b>
+                        <a style="height:30px;" class="btn btn-light btn-block" data-toggle="collapse" data-parent="#accordianId" href="#stakeholdersContentId" aria-expanded="true" aria-controls="stakeholdersContentId">
+                           <span class="float-left"><b>Stakeholders and Interests</b></span> <span class="float-right badge @if(count($stakeholders)>0) badge-success @else badge-danger @endif badge-pill">&nbsp;</span>
                         </a>
                     </h5>
                 </div>
@@ -107,7 +125,15 @@
                                 <br>
                             @endfor
                         @else
-                            <p class="card-text">No inputs have been made</p>                      
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>No inputs have been made</strong> 
+                                </div>
+                            </div>                       
                         @endif
                     </div>
                 </div>
@@ -115,17 +141,26 @@
             <div class="card">
                 <div class="card-header" role="tab" id="utilHeaderId">
                     <h5 class="mb-0">
-                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#utilContentId" aria-expanded="true" aria-controls="utilContentId">
-                           <b>Utilitarianism </b>
+                        <a style="height:30px;" class="btn btn-light btn-block" data-toggle="collapse" data-parent="#accordianId" href="#utilContentId" aria-expanded="true" aria-controls="utilContentId">
+                            <span class="float-left"><b>Utilitarianism</b></span> <span class="float-right badge @if($util->decision != null) badge-success @else badge-danger @endif badge-pill">&nbsp;</span>
                         </a>
                     </h5>
                 </div>
                 <div id="utilContentId" class="collapse in" role="tabpanel" aria-labelledby="utilHeaderId">
                     <div class="card-body">
                         @if($util->decision != null)
-                            {{$util->decision}}
+                            <p><b>Decision:</b> {{$util->decision}}</p>
+                            
                         @else
-                            <p class="card-text">No inputs have been made</p>       
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>No inputs have been made</strong> 
+                                </div>
+                            </div>       
                         @endif
                     </div>
                 </div>
@@ -133,17 +168,25 @@
             <div class="card">
                 <div class="card-header" role="tab" id="careHeaderId">
                     <h5 class="mb-0">
-                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#careContentId" aria-expanded="true" aria-controls="careContentId">
-                           <b>Care Ethics </b>
+                        <a style="height:30px;" class="btn btn-light btn-block" data-toggle="collapse" data-parent="#accordianId" href="#careContentId" aria-expanded="true" aria-controls="careContentId">
+                            <span class="float-left"><b>Care Ethics</b></span> <span class="float-right badge @if($care->decision != null) badge-success @else badge-danger @endif badge-pill">&nbsp;</span>
                         </a>
                     </h5>
                 </div>
                 <div id="careContentId" class="collapse in" role="tabpanel" aria-labelledby="careHeaderId">
                     <div class="card-body">
                         @if($care->decision != null)
-                            {{$care->decision}}
+                        <p><b>Decision:</b> {{$care->decision}}</p>
                         @else
-                            <p class="card-text">No inputs have been made</p>       
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>No inputs have been made</strong> 
+                                </div>
+                            </div>         
                         @endif
                     </div>
                 </div>
@@ -151,17 +194,25 @@
             <div class="card">
                 <div class="card-header" role="tab" id="virtueHeaderId">
                     <h5 class="mb-0">
-                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#virtueContentId" aria-expanded="true" aria-controls="virtueContentId">
-                           <b>Virtue Ethics </b>
+                        <a style="height:30px;" class="btn btn-light btn-block" data-toggle="collapse" data-parent="#accordianId" href="#virtueContentId" aria-expanded="true" aria-controls="virtueContentId">
+                            <span class="float-left"><b>Virtue Ethics</b></span> <span class="float-right badge @if($virtue->decision != null) badge-success @else badge-danger @endif badge-pill">&nbsp;</span>
                         </a>
                     </h5>
                 </div>
                 <div id="virtueContentId" class="collapse in" role="tabpanel" aria-labelledby="virtueHeaderId">
                     <div class="card-body">
                         @if($virtue->decision != null)
-                            {{$virtue->decision}}
+                        <p><b>Decision:</b>{{$virtue->decision}}</p>
                         @else
-                            <p class="card-text">No inputs have been made</p>       
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>No inputs have been made</strong> 
+                                </div>
+                            </div>         
                         @endif
                     </div>
                 </div>
@@ -169,23 +220,43 @@
             <div class="card">
                 <div class="card-header" role="tab" id="deonHeaderId">
                     <h5 class="mb-0">
-                        <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-parent="#accordianId" href="#deonContentId" aria-expanded="true" aria-controls="deonContentId">
-                           <b>Deontology </b>
+                        <a style="height:30px;" class="btn btn-light btn-block" data-toggle="collapse" data-parent="#accordianId" href="#deonContentId" aria-expanded="true" aria-controls="deonContentId">
+                            <span class="float-left"><b>Deontology</b></span> <span class="float-right badge @if($deon->decision != null) badge-success @else badge-danger @endif badge-pill">&nbsp;</span>
                         </a>
                     </h5>
                 </div>
                 <div id="deonContentId" class="collapse in" role="tabpanel" aria-labelledby="deonHeaderId">
                     <div class="card-body">
                         @if($deon->decision != null)
-                            {{$deon->decision}}
+                        <p><b>Decision:</b>{{$deon->decision}}</p>
                         @else
-                            <p class="card-text">No inputs have been made</p>       
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>No inputs have been made</strong> 
+                                </div>
+                            </div>      
                         @endif
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
+
+    <div class="mt-3 container text-left">
+        
+        <form method="POST" action="{{route('downloadPDF')}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+            <input type="hidden" id="id" name="id" value="{{$dashboard->id}}" >                   
+            <input type="submit" class=" btn btn-primary" value="Download Summary as PDF">   
+            
+        </form>
+        
     </div>
 </div>
 

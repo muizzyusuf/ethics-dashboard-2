@@ -25,15 +25,15 @@
         <p>{{$casestudy->instruction}}</p>
         
         @if($dashboard === null)
-            <p class="lead">
+            <div class="text-right">
                 <!-- create dashboard Button trigger modal -->
-                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#createDashboardModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createDashboardModal">
                     Create an ethics dashboard
                 </button>
 
                 <!-- Modal -->
                 <div class="modal fade" id="createDashboardModal" tabindex="-1" role="dialog" aria-labelledby="createDashboardModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                             <h5 class="modal-title" id="createDashboardModalLabel">Create a dashboard</h5>
@@ -45,9 +45,11 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="case_study_id" id="case_study_id" value="{{$casestudy->id}}">
                                 <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="title">Title of Dashboard:</label>
-                                        <input type="text" id="name" name="name" class="form-control" required>
+                                    <div class="form-group row">
+                                        <label class="col-3 col-form-label" for="title">Title of Dashboard:</label>
+                                        <div class="col-9">
+                                            <input type="text" id="name" name="name" class="form-control" required>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -58,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-            </p>
+            </div>
         @endif
 
         @if($dashboard !== null)
@@ -114,7 +116,7 @@
                     
                 </div>
                 
-            </div>
+            </div> 
         @endif
 
     </div>

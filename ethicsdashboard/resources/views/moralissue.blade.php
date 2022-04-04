@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,7 +24,7 @@
 <div class="jumbotron">
 
     <div class="container mb-2">
-        <ul class="nav nav-pills nav-justified">
+        <ul class="nav nav-pills nav-justified flex-column flex-lg-row">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Option Analysis</a>
             </li>
@@ -40,6 +40,20 @@
             </li>
         </ul>
     </div>
+
+    @if(count($options)<1)
+
+        <div class="container">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>There are no options with a reasoning that is consistent with categorical reasoning</strong> 
+            </div>
+        </div> 
+                              
+    @endif 
         
     @for($i=0; $i<count($options); $i++)
 
@@ -60,6 +74,20 @@
                     
                 </div>
                 <div class="card-body">
+
+                    @if(count($options[$i]->moralLaws)<1)
+
+                        <div class="container">
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <strong>You have not input the moral issue and moral laws</strong> 
+                            </div>
+                        </div> 
+                                            
+                    @endif 
 
                     <div class="form-group">
                         <input type="hidden" id="moral_issue_id" name="moral_issue_id" @if($options[$i]->moralIssue != null ) value="{{$options[$i]->moralIssue->id}}" @endif>
@@ -114,19 +142,25 @@
 <div class="mt-3 card">
     <p class="card-header">Instructor Comments & Grade</p>
     <div class="card-body">
-        <form method="POST" action="{{route('deontologysection.comment',$deontologySection->id)}}">
+        <form method="POST" action="{{route('deontologysection.comment', $deontologySection->id)}}">
             {{ csrf_field() }}
             {{method_field('POST')}}
     
-            <div class="form-group">
-                <label class="font-weight-bold" for="comment">Comment</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$deontologySection->comment}} </textarea>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="comment">Comment:</label>
+                <div class="col-9">
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required>{{$deontologySection->comment}}</textarea>
+                </div>
+                
             </div>
 
-            <div class="form-group">
-                <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" min="0" max="{{$casestudy->deontology_points}}" class="form-control col-1" id="grade" name="grade" value="{{$deontologySection->grade}}" required>
-                <small id="help" class="form-text text-muted">Out of {{$casestudy->deontology_points}} </small>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="grade">Grade:</label>
+                <div class="col-9">
+                    <input type="number" min="0" max="{{$dashboard->caseStudy->deontology_points}}" class="form-control" id="grade" name="grade" value="{{$deontologySection->grade}}" required >
+                    <small id="help" class="form-text text-muted">Out of {{$dashboard->caseStudy->deontology_points}} </small>
+                </div>
+                
             </div>
 
             <input type="submit" class="float-right btn btn-primary" value="Save">
@@ -135,6 +169,7 @@
       
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
   

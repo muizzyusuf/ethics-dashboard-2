@@ -22,6 +22,6 @@ class CaseStudy extends Model
     }
 
     public function dashboard(){
-        return $this->hasMany('App\Models\Dashboard');
+        return $this->hasMany('App\Models\Dashboard', 'case_study_id');
     }
 }

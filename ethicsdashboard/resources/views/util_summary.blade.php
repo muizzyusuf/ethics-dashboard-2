@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a>  
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,7 +24,7 @@
 <div class="jumbotron">
 
     <div class="container mb-2">
-        <nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
             <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Option Analysis</a>
             <a class="nav-link" href="{{route('utilitarianismsection.impact', $dashboard->utilitarianism_section_id)}}">Stakeholder Analysis</a>
             <a class="nav-link" href="{{route('utilitarianismsection.aggregate', $dashboard->utilitarianism_section_id)}}">Pleasure Analysis</a>
@@ -44,7 +44,7 @@
             <div class="card-body">
 
                 <div class="form-group">
-                    <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
+                    <label class="font-weight-bold" for="option">Option {{$i+1}}:</label>
                 </div>
 
                 @if(count($options[$i]->consequences)>0 )
@@ -58,21 +58,31 @@
                                 </div>
                                 <div class="card-body">
                                     @if(count($consequence->pleasures)<1)
+                                        <div class="container">
+                                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    <span class="sr-only">Close</span>
+                                                </button>
+                                                <strong>Pleasure analysis not done for the {{ucfirst($consequence->type)}}-Term Consequences</strong> 
+                                            </div>
+                                        </div>
+
                                         <form>     
                                                 
                                             <div class="row">
                                                 <div class="form-group col-md-8">
-                                                    <label class="float-left font-weight-bold text-muted" for="pleasure">Pleasure</label> <label class="float-right font-weight-bold text-muted" for="pleasure">Pain</label>
+                                                    <small class="float-left text-muted" for="pleasure">Pleasure</small> <small class="float-right text-muted" for="pleasure">Pain</small>
                                                     <input type="range" min="0" max="10" class="form-control-range" id="pleasure" name="pleasure" value="" disabled> 
                                                 </div>
                                                 
                                                 <div class="form-group col-md-2">
-                                                    <label for="higher">Higher</label>
+                                                    <label for="higher">Higher:</label>
                                                     <input type="text" class="form-control" id="higher" value="" disabled>
                                                 </div>
 
                                                 <div class="form-group col-md-2">
-                                                    <label for="lower">Lower</label>
+                                                    <label for="lower">Lower:</label>
                                                     <input type="text" class="form-control" id="lower" value="" disabled>
                                                 </div>
                                                     
@@ -85,12 +95,12 @@
                                                     
                                             <div class="row">
                                                 <div class="form-group col-md-8">
-                                                    <label class="float-left font-weight-bold text-muted" for="pleasure">Pleasure</label> <label class="float-right font-weight-bold text-muted" for="pleasure">Pain</label>
+                                                    <small class="float-left text-muted" for="pleasure">Pleasure</small> <small class="float-right text-muted" for="pleasure">Pain</small>
                                                     <input type="range" min="0" max="10" class="form-control-range" id="pleasure" name="pleasure" value="{{$pleasures->groupBy('consequence_id')[$consequence->id]->avg('pleasure')}}" disabled> 
                                                 </div>
                                                 
                                                 <div class="form-group col-md-2">
-                                                    <label for="higher">Higher</label>
+                                                    <label for="higher">Higher:</label>
                                                     <input type="text" class="form-control" id="higher" 
                                                     @if(isset($pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['High']))
                                                     value="{{$pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['High']->count() }}"
@@ -98,7 +108,7 @@
                                                 </div>
 
                                                 <div class="form-group col-md-2">
-                                                    <label for="lower">Lower</label>
+                                                    <label for="lower">Lower:</label>
                                                     <input type="text" class="form-control" id="lower" 
                                                     @if(isset($pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['Low']))
                                                     value="{{$pleasures->groupBy('consequence_id')[$consequence->id]->groupBy('level')['Low']->count() }}"
@@ -117,6 +127,18 @@
                         
                     @endforeach
                     
+                @else 
+                   
+                    <div class="container">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>No consequences have been input for this option</strong> 
+                        </div>
+                    </div> 
+
                 @endif
             </div>
         @endfor
@@ -135,8 +157,7 @@
                 {{method_field('POST')}}
                 <div class="form-group">
                     <label class="font-weight-bold" for="decision">Decision</label>
-                    <textarea readonly class="form-control" id="decision" name="decision" rows="3" >
-                        {{$utilitarianismSection->decision}}
+                    <textarea readonly class="form-control" id="decision" name="decision" rows="3" >{{$utilitarianismSection->decision}}
                     </textarea>
                 </div>
 
@@ -152,19 +173,25 @@
 <div class="mt-3 card">
     <p class="card-header">Instructor Comments & Grade</p>
     <div class="card-body">
-        <form method="POST" action="{{route('utilitarianismsection.comment',$utilitarianismSection->id)}}">
+        <form method="POST" action="{{route('utilitarianismsection.comment', $utilitarianismSection->id)}}">
             {{ csrf_field() }}
             {{method_field('POST')}}
     
-            <div class="form-group">
-                <label class="font-weight-bold" for="comment">Comment</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$utilitarianismSection->comment}} </textarea>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="comment">Comment:</label>
+                <div class="col-9">
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required>{{$utilitarianismSection->comment}}</textarea>
+                </div>
+                
             </div>
 
-            <div class="form-group">
-                <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" min="0" max="{{$casestudy->util_points}}" class="form-control col-1" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required>
-                <small id="help" class="form-text text-muted">Out of {{$casestudy->util_points}} </small>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="grade">Grade:</label>
+                <div class="col-9">
+                    <input type="number" min="0" max="{{$dashboard->caseStudy->util_points}}" class="form-control" id="grade" name="grade" value="{{$utilitarianismSection->grade}}" required >
+                    <small id="help" class="form-text text-muted">Out of {{$dashboard->caseStudy->util_points}} </small>
+                </div>
+                
             </div>
 
             <input type="submit" class="float-right btn btn-primary" value="Save">
@@ -173,6 +200,7 @@
       
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
   

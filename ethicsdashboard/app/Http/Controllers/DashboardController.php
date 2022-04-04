@@ -84,6 +84,7 @@ class DashboardController extends Controller
         $dash->virtue_section_id = $virtue->id;
         $dash->care_section_id = $care->id;
         $dash->save();
+        $dash->user()->associate(Auth::user());
 
         //set eloquent relationships
         $dash->user()->associate(User::where('id',$id)->first());

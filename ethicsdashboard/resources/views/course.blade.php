@@ -15,24 +15,24 @@
     </ul>
 
     <div class="container">
-        <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-            <div class="col px-0">
-                <h1 class="display-4">{{$course->code}}-{{$course->number}} 00{{$course->section}}</h1>
-                <p class="lead my-3">{{$course->title}}</p>
+        <div class="p-4 mb-4 text-white rounded bg-dark">
+            <div class="">
+                <h1 class="display-4">{{$course->code}}-{{$course->number}} {{$course->section}}</h1>
+                <p class="lead">{{$course->title}}</p>
                 <p>{{$course->year}}</p>
-                <p class="lead">
+                <div class="text-right">
                     <!-- create case study Button trigger modal -->
-                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#createCasestudyModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCasestudyModal">
                         Create a case study
                     </button>
-                </p>
+                </div>
             </div>
 
         </div>
 
         <!-- create case study Modal -->
         <div class="modal fade" id="createCasestudyModal" tabindex="-1" role="dialog" aria-labelledby="createCasestudyModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createCasestudyModalLabel">Create a Case Study</h5>
@@ -44,38 +44,54 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="course_id" id="course_id" value="{{$course->id}}">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="title">Name:</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="title">Name:</label>
+                            <div class="col-10">
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="code">Instruction:</label>
-                            <textarea cols="30" rows="10" type="text" name="instruction" placeholder="Instructions.." class="form-control" required> </textarea>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="code">Instruction:</label>
+                            <div class="col-10">
+                                <textarea cols="30" rows="10" type="text" name="instruction" placeholder="Instructions.." class="form-control" required> </textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="code">Ethical Issue Section Points:</label>
-                            <input type="number" id="issue_points" min="0" name="issue_points" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="code"> Stakeholder Section Points:</label>
-                            <input type="number" id="stakeholder_points" min="0" name="stakeholder_points" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="code">Utilitarianism Section Points:</label>
-                            <input type="number" id="util_points" min="0" name="util_points" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="code"> Deontology Section Points:</label>
-                            <input type="number" id="deontology_points" min="0" name="deontology_points" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="code"> Virtue Ethics Section Points:</label>
-                            <input type="number" id="virtue_points" min="0" name="virtue_points" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="code"> Care Ethics Section Points:</label>
-                            <input type="number" id="care_points" min="0" name="care_points" class="form-control" required>
-                        </div>
+                        <fieldset class="mt-1">
+                            <h5>Dashboard Sections Maximum Points:</h5>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="code">Ethical Issue:</label>
+                                <div class="col-4">
+                                    <input type="number" id="issue_points" min="0" max="100" name="issue_points" class="form-control" required>
+                                </div>
+                        
+                                <label class="col-2 col-form-label" for="code">Stakeholder:</label>
+                                <div class="col-4">
+                                    <input type="number" id="stakeholder_points" min="0" max="100" name="stakeholder_points" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="code">Utilitarianism:</label>
+                                <div class="col-4">
+                                    <input type="number" id="util_points" min="0" max="100" name="util_points" class="form-control" required>
+                                </div>
+
+                                <label class="col-2 col-form-label" for="code">Deontology:</label>
+                                <div class="col-4">
+                                    <input type="number" id="deontology_points" min="0" max="100" name="deontology_points" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="code">Virtue Ethics:</label>
+                                <div class="col-4">
+                                    <input type="number" id="virtue_points" min="0" max="100" name="virtue_points" class="form-control" required>
+                                </div>
+
+                                <label class="col-2 col-form-label" for="code">Care Ethics:</label>
+                                <div class="col-4">
+                                    <input type="number" id="care_points" min="0" max="100" name="care_points" class="form-control" required>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -93,7 +109,16 @@
         <div class="card">
             <div class="card-header">Case Studies</div>
             @if(count($casestudies)<1)
-                <p class="mx-auto mt-2 "><mark>NO CASE STUDIES CREATED YET</mark></p>
+                <div class="mt-4 container">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>No worries!</strong> You cannot see any case studies because you have not created one yet!
+                    </div>
+                </div>
+                
             @else
                 <ul class="list-group list-group-flush">
 
@@ -145,7 +170,7 @@
 
                              <!-- edit case study Modal -->
                             <div class="modal fade" id="editCasestudy{{$casestudy->id}}Modal" tabindex="-1" role="dialog" aria-labelledby="editCasestudy{{$casestudy->id}}ModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCasestudy{{$casestudy->id}}ModalLabel">Edit Case Study</h5>
@@ -157,42 +182,62 @@
                                         {{ csrf_field() }}
                                         {{method_field('PUT')}}
                                         <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="title">Name:</label>
-                                                <input type="text" id="name" name="name" class="form-control" value="{{$casestudy->name}}" required>
+
+                                            <div class="form-group row">
+                                                <label class="col-2 col-form-label" for="title">Name:</label>
+                                                <div class="col-10">
+                                                    <input type="text" id="name" name="name" class="form-control" value="{{$casestudy->name}}" required>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="code">Instruction:</label>
-                                                <textarea cols="30" rows="10" type="text" name="instruction" class="form-control" required>{{$casestudy->instruction}}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="code">Ethical Issue Section Points:</label>
-                                                <input type="number" id="issue_points" name="issue_points" class="form-control" value="{{$casestudy->issue_points}}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="code"> Stakeholder Section Points:</label>
-                                                <input type="number" id="stakeholder_points" name="stakeholder_points" class="form-control" value="{{$casestudy->stakeholder_points}}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="code">Utilitarianism Section Points:</label>
-                                                <input type="number" id="util_points" name="util_points" class="form-control" value="{{$casestudy->util_points}}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="code"> Deontology Section Points:</label>
-                                                <input type="number" id="deontology_points" name="deontology_points" class="form-control" value="{{$casestudy->deontology_points}}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="code"> Virtue Ethics Section Points:</label>
-                                                <input type="number" id="virtue_points" name="virtue_points" class="form-control" value="{{$casestudy->virtue_points}}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="code"> Care Ethics Section Points:</label>
-                                                <input type="number" id="care_points" name="care_points" class="form-control" value="{{$casestudy->care_points}}" required>
+                                            <div class="form-group row">
+                                                <label class="col-2 col-form-label" for="code">Instruction:</label>
+                                                <div class="col-10">
+                                                    <textarea cols="30" rows="10" type="text" name="instruction" class="form-control" required>{{$casestudy->instruction}}</textarea>
+                                                </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="code">Total Points:</label>
-                                                <input readonly type="number" id="points" name="points" class="form-control" value="{{$casestudy->points}}" required>
+                                            <fieldset class="mt-1">
+                                                <h5>Dashboard Sections Maximum Points:</h5>
+                                                <div class="form-group row">
+                                                    <label class="col-2 col-form-label" for="code">Ethical Issue:</label>
+                                                    <div class="col-4">
+                                                        <input type="number" id="issue_points" min="0" max="100" name="issue_points" class="form-control" value="{{$casestudy->issue_points}}" required>
+                                                    </div>
+                                            
+                                                    <label class="col-2 col-form-label" for="code">Stakeholder:</label>
+                                                    <div class="col-4">
+                                                        <input type="number" id="stakeholder_points" min="0" max="100" name="stakeholder_points" class="form-control" value="{{$casestudy->stakeholder_points}}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-2 col-form-label" for="code">Utilitarianism:</label>
+                                                    <div class="col-4">
+                                                        <input type="number" id="util_points" min="0" max="100" name="util_points" class="form-control" value="{{$casestudy->util_points}}" required>
+                                                    </div>
+                    
+                                                    <label class="col-2 col-form-label" for="code">Deontology:</label>
+                                                    <div class="col-4">
+                                                        <input type="number" id="deontology_points" min="0" max="100" name="deontology_points" class="form-control" value="{{$casestudy->deontology_points}}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-2 col-form-label" for="code">Virtue Ethics:</label>
+                                                    <div class="col-4">
+                                                        <input type="number" id="virtue_points" min="0" max="100" name="virtue_points" class="form-control" value="{{$casestudy->virtue_points}}" required>
+                                                    </div>
+                    
+                                                    <label class="col-2 col-form-label" for="code">Care Ethics:</label>
+                                                    <div class="col-4">
+                                                        <input type="number" id="care_points" min="0" max="100" name="care_points" class="form-control" value="{{$casestudy->care_points}}" required>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+
+                                            <div class="form-group row">
+                                                <label class="col-2 col-form-label" for="total">Total Points:</label>
+                                                <div class="col-10">
+                                                    <input readonly type="number" id="points" name="points" class="form-control" value="{{$casestudy->points}}" required>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">

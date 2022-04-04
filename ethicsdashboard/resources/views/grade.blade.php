@@ -12,12 +12,25 @@
         <li class="nav-item">
             <a class="nav-link font-weight-bold active" href="{{route('courses.grade', $course->id)}}">Grades</a>
         </li>
-    </ul>
+    </ul> 
+
+
 
     
     <div class="container">
+        <div class="my-3 container text-right">
+        
+            <form method="POST" action="{{route('downloadGrades')}}">
+                {{ csrf_field() }}
+                {{method_field('POST')}}
+                <input type="hidden" id="id" name="id" value="{{$course->id}}" >                   
+                <input type="submit" class=" btn btn-primary" value="Download Grades as PDF">   
+                
+            </form>
+            
+        </div>
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Student Name</th>
@@ -35,23 +48,34 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     
+
                     @foreach($students as $student)
     
-                        <tr>
-                            <th scope="row">{{$student->name}}</th>
-                            
-                            @foreach($dashboards as $dash)
+                    <tr>
                         
-                                @if($dash->user_id == $student->id)
-                                    <td class="text-center">{{$dash->grade}}</td>
+                        <th scope="row">{{$student->name}}</th>
 
-                                @endif
+                        @foreach($casestudies as $case)
 
-                            @endforeach
+                            @if($case->dashboard->where('user_id',$student->id)->first() != null)
                             
-                        </tr>
-                    @endforeach
+                                <td class="text-center">{{$case->dashboard->where('user_id',$student->id)->first()->grade}}</td>
+                            
+                            @else
+
+                                <td class="text-center">0</td>
+
+                            @endif
+                            
+                            
+                        @endforeach
+                        
+                    </tr>
+                @endforeach
+
+                    
                 
                 </tbody>
             </table>

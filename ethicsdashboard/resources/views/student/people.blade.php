@@ -23,29 +23,33 @@
               
             @if(count($people)>0)
 
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        @foreach($people as $person)
-
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
                             <tr>
-                                <th scope="row">{{$person->name}}</th>
-                                <td>{{$person->email}}</td>
-                                <td>{{$person->role}}</td>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
                                 
                             </tr>
-                        @endforeach
-                    
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            
+                            @foreach($people as $person)
+    
+                                <tr>
+                                    <th scope="row">{{$person->name}}</th>
+                                    <td>{{$person->email}}</td>
+                                    <td>{{$person->role}}</td>
+                                    
+                                </tr>
+                            @endforeach
+                        
+                        </tbody>
+                    </table>
+                </div>
+
+                
 
             @endif
         </div>

@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
-</div>
+</div> 
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link active" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,7 +24,7 @@
 <div class="jumbotron">
 
     <div class="ml-5 mr-5 pl-5 pr-5 mb-2">
-        <nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
             <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Character</a>
             <a class="nav-link" href="{{route('virtuesection.show', $dashboard->virtue_section_id)}}">Vices and Virtues</a>
             <a class="nav-link btn-dark active" href="{{route('virtuesection.summary', $dashboard->virtue_section_id)}}">Summary</a>
@@ -39,7 +39,7 @@
 
     <div>
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-md-12 col-lg-6">
                 <div class="card border-secondary mt-2">
                     <p class="card-header font-weight-bold">Options Ranked by Most Virtuous</p>
                         <div class="card-body">  
@@ -73,13 +73,21 @@
             
                                 </form>
                             @else
-                                <p class="mx-auto mt-2 "><mark>NO VIRTUES/VICES HAVE BEEN SET FOR THE OPTIONS</mark></p>
+                                <div class="container">
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        <strong>No virtues/vices have been set for the options</strong> 
+                                    </div>
+                                </div> 
                             @endif
                         </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col-12 col-md-12 col-lg-6">
                 <div class="card border-secondary mt-2">
                     <p class="card-header font-weight-bold">Interests Ranked by Most Virtuous</p>
                         <div class="card-body">  
@@ -115,7 +123,15 @@
                                     
                                 </form>
                             @else
-                                <p class="mx-auto mt-2 "><mark>NO VIRTUES/VICES HAVE BEEN SET FOR THE STAKEHOLDER INTERESTS</mark></p>
+                                <div class="container">
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        <strong>No virtues/vices have been set for the interests</strong> 
+                                    </div>
+                                </div> 
                             @endif
                         </div>
                 </div>

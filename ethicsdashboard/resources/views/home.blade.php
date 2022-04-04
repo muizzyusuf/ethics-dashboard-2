@@ -10,7 +10,7 @@
             <div class="col-6 ">
                 <!-- create course Button trigger modal -->
                 <button type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#createCourseModal">
-                    Create a course
+                    Create a Course
                 </button>
             </div>
         </div>
@@ -19,7 +19,7 @@
 
     <!-- Create course Modal -->
     <div class="modal fade" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="createCourseModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="createCourseModalLabel">Create a course</h5>
@@ -33,25 +33,35 @@
                 <input type="hidden" id="user_id" name="user_id" value="{{$id}}">
                 <div class="modal-body">
                 
-                    <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" id="title" name="title" class="form-control" placeholder="e.g. Intro to Philosophy" required>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="title">Title:</label>
+                        <div class="col-10">
+                            <input type="text" id="title" name="title" class="form-control" placeholder="e.g. Intro to Philosophy" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="code">Course Code:</label>
-                        <input type="text" id="code" name="code" class="form-control" placeholder="e.g. PHIL" required>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="code">Course Code:</label>
+                        <div class="col-10">
+                            <input type="text" id="code" name="code" class="form-control" placeholder="e.g. PHIL" maxlength="5" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="section">Number:</label>
-                        <input type="number" id="number" name="number" class="form-control" placeholder="e.g. 101" required>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="section">Number:</label>
+                        <div class="col-10">
+                            <input type="number" id="number" name="number" class="form-control" placeholder="e.g. 101" min="100" max="700" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="section">Section:</label>
-                        <input type="number" id="section" name="section" class="form-control" placeholder="e.g. 001" required>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="section">Section:</label>
+                        <div class="col-10">
+                            <input type="text" id="section" name="section" class="form-control" placeholder="e.g. 001" maxlength="3" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="year">Year:</label>
-                        <input type="text" id="year" name="year" class="form-control" placeholder="e.g. 2021" required>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="year">Year:</label>
+                        <div class="col-10">
+                            <input type="date" id="year" name="year" class="form-control" required>
+                        </div>
                     </div>
 
                 </div>
@@ -70,7 +80,13 @@
            
             @if(count($courses)<1)
             
-            <p class="mx-auto mt-2 "><mark>NO COURSES REGISTERED/CREATED</mark></p>
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>No worries!</strong> You cannot see any courses becuase you have not created a course yet!
+            </div>
 
             @else
                 
@@ -81,7 +97,7 @@
                         <div class="col-md-4 mt-5">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title font-weight-bold"><a href="{{route('courses.show', $courses[$i]->id)}}">{{$courses[$i]->code}}-{{$courses[$i]->number}} 00{{$courses[$i]->section}}</a></h5>
+                                    <h5 class="card-title font-weight-bold"><a href="{{route('courses.show', $courses[$i]->id)}}">{{$courses[$i]->code}}-{{$courses[$i]->number}} {{$courses[$i]->section}}</a></h5>
                                     <h6 class="card-subtitle mb-2 text-muted">{{$courses[$i]->year}}</h6>
                                     <p class="card-text">{{$courses[$i]->title}}</p>
                                     
@@ -133,7 +149,7 @@
 
                         <!-- edit course Modal -->
                         <div class="modal fade" id="editCourse{{$courses[$i]->id}}Modal" tabindex="-1" role="dialog" aria-labelledby="editCourse{{$courses[$i]->id}}ModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                 <h5 class="modal-title" id="editCourse{{$courses[$i]->id}}ModalLabel">Edit course</h5>
@@ -146,26 +162,36 @@
                                     {{ csrf_field() }}
                                     {{method_field('PUT')}}
                                     <div class="modal-body">
-                                    
-                                        <div class="form-group">
-                                            <label for="title">Title:</label>
-                                            <input type="text" id="title" name="title" class="form-control" value="{{$courses[$i]->title}}" required>
+
+                                        <div class="form-group row">
+                                            <label class="col-2 col-form-label" for="title">Title:</label>
+                                            <div class="col-10">
+                                                <input type="text" id="title" name="title" class="form-control" value="{{$courses[$i]->title}}" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="code">Course Code:</label>
-                                            <input type="text" id="code" name="code" class="form-control" value="{{$courses[$i]->code}}" required>
+                                        <div class="form-group row">
+                                            <label class="col-2 col-form-label" for="code">Course Code:</label>
+                                            <div class="col-10">
+                                                <input type="text" id="code" name="code" class="form-control" value="{{$courses[$i]->code}}" maxlength="5" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="number">Number:</label>
-                                            <input type="number" id="number" name="number" class="form-control" value="{{$courses[$i]->number}}" required>
+                                        <div class="form-group row">
+                                            <label class="col-2 col-form-label" for="section">Number:</label>
+                                            <div class="col-10">
+                                                <input type="number" id="number" name="number" class="form-control" value="{{$courses[$i]->number}}" min="100" max="700" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="section">Section:</label>
-                                            <input type="number" id="section" name="section" class="form-control" value="00{{$courses[$i]->section}}" required>
+                                        <div class="form-group row">
+                                            <label class="col-2 col-form-label" for="section">Section:</label>
+                                            <div class="col-10">
+                                                <input type="text" id="section" name="section" class="form-control" maxlength="3" value="{{$courses[$i]->section}}" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="year">Year:</label>
-                                            <input type="text" id="year" name="year" class="form-control" value="{{$courses[$i]->year}}" required>
+                                        <div class="form-group row">
+                                            <label class="col-2 col-form-label" for="year">Year:</label>
+                                            <div class="col-10">
+                                                <input type="date" id="year" name="year" value="{{$courses[$i]->year}}" class="form-control" required>
+                                            </div>
                                         </div>
 
                                     </div>

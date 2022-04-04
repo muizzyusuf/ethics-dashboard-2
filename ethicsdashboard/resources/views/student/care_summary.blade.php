@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,13 +24,26 @@
 <div class="jumbotron">
 
     <div class="ml-5 mr-5 pl-5 pr-5 mb-2">
-        <nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
             <a class="nav-link" href="{{route('caresection.show', $dashboard->care_section_id)}}">Care Analysis</a>
             <a class="nav-link  btn-dark active" href="{{route('caresection.summary', $dashboard->care_section_id)}}">Summary</a>
         </nav>
     </div>
    
     <div class="container">
+        @if(count($dashboard->ethicalIssue->options)<1)
+
+            <div class="container">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>No option inputs have been made</strong> 
+                </div>
+            </div> 
+                              
+        @endif 
 
         @for($i=0; $i<count($options); $i++)
 
@@ -55,7 +68,15 @@
                 @else
                     
                         <div class="card-body">
-                            <p class="text-center">ANALYSIS NOT DONE</p>
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>Care analysis not done!</strong> 
+                                </div>
+                            </div> 
                         </div>
                      
                 @endif

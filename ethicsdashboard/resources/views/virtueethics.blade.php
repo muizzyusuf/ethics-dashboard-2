@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
-</div>
+</div> 
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link active" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -23,8 +23,8 @@
 
 <div class="jumbotron">
 
-    <div class="ml-5 mr-5 pl-5 pr-5 mb-2">
-        <nav class="nav nav-pills nav-justified">
+    <div class="ml-5 mr-5 pl-5 pr-5 mb-2 ">
+        <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
             <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Character</a>
             <a class="nav-link btn-dark active" href="{{route('virtuesection.show', $dashboard->virtue_section_id)}}">Vices and Virtues</a>
             <a class="nav-link " href="{{route('virtuesection.summary', $dashboard->virtue_section_id)}}">Summary</a>
@@ -39,7 +39,20 @@
             would evaluate success/failure in consideration of the consequences, re-evaluate
             your decisions and refine your understanding of the virtues until virtuous actions 
             flow from your character.</p>
-            <div class="card-body">  
+            <div class="card-body"> 
+                @if(count($dashboard->ethicalIssue->options)<1)
+
+                    <div class="container">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>No option inputs have been made</strong> 
+                        </div>
+                    </div> 
+                      
+                @endif 
                 <!-- User input of Vices and Virtues for all options-->
                 @if(count($optionVirtues)<1)
                     <form method="POST" action="{{route('virtue.store')}}">
@@ -49,25 +62,25 @@
                         @for($i=0; $i<count($options); $i++)
                             <div class="container border my-1 py-1 rounded">
                                 <div class="form-group row mt-1">
-                                    <label class="col-2 col-form-label font-weight-bold" for="option">Option {{$i+1}}:</label>
+                                    <label class="col-3 col-form-label font-weight-bold" for="option">Option {{$i+1}}:</label>
                                     <input type="hidden" id="option{{$i+1}}_id" name="option{{$i+1}}_id"  value="{{$options[$i]->id}}">
-                                    <div class="col-10">
+                                    <div class="col-9">
                                         <input type="text" class="form-control" id="option{{$i+1}}" name="option{{$i+1}}" value="{{$options[$i]->option}}" readonly>
                                     </div>
                                 </div>
                         
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2">
                                     
                                         
                                         <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                                     
             
                                         <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                             
                                     
                                         <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" readonly required>
@@ -93,26 +106,26 @@
 
                             <div class="container border my-1 py-1 rounded">
                                 <div class="form-group row mt-1">
-                                    <label class="col-2 col-form-label font-weight-bold" for="option">Option {{$i+1}}:</label>
+                                    <label class="col-3 col-form-label font-weight-bold" for="option">Option {{$i+1}}:</label>
                                     <input type="hidden" id="option{{$i+1}}_id" name="option{{$i+1}}_id"  value="{{$options[$i]->id}}">
-                                    <div class="col-10">
+                                    <div class="col-9">
                                         <input type="text" class="form-control" id="option{{$i+1}}" name="option{{$i+1}}" value="{{$options[$i]->option}}" readonly>
                                     </div>
                                 </div>
                             
         
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2">
                                     
                                         
                                         <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" value="{{$options[$i]->virtue->excess}}" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                                     
             
                                         <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" value="{{$options[$i]->virtue->mean}}" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                             
                                     
                                         <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" value="{{$options[$i]->virtue->deficiency}}" readonly required>
@@ -134,6 +147,19 @@
             in the context of a community. Identify the relevant virtues and vices relevant to the stakeholder interests you've tried
         </p>
             <div class="card-body">  
+                @if(count($dashboard->stakeholderSection->stakeholders)<1)
+
+                    <div class="container">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>No stakeholder inputs have been made</strong> 
+                        </div>
+                    </div> 
+                      
+                @endif
                 <!-- User input of Vices and Virtues for all options-->
                 @if(count($stakeholderVirtues)<1)
                     <form method="POST" action="{{route('virtue.store')}}">
@@ -144,25 +170,25 @@
                         @for($i=0; $i<count($stakeholders); $i++)
                             <div class="container border my-1 py-1 rounded">
                                 <div class="form-group row mt-1">
-                                    <label class="col-3 col-form-label font-weight-bold" for="stakeholder">Stakeholders Interest {{$i+1}}:</label>
+                                    <label class="col-4 col-md-3 col-form-label font-weight-bold" for="stakeholder">Stakeholders Interest {{$i+1}}:</label>
                                     <input type="hidden" id="stakeholder{{$i+1}}_id" name="stakeholder{{$i+1}}_id"  value="{{$stakeholders[$i]->id}}">
-                                    <div class="col-9">
+                                    <div class="col-8 col-md-9">
                                         <textarea type="text" class="form-control" id="stakeholder{{$i+1}}" name="stakeholder{{$i+1}}" disabled >{{$stakeholders[$i]->interests}}</textarea>
                                     </div>
                                 </div>
                             
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2">
                                     
                                         
                                         <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                                     
             
                                         <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                             
                                     
                                         <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" readonly required>
@@ -188,26 +214,26 @@
 
                             <div class="container border my-1 py-1 rounded">
                                 <div class="form-group row mt-1">
-                                    <label class="col-3 col-form-label font-weight-bold" for="stakeholder">Stakeholders Interest {{$i+1}}:</label>
+                                    <label class="col-4 col-md-3  col-form-label font-weight-bold" for="stakeholder">Stakeholders Interest {{$i+1}}:</label>
                                     <input type="hidden" id="stakeholder{{$i+1}}_id" name="stakeholder{{$i+1}}_id"  value="{{$stakeholders[$i]->id}}">
-                                    <div class="col-9">
+                                    <div class="col-8 col-md-9">
                                         <textarea type="text" class="form-control" id="stakeholder{{$i+1}}" name="stakeholder{{$i+1}}" disabled >{{$stakeholders[$i]->interests}}</textarea>
                                     </div>
                                 </div>
                             
         
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2">
                                     
                                         
                                         <input type="text"  class="form-control form-control-sm text-center" name="excess{{$i+1}}" placeholder="Vice (Excess)" value="{{$stakeholders[$i]->virtue->excess}}" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                                     
             
                                         <input type="text" class="form-control form-control-sm text-center" name="mean{{$i+1}}" placeholder="Virtue (Mean)" value="{{$stakeholders[$i]->virtue->mean}}" readonly required>
                                     </div>
-                                    <div class="col-2 offset-3">
+                                    <div class="col-4 col-sm-4 col-md-4 col-lg-2 offset-lg-3">
                             
                                     
                                         <input type="text" class="form-control form-control-sm text-center" name="deficiency{{$i+1}}" placeholder="Vice (Deficiency)" value="{{$stakeholders[$i]->virtue->deficiency}}" readonly required>
@@ -229,19 +255,25 @@
 <div class="mt-3 card">
     <p class="card-header">Instructor Comments & Grade</p>
     <div class="card-body">
-        <form method="POST" action="{{route('virtuesection.comment',$virtueSection->id)}}">
+        <form method="POST" action="{{route('virtuesection.comment', $virtueSection->id)}}">
             {{ csrf_field() }}
             {{method_field('POST')}}
     
-            <div class="form-group">
-                <label class="font-weight-bold" for="comment">Comment</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$virtueSection->comment}} </textarea>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="comment">Comment:</label>
+                <div class="col-9">
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required>{{$virtueSection->comment}}</textarea>
+                </div>
+                
             </div>
 
-            <div class="form-group">
-                <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" min="0" max="{{$casestudy->virtue_points}}" class="form-control col-1" id="grade" name="grade" value="{{$virtueSection->grade}}" required>
-                <small id="help" class="form-text text-muted">Out of {{$casestudy->virtue_points}} </small>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="grade">Grade:</label>
+                <div class="col-9">
+                    <input type="number" min="0" max="{{$dashboard->caseStudy->virtue_points}}" class="form-control" id="grade" name="grade" value="{{$virtueSection->grade}}" required >
+                    <small id="help" class="form-text text-muted">Out of {{$dashboard->caseStudy->virtue_points}} </small>
+                </div>
+                
             </div>
 
             <input type="submit" class="float-right btn btn-primary" value="Save">

@@ -13,7 +13,7 @@
             <a class="nav-link font-weight-bold active" href="{{route('courses.grade', $course->id)}}">Grades</a>
         </li>
     </ul>
-
+ 
     
     <div class="container">
         <div class="table-responsive">
@@ -27,14 +27,22 @@
                 </thead>
                 <tbody>
 
-                    @foreach($dboards as $dash)
+                    @foreach($casestudies as $case)
                         <tr>
-                            <th scope="row"><a href="{{route('casestudy.show', $dash->case_study_id)}}">{{$dash->name}}</a></th>
-                            @if($dash->user_id == $student->id)
-                                    <td class="text-center">{{$dash->grade}}</td>
-                                    
-                                    <td class="text-center">{{$dash->points}}</td>
+                            <th scope="row"><a href="{{route('casestudy.show', $case->id)}}">{{$case->name}}</a></th>
+
+                            @if($case->dashboard->where('user_id',Auth::user()->id)->first() != null)
+                            
+                                <td class="text-center">{{$case->dashboard->where('user_id',Auth::user()->id)->first()->grade}}</td>
+                                
+                            @else
+
+                                <td class="text-center">0</td>
+
                             @endif
+                            
+                            <td class="text-center">{{$case->points}}</td>
+                            
                         </tr>
                     @endforeach
                 

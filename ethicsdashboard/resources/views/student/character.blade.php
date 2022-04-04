@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
-</div>
+</div> 
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link active" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,7 +24,7 @@
 <div class="jumbotron">
 
     <div class="ml-5 mr-5 pl-5 pr-5 mb-2">
-        <nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
             <a class="nav-link btn-dark active" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Character</a>
             <a class="nav-link" href="{{route('virtuesection.show', $dashboard->virtue_section_id)}}">Vices and Virtues</a>
             <a class="nav-link" href="{{route('virtuesection.summary', $dashboard->virtue_section_id)}}">Summary</a>
@@ -100,19 +100,6 @@
                             var y = 50;
                             var WIDTH = 600;
                             var HEIGHT = 400;
-                            
-            
-                            //var gravity = 0.25;
-                            //var friction = 0.98;
-            
-                            // const velocity = 3;
-                            // const startingAngle = 50;
-            
-                            // var moveX = Math.cos(Math.PI / 180 * startingAngle) * velocity;
-                            // var moveY = Math.sin(Math.PI / 180 * startingAngle) * velocity;
-            
-                            // var moveX = (Math.random() * 5 + 1) * (Math.floor(Math.random() * 2) || -1);
-                            // var moveY = (Math.random() * 5 + 1) * (Math.floor(Math.random() * 2) || -1);
             
             
                             function component(x, y, r, colour, text) {
@@ -128,10 +115,6 @@
             
                                 this.moveX = Math.cos(Math.PI / 180 * this.startingAngle) * this.velocity;
                                 this.moveY = Math.sin(Math.PI / 180 * this.startingAngle) * this.velocity;
-            
-                                // this.moveX = (Math.random() * 5 + 1) * (Math.floor(Math.random() * 2) || -1);
-                                // this.moveY = (Math.random() * 5 + 1) * (Math.floor(Math.random() * 2) || -1);
-            
             
                                 this.update = function () {
                                     // ctx = myGameArea.context;
@@ -271,10 +254,6 @@
                                     var mx = (e.clientX - rect.left)*scaleX;
                                     var my = (e.clientY -rect.top)*scaleY;
             
-                                    // get the current mouse position
-                                    // var mx = parseInt(e.clientX - offsetX);
-                                    // var my = parseInt(e.clientY - offsetY);
-            
                                     // calculate the distance the mouse has moved
                                     // since the last mousemove
                                     var dx = mx - startX;
@@ -362,8 +341,8 @@
                     </script>
             
                     <div class="text-center">
-                        <button id='solve' class="btn btn-success"> BALANCE </button>
-                        <button id='reset' class="btn btn-secondary"> RESET </button>
+                        <button id='solve' class="btn btn-success font-weight-bold">Balance</button>
+                        <button id='reset' class="btn btn-secondary font-weight-bold">Reset</button>
                     </div>
                    
                 </section>
