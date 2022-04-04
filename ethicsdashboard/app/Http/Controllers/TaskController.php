@@ -117,6 +117,22 @@ class TaskController extends Controller
 
         return $pdf->download('DashboardSummary.pdf');
     }
+
+    public function downloadGrades(Request $request){
+        
+        $course = Course::where('id', $request->input('id'))->first();
+
+        $students = $course->users->where('role_id','3');
+
+        $casestudies = CaseStudy::where('course_id', $request->input('id'))->get();
+        
+
+        $pdf = PDF::loadView('gradespdf', compact('course','students','casestudies'),);
+
+        return $pdf->download('grades.pdf');
+    }
+
+
     public function exportCsv(Request $request)
     {   
         

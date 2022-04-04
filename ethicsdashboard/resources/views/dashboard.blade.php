@@ -246,6 +246,18 @@
         </div>
 
     </div>
+
+    <div class="mt-3 container text-left">
+        
+        <form method="POST" action="{{route('downloadPDF')}}">
+            {{ csrf_field() }}
+            {{method_field('POST')}}
+            <input type="hidden" id="id" name="id" value="{{$dashboard->id}}" >                   
+            <input type="submit" class=" btn btn-primary" value="Download Summary as PDF">   
+            
+        </form>
+        
+    </div>
 </div>
 
 

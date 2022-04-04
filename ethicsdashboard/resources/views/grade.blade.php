@@ -14,10 +14,23 @@
         </li>
     </ul> 
 
+
+
     
     <div class="container">
+        <div class="my-3 container text-right">
+        
+            <form method="POST" action="{{route('downloadGrades')}}">
+                {{ csrf_field() }}
+                {{method_field('POST')}}
+                <input type="hidden" id="id" name="id" value="{{$course->id}}" >                   
+                <input type="submit" class=" btn btn-primary" value="Download Grades as PDF">   
+                
+            </form>
+            
+        </div>
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Student Name</th>

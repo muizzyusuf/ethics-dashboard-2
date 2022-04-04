@@ -71,8 +71,6 @@
                 </div>
               
 
-                <input type="submit" class="float-right btn btn-primary" value="Save">
-
             </form>
           
         </div>

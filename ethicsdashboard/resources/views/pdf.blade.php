@@ -8682,6 +8682,7 @@
       <tr>
         <td>
           <h3>Virtue Ethics Summary</h3>
+          <p><b>Decision:</b> {{$virtue->decision}}</p>
 
           @for($i=0; $i<count($oVirtues); $i+=2)
             @if($oVirtues[$i] != null)
@@ -8720,6 +8721,7 @@
       <tr>
         <td>
           <h3>Care Ethics Summary</h3>
+          <p><b>Decision:</b> {{$care->decision}}</p>
         </td>
       </tr>
     
@@ -8744,6 +8746,7 @@
 
           <td>
             <h3>Deontology Summary</h3>
+            <p><b>Decision:</b> {{$deontology->decision}}</p>
           </td>
         
         </tr>
