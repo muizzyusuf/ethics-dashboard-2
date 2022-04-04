@@ -14,6 +14,6 @@ class StakeholderSection extends Model
     }
 
     public function stakeholders(){
-        return $this->hasMany('App\Models\Stakeholders');
+        return $this->hasMany('App\Models\Stakeholder');
     }
 }
