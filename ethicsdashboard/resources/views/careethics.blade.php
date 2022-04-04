@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,23 +24,47 @@
 <div class="jumbotron">
 
     <div class="ml-5 mr-5 pl-5 pr-5 mb-2">
-        <nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
             <a class="nav-link btn-dark active" href="{{route('caresection.show', $dashboard->care_section_id)}}">Care Analysis</a>
             <a class="nav-link " href="{{route('caresection.summary', $dashboard->care_section_id)}}">Summary</a>
         </nav>
     </div>
 
-    <div class="container font-weight-bold">Care ethics we come to understand the right thing to do by considering how we can care for others.  There are three main features of care that we can use to quantify this:
-        <ol>
-            <li>Attentiveness: Being aware of needs in others. </li>
-            <li>Competence: The ability to deliver what is needed.</li>
-            <li>Responsiveness: Empathy for the position of others in need of care.</li>
-        </ol>    
-    
+    <div class="container mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="">Care ethics we come to understand the right thing to do by considering how we can care for others.  There are three main features of care that we can use to quantify this:
+                    <ol>
+                        <li>Attentiveness: Being aware of needs in others. </li>
+                        <li>Competence: The ability to deliver what is needed.</li>
+                        <li>Responsiveness: Empathy for the position of others in need of care.</li>
+                    </ol>    
+                
+                </div>
+            </div>
+        </div>
     </div>
+
+    
+
+    
 
         
     <div class="container">
+
+        @if(count($dashboard->ethicalIssue->options)<1)
+
+            <div class="container">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>No option inputs have been made</strong> 
+                </div>
+            </div> 
+                              
+        @endif 
 
         @for($i=0; $i<count($options); $i++)
 
@@ -57,13 +81,28 @@
                         <input type="hidden" id="option_id" name="option_id" value="{{$options[$i]->id}}">
 
                         <div class="card-body">
+
+                            @if(count($dashboard->stakeholderSection->stakeholders)<1)
+
+                                <div class="container">
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        <strong>No stakeholder inputs have been made</strong> 
+                                    </div>
+                                </div> 
+                                
+                            @endif
+
                             @for($j=0; $j<count($stakeholders); $j++)
                                     
                                 <div class="container border my-1 py-1 rounded">
                                     <div class="form-group row mt-1">
-                                        <label class="col-2 col-form-label" for="stakeholder">Stakeholder {{$j+1}}:</label>
+                                        <label class="col-4 col-form-label" for="stakeholder">Stakeholder {{$j+1}}:</label>
                                         <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
-                                        <div class="col-10">
+                                        <div class="col-8">
                                             <input type="text" class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" value="{{$stakeholders[$j]->stakeholder}}" readonly>
                                         </div>
                                         
@@ -114,10 +153,10 @@
                                     
                                 <div class="container border my-1 py-1 rounded">
                                     <div class="form-group row mt-1">
-                                        <label class="col-2 col-form-label" for="stakeholder">Stakeholder {{$j+1}}:</label>
+                                        <label class="col-4 col-form-label" for="stakeholder">Stakeholder {{$j+1}}:</label>
                                         <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
                                         <input type="hidden" id="care{{$j+1}}_id" name="care{{$j+1}}_id"  value=@foreach($stakeholders[$j]->cares as $c) @if($c->option_id == $options[$i]->id)  {{$c->id}} @endif @endforeach >
-                                        <div class="col-10">
+                                        <div class="col-8">
                                             <input type="text" class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" value="{{$stakeholders[$j]->stakeholder}}" readonly>
                                         </div>
                                         
@@ -169,19 +208,25 @@
 <div class="mt-3 card">
     <p class="card-header">Instructor Comments & Grade</p>
     <div class="card-body">
-        <form method="POST" action="{{route('caresection.comment',$careSection->id)}}">
+        <form method="POST" action="{{route('caresection.comment', $careSection->id)}}">
             {{ csrf_field() }}
             {{method_field('POST')}}
     
-            <div class="form-group">
-                <label class="font-weight-bold" for="comment">Comment</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required> {{$careSection->comment}} </textarea>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="comment">Comment:</label>
+                <div class="col-9">
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required>{{$careSection->comment}}</textarea>
+                </div>
+                
             </div>
 
-            <div class="form-group">
-                <label class="font-weight-bold" for="grade">Grade</label>
-                <input type="number" min="0" max="{{$casestudy->care_points}}" class="form-control col-1" id="grade" name="grade" value="{{$careSection->grade}}" required>
-                <small id="help" class="form-text text-muted">Out of {{$casestudy->care_points}} </small>
+            <div class="form-group row">
+                <label class="font-weight-bold col-form-label col-3" for="grade">Grade:</label>
+                <div class="col-9">
+                    <input type="number" min="0" max="{{$dashboard->caseStudy->care_points}}" class="form-control" id="grade" name="grade" value="{{$careSection->grade}}" required >
+                    <small id="help" class="form-text text-muted">Out of {{$dashboard->caseStudy->care_points}} </small>
+                </div>
+                
             </div>
 
             <input type="submit" class="float-right btn btn-primary" value="Save">
