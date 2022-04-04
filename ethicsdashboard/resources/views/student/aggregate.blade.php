@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show',  $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link active" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,7 +24,7 @@
 <div class="jumbotron">
 
     <div class="container mb-2">
-        <nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
             <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Option Analysis</a>
             <a class="nav-link" href="{{route('utilitarianismsection.impact', $dashboard->utilitarianism_section_id)}}">Stakeholder Analysis</a>
             <a class="nav-link btn-dark active" href="{{route('utilitarianismsection.aggregate', $dashboard->utilitarianism_section_id)}}">Pleasure Analysis</a>
@@ -38,12 +38,26 @@
             unhappiness (pain).  Consider the relative stakeholder 
             pleasures or pains for the options you identified. Identify 
             the pleasures as higher or lower by ticking the box. </p>
+
+        @if(count($options)<1)
+            <div class="card-body">
+                <div class="container">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>No option inputs have been made</strong> 
+                    </div>
+                </div> 
+            </div>  
+        @endif
     
         @for($i=0; $i<count($options); $i++)
             <div class="card-body">
 
                 <div class="form-group">
-                    <label class="font-weight-bold" for="option">Option {{$i+1}}</label>
+                    <label class="font-weight-bold" for="option">Option {{$i+1}}:</label>
                     <textarea class="form-control" id="option" name="option" rows="1" readonly>{{$options[$i]->option}} </textarea>
                 </div>
 
@@ -66,37 +80,39 @@
                                             <input type="hidden" id="consequence_id" name="consequence_id" value="{{$consequence->id}}">
 
                                             @for($j=0; $j<count($stakeholders); $j++)
-                                                        
-                                                <div class="form-group">
-                                                    <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}</label>
-                                                    <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
-                                                    <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-10">
-                                                        <label class="float-left font-weight-bold text-muted" for="pleasure">Pleasure</label> <label class="float-right font-weight-bold text-muted" for="pleasure">Pain</label>
-                                                        <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$j+1}}" name="pleasure{{$j+1}}" required>
-                                                        
-                                                    </div>
-                                                    <div class="form-group col-md-2">
-                                                        <div class="form-check text-justify">
-                                                            <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="High" required>
-                                                            <label class="form-check-label" for="level">High</label>
-                                                        </div>
-                                                        <div class="form-check text-justify">
-                                                            <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="Low">
-                                                            <label class="form-check-label" for="">Low</label>
-                                                        </div>
-                                                    </div>
-                                                        
-                                                </div>
-                                                
 
-                                                <div class="form-group">
-                                                    <label class="font-weight-bold" for="explanation">Explanation</label>
-                                                    <textarea class="form-control" id="explanation{{$j+1}}" name="explanation{{$j+1}}" rows="3"></textarea>
-                                                </div>
-                                                
+                                                <div class="container border my-2 pt-2 rounded">
+                                                            
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}:</label>
+                                                        <input type="hidden" id="stakeholder{{$j+1}}_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
+                                                        <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-10">
+                                                            <small class="float-left text-muted" for="pleasure">Pleasure</small> <small class="float-right text-muted" for="pleasure">Pain</small>
+                                                            <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$j+1}}" name="pleasure{{$j+1}}" required>
+                                                            
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                            <div class="form-check text-justify">
+                                                                <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="High" required>
+                                                                <label class="form-check-label" for="level">High</label>
+                                                            </div>
+                                                            <div class="form-check text-justify">
+                                                                <input class="form-check-input" type="radio" name="level{{$j+1}}" id="level{{$j+1}}" value="Low">
+                                                                <label class="form-check-label" for="">Low</label>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                    </div>
+                                                    
+
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold" for="explanation">Explanation:</label>
+                                                        <textarea class="form-control" id="explanation{{$j+1}}" name="explanation{{$j+1}}" rows="3"></textarea>
+                                                    </div>
+                                                </div>   
                                                 
                                                                 
 
@@ -118,62 +134,64 @@
                                             <input type="hidden" id="consequence_id" name="consequence_id" value="{{$consequence->id}}">
 
                                             @for($j=0; $j<count($stakeholders); $j++)
-                                                        
-                                                <div class="form-group">
-                                                    <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}</label>
-                                                    <input type="hidden" id="stakeholde{{$j+1}}r_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
-                                                    <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
-                                                </div>
 
-                                                
-                                                @for($k=0; $k<count($pleasures); $k++)
-
-                                                
-                                                    @if(($pleasures[$k]->consequence_id == $consequence->id) && ($pleasures[$k]->stakeholder_id == $stakeholders[$j]->id)  )
-                                                        <div class="row">
+                                                <div class="container border my-2 pt-2 rounded">
                                                             
-                                                            <div class="form-group col-md-10">
-                                                                <label class="float-left font-weight-bold text-muted" for="pleasure">Pleasure</label> <label class="float-right font-weight-bold text-muted" for="pleasure">Pain</label>
-                                                                <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$k+1}}" name="pleasure{{$k+1}}" value="{{$pleasures[$k]->pleasure}}" required >
-                                                                <input type="hidden" id="pleasure{{$k+1}}_id" name="pleasure{{$k+1}}_id"  value="{{$pleasures[$k]->id}}">
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold" for="stakeholder">Stakeholder {{$j+1}}:</label>
+                                                        <input type="hidden" id="stakeholde{{$j+1}}r_id" name="stakeholder{{$j+1}}_id"  value="{{$stakeholders[$j]->id}}">
+                                                        <textarea class="form-control" id="stakeholder{{$j+1}}" name="stakeholder{{$j+1}}" rows="1" readonly>{{$stakeholders[$j]->stakeholder}}</textarea>
+                                                    </div>
+
+                                                    
+                                                    @for($k=0; $k<count($pleasures); $k++)
+
+                                                    
+                                                        @if(($pleasures[$k]->consequence_id == $consequence->id) && ($pleasures[$k]->stakeholder_id == $stakeholders[$j]->id)  )
+                                                            <div class="row">
+                                                                
+                                                                <div class="form-group col-md-10">
+                                                                    <small class="float-left text-muted" for="pleasure">Pleasure</small> <small class="float-right text-muted" for="pleasure">Pain</small>
+                                                                    <input type="range" min="0" max="10" class="form-control-range" id="pleasure{{$k+1}}" name="pleasure{{$k+1}}" value="{{$pleasures[$k]->pleasure}}" required >
+                                                                    <input type="hidden" id="pleasure{{$k+1}}_id" name="pleasure{{$k+1}}_id"  value="{{$pleasures[$k]->id}}">
+                                                                </div>
+
+                                                                @if($pleasures[$k]->level == 'High')
+                                                                    <div class="form-group col-md-2">
+                                                                        <div class="form-check text-justify">
+                                                                            <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" checked required>
+                                                                            <label class="form-check-label" for="level">High</label>
+                                                                        </div>
+                                                                        <div class="form-check text-justify">
+                                                                            <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low">
+                                                                            <label class="form-check-label" for="">Low</label>
+                                                                        </div>
+                                                                    </div>
+                                                                @else
+                                                                    <div class="form-group col-md-2">
+                                                                        <div class="form-check text-justify">
+                                                                            <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" required>
+                                                                            <label class="form-check-label" for="level">High</label>
+                                                                        </div>
+                                                                        <div class="form-check text-justify">
+                                                                            <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low" checked>
+                                                                            <label class="form-check-label" for="">Low</label>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                                    
                                                             </div>
+                                                            
 
-                                                            @if($pleasures[$k]->level == 'High')
-                                                                <div class="form-group col-md-2">
-                                                                    <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" checked required>
-                                                                        <label class="form-check-label" for="level">High</label>
-                                                                    </div>
-                                                                    <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low">
-                                                                        <label class="form-check-label" for="">Low</label>
-                                                                    </div>
-                                                                </div>
-                                                            @else
-                                                                <div class="form-group col-md-2">
-                                                                    <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="High" required>
-                                                                        <label class="form-check-label" for="level">High</label>
-                                                                    </div>
-                                                                    <div class="form-check text-justify">
-                                                                        <input class="form-check-input" type="radio" name="level{{$k+1}}" id="level{{$k+1}}" value="Low" checked>
-                                                                        <label class="form-check-label" for="">Low</label>
-                                                                    </div>
-                                                                </div>
-                                                            @endif
-                                                                
-                                                        </div>
-                                                        
-
-                                                        <div class="form-group">
-                                                            <label class="font-weight-bold" for="explanation">Explanation</label>
-                                                            <textarea class="form-control" id="explanation{{$k+1}}" name="explanation{{$k+1}}" rows="3" required>{{$pleasures[$k]->explanation}}</textarea>
-                                                        </div>
-                                                    @endif
-                                                @endfor
-                                                
-                                                
-                                                                
+                                                            <div class="form-group">
+                                                                <label class="font-weight-bold" for="explanation">Explanation:</label>
+                                                                <textarea class="form-control" id="explanation{{$k+1}}" name="explanation{{$k+1}}" rows="3" required>{{$pleasures[$k]->explanation}}</textarea>
+                                                            </div>
+                                                        @endif
+                                                    @endfor
+                                                    
+                                                    
+                                                </div>                    
 
                                                     
                                             @endfor
@@ -191,10 +209,29 @@
                         @endif
                         
                     @endforeach
+
+                @else
+
+                    <div class="mb-2 card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>No long-term or short-term consequences have been inputed for this option</strong> 
+                                </div>
+                            </div> 
+                        </div>  
+        
+                    </div>
                     
                 @endif
             </div>
-        @endfor
+        
+        
+        @endfor 
         
     </div>
 

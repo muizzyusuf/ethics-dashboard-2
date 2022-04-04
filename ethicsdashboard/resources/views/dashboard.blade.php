@@ -149,7 +149,8 @@
                 <div id="utilContentId" class="collapse in" role="tabpanel" aria-labelledby="utilHeaderId">
                     <div class="card-body">
                         @if($util->decision != null)
-                            {{$util->decision}}
+                            <p><b>Decision:</b> {{$util->decision}}</p>
+                            
                         @else
                             <div class="container">
                                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -175,7 +176,7 @@
                 <div id="careContentId" class="collapse in" role="tabpanel" aria-labelledby="careHeaderId">
                     <div class="card-body">
                         @if($care->decision != null)
-                            {{$care->decision}}
+                        <p><b>Decision:</b> {{$care->decision}}</p>
                         @else
                             <div class="container">
                                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -201,7 +202,7 @@
                 <div id="virtueContentId" class="collapse in" role="tabpanel" aria-labelledby="virtueHeaderId">
                     <div class="card-body">
                         @if($virtue->decision != null)
-                            {{$virtue->decision}}
+                        <p><b>Decision:</b>{{$virtue->decision}}</p>
                         @else
                             <div class="container">
                                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -227,7 +228,7 @@
                 <div id="deonContentId" class="collapse in" role="tabpanel" aria-labelledby="deonHeaderId">
                     <div class="card-body">
                         @if($deon->decision != null)
-                            {{$deon->decision}}
+                        <p><b>Decision:</b>{{$deon->decision}}</p>
                         @else
                             <div class="container">
                                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
