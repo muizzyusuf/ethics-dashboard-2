@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,7 +24,7 @@
 <div class="jumbotron">
 
     <div class="container mb-2">
-        <ul class="nav nav-pills nav-justified">
+        <ul class="nav nav-pills nav-justified flex-column flex-lg-row">
             <li class="nav-item">
                 <a class="nav-link btn-dark active" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Option Analysis</a>
             </li>
@@ -56,6 +56,19 @@
         </div>
     </div>
 
+    @if(count($dashboard->ethicalIssue->options)<1)
+
+        <div class="container">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>No option inputs have been made</strong> 
+            </div>
+        </div> 
+                              
+    @endif 
     
     @for($i=0; $i<count($options); $i++)
 
@@ -75,6 +88,20 @@
                     </div>
                 </div>
                 <div class="card-body">
+
+                    @if(count($options[$i]->motivations)<1)
+
+                        <div class="container">
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <strong>Motivation(s) not selected yet</strong> 
+                            </div>
+                        </div> 
+                                        
+                    @endif 
 
                     <h5 class="card-subtitle mb-2 text-muted">What is your motivation ?</h5>
 

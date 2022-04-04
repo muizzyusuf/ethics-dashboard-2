@@ -3,15 +3,15 @@
 @section('content')
  
 <div>
-    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $casestudy->id)}}">
+    <a class="mb-2 btn btn-dark" href="{{route('casestudy.show', $dashboard->caseStudy->id)}}">
         ⏴Case Study
     </a> 
 </div>
 
 <div class="container mb-2">
-    <nav class="nav nav-pills nav-justified">
+    <nav class="nav nav-pills nav-justified flex-column flex-lg-row">
         <a class="nav-link" href="{{route('dashboard.show', $dashboard->id)}}">Summary</a>
-        <a class="nav-link" href="{{route('ethicalissue.show', $ethicalissue->id)}}">Ethical Issue</a>
+        <a class="nav-link" href="{{route('ethicalissue.show', $dashboard->ethical_issue_id)}}">Ethical Issue</a>
         <a class="nav-link" href="{{route('stakeholdersection.show', $dashboard->stakeholder_section_id)}}">Stakeholders</a>
         <a class="nav-link" href="{{route('utilitarianismsection.show', $dashboard->utilitarianism_section_id)}}">Utilitarianism</a>
         <a class="nav-link" href="{{route('virtuesection.character', $dashboard->virtue_section_id)}}">Virtue Ethics</a>
@@ -24,7 +24,7 @@
 <div class="jumbotron">
 
     <div class="container mb-2">
-        <ul class="nav nav-pills nav-justified">
+        <ul class="nav nav-pills nav-justified flex-column flex-lg-row">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('deontologysection.show', $dashboard->deontology_section_id)}}">Option Analysis</a>
             </li>
@@ -54,6 +54,20 @@
         </ul>
 
     </div>
+    
+    @if(count($options->where('imperative','hypothetical'))<1)
+
+        <div class="container">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>There are no options with a reasoning that is consistent with hypothetical reasoning</strong> 
+            </div>
+        </div> 
+                            
+    @endif 
     
     @for($i=0; $i<count($options); $i++)
 
@@ -161,6 +175,21 @@
 
     </div>
 
+    @if(count($options->where('imperative','categorical'))<1)
+
+        <div class="container">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>There are no options with a reasoning that is consistent with categorical reasoning</strong> 
+            </div>
+        </div> 
+                              
+    @endif 
+
+
     @for($i=0; $i<count($options); $i++)
 
         @if($options[$i]->imperative == 'categorical')
@@ -241,6 +270,21 @@
                             </label>
                         </div>
                         <p class="card-subtitle mt-2 font-weight-bold">These motivations are consistent with categorical reasoning because you selected "It's the right thing to do" and therefore may support a universal law of moral action; howerver, the law must be defined, univeral and consistent</p>
+                        
+                        @if(count($options[$i]->moralLaws)<1)
+
+                            <div class="container">
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>You have not input the moral laws for this option</strong> 
+                                </div>
+                            </div> 
+                 
+                        @endif 
+
                         <div class="container border my-2 py-1 rounded">
                             <form>
                                 <div class="form-group mt-2">
@@ -251,6 +295,21 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if(isset($options[$i]->moralLaws[0]))
+                                    @if($options[$i]->moralLaws[0]->universalizability==null)
+                                        <div class="container">
+                                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    <span class="sr-only">Close</span>
+                                                </button>
+                                                <strong>You have not tested the universalizability and consistency of this moral law</strong> 
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif 
+                            
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="">Universal - </label>
@@ -289,6 +348,21 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if(isset($options[$i]->moralLaws[1]))
+                                    @if($options[$i]->moralLaws[1]->universalizability==null)
+                                        <div class="container">
+                                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    <span class="sr-only">Close</span>
+                                                </button>
+                                                <strong>You have not tested the universalizability and consistency of this moral law</strong> 
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif 
+                            
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="">Universal - </label>
@@ -318,6 +392,21 @@
                         </div>
             
                         <div class="container border my-2 py-1 rounded">
+
+                            @if(isset($options[$i]->moralLaws[2]))
+                                @if($options[$i]->moralLaws[2]->universalizability==null)
+                                    <div class="container">
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <strong>You have not tested the universalizability and consistency of this moral law</strong> 
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif 
+                        
                             
                             <div class="form-group mt-2">
                                 <div class="form-row">
